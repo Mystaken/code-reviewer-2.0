@@ -1,0 +1,44 @@
+{ 
+
+    "specialization": {
+    },
+
+    "middleware": {
+
+        "router": {
+            "route": "/api",
+            "module": {
+                "arguments": [{ "directory": "path:./routes" }]
+            }
+        },
+        "appsec": {
+            "priority": 110,
+            "module": {
+                "name": "lusca",
+                "arguments": [
+                    {
+                        "csrf": false,
+                        "xframe": "SAMEORIGIN",
+                        "p3p": false,
+                        "csp": false
+                    }
+                ]
+            }
+        },
+        "multipart": {
+            "enabled": false,
+            "priority": 0,
+            "module": "kraken-js/middleware/multipart",
+            "arguments": [
+                {
+                    "uploadDir": "/tmp/upload",
+                    "keepExtensions": true,
+                    "hash": "sha1"
+                }
+            ]
+        },
+        "logger": {
+            "enabled": false
+        }
+    }
+}
