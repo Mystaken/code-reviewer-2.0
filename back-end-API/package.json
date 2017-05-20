@@ -2,11 +2,8 @@
   "name": "api",
   "version": "0.1.0",
   "main": "app.js",
-  "scripts": {
-  },
+  "scripts": {},
   "dependencies": {
-    "express": "^4.12.2",
-    "kraken-js": "^2.0.0",
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
     "cookie-parser": "^1.4.3",
@@ -16,6 +13,9 @@
     "gulp-jshint": "^2.0.1",
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
+    "kraken-js": "^2.0.0",
+    "mongoose": "^4.10.0",
+    "validator": "^7.0.0",
     "z-schema": "^3.17.0"
   }
 }

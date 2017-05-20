@@ -4,6 +4,7 @@ var express     = require('express'),
     path        = require('path'),
     bodyParser      = require('body-parser'),
     cookieParser    = require('cookie-parser'),
+    mongoose        = require('mongoose'),
 
     config      = require('./config/config.json'),
     API_PORT    = 3000,
@@ -11,6 +12,10 @@ var express     = require('express'),
     APP_DIR     = path.join(__dirname, "../newProject/dist"),
     app         = express(),
     spec        = require('./lib/spec')(app);
+
+
+mongoose.connect('mongodb://localhost/csca08');
+
 
 app.use(bodyParser.json())
     .use(cookieParser())
