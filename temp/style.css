@@ -1,0 +1,72 @@
+.header {
+  background-color: blue;
+  display: block;
+  color: white;
+}
+.tab {
+  display: inline-block;
+  padding: 10px;
+}
+
+.tab:hover {
+}
+/*
+.content {
+  display:none;
+}
+*/
+.tab > .dropdown {
+  display: block;
+  background-color: white;
+  top: 0px;
+    box-shadow: 0 5px 5px -3px rgba(0,0,0,.2),
+              0 8px 10px 1px rgba(0,0,0,.14),
+              0 3px 14px 2px rgba(0,0,0,.12);
+}
+.tab > .dropdown > .item {
+
+}
+.tab > .dropdown > .item:hover {
+  background-color: #FFF8DC;
+
+}
+.nav-bar {
+  display: flex;
+}
+
+.window {
+  display: inline-block;
+  overflow: hidden;
+  width: 200px;
+  height: 200px;
+  padding-bottom: 15%;
+  cursor: pointer;
+}
+
+.window-title {
+  font-weight: bold;
+  font-size: 20px;
+}
+
+.window-title:hover {
+  text-decoration: underline;
+}
+
+.window-deadline-ignore {
+  display: inline;
+}
+
+.window-deadline {
+  display: inline;
+  font-style: italic;
+  font-size: 15px;
+  width: 100px;
+}
+
+.window-deadline:hover {
+  text-decoration: underline;
+}
+
+.window-ignore {
+  display: inline;
+}
