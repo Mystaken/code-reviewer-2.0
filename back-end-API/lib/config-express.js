@@ -49,7 +49,6 @@ function configureResponse (response) {
      * @param err.message {str} the error message
      */
     response.requestError = function (err) {
-        console.log(err);
         if (err.status && err.message) {
             return this.status(400).send({
                 status: err.status,
