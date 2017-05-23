@@ -16,5 +16,5 @@ export class AppComponent {
 constructor (private http: Http) {}
 
   title = this.http.get('localhost:3000/api');
-  
+
 }

@@ -3,16 +3,16 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-
-
-
 import { AppComponent } from './app.component';
-import { MdCheckboxModule } from '@angular/material';
+import { MdCheckboxModule, MaterialModule } from '@angular/material';
+
+import { WindowComponent } from './window.component'
 
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    WindowComponent
   ],
   imports: [
     BrowserModule,
@@ -20,7 +20,9 @@ import { MdCheckboxModule } from '@angular/material';
     HttpModule,
     JsonpModule,
     BrowserAnimationsModule,
-    MdCheckboxModule
+    MdCheckboxModule,
+    MaterialModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
