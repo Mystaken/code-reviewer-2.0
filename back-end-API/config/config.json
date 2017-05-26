@@ -1,5 +1,7 @@
 { 
-
+    "mongo" : {
+        "server": "mongodb://localhost/csca08"
+    },
     "specialization": {
     },
 

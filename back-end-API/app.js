@@ -14,7 +14,6 @@ var express     = require('express'),
     spec        = require('./lib/spec')(app);
 
 
-mongoose.connect('mongodb://localhost/csca08');
 
 
 app.use(bodyParser.json())
