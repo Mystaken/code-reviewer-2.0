@@ -22,7 +22,7 @@ var mongoose    = require('mongoose'),
  */
 function configSchemas(schemas) {
     schemas.forEach(function(schema) {
-        var sch =  mongoose.Schema(require(schema.path).schema),
+        var sch =  mongoose.Schema(require(schema.path)),
             promise = Promise.promisifyAll(mongoose.model(schema.name, sch));
         mongoose[schema.name] = promise;
     });
