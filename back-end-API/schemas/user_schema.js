@@ -2,9 +2,9 @@ module.exports = {
     first_name : String,
     last_name : String,
     utorid : {
-        type: String, // data type
+        type: String,           // data type
         required: true,
-        unique: true // avoid duplicates
+        unique: true            // avoid duplicates
     },
     student_number : {
         type: Number,
@@ -16,7 +16,8 @@ module.exports = {
         required: true,
         unique: true
     },
-    status : String,
+    status : String,            
+    last_login : Date,
     contract_number: Number,
-    user_type: String
+    user_type: String           // one of "instructor", "TA", "Student"
 }

@@ -1,11 +1,14 @@
+var mongoose = require('mongoose');
+
 module.exports = {
-    name: String,               // name of this file
-    utorid: String,             // utorid of the student
-    review_by: Array,           // students going to review this code
-    ta: String,                 // the TA who is going to mark this assignment
-    code: String,               // the actual code
-    report: String,             // the report.txt
-    failed_test_cases: Array,   // [String] or [Number]
-    self_assess : Number,       
-    mark : Number
+    name: String,                       // name of this file, e.g. assignment 1, assignment 2
+    author_id: mongoose.Schema.Types.ObjectId,        // utorid of the student
+    ta_id: mongoose.Schema.Types.ObjectId,            // the TA who is going to mark this assignment
+    code: String,                       // file content
+    file_name : String,
+    report: String,                     // the report.txt
+    self_assess : Number,               // mark by author himself
+    mark : Number,                      // actual mark of this submission
+    delete_date: Date,                  // the date this submission becomes inactive/deleted
+    status: String                      // ['active', 'deleted']
 }
