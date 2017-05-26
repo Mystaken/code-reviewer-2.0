@@ -24,7 +24,6 @@ module.exports = function (router) {
         }).then(function(ret) {
             return res.sendResponse(ret);
         }).catch(function(err) {
-            console.log(err);
             return res.requestError({
                 message: "Server Error"
             });
