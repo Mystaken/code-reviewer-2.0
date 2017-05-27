@@ -31,8 +31,8 @@ module.exports = function (router) {
             // eg. user_model.find() = same old callback
             // user_model.findAsync() = same functionality as ^ but returns a promise.
             return user_model.findAsync(req.query);
-        }).then(function(ret) {
-            return res.sendResponse(ret);
+        }).then(function(users) {
+            return res.sendResponse(users);
         }).catch(function(err) {
             return res.requestError({
                 message: "Server Error"
