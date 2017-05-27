@@ -33,7 +33,7 @@ function getModel(name) {
         if (!mongoose[name]) {
             throw new Error("No model in mongoose.");
         }
-        return Promise.resolve(mongoose[name]);
+        return mongoose[name];
     });
 }
 

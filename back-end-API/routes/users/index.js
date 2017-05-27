@@ -9,7 +9,8 @@ module.exports = function (router) {
      * THE COMMENTS ARE JUST TO SHOW HOW IT WORKS.
      */
     router.route('/').get(function(req, res, next) {
-        var error;
+        var user_model = mongoose.getModel('user'),
+            err;
         //make sure utorid is in the query and no other parameters
         validator.validate(req.query, {
             type: "object",
@@ -25,13 +26,7 @@ module.exports = function (router) {
         if (error) return res.requestError({ status: 400, message: error });
 
         // mongoose.getModel returns promise with the user_model promise
-        return mongoose.getModel('user').then(function(user_model) {
-            // user_model promise is the same as regular user_model but
-            // adding Async at the end of every function returns a promise.
-            // eg. user_model.find() = same old callback
-            // user_model.findAsync() = same functionality as ^ but returns a promise.
-            return user_model.findAsync(req.query);
-        }).then(function(users) {
+        return user_model.findAsync(req.query).then(function(users) {
             return res.sendResponse(users);
         }).catch(function(err) {
             return res.requestError({
