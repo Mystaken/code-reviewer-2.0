@@ -7,12 +7,16 @@ import { AppComponent } from './app.component';
 import { MdCheckboxModule, MaterialModule } from '@angular/material';
 
 import { WindowComponent } from './window.component'
+import { TodoListComponent } from './todo-list.component'
+import { NavbarComponent} from './navbar.component'
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    WindowComponent
+    WindowComponent,
+    TodoListComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,

@@ -1,38 +1,41 @@
-import {Component} from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 
 @Component({
   selector: 'window-component',
   template: `
-	 <md-card class="example-card">
-	 	<!-- comment out
-	  <md-card-header>
-	    <div md-card-avatar class="example-header-image"></div>
-	    <md-card-title>Assignment 1</md-card-title>
-	    <md-card-subtitle>Dog Breed</md-card-subtitle>
-	  </md-card-header>
-	  		-->
-	  <img md-card-image src="../favicon.ico">
-	  <!-- adding description of this stage later
-	  <md-card-content>
-	  </md-card-content>
-	  		-->
-	  <div class="window">
-	  	<div class="center">
-	        <div class="window-title">
-	          <div> A1 My Work/Submission </div>
-	        </div>
-          <div class="window-deadline">
-            May 29, 2017 
-          </div>
-		    <md-checkbox color="warn">Done!</md-checkbox>
-	    </div>
-	  </div>
+	<md-card class="example-card">
+	  	<img md-card-image src="../favicon.ico">
+	  	<div class="window">
+	  		<div class="center">
+	        	<div class="window-title">
+	          		<div> 
+	          			{{ window_name }}
+	          		</div>
+	        	</div>
+          		<div class="window-deadline">
+            		{{ deadline }}
+          		</div>
+
+		    	<md-checkbox color="warn">Done!</md-checkbox>
+
+	    	</div>
+	  	</div>
 	</md-card>
   `,
   styles: [`
+	window-component {
+	  border-bottom: 10px;
+	  border-color: grey;
+	  width: 0px;
+
+	}
+
   	.example-card {
-	  width: 400px;
+	  width: 250px;
+	  margin: 10px;
+	  border-bottom: grey;
+	  border-width: 10px;
 	}
 
 	.example-header-image {
@@ -52,7 +55,6 @@ import {Component} from '@angular/core';
 
 	.window {
 		display: inline-block;
-		overflow: hidden;
 		cursor: pointer;
 	}
 
@@ -73,6 +75,9 @@ import {Component} from '@angular/core';
   `]
 })
 export class WindowComponent {
+
+	@Input() window_name = "A1 Submission";
+	@Input() deadline = "May 29, 2017";
 
 
 }
