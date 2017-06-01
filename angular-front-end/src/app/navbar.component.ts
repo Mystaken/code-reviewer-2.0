@@ -3,29 +3,57 @@ import { Http } from '@angular/http';
 @Component({
 	selector: 'navbar',
 	template: `
-	<div *ngFor="let tab of tabs"> 
-		<button md-button [mdMenuTriggerFor]="menu">
-		  	{{ tab.tab_name }}
-		</button>
-		<md-menu #menu="mdMenu">
-		  <button 
-		  	md-menu-item 
-		  	*ngFor="let sub_tab_name of tab.sub_tab_names"
-		  	(click)="on_click(tab.tab_name ,sub_tab_name.id);"
-		  	>
-		    <md-icon>dialpad</md-icon>
-		    <span>{{ sub_tab_name.name }}</span>
-		  </button>
-		</md-menu>
+	<div class="navbar">
+
+		<div class="stage-buttons">
+			<div *ngFor="let tab of tabs"> 
+				<button md-raised-button [mdMenuTriggerFor]="menu">
+				  	{{ tab.tab_name }}
+				</button>
+				<!-- dropdown -->
+				<md-menu #menu="mdMenu">
+				  <button 
+				  	md-menu-item 
+				  	*ngFor="let sub_tab_name of tab.sub_tab_names"
+				  	(click)="on_click(tab.tab_name ,sub_tab_name.id);"
+				  	>
+				    <md-icon>dialpad</md-icon>
+				    <span>{{ sub_tab_name.name }}</span>
+				  </button>
+				</md-menu>
+			</div>
+		</div>
+		<div class="utility-buttons">
+			<button md-raised-button>
+				{{ username }}
+			</button>
+			<button md-raised-button>
+				Logout
+			</button>
+		</div>
 	</div>
 	`,
 	styles: [`
-
+		.navbar {
+			display: flex;
+			justify-content: space-between;
+		}
+		.stage-buttons {
+			text-align: left;
+			display: flex;
+		}
+		.utility-buttons {
+			text-align: right;
+		}
 
 	`]
 })
 
+
+
+
 export class NavbarComponent {
+	username = "The Student's Name"
 	tabs = [{
 		tab_name: "My Work",
 		sub_tab_names: [
@@ -60,6 +88,25 @@ export class NavbarComponent {
 			},{
 				id: "workId:kkasdlkfjasldkfj",
 				name: "Assignment 1"
+			}
+		]
+	}, {
+		tab_name: "Review My Peers",
+				sub_tab_names: [
+			{
+				id: "workId:kkasdlkfjasldkfj",
+				name: "Assignment 0"
+			},{
+				id: "workId:kkasdlkfjasldkfj",
+				name: "Assignment 1"
+			}
+		]
+	}, {
+		tab_name: "Quality of My Reviews",
+				sub_tab_names: [
+			{
+				id: "workId:kkasdlkfjasldkfj",
+				name: "Assignment 0"
 			}
 		]
 	}
