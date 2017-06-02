@@ -5,7 +5,7 @@ import { Component, Input } from '@angular/core';
   selector: 'window-component',
   template: `
 	<md-card class="example-card">
-	  	<img md-card-image src="../favicon.ico">
+	  	<img height="180px" md-card-image src="../favicon.ico">
 	  	<div class="window">
 	  		<div class="center">
 	        	<div class="window-title">
@@ -32,7 +32,7 @@ import { Component, Input } from '@angular/core';
 	}
 
   	.example-card {
-	  width: 250px;
+	  width: 200px;
 	  margin: 10px;
 	  border-bottom: grey;
 	  border-width: 10px;

@@ -7,9 +7,11 @@ import { Http } from '@angular/http';
 
 		<div class="stage-buttons">
 			<div *ngFor="let tab of tabs"> 
-				<button md-raised-button [mdMenuTriggerFor]="menu">
+				<button md-raised-button [mdMenuTriggerFor]="menu" class="ui blue button">
 				  	{{ tab.tab_name }}
+				  	<a class="ui orange circular label">2</a>
 				</button>
+
 				<!-- dropdown -->
 				<md-menu #menu="mdMenu">
 				  <button 
@@ -24,10 +26,10 @@ import { Http } from '@angular/http';
 			</div>
 		</div>
 		<div class="utility-buttons">
-			<button md-raised-button>
+			<button md-raised-button class="ui blue button">
 				{{ username }}
 			</button>
-			<button md-raised-button>
+			<button md-raised-button class="ui blue button">
 				Logout
 			</button>
 		</div>
@@ -53,6 +55,8 @@ import { Http } from '@angular/http';
 
 
 export class NavbarComponent {
+	// color of buttons
+	color = ["Red", "Orange", "Yellow", "Olive", "Green"];
 	username = "The Student's Name"
 	tabs = [{
 		tab_name: "My Work",
@@ -80,7 +84,7 @@ export class NavbarComponent {
 			}
 		]
 	}, {
-		tab_name: "Review My Own Work",
+		tab_name: "Review My Peers",
 		sub_tab_names: [
 			{
 				id: "workId:kkasdlkfjasldkfj",
@@ -91,7 +95,7 @@ export class NavbarComponent {
 			}
 		]
 	}, {
-		tab_name: "Review My Peers",
+		tab_name: "How My Code Is Reviewed",
 				sub_tab_names: [
 			{
 				id: "workId:kkasdlkfjasldkfj",
