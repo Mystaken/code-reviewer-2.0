@@ -42,7 +42,7 @@ module.exports = function (router) {
         if (error) return res.requestError({ status: 400, message: error });
 
         user_model.getAsync({email:req.session.user}).then(function (user) {
-            if (user.user_type === "instructor") //TODO
+            if (user.user_type === "instructor") //TODO KEVIN HELP TO　ＦＩＬＬ　ＩＮ　ＴＨＥ CODE FOR PUT
             return Promise.reject("Invalid user type, premission denied.");
         }).then(function (data) { return res.sendResponse(data);
         }).catch(function (err) { return res.requestError({ message: "Server Error" });
@@ -56,7 +56,7 @@ module.exports = function (router) {
 
         user_model.getAsync({email:req.session.user}).then(function (user) {
             if (user.user_type === "instructor" || user.id === req.query.user_id) {
-                //TODO
+                //TODO KEVIN HELP TO　ＦＩＬＬ　ＩＮ　ＴＨＥ CODE FOR POST
             }
             return Promise.reject("Invalid user type, premission denied.");
         }).then(function (data) { return res.sendResponse(data);
@@ -70,7 +70,7 @@ module.exports = function (router) {
         if (error) return res.requestError({ status: 400, message: error });
 
         user_model.getAsync({email:req.session.user}).then(function (user) {
-            if (user.user_type === "instructor") //TODO 
+            if (user.user_type === "instructor") //TODO KEVIN HELP TO　ＦＩＬＬ　ＩＮ　ＴＨＥ CODE FOR DELETE
             return Promise.reject("Invalid user type, premission denied.");
         }).then(function (data) { return res.sendResponse(data);
         }).catch(function (err) { return res.requestError({ message: "Server Error" });
