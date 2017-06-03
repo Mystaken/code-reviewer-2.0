@@ -1,56 +1,98 @@
 'use strict';
 
-var mongoose = require('mongoose');
 
-var review_schema = require("../../models/review_schema.js");
-var validator = require('../../lib/validator');
+var validator = require('../../lib/validator'),
+    mongoose = require('mongoose');
 
 // set the schema of the query
-var QuerySchema = function() {
-    return {
-        type: "object", //json object
-        properties: {    // properties in the json object
-            author: {  type: "string" },   //first_name should be string
-            review_by: { type: "string" }   
-        },
-        additionalProperties: false, // no additional properties other than additional properties
-        //required: [] // required fields  
-    };
+var query_shcema = {
+    type: "object", //json object
+    properties: {    // properties in the json object
+        work_id: {  type: "string" },
+        review_by: { type: "string" }   
+    },
+    additionalProperties: false, // no additional properties other than additional properties
+    //required: [] // required fields  
+};
 
+
+var findReview = function(req, res) {
+    // mongoose.getModel returns promise with the user_model promise
+    return mongoose.getModel('review').then(function(review_model) {
+        return review_model.findAsync(req.query);
+    }).then(function(reviews) {
+        if (!reviews) return res.status(404).end("reviews not found.");
+        return res.sendResponse(reviews);
+    }).catch(function(err) {
+        return res.requestError({ message: "Server Error" });
+    });
 }
-
-// generates search arg for GET, add more queries if needed
-var searchInfo = function(query) {
-    var search_info = {};
-    if (query.author) search_info.author = query.author;
-    if (query.review_by) search_info.review_by = query.review_by;
-    return search_info;
-}
-
-
 
 module.exports = function (router) {
-    router.route('/:work_name/').get(function (req, res, next) {
+    router.route('/').get(function (req, res, next) {
         //TODO check log in
-
-        var query_shcema = QuerySchema();
-
-        // validate the req.query (req.body if form data)
+        //if (!req.session.user) return res.status(403).end("Forbidden");
+        // validate the req.query
         validator.validate(req.query, query_shcema);
-
-        // get any errors in the format
         var error = validator.getLastErrors();
-
-        // if there's any error, send an error response
-        // IMPORTANT: return to exit we don't continue with the request!
         if (error) return res.requestError({ status: 400, message: error});
-        
-        var review_model = mongoose.model(req.params.work_name + "_reviews", review_schema);
 
-        review_model.find(searchInfo(req.query) ,function(err, reviews) {
-            if (err) res.status(404).end("review not found.");
-            return res.sendResponse(reviews);
+        //Check permission
+        return mongoose.getModel('user').then(function(user_model) {
+            return user_model.findAsync({email:req.session.user});
+        }).then(function(users) {
+            if (!users) return res.status(404).end("user not found.");
+            if (users.user_type === "instructor") {
+                return mongoose.getModel('review').then(function(review_model) {
+                    return review_model.findAsync(req.query);
+                }).then(function(reviews) {
+
+                });
+            }
+        }).catch(function(err) {
+            return res.requestError({ message: "Server Error" });
         });
+
+
+
+
+        // // Check for permission
+        // return mongoose.getModel('user').then(function(user_model) {
+        //     return user.findAsync({email:req.session.user});
+        // }).then(function(users) {
+        //     if (!users) return res.status(404).end("user not found.");
+
+        //     if (users.user_type === "instructor") return findReview(req, res);
+
+        //     if (users.user_type === "student") {
+
+        //         return mongoose.getModel('submission').then(function(review_model) {
+        //             return review_model.findAsync(req.query);
+        //         }).then(function(submissions) {
+        //             if (!submissions) return res.status(404).end("submission not found.");
+                    
+        //             if (req.query.work_id && req.query.work_id !in submissions.work_id) {
+        //                 return res.status(403).end("work_id doesn't belong to yours.");
+        //             }
+        //             if (req.query.review_by && req.query.review_by !== users._id) {
+        //                 return res.status(403).end("review_by ...........");
+        //             }
+        //             if (!req.query.work_id && !req.query.review_by) {
+        //                 return status(403).end("need to give at least work_id or review_by");
+        //             }
+
+        //             return findReview(req, res);
+
+        //         }).catch(function(err) {
+        //             return res.requestError({ message: "Server Error" });
+        //         });
+        //     }
+
+        //     return res.sendResponse(reviews);
+        // }).catch(function(err) {
+        //     return res.requestError({ message: "Server Error" });
+        // });
+
 
     }).put(function (req, res, next) {
 
