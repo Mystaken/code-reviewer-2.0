@@ -1,12 +1,9 @@
-# Get students
-
+# Get Students
 ## Method
 GET
-
 ## URL structure
 `http://localhost:3000/api/users/students/`
-
-## Request Queies
+## Request Queries
 
 | Queries        |      Type      |  Description |
 |---------------|-------------|------|
@@ -19,3 +16,16 @@ GET
 | **status** | String             |     |
 | **contract_number**    | Number |   |
 | **user_type** | String          |     |
+
+
+
+# Get One Student
+## Method
+GET
+## URL structure
+`http://localhost:3000/api/users/students/123456`
+## Request Parameters
+
+| Parameter       |      Type      | Required? |  Description |
+|---------------|-------------|---|--------|
+| **id**     |  String         | Required| |
