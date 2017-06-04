@@ -12,7 +12,7 @@ Returns all students that matches this field.
 ##### Method
 GET
 ##### URL structure
-`http://localhost:3000/api/users/students/`
+`/api/users/students/`
 ##### Request Queries
 
 | Queries        |      Type      |  Description |
@@ -33,7 +33,7 @@ GET
 ##### Method
 GET
 ##### URL structure
-`http://localhost:3000/api/users/students/123456`
+`/api/users/students/123456`
 ##### Request Parameters
 
 | Parameter       |      Type      | Required? |  Description |
