@@ -8,7 +8,7 @@
       * [api/users/students/ - PUT](#add-students)
       * [api/users/students/upload - POST](#upload-student-file)
    * [**Works**](#works)
-      * [api/works - POST](#create-work)
+      * [api/works - PUT](#create-work)
 
 Users
 ===
