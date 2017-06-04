@@ -20,6 +20,7 @@
       * [/api/works/annotations - GET](#get-annotation)
       * [/api/works/annotations - PUT](#add-annotation)
       * [/api/works/annotations - POST](#update-annotation)
+      * [/api/works/annotations - DELETE](#delete-annotation)
 
 Users
 ===
@@ -593,5 +594,37 @@ POST
 {
    "status": 200,
    "data": 145
+}
+```
+Delete Annotation
+---
+Delete a annotation for a specific annotation_id.
+#### Method
+DELETE
+#### URL Structure
+`api/works/annotations`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **annotation_id** |    Number     |     Yes      |  The id of the  of the annotation  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| annotation_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"annotation_id"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<field>"]}` |
+| annotation_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+
+#### Example Request Body
+{
+    "annotation_id": 123,
+}
+
+#### Example Response
+```
+{
+   "status": 200
 }
 ```
