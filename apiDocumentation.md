@@ -84,7 +84,7 @@ GET
 ##### Request Queries
 
 | Queries        |      Type      |    Required?    |  Description |
-|------------ ---|-------------|----|------|
+|----------------|-------------|----|------|
 | **email**     |  String         |        No        |  The email of the student.|
 | **id** |    String              |        No        |  The id of the student. |
 | **first_name** | String         |        No        |  The first name of the student.  |
