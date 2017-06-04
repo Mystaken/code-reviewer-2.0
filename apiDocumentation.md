@@ -14,6 +14,7 @@
     * [api/works/all - GET](#get-all-work)
     * [**Feedbacks**](#feedbacks)
       * [/api/works/feedbacks - GET](#get-feedback)
+      * [/api/works/feedbacks - PUT](#add-feedback)
 
 Users
 ===
@@ -382,5 +383,46 @@ POST
         "mark": 79,
         "author": 35
    }
+}
+```
+
+Add Feedback
+---
+Return the user information for the user of the userid.
+#### Method
+PUT
+#### URL Structure
+`api/works/feedbacks`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **work_id** |    Number     |     Yes      |  The id of the work this feedback belongs to.  |
+| **feedbacks** |    Array of String     |     Yes      |  The feedback answers to the feedback questsion in the work.  |
+| **author** |    Number    |     Yes      |  The author of this feedback.  |
+| **mark** |    Number     |     Yes      |  The mark assigned to this student.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| work_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+{
+    "work_id": 34,
+    "feedbacks": [
+        "Good",
+        "Great"
+    ],
+    "mark": 79,
+    "author": 35
+}
+
+#### Example Response
+```
+{
+   "feedback_id": 1232
 }
 ```
