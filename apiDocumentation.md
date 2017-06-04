@@ -3,7 +3,7 @@
   * [**Users**](#users)
     * [api/users/ - GET](#get-user)
     * [**Students**](#students)
-      * [api/users/students - GET](#filter-students)
+      * [api/users/students/all - GET](#filter-students)
       * [api/users/students/:id - GET](#get-student)
       * [api/users/students/ - PUT](#add-students)
       * [api/users/students/upload - POST](#upload-student-file)
@@ -38,17 +38,17 @@ GET
 #### URL Structure
 `api/users/`
 #### Request Body
-| Queries        |      Type      |  Required?   |  Description |
-|---------------|-----------------|--------------|--------------|
-| **user_id** |    String              |     Yes      |  The id of the user.  |
+| Queries        |  Type     |  Required?   |  Description          |
+|----------------|-----------|--------------|-----------------------|
+| **user_id**    |  String   |     Yes      |  The id of the user.  |
 
 #### Validation
-|  Action  |  Expected Result |
+|  Action       |  Expected Result |
 |---------------|-------------| 
-| user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"user_id"}` |
-| user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
-| user_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param": ["#/user_id"]}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
+| user_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
 
 #### Example Request Body
 ```
@@ -80,11 +80,11 @@ Returns all students that matches this field.
 ##### Method
 GET
 ##### URL structure
-`/api/users/students/`
+`/api/users/students/all`
 ##### Request Queries
 
 | Queries        |      Type      |    Required?    |  Description |
-|---------------|-------------|----|------|
+|------------ ---|-------------|----|------|
 | **email**     |  String         |        No        |  The email of the student.|
 | **id** |    String              |        No        |  The id of the student. |
 | **first_name** | String         |        No        |  The first name of the student.  |
@@ -95,7 +95,22 @@ GET
 | **contract_number**    | Number |        No        |  The contract number of the student. |
 | **user_type** | String          |        No        |  The user type of the student.   |
 
-
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : [
+      {
+         "userid": 1232,
+         "student_id" 1314,
+         "first_name" "Grey",
+         "last_name": "Gxsanda",
+         "utorid": "gxsanda1",
+         "email": "grey.gxsanda@mail.utoronto.ca",
+         "last_login": "01-23-13 13:03:32"
+      },
+   ]
+}
 
 Get Student
 ---
@@ -107,7 +122,38 @@ GET
 
 | Parameter       |      Type      | Required? |  Description |
 |---------------|-------------|---|--------|
-| **id**     |  String         | Yes | The id of the student. |
+| **user_id**     |  String         | Yes | The id of the student. |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param": ["#/user_id"]}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
+| user_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
+
+#### Example Request Body
+```
+{
+      "userid": 1232
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : {
+      "userid": 1232,
+      "student_id" 1314,
+      "first_name" "Grey",
+      "last_name": "Gxsanda",
+      "utorid": "gxsanda1",
+      "email": "grey.gxsanda@mail.utoronto.ca",
+      "last_login": "01-23-13 13:03:32"
+   }
+}
+
+```
 
 Add Students
 ---
@@ -135,7 +181,7 @@ PUT
 #### Example Request Body
 ```
 {
-      "id": 1232,
+      "student_number": 1232,
       "first_name" "Grey",
       "last_name": "Gxsanda",
       "utorid": "gxsanda1",
