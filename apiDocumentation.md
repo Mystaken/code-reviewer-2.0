@@ -21,6 +21,11 @@
       * [/api/works/annotations - PUT](#add-annotation)
       * [/api/works/annotations - POST](#update-annotation)
       * [/api/works/annotations - DELETE](#delete-annotation)
+    * [**Submissions**](#submissions)
+      * [/api/works/submissions - GET](#get-submission)
+      * [/api/works/submissions - POST](#update-submission)
+      * [/api/works/submissions - DELETE](#delete-submission)
+      * [/api/works/submissions/upload - POST](#upload-submission)
 
 Users
 ===
@@ -626,5 +631,151 @@ DELETE
 ```
 {
    "status": 200
+}
+```
+Submissions
+===
+Get Submission
+---
+Return the submission for the submission_id
+#### Method
+GET
+#### URL Structure
+`api/works/submissions`
+
+#### Request Query
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **submission_id** |    Number     |     Yes      |  The id of the work of the annotations.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"submission_id"}` |
+| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
+| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+{
+    "submission_id": 42
+}
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": {
+       "submission_id": 42,
+       "work_id": 123,
+       "author_id": 142,
+       "code": "def a():\n    print(1)",
+       "file_name": "ex1.py",
+       "mark": 0
+   }
+}
+```
+Update Submission
+---
+Update the submission for the submission_id
+#### Method
+POST
+#### URL Structure
+`api/works/submissions`
+
+#### Request Query
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **submission_id** |    Number   |     Yes    |  The id of the work of the annotations.  |
+| **code**       |    String      |     Yes       |  The code of the work of the annotations.  |
+| **file_name**       |    String      |     No       |  The new file_name of the work of the annotations.  |
+| **mark**       |    Number      |     No       |  The new mark of the work of the annotations.  |
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"submission_id"}` |
+| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
+| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+```
+{
+   "submission_id": 42,
+   "code": "def b():\n    print(1)",
+   "file_name": "ex2.py",
+   "mark": 0
+}
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": 42
+}
+```
+
+Delete Submission
+---
+Delete the submission for the submission_id
+#### Method
+DELETE
+#### URL Structure
+`api/works/submissions`
+
+#### Request Query
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **submission_id** |    Number   |     Yes    |  The id of the work of the annotations.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"submission_id"}` |
+| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
+| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+```
+{
+   "submission_id": 42
+}
+
+#### Example Response
+```
+{
+   "status": 200
+}
+```
+Upload Submission
+---
+Upload
+#### Method
+POST
+#### URL Structure
+`api/works/submissions/upload`
+
+#### Request Query
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **author_id** |    Number     |     Yes      |  The id of the work of the annotations.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| author_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"author_id"}` |
+| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
+| author_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| corrupted upload file | Return error status `404` with message: `{ "code": "INVALID_DATA" }` |
+
+
+#### Example Request Body
+{
+    "author_id": 42
+}
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": 123
 }
 ```
