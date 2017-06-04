@@ -1,12 +1,14 @@
 # API Documentation
 ## Table of contents
   * [**Users**](#users)
-    * [/users/ - POST](#get-user)
+    * [api/users/ - POST](#get-user)
     * [**Students**](#students)
-      * [/users/students - GET](#filter-students)
-      * [/users/students/:id - GET](#get-student)
-      * [/users/students/ - PUT](#add-students)
-      * [/users/students/upload - POST](#upload-student-file)
+      * [api/users/students - GET](#filter-students)
+      * [api/users/students/:id - GET](#get-student)
+      * [api/users/students/ - PUT](#add-students)
+      * [api/users/students/upload - POST](#upload-student-file)
+   * [**Works**](#works)
+      * [api/works - POST](#upload-student-file)
 
 Users
 ===
@@ -25,7 +27,7 @@ POST
 
 #### Validation
 |  Action  |  Expected Result |
-|---------------|-------------|
+|---------------|-------------| 
 | user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"user_id"}` |
 | user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
 | Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
@@ -34,7 +36,7 @@ POST
 #### Example Request Body
 ```
 {
-   id: 1232
+   "id": 1232
 }
 ```
 #### Example Response
@@ -152,5 +154,55 @@ UTORiD,First Name,Last Name,Student Number,Email
 ```
 {
    "status": 200
+}
+```
+
+Works
+===
+Create work
+---
+Create a work
+#### Method
+PUT
+#### URL Structure
+`api/works`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **work_name**       |    String      |     Yes      |  The name of this work. Format: YYYY-MM-DD.  |
+| **num_peers**  |    String      |      Yes     |  The number of students who will be assigned to review each work. |
+| **required_files** | Array of Strings | No    | The required files for this assignment |
+| **repo_path**  | String |      No      |  The markus repo path |
+| **student_submission_deadline** |   String  | No   |  The deadline of the student submission. |
+| **peer_review_deadline** |   String  | No   |  The deadline of the student peer review. |
+| **ta_review_deadline** |   String  | No   |  The deadline of the ta review. |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| num_peers larger than maximum in database | Return error status `400` with message: `{"code":"MAXIMUM","param":["num_peers"]}`|
+| num_peers lower than minimum in database | Return error status `400` with message: `{"code":"MINIMUM","param":["num_peers"]}`|
+
+#### Example Request Body
+```
+{
+   "work_name": "Assignment 1",
+   "num_peers": 5,
+   "required_files": [ "a1.py", "a2.py"],
+   "repo_path": "assignment/a1",
+   "student_submission_dead_line": "2017-12-17",
+   "peer_review_deadline": "2017-12-30",
+   "ta_review_deadline": "2017-12-30"
+}
+```
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": 14
 }
 ```
