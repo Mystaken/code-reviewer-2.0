@@ -4,7 +4,6 @@ module.exports = {
         required: true,
         uinque: true
     },
-    deadline: Date,
     num_peers : {                   // number of students in a group
         type: Number,
         min: 0,
@@ -17,10 +16,8 @@ module.exports = {
     feedback_questions: [String],   // e.g. How descriptive the variable names are
                                     //      Is this function efficient
     student_submission_deadline : Date,
-    release_to_peers : Date,
     peer_review_deadline : Date,
-    release_to_tas : Date,
     ta_review_deadline : Date,
-    release_to_students : Date
+    status: String
 }
 
