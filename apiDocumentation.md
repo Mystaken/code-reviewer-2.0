@@ -15,6 +15,7 @@
     * [**Feedbacks**](#feedbacks)
       * [/api/works/feedbacks - GET](#get-feedback)
       * [/api/works/feedbacks - PUT](#add-feedback)
+      * [/api/works/feedbacks - POST](#update-feedback)
 
 Users
 ===
@@ -418,6 +419,45 @@ PUT
     ],
     "mark": 79,
     "author": 35
+}
+
+#### Example Response
+```
+{
+   "feedback_id": 1232
+}
+```
+
+Update Feedback
+---
+Update a specific feedback. NOTE: it will overwrite what is in the database.
+#### Method
+POST
+#### URL Structure
+`api/works/feedbacks`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **feedback_id** |    Number     |     Yes      |  The id of the work this feedback belongs to.  |
+| **feedbacks** |    Array of String     |     No      |  The new feedback answers to the feedback questsion in the work.  |
+| **mark** |    Number     |     No      |  The new mark assigned to this student.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| feedback_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"feedback_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| feedback_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| feedback exists user does not have access to the feedback | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+{
+    "feedback_id": 34,
+    "feedbacks": [
+        "Good",
+        "Great"
+    ],
+    "mark": 79
 }
 
 #### Example Response
