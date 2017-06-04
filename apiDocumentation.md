@@ -1,11 +1,12 @@
 # API Documentation
 ## Table of contents
- * Users
-    * [/users/](#get-user)
-    * [Students](#students)
-      * [/users/students](#filter-students)
-      * [/users/students/:id](#get-student)
+ * **Users**(#users)
+    * [/users/ - POST](#get-user)
+    * [**Students**](#students)
+      * [/users/students - GET](#filter-students)
+      * [/users/students/:id - GET](#get-student)
 ### Users
+
 #### Get User
 Return the user information for the user of the userid.
 #### Method
