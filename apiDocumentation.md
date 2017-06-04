@@ -16,7 +16,7 @@
       * [/api/works/feedbacks - GET](#get-feedback)
       * [/api/works/feedbacks - PUT](#add-feedback)
       * [/api/works/feedbacks - POST](#update-feedback)
-    * [**Annotations**](#annotation)
+    * [**Annotations**](#annotations)
       * [/api/works/annotations - GET](#get-annotation)
       * [/api/works/annotations - PUT](#add-annotation)
       * [/api/works/annotations - POST](#update-annotation)
