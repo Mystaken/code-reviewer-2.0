@@ -10,6 +10,7 @@
   * [**Works**](#works)
       * [api/works - GET](#get-work)
       * [api/works - PUT](#create-work)
+      * [api/works - POST](#update-work)
 
 Users
 ===
@@ -196,6 +197,7 @@ GET
       "work_name": "Assignment 1",
       "num_peers": 5,
       "required_files": [ "a1.py", "a2.py"],
+      "feedback_questions": [ "Is this good?" ],
       "repo_path": "assignment/a1",
       "student_submission_dead_line": "2017-12-17",
       "peer_review_deadline": "2017-12-30",
@@ -217,7 +219,8 @@ PUT
 |----------------|----------------|--------------|--------------|
 | **work_name**       |    String      |     Yes      |  The name of this work.  |
 | **num_peers**  |    Number      |      Yes     |  The number of students who will be assigned to review each work. |
-| **required_files** | Array of Strings | No    | The required files for this assignment |
+| **required_files** | Array of Strings | No    | The required files for this assignment. |
+| **feedback_questions** | Array of Strings | No | The list of feedback questions for this work. |
 | **repo_path**  | String |      No      |  The markus repo path |
 | **student_submission_deadline** |   String  | No   |  The deadline of the student submission. Format: YYYY-MM-DD. |
 | **peer_review_deadline** |   String  | No   |  The deadline of the student peer review. Format: YYYY-MM-DD. |
@@ -239,6 +242,7 @@ PUT
    "required_files": [ "a1.py", "a2.py"],
    "repo_path": "assignment/a1",
    "student_submission_dead_line": "2017-12-17",
+   "feedback_questions": [ "Is this good?" ],
    "peer_review_deadline": "2017-12-30",
    "ta_review_deadline": "2017-12-30"
 }
@@ -249,5 +253,57 @@ PUT
 {
    "status": 200,
    "data": 14
+}
+```
+
+Update Work
+---
+Update the work. NOTE, the fields inputted will overwrite the original.
+#### Method
+POST
+#### URL Structure
+`api/works`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **work_id**    |    String      |     Yes      |  The id of this work.  |
+| **name**    |    String      |     No      |  The new name of this work.  |
+| **num_peers**    |    Number      |     No      |  The new  number of peer reviews of this work.  |
+| **required_files**    |    Array of Strings      |     Yes      |  The new list of required files of this work.  |
+| **feedback_questions** | Array of Strings | No | The list of feedback questions for this work. |
+| **repo_path**    |    String      |     Yes      |  The new repo_path of this work.  |
+| **student_submission_deadline** |   String  | No   |  The deadline of the student submission. Format: YYYY-MM-DD. |
+| **peer_review_deadline** |   String  | No   |  The deadline of the student peer review. Format: YYYY-MM-DD. |
+| **ta_review_deadline** |   String  | No   |  The deadline of the ta review. Format: YYYY-MM-DD. |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+|  work_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<work_id>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| work_id does not exist in database | Return error status `404` with message: `{"code":"NOT_FOUND","param":["work_id"]}`|
+| num_peers larger than maximum in database | Return error status `400` with message: `{"code":"MAXIMUM","param":["num_peers"]}`|
+| num_peers lower than minimum in database | Return error status `400` with message: `{"code":"MINIMUM","param":["num_peers"]}`|
+
+#### Example Request Body
+```
+"data": {
+   "work_id", 123
+   "work_name": "Assignment 1",
+   "num_peers": 5,
+   "required_files": [ "a1.py", "a2.py"],
+   "repo_path": "assignment/a1",
+   "student_submission_dead_line": "2017-12-17",
+   "peer_review_deadline": "2017-12-30",
+   "ta_review_deadline": "2017-12-30",
+   "feedback_questions": [ "Is this good?" ]
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data": 123
 }
 ```
