@@ -4,7 +4,7 @@
     * [api/users/ - GET](#get-user)
     * [**Students**](#students)
       * [api/users/students/all - GET](#filter-students)
-      * [api/users/students/:id - GET](#get-student)
+      * [api/users/students/ - GET](#get-student)
       * [api/users/students/ - PUT](#add-students)
       * [api/users/students/upload - POST](#upload-student-file)
   * [**Works**](#works)
