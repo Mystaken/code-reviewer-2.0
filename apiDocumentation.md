@@ -411,6 +411,7 @@ PUT
 | work_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
 | work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
 #### Example Request Body
+```
 {
     "work_id": 34,
     "feedbacks": [
@@ -420,7 +421,7 @@ PUT
     "mark": 79,
     "author": 35
 }
-
+```
 #### Example Response
 ```
 {
@@ -451,6 +452,7 @@ POST
 | feedback_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
 | feedback exists user does not have access to the feedback | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
 #### Example Request Body
+```
 {
     "feedback_id": 34,
     "feedbacks": [
@@ -459,7 +461,7 @@ POST
     ],
     "mark": 79
 }
-
+```
 #### Example Response
 ```
 {
