@@ -9,7 +9,8 @@
 Users
 ===
 
-#### Get User
+Get User
+---
 Return the user information for the user of the userid.
 #### Method
 POST
@@ -40,8 +41,12 @@ POST
    }
 }
 ```
-### Students
-#### Filter Students
+
+Students
+===
+
+Filter Students
+---
 Returns all students that matches this field.
 
 ##### Method
@@ -64,7 +69,8 @@ GET
 
 
 
-#### Get Student
+Get Student
+---
 ##### Method
 GET
 ##### URL structure
