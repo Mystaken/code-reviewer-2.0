@@ -111,7 +111,7 @@ GET
       },
    ]
 }
-
+```
 Get Student
 ---
 ##### Method
