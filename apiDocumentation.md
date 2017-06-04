@@ -216,7 +216,7 @@ PUT
 | Queries        |      Type      |  Required?   |  Description |
 |----------------|----------------|--------------|--------------|
 | **work_name**       |    String      |     Yes      |  The name of this work.  |
-| **num_peers**  |    String      |      Yes     |  The number of students who will be assigned to review each work. |
+| **num_peers**  |    Number      |      Yes     |  The number of students who will be assigned to review each work. |
 | **required_files** | Array of Strings | No    | The required files for this assignment |
 | **repo_path**  | String |      No      |  The markus repo path |
 | **student_submission_deadline** |   String  | No   |  The deadline of the student submission. Format: YYYY-MM-DD. |
