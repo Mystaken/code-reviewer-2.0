@@ -13,9 +13,9 @@ POST
 #### URL Structure
 `api/users/`
 #### Request Body
-| Queries        |      Type      |  Description |
-|---------------|-------------|------|
-| **id** |    String              |   |
+| Queries        |      Type      |  Required?   |  Description |
+|---------------|-----------------|--------------|--------------|
+| **id** |    String              |     Yes      |  The id of the user.  |
 
 #### Example Request Body
 ```
@@ -47,17 +47,17 @@ GET
 `/api/users/students/`
 ##### Request Queries
 
-| Queries        |      Type      |  Description |
-|---------------|-------------|------|
-| **email**     |  String         |  |
-| **id** |    String              |   |
-| **first_name** | String         |    |
-| **last_name** | String          |    |
-| **utorid** | String             |    |
-| **student_number**     | Number |    |
-| **status** | String             |     |
-| **contract_number**    | Number |   |
-| **user_type** | String          |     |
+| Queries        |      Type      |    Required?    |  Description |
+|---------------|-------------|----|------|
+| **email**     |  String         |        No        |  The email of the student.|
+| **id** |    String              |        No        |  The id of the student. |
+| **first_name** | String         |        No        |  The first name of the student.  |
+| **last_name** | String          |        No        |  The last name of the student.  |
+| **utorid** | String             |        No        |  The utorid of the student.  |
+| **student_number**     | Number |        No        |  The student number of the student.  |
+| **status** | String             |        No        |  The status of the student.   |
+| **contract_number**    | Number |        No        |  The contract number of the student. |
+| **user_type** | String          |        No        |  The user type of the student.   |
 
 
 
@@ -70,4 +70,4 @@ GET
 
 | Parameter       |      Type      | Required? |  Description |
 |---------------|-------------|---|--------|
-| **id**     |  String         | Required| |
+| **id**     |  String         | Yes | The id of the student. |
