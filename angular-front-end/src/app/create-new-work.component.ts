@@ -5,9 +5,9 @@ import { Component } from '@angular/core'
 	template: `
 		<div>
 			<md-input-container>
- 				<input mdInput placeholder="Work Name" value="A0">
+				<input mdInput placeholder="Work name" value="A0">
 			</md-input-container>
-			<md-select placeholder="Number of Peers">
+			<md-select placeholder="Number of peers">
  				<md-option *ngFor="let num of num_peers_options">
     				{{ num }}
   				</md-option>
@@ -16,30 +16,30 @@ import { Component } from '@angular/core'
 			<!-- deadlines -->
 			<br>
 			<md-checkbox>
-				Enable Student Submission:
+				Enable student submission:
 			</md-checkbox>
 			<md-input-container>
-				<input mdInput [mdDatepicker]="student_submission" placeholder="Submission Deadline">
+				<input mdInput [mdDatepicker]="student_submission" placeholder="Submission deadline">
 				<button mdSuffix [mdDatepickerToggle]="student_submission"></button>
 			</md-input-container>
 			<md-datepicker #student_submission></md-datepicker>
 
 			<br>
 			<md-checkbox>
-				Enable Self Review:
+				Enable self review:
 			</md-checkbox>
 			<md-input-container>
-				<input mdInput [mdDatepicker]="self_review" placeholder="Self Review Deadline">
+				<input mdInput [mdDatepicker]="self_review" placeholder="Self review deadline">
 				<button mdSuffix [mdDatepickerToggle]="self_review"></button>
 			</md-input-container>
 			<md-datepicker #self_review></md-datepicker>
 
 			<br>
 			<md-checkbox>
-				Enable Peer Review:
+				Enable peer review:
 			</md-checkbox>
 			<md-input-container>
-				<input mdInput [mdDatepicker]="peer_review" placeholder="Peer Review Deadline">
+				<input mdInput [mdDatepicker]="peer_review" placeholder="Peer review deadline">
 				<button mdSuffix [mdDatepickerToggle]="peer_review"></button>
 			</md-input-container>
 			<md-datepicker #peer_review></md-datepicker>

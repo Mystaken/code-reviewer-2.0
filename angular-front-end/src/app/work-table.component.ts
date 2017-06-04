@@ -6,16 +6,16 @@ import { Component } from '@angular/core'
 		<table class="ui selectable inverted table">
 			<thead>
 				<tr>
-					<th>Work Name</th>
+					<th>Work name</th>
 					<th>Status</th>
-					<th>Number of Peers</th>
-					<th>Next Deadline</th>
+					<th>Number of peers</th>
+					<th>Next deadline</th>
 				</tr>
 			</thead>
 
 			<tbody>
 				<tr *ngFor="let row of table_content">
-					<td *ngFor="let data of row"> 
+					<td *ngFor="let data of row">
 						{{ data }}
 					</td>
 				</tr>

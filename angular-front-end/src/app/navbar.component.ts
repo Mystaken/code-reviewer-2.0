@@ -4,41 +4,77 @@ import { Http } from '@angular/http';
   selector: 'navbar',
   template: `
   <div class="navbar">
+    <div class="navbar-desktop">
+      <div class="stage-buttons">
+        <ul>
+          <li *ngFor="let tab of tabs" md-raised-button [mdMenuTriggerFor]="menu">
+            <a href="#">{{ tab.tab_name }}</a>
 
-    <div class="stage-buttons">
-      <ul>
-        <li *ngFor="let tab of tabs" md-raised-button [mdMenuTriggerFor]="menu">
-          <a href="#">{{ tab.tab_name }}</a>
-
-          <!-- dropdown -->
-          <md-menu #menu="mdMenu">
-            <button
-              md-menu-item
-              *ngFor="let sub_tab_name of tab.sub_tab_names"
-              (click)="on_click(tab.tab_name ,sub_tab_name.id);"
-              >
-              <md-icon>dialpad</md-icon>
-              <span>{{ sub_tab_name.name }}</span>
-            </button>
-          </md-menu>
+            <!-- dropdown -->
+            <md-menu #menu="mdMenu">
+              <button
+                md-menu-item
+                *ngFor="let sub_tab_name of tab.sub_tab_names"
+                (click)="on_click(tab.tab_name ,sub_tab_name.id);"
+                >
+                <md-icon>dialpad</md-icon>
+                <span>{{ sub_tab_name.name }}</span>
+              </button>
+            </md-menu>
+          </li>
         </ul>
+      </div>
+      <div class="user-info">
+        <p>
+          {{ username }}&nbsp;(<a href="#">Log&nbsp;out</a>)
+        </p>
+      </div>
     </div>
-    <div class="user-info">
-        {{ username }}&nbsp;(<a href="#">Logout</a>)
+
+    <div class="navbar-mobile">
+      <h2 style="color: #FFF;">Mobile placeholder</h2>
     </div>
   </div>
   `,
   styles: [`
-    .navbar {
+    @media (max-width: 1023px) {
+       .navbar-desktop {
+          display: none !important;
+       }
+    }
+
+    @media (min-width: 1024px) {
+       .navbar-mobile {
+          display: none !important;
+       }
+    }
+
+    .navbar-desktop {
       display: flex;
       justify-content: space-between;
+      overflow-x: hidden;
     }
+
+    .navbar-desktop a {
+      color: #E8EAF6;
+    }
+
+    .navbar-desktop a:hover {
+      color: #E8EAF6;
+      text-decoration: underline;
+    }
+
+    .navbar-desktop p {
+      color: #E8EAF6;
+    }
+
     .stage-buttons {
       text-align: left;
       display: flex;
     }
+
     .user-info {
-      margin: 18px 20px 0 0;
+      margin: 15px 20px 0 0;
     }
 
     ul {
@@ -54,6 +90,7 @@ import { Http } from '@angular/http';
       margin: 0 10px 0 0;
       text-indent: 35px;
       position: relative;
+      left: -10px;
     }
 
     ul li:before {
@@ -64,7 +101,7 @@ import { Http } from '@angular/http';
       left: -2px;
       border-style: solid;
       border-width: 25px 0 25px 25px;
-      border-color: transparent transparent transparent #fff;
+      border-color: transparent transparent transparent #3F51B5;
       z-index: 0;
     }
 
@@ -80,7 +117,7 @@ import { Http } from '@angular/http';
       right: -25px;
       border-style: solid;
       border-width: 25px 0 25px 25px;
-      border-color: transparent transparent transparent #ccc;
+      border-color: transparent transparent transparent #5C6BC0;
       z-index: 10;
     }
 
@@ -95,16 +132,16 @@ import { Http } from '@angular/http';
 
     ul li a {
       display: block;
-      background: #ccc;
+      background: #5C6BC0;
       padding-left: 5px;
     }
 
     ul li a:hover {
-      background: #4fc3f7;
+      background: #7986CB;
     }
 
     ul li a:hover:after {
-      border-color: transparent transparent transparent #4fc3f7;
+      border-color: transparent transparent transparent #7986CB;
     }
 
   `]
