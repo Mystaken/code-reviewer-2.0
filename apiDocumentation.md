@@ -11,6 +11,7 @@
       * [api/works - GET](#get-work)
       * [api/works - PUT](#create-work)
       * [api/works - POST](#update-work)
+      * [api/works/all - GET](#update-all-work)
 
 Users
 ===
@@ -305,5 +306,34 @@ POST
 {
    "status": 200,
    "data": 123
+}
+```
+
+Get All Work
+---
+Get the work for the id.
+#### Method
+GET
+#### URL Structure
+`api/works/all`
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": [
+      {
+         "work_id", 123
+         "work_name": "Assignment 1",
+         "num_peers": 5,
+         "required_files": [ "a1.py", "a2.py"],
+         "feedback_questions": [ "Is this good?" ],
+         "repo_path": "assignment/a1",
+         "student_submission_dead_line": "2017-12-17",
+         "peer_review_deadline": "2017-12-30",
+         "ta_review_deadline": "2017-12-30"
+      },
+   ...
+   ]
 }
 ```
