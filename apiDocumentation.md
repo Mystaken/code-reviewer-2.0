@@ -145,3 +145,8 @@ POST
    "status": 200
 }
 ```
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| CSV file corrupted/incorrect format | Return `400` with message { "code": "INVALID_INPUT", error: "File corrupted or incorrect format" } |
