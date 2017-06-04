@@ -2,7 +2,6 @@ var mongoose = require('mongoose');
 
 module.exports = {
     submission_id: mongoose.Schema.Types.ObjectId,
-    name: String,                       // name of this file, e.g. assignment 1, assignment 2
     author_id: mongoose.Schema.Types.ObjectId,        // utorid of the student
     ta_id: mongoose.Schema.Types.ObjectId,            // the TA who is going to mark this assignment
     code: String,                       // file content
