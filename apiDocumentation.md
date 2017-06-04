@@ -5,7 +5,9 @@
     * [**Students**](#students)
       * [/users/students - GET](#filter-students)
       * [/users/students/:id - GET](#get-student)
-### Users
+
+Users
+===
 
 #### Get User
 Return the user information for the user of the userid.
