@@ -425,7 +425,10 @@ PUT
 #### Example Response
 ```
 {
-   "feedback_id": 1232
+   "status": 200,
+   "data": {
+       "feedback_id": 1232
+   }
 }
 ```
 
@@ -465,6 +468,9 @@ POST
 #### Example Response
 ```
 {
-   "feedback_id": 1232
+   "status": 200,
+   "data": {
+       "feedback_id": 1232
+   }
 }
 ```
