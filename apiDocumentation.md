@@ -170,13 +170,13 @@ PUT
 #### Request Body
 | Queries        |      Type      |  Required?   |  Description |
 |----------------|----------------|--------------|--------------|
-| **work_name**       |    String      |     Yes      |  The name of this work. Format: YYYY-MM-DD.  |
+| **work_name**       |    String      |     Yes      |  The name of this work.  |
 | **num_peers**  |    String      |      Yes     |  The number of students who will be assigned to review each work. |
 | **required_files** | Array of Strings | No    | The required files for this assignment |
 | **repo_path**  | String |      No      |  The markus repo path |
-| **student_submission_deadline** |   String  | No   |  The deadline of the student submission. |
-| **peer_review_deadline** |   String  | No   |  The deadline of the student peer review. |
-| **ta_review_deadline** |   String  | No   |  The deadline of the ta review. |
+| **student_submission_deadline** |   String  | No   |  The deadline of the student submission. Format: YYYY-MM-DD. |
+| **peer_review_deadline** |   String  | No   |  The deadline of the student peer review. Format: YYYY-MM-DD. |
+| **ta_review_deadline** |   String  | No   |  The deadline of the ta review. Format: YYYY-MM-DD. |
 
 #### Validation
 |  Action  |  Expected Result |
