@@ -6,7 +6,6 @@
       * [/users/students](#filter-students)
       * [/users/students/:id](#get-student)
 ### Users
-<hr></hr>
 #### Get User
 Return the user information for the user of the userid.
 #### Method
