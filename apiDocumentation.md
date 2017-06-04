@@ -1,6 +1,6 @@
 # API Documentation
 ## Table of contents
- * **Users**(#users)
+ * [**Users**] (#users)
     * [/users/ - POST](#get-user)
     * [**Students**](#students)
       * [/users/students - GET](#filter-students)
