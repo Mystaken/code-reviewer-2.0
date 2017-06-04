@@ -11,7 +11,7 @@
       * [api/works - GET](#get-work)
       * [api/works - PUT](#create-work)
       * [api/works - POST](#update-work)
-      * [api/works/all - GET](#update-all-work)
+      * [api/works/all - GET](#get-all-work)
 
 Users
 ===
