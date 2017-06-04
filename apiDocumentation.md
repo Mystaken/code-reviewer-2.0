@@ -19,7 +19,15 @@ POST
 #### Request Body
 | Queries        |      Type      |  Required?   |  Description |
 |---------------|-----------------|--------------|--------------|
-| **id** |    String              |     Yes      |  The id of the user.  |
+| **user_id** |    String              |     Yes      |  The id of the user.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"user_id"}` |
+| user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| user_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
 
 #### Example Request Body
 ```
@@ -41,7 +49,6 @@ POST
    }
 }
 ```
-
 Students
 ===
 
