@@ -1,9 +1,19 @@
-# Get Students
-## Method
+# API Documentation
+## Table of contents
+ * Users
+    * [Students](#students)
+      * [/users/students](#filter-students)
+      * [/users/students/:id](#get-students)
+
+### Students
+#### Filter Students
+Returns all students that matches this field.
+
+##### Method
 GET
-## URL structure
+##### URL structure
 `http://localhost:3000/api/users/students/`
-## Request Queries
+##### Request Queries
 
 | Queries        |      Type      |  Description |
 |---------------|-------------|------|
@@ -19,7 +29,7 @@ GET
 
 
 
-# Get One Student
+###### Get Student
 ## Method
 GET
 ## URL structure
