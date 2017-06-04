@@ -6,6 +6,7 @@
       * [/users/students - GET](#filter-students)
       * [/users/students/:id - GET](#get-student)
       * [/users/students/ - PUT](#add-students)
+      * [/users/students/upload - POST](#upload-student-file)
 
 Users
 ===
@@ -136,6 +137,14 @@ Upload Student File
 Upload a student csv file and add the students to the server
 #### Method
 POST
+
+#### File format
+UTORiD,First Name,Last Name,Student Number,Email
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| CSV file corrupted/incorrect format | Return `400` with message { "code": "INVALID_INPUT", error: "File corrupted or incorrect format" } |
 #### URL Structure
 `api/users/students/upload`
 
@@ -145,8 +154,3 @@ POST
    "status": 200
 }
 ```
-
-#### Validation
-|  Action  |  Expected Result |
-|---------------|-------------|
-| CSV file corrupted/incorrect format | Return `400` with message { "code": "INVALID_INPUT", error: "File corrupted or incorrect format" } |
