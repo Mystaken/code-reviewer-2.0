@@ -37,7 +37,7 @@ Return the user information for the user of the userid.
 GET
 #### URL Structure
 `api/users/`
-#### Request Body
+#### Request Query
 | Queries        |  Type     |  Required?   |  Description          |
 |----------------|-----------|--------------|-----------------------|
 | **user_id**    |  String   |     Yes      |  The id of the user.  |
@@ -47,8 +47,8 @@ GET
 |---------------|-------------| 
 | user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param": ["#/user_id"]}` |
 | Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
-| user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
-| user_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
+| user exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
+| user does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
 
 #### Example Request Body
 ```
@@ -117,8 +117,8 @@ Get Student
 ##### Method
 GET
 ##### URL structure
-`/api/users/students/123456`
-##### Request Parameters
+`/api/users/students`
+##### Request Query
 
 | Parameter       |      Type      | Required? |  Description |
 |---------------|-------------|---|--------|
@@ -129,8 +129,8 @@ GET
 |---------------|-------------|
 | user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param": ["#/user_id"]}` |
 | Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
-| user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
-| user_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
+| user exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
+| user does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": ["#/user_id"] }` |
 
 #### Example Request Body
 ```
@@ -175,8 +175,8 @@ PUT
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------|
-| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<field>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
 
 #### Example Request Body
 ```
@@ -209,7 +209,7 @@ UTORiD,First Name,Last Name,Student Number,Email
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------|
-| CSV file corrupted/incorrect format | Return `400` with message { "code": "INVALID_INPUT", error: "File corrupted or incorrect format" } |
+| CSV file corrupted/incorrect format | Return `400` with message { "code": "INVALID_INPUT", error: "#/file" } |
 #### URL Structure
 `api/users/students/upload`
 
@@ -239,9 +239,9 @@ GET
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------|
-|  work_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<work_id>"}` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
-| work_id does not exist in database | Return error status `404` with message: `{"code":"NOT_FOUND","param":["work_id"]}`|
+|  work_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<work_id>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| work does not exist in database | Return error status `404` with message: `{"code":"NOT_FOUND","param":["#/work_id"]}`|
 #### Example Request Body
 ```
 {
@@ -290,10 +290,10 @@ PUT
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------|
-| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
-| num_peers larger than maximum in database | Return error status `400` with message: `{"code":"MAXIMUM","param":["num_peers"]}`|
-| num_peers lower than minimum in database | Return error status `400` with message: `{"code":"MINIMUM","param":["num_peers"]}`|
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<field>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| num_peers larger than maximum in database | Return error status `400` with message: `{"code":"MAXIMUM","param":["#/num_peers"]}`|
+| num_peers lower than minimum in database | Return error status `400` with message: `{"code":"MINIMUM","param":["#/num_peers"]}`|
 
 #### Example Request Body
 ```
@@ -341,11 +341,11 @@ POST
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------|
-|  work_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<work_id>"}` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
-| work_id does not exist in database | Return error status `404` with message: `{"code":"NOT_FOUND","param":["work_id"]}`|
-| num_peers larger than maximum in database | Return error status `400` with message: `{"code":"MAXIMUM","param":["num_peers"]}`|
-| num_peers lower than minimum in database | Return error status `400` with message: `{"code":"MINIMUM","param":["num_peers"]}`|
+|  work_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<work_id>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| work does not exist in database | Return error status `404` with message: `{"code":"NOT_FOUND","param":["#/work_id"]}`|
+| num_peers larger than maximum in database | Return error status `400` with message: `{"code":"MAXIMUM","param":["#/num_peers"]}`|
+| num_peers lower than minimum in database | Return error status `400` with message: `{"code":"MINIMUM","param":["#/num_peers"]}`|
 
 #### Example Request Body
 ```
@@ -416,10 +416,10 @@ POST
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| feedback_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"feedback_id"}` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
-| feedback_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| feedback exists user does not have access to this feedback | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| feedback_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/feedback_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| feedback does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }` |
+| feedback exists user does not have access to this feedback | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }` |
 #### Example Request Body
 ```
 {
@@ -462,10 +462,10 @@ PUT
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
-| work_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<field>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| work does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }` |
+| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }` |
 #### Example Request Body
 ```
 {
@@ -506,10 +506,10 @@ POST
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| feedback_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"feedback_id"}` |
-| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
-| feedback_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| feedback exists user does not have access to the feedback | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| feedback_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/feedback_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<additional_param>"]}` |
+| feedback does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }` |
+| feedback exists user does not have access to the feedback | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }` |
 #### Example Request Body
 ```
 {
@@ -548,10 +548,10 @@ GET
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| work_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"feedback_id"}` |
-| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
-| work_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| work_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/feedback_id"}` |
+| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/work_id"]}` |
+| work does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }` |
+| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }` |
 #### Example Request Body
 {
     "work_id": 42
@@ -592,11 +592,11 @@ PUT
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<field>"}` |
 | Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<field>"]}` |
-| work_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| invalid start and end. | Return error status `400` with message: `{ "code": "INVALID_DATA", "param":["start", "end"] }` |
+| work does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param":["#/work_id"] }` |
+| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND", "param":["#/work_id"] }` |
+| invalid start and end. | Return error status `400` with message: `{ "code": "INVALID_DATA", "param":["#/start", "#/end"] }` |
 #### Example Request Body
 {
     "work_id": 123,
@@ -630,10 +630,10 @@ POST
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
-| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<field>"]}` |
-| annotation_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<field>"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<field>"]}` |
+| annotation does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/annotationid" ] }` |
+| annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/annotationid" ]  }` |
 #### Example Request Body
 {
     "work_id": 123,
@@ -664,9 +664,9 @@ DELETE
 |  Action  |  Expected Result |
 |---------------|-------------| 
 | annotation_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"annotation_id"}` |
-| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<field>"]}` |
-| annotation_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<field>"]}` |
+| annotation does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/annotationid" ]  }` |
+| annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/annotationid" ] }` |
 
 #### Example Request Body
 {
@@ -697,10 +697,10 @@ GET
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"submission_id"}` |
-| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
-| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/submission_id"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<field>"]}` |
+| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/submission_id" ] }` |
+| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/submission_id" ] }` |
 #### Example Request Body
 {
     "submission_id": 42
@@ -738,10 +738,10 @@ POST
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"submission_id"}` |
-| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
-| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/submission_id"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<field>"]}` |
+| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/submission_id" ] }` |
+| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/submission_id" ] }` |
 #### Example Request Body
 ```
 {
@@ -750,7 +750,7 @@ POST
    "file_name": "ex2.py",
    "mark": 0
 }
-
+```
 #### Example Response
 ```
 {
@@ -775,16 +775,16 @@ DELETE
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"submission_id"}` |
-| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
-| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| submission_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/submission_id"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<field>"]}` |
+| submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/submission_id" ] }` |
+| submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" [ "#/submission_id" ] }` |
 #### Example Request Body
 ```
 {
    "submission_id": 42
 }
-
+```
 #### Example Response
 ```
 {
@@ -807,10 +807,10 @@ POST
 #### Validation
 |  Action  |  Expected Result |
 |---------------|-------------| 
-| author_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"author_id"}` |
-| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
-| author_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
-| corrupted upload file | Return error status `404` with message: `{ "code": "INVALID_DATA" }` |
+| author_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/author_id"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["#/<field>"]}` |
+| author_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": [ "#/author_id" ] }` |
+| corrupted upload file | Return error status `404` with message: `{ "code": "INVALID_DATA", "param": [ "#/file" ] }` |
 
 
 #### Example Request Body
