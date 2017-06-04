@@ -345,7 +345,7 @@ Feedbacks
 ===
 Get Feedback
 ---
-Return the user information for the user of the userid.
+Return the feedback information for the feedback of the feedback_id.
 #### Method
 POST
 #### URL Structure
@@ -388,7 +388,7 @@ POST
 
 Add Feedback
 ---
-Return the user information for the user of the userid.
+Add a new feedback for a work.
 #### Method
 PUT
 #### URL Structure
