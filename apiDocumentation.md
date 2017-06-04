@@ -1,10 +1,45 @@
 # API Documentation
 ## Table of contents
  * Users
+    * [/users/](#get-user)
     * [Students](#students)
       * [/users/students](#filter-students)
       * [/users/students/:id](#get-student)
+### Users
+<hr>
+#### Get User
+Return the user information for the user of the userid.
+#### Method
+POST
+#### URL Structure
+`api/users/`
+#### Request Body
 
+| Queries        |      Type      |  Description |
+|---------------|-------------|------|
+| **id** |    String              |   |
+
+#### Example Request Body
+```
+{
+   id: 1232
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : {
+      "id": 1232,
+      "utorid": "gxsanda1",
+      "user_type": "Instructor",
+      "first_name" "Grey",
+      "last_name": "Gxsanda",
+      "email": "grey.gxsanda@mail.utoronto.ca"
+   }
+}
+```
+<hr>
 ### Students
 #### Filter Students
 Returns all students that matches this field.
