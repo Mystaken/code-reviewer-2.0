@@ -5,6 +5,7 @@
     * [**Students**](#students)
       * [/users/students - GET](#filter-students)
       * [/users/students/:id - GET](#get-student)
+      * [/users/students/ - PUT](#add-students)
 
 Users
 ===
@@ -87,3 +88,44 @@ GET
 | Parameter       |      Type      | Required? |  Description |
 |---------------|-------------|---|--------|
 | **id**     |  String         | Yes | The id of the student. |
+
+Add Students
+---
+Adds a student to the database
+#### Method
+PUT
+#### URL Structure
+`api/users/students`
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|---------------|-----------------|--------------|--------------|
+| **email**     |  String         |        Yes        |  The email of the student.|
+| **first_name** | String         |        Yes        |  The first name of the student.  |
+| **last_name** | String          |        Yes        |  The last name of the student.  |
+| **utorid** | String             |        Yes        |  The utorid of the student.  |
+| **student_number**     | Number |        Yes        |  The student number of the student.  |
+
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+
+#### Example Request Body
+```
+{
+      "id": 1232,
+      "first_name" "Grey",
+      "last_name": "Gxsanda",
+      "utorid": "gxsanda1",
+      "email": "grey.gxsanda@mail.utoronto.ca"
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : 12352 
+}
+```
