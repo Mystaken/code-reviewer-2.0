@@ -6,7 +6,6 @@
       * [/users/students](#filter-students)
       * [/users/students/:id](#get-student)
 ### Users
-<hr>
 #### Get User
 Return the user information for the user of the userid.
 #### Method
@@ -39,7 +38,6 @@ POST
    }
 }
 ```
-<hr>
 ### Students
 #### Filter Students
 Returns all students that matches this field.
