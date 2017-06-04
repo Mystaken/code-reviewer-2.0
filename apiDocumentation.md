@@ -128,4 +128,20 @@ PUT
    "status": 200,
    "data" : 12352 
 }
+
+```
+
+Upload Student File
+---
+Upload a student csv file and add the students to the server
+#### Method
+POST
+#### URL Structure
+`api/users/students/upload`
+
+#### Example Response
+```
+{
+   "status": 200
+}
 ```
