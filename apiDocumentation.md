@@ -3,7 +3,7 @@
  * Users
     * [Students](#students)
       * [/users/students](#filter-students)
-      * [/users/students/:id](#get-students)
+      * [/users/students/:id](#get-student)
 
 ### Students
 #### Filter Students
@@ -29,12 +29,12 @@ GET
 
 
 
-###### Get Student
-## Method
+#### Get Student
+##### Method
 GET
-## URL structure
+##### URL structure
 `http://localhost:3000/api/users/students/123456`
-## Request Parameters
+##### Request Parameters
 
 | Parameter       |      Type      | Required? |  Description |
 |---------------|-------------|---|--------|
