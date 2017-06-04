@@ -1,7 +1,7 @@
 # API Documentation
 ## Table of contents
   * [**Users**](#users)
-    * [api/users/ - POST](#get-user)
+    * [api/users/ - GET](#get-user)
     * [**Students**](#students)
       * [api/users/students - GET](#filter-students)
       * [api/users/students/:id - GET](#get-student)
@@ -29,7 +29,7 @@ Get User
 ---
 Return the user information for the user of the userid.
 #### Method
-POST
+GET
 #### URL Structure
 `api/users/`
 #### Request Body
