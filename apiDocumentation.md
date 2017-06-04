@@ -8,10 +8,12 @@
       * [api/users/students/ - PUT](#add-students)
       * [api/users/students/upload - POST](#upload-student-file)
   * [**Works**](#works)
-      * [api/works - GET](#get-work)
-      * [api/works - PUT](#create-work)
-      * [api/works - POST](#update-work)
-      * [api/works/all - GET](#get-all-work)
+    * [api/works - GET](#get-work)
+    * [api/works - PUT](#create-work)
+    * [api/works - POST](#update-work)
+    * [api/works/all - GET](#get-all-work)
+    * [**Feedbacks**](#feedbacks)
+      * [/api/works/feedbacks - GET](#get-feedback)
 
 Users
 ===
@@ -335,5 +337,51 @@ GET
       },
    ...
    ]
+}
+```
+
+Feedbacks
+===
+Get Feedback
+---
+Return the user information for the user of the userid.
+#### Method
+POST
+#### URL Structure
+`api/works/feedbacks`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **feedback_id** |    Number     |     Yes      |  The id of the feedback.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| feedback_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"feedback_id"}` |
+| user_id exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| feedback_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| feedback exists user does not have access to this feedback | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+```
+{
+   "feedback_id": 1232
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : {
+        "feedback_id": 31
+        "work_id": 34,
+        "feedbacks": [
+            "Good",
+            "Great"
+        ],
+        "mark": 79,
+        "author": 35
+   }
 }
 ```
