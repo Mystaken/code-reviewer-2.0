@@ -8,6 +8,7 @@
       * [api/users/students/ - PUT](#add-students)
       * [api/users/students/upload - POST](#upload-student-file)
   * [**Works**](#works)
+      * [api/works - GET](#get-work)
       * [api/works - PUT](#create-work)
 
 Users
@@ -159,6 +160,50 @@ UTORiD,First Name,Last Name,Student Number,Email
 
 Works
 ===
+
+Get Work
+---
+Get the work for the id.
+#### Method
+GET
+#### URL Structure
+`api/works`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **work_id**    |    String      |     Yes      |  The id of this work.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+|  work_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<work_id>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<additional_param>"]}` |
+| work_id does not exist in database | Return error status `404` with message: `{"code":"NOT_FOUND","param":["work_id"]}`|
+#### Example Request Body
+```
+{
+   "work_id": 123
+}
+```
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": {
+      "work_id", 123
+      "work_name": "Assignment 1",
+      "num_peers": 5,
+      "required_files": [ "a1.py", "a2.py"],
+      "repo_path": "assignment/a1",
+      "student_submission_dead_line": "2017-12-17",
+      "peer_review_deadline": "2017-12-30",
+      "ta_review_deadline": "2017-12-30"
+   }
+}
+```
+
 Create work
 ---
 Create a work
