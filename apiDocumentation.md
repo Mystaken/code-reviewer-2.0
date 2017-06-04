@@ -16,6 +16,10 @@
       * [/api/works/feedbacks - GET](#get-feedback)
       * [/api/works/feedbacks - PUT](#add-feedback)
       * [/api/works/feedbacks - POST](#update-feedback)
+    * [**Annotations**](#annotation)
+      * [/api/works/annotations - GET](#get-annotation)
+      * [/api/works/annotations - PUT](#add-annotation)
+      * [/api/works/annotations - POST](#update-annotation)
 
 Users
 ===
@@ -472,5 +476,122 @@ POST
    "data": {
        "feedback_id": 1232
    }
+}
+```
+Annotations
+===
+Get Annotation
+---
+Return all the annotation for a specific work.
+#### Method
+GET
+#### URL Structure
+`api/works/annotations`
+
+#### Request Query
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **work_id** |    Number     |     Yes      |  The id of the work of the annotations.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| work_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"feedback_id"}` |
+| Additional fields entered | Return error status `400` with message: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["work_id"]}` |
+| work_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+{
+    "work_id": 42
+}
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": {
+       "work_id": 123,
+       "annotations": {
+          "annotation": "A good one",
+          "start": 4,
+          "end": 10,
+          "annotation_id": 123
+       }
+   }
+}
+```
+
+Add Annotation
+---
+Add a annotation for a specific work.
+#### Method
+PUT
+#### URL Structure
+`api/works/annotations`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **work_id** |    Number     |     Yes      |  The id of the work of the annotation  |
+| **annotation** |    String     |     Yes      |  The annotation.  |
+| **start** |    Number     |     Yes      |  The start of the annotation.  |
+| **end** |    Number     |     Yes      |  The end of the annotation  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<field>"]}` |
+| work_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| invalid start and end. | Return error status `400` with message: `{ "code": "INVALID_DATA", "param":["start", "end"] }` |
+#### Example Request Body
+{
+    "work_id": 123,
+    "annotation": "A good one",
+    "start": 4,
+    "end": 10
+}
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": 145
+}
+```
+
+Update Annotation
+---
+Update a annotation for a specific annotation_id.
+#### Method
+POST
+#### URL Structure
+`api/works/annotations`
+
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|----------------|----------------|--------------|--------------|
+| **annotation_id** |    Number     |     Yes      |  The id of the  of the annotation  |
+| **annotation** |    String     |     Yes      |  The new annotation.  |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------| 
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"<field>"}` |
+| Additional fields entered | Return error status `400` with message for each field: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":["<field>"]}` |
+| annotation_id does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+| annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND" }` |
+#### Example Request Body
+{
+    "work_id": 123,
+    "annotation": "A good one"
+}
+
+#### Example Response
+```
+{
+   "status": 200,
+   "data": 145
 }
 ```
