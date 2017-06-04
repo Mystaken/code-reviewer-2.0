@@ -169,7 +169,7 @@ export class NavbarComponent {
       }
     ]
   },{
-    tab_name: "Review",
+    tab_name: "Reflect",
     sub_tab_names: [
       {
         id: "workId:kkasdlkfjasldkfj",
@@ -180,7 +180,7 @@ export class NavbarComponent {
       }
     ]
   }, {
-    tab_name: "Reflect",
+    tab_name: "Review",
         sub_tab_names: [
       {
         id: "workId:kkasdlkfjasldkfj",
@@ -191,7 +191,7 @@ export class NavbarComponent {
       }
     ]
   }, {
-    tab_name: "Marks",
+    tab_name: "Results",
         sub_tab_names: [
       {
         id: "workId:kkasdlkfjasldkfj",
