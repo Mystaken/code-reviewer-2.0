@@ -5,12 +5,16 @@ import { HttpModule, JsonpModule } from '@angular/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MdCheckboxModule, MaterialModule, MdNativeDateModule } from '@angular/material';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { WindowComponent } from './window.component'
 import { TodoListComponent } from './todo-list.component'
 import { NavbarComponent} from './navbar.component'
 import { SiteMapComponent } from './site-map.component'
 import { CreateNewWorkComponent} from './create-new-work.component'
+import { WorkTableComponent } from './work-table.component'
+import { AdminComponent } from './admin.component'
+import { StudentTableComponent } from './student-table.component'
 
 
 @NgModule({
@@ -20,7 +24,10 @@ import { CreateNewWorkComponent} from './create-new-work.component'
     TodoListComponent,
     NavbarComponent,
     SiteMapComponent,
-    CreateNewWorkComponent
+    CreateNewWorkComponent,
+    WorkTableComponent,
+    AdminComponent,
+    StudentTableComponent
   ],
   imports: [
     BrowserModule,
@@ -30,7 +37,8 @@ import { CreateNewWorkComponent} from './create-new-work.component'
     BrowserAnimationsModule,
     MdCheckboxModule,
     MaterialModule,
-    MdNativeDateModule
+    MdNativeDateModule,
+    NgxDatatableModule
   ],
   providers: [],
   bootstrap: [AppComponent]
