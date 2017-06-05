@@ -2,13 +2,13 @@
 
 var validator   = require('../../lib/validator'),
     mongoose    = require('mongoose'),
-    Promise     = require('bluebird');
+    Promise     = require('bluebird'),
+    user_model  = mongoose.getModel('user');
 
 module.exports = function (router) {
 
     router.route('/').get(function(req, res, next) {
-        var user_model = mongoose.getModel('user'),
-            error,
+        var error,
             user_id;
 
         if (req.sessionUserType !== 'Admin') {
