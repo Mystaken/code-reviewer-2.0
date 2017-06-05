@@ -92,8 +92,6 @@ GET
 | **utorid** | String             |        No        |  The utorid of the student.  |
 | **student_number**     | Number |        No        |  The student number of the student.  |
 | **status** | String             |        No        |  The status of the student.   |
-| **contract_number**    | Number |        No        |  The contract number of the student. |
-| **user_type** | String          |        No        |  The user type of the student.   |
 
 #### Example Response
 ```
