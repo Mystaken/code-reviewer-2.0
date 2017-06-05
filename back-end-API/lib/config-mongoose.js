@@ -29,12 +29,10 @@ function configSchemas(schemas) {
 }
 
 function getModel(name) {
-    return Promise.try(function() {
-        if (!mongoose[name]) {
-            throw new Error("No model in mongoose.");
-        }
-        return mongoose[name];
-    });
+    if (!mongoose[name]) {
+        throw new Error("No model in mongoose.");
+    }
+    return mongoose[name];
 }
 
 module.exports = {
