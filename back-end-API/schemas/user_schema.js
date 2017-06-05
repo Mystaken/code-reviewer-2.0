@@ -19,5 +19,5 @@ module.exports = {
     status : String,            
     last_login : Date,
     contract_number: Number,    // number of contracts a TA has
-    user_type: String           // one of "instructor", "TA", "Student"
+    user_type: String           // one of "instructor", "TA", "Student", "Admin"
 }
