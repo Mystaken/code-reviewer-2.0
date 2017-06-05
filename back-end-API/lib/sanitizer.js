@@ -13,7 +13,7 @@ sanitizer = {
         if (sanitize.isInt(str)) {
             return sanitize.toInt(str);
         }
-        return str;
+        return null;
     }
 };
 
