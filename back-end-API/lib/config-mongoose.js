@@ -27,7 +27,10 @@ function configSchemas(schemas) {
         mongoose[schema.name] = promise;
     });
 }
-
+/*
+ * Returns a configured mongoose model given the name
+ * @param name {String} The name of the model
+ */
 function getModel(name) {
     if (!mongoose[name]) {
         throw new Error("No model in mongoose.");
@@ -35,12 +38,21 @@ function getModel(name) {
     return mongoose[name];
 }
 
+/*
+ * Returns true iff the given id is valid.
+ * @param id {String} The mongo id to be verified.
+ */
+function validID(id) {
+    return id.match(/^[0-9a-fA-F]{24}$/);
+}
 module.exports = {
     /** Configures the mongoose
      * @param app {Express} the express app
      */
     configure: function (app) {
+        mongoose.connect(config.mongo.server);
         configSchemas(schemas);
         mongoose.getModel = getModel;
+        mongoose.validID = validID;
     }
 };

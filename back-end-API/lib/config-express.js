@@ -49,24 +49,44 @@ function configureResponse (response) {
      * @param err.message {str} the error message
      */
     response.requestError = function (err) {
-        if (err.status && err.message) {
+        if (err.code === "VALIDATION") {
             return this.status(400).send({
-                status: err.status,
+                status: 400,
                 message: err.message
             });
-        }
-        if (err.status) {
-            return this.status(400).send({
-                status: err.status
-            });
+        } else if (err.code === "NOT_FOUND") {
+            return this.status(404).send({
+                status: 404,
+                message: [{
+                    code: "NOT_FOUND",
+                    params: [ "#/" + err.params ]
+                }]
+            })
         }
         return this.status(500).send({
-            status: 500
+            status: 500,
+            error: err
         });
     };
 
+    /** Sends a error response if user does not have permission
+     * @param err {Object} Not being used.
+     */
+    response.forbidden = function (err) {
+        this.status(403).send({
+            status: 403,
+            message: "You do not have access to this page."
+        })
+    };
 }
 
+function configureMiddleware(app) {
+    app.use(function (req, res, next) {
+        req.sessionUserId   = "5934a1a4ea6bac5187aaad0c";
+        req.sessionUserType = "Admin";
+        next();
+    })
+}
 module.exports = {
     /** Configures the Express app
      * @param app {Express} the express app
@@ -74,5 +94,6 @@ module.exports = {
     configure: function (app) {
         configureRequest(express.request);
         configureResponse(express.response);
+        configureMiddleware(app);
     }
 };

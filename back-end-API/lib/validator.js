@@ -14,9 +14,17 @@ module.exports = {
         var lastErrors = validator.getLastErrors();
         if (lastErrors) {
             return lastErrors.map(function (err) {
+                var path;
+                if (err.code === 'OBJECT_ADDITIONAL_PROPERTIES') {
+                    path = err.params[0].map(function(param){
+                        return '#/' + param;
+                    });
+                } else {
+                    path = [ err.path ];
+                }
                 return {
                     code: err.code,
-                    param: err.params[0]
+                    param: path
                 };
             });
         }

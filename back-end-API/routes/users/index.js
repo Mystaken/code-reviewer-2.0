@@ -1,37 +1,50 @@
 'use strict';
 
-var validator = require('../../lib/validator'),
-    mongoose = require('mongoose');
+var validator   = require('../../lib/validator'),
+    mongoose    = require('mongoose'),
+    Promise     = require('bluebird');
 
 module.exports = function (router) {
-    /*
-     * JUST FOR DEMO. PLEASE DO NOT COPY AND PASTE CODE WITH THE COMMENTS.
-     * THE COMMENTS ARE JUST TO SHOW HOW IT WORKS.
-     */
+
     router.route('/').get(function(req, res, next) {
         var user_model = mongoose.getModel('user'),
-            err;
-        //make sure utorid is in the query and no other parameters
+            error,
+            user_id;
+
+        if (req.sessionUserType !== 'Admin') {
+            res.forbidden();
+        }
         validator.validate(req.query, {
             type: "object",
             properties: {
-                utorid: {  type: "string" }
+                user_id: {
+                    type: "string"
+                }
             },
             additionalProperties: false,
-            required: ["utorid"]
+            required: [ "user_id" ]
         });
-        // Check if there's errors.
         error = validator.getLastErrors();
-        // if there's an error, return error response.
-        if (error) return res.requestError({ status: 400, message: error });
+        if (error) return res.requestError({ code: "VALIDATION", message: error });
 
-        // mongoose.getModel returns promise with the user_model promise
-        return user_model.findAsync(req.query).then(function(users) {
+        if (!mongoose.validID(req.query.user_id)) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'user_id' ]
+            });
+        }
+        return user_model.findAsync({
+            _id: req.query.user_id
+        }).then(function(users) {
+            if (!users || !users.length) {
+                return Promise.reject({
+                    code: "NOT_FOUND",
+                    params: [ 'user_id' ]
+                });
+            }
             return res.sendResponse(users);
         }).catch(function(err) {
-            return res.requestError({
-                message: "Server Error"
-            });
+            return res.requestError(err);
         });
     }).all(function (req, res, next) {
         return res.invalidVerb();
