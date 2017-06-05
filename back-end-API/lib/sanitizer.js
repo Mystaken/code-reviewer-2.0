@@ -7,13 +7,13 @@ sanitizer = {
     /** Sanitizes a string to an integer
      * @param str {String} The string to be sanitized.
      *
-     * @return {String} The sanitized string.
+     * @return {Integer} The sanitized integer.
      */
     stringToInteger: function(str) {
         if (sanitize.isInt(str)) {
             return sanitize.toInt(str);
         }
-        return null;
+        return str;
     }
 };
 

@@ -11,14 +11,15 @@ module.exports = function (router) {
         var error,
             user_id;
 
-        if (req.sessionUserType !== 'Admin') {
+        if (req.sessionUserType !== 'admin') {
             return res.forbidden();
         }
         validator.validate(req.query, {
             type: "object",
             properties: {
                 user_id: {
-                    type: "string"
+                    type: "string",
+                    maxLength: 100
                 }
             },
             additionalProperties: false,
