@@ -12,7 +12,7 @@ module.exports = function (router) {
             user_id;
 
         if (req.sessionUserType !== 'Admin') {
-            res.forbidden();
+            return res.forbidden();
         }
         validator.validate(req.query, {
             type: "object",
