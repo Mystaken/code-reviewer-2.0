@@ -96,7 +96,7 @@ GET
 #### Example Request Query
 ```
 {
-   "userid": 1232,
+   "user_id": 1232,
    "student_id" 1314,
    "first_name" "Grey",
    "last_name": "Gxsanda",
@@ -112,7 +112,7 @@ GET
    "data" : [
       {
          "user_id": 1232,
-         "student_id" 1314,
+         "student_number" 1314,
          "first_name" "Grey",
          "last_name": "Gxsanda",
          "utorid": "gxsanda1",
@@ -145,7 +145,7 @@ GET
 #### Example Request Body
 ```
 {
-      "userid": 1232
+      "user_id": 1232
 }
 ```
 #### Example Response
