@@ -34,9 +34,24 @@ module.exports = function (router) {
                 params: [ 'user_id' ]
             });
         }
-        return user_model.find({
-            _id: req.query.user_id
-        }).exec().then(function(users) {
+        return user_model.aggregate([
+            { 
+                $match: {
+                    _id: mongoose.Types.ObjectId(req.query.user_id)
+                } 
+            },
+            { 
+                $project : {
+                    user_id: "$_id",
+                    _id: 0,
+                    email: 1,
+                    first_name: 1,
+                    last_name: 1,
+                    user_type: 1,
+                    utorid: 1
+                }
+            }
+        ]).exec().then(function(users) {
             if (!users || !users.length) {
                 return Promise.reject({
                     code: "NOT_FOUND",

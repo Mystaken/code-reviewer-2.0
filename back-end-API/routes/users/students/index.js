@@ -63,7 +63,10 @@ module.exports = function (router) {
         // need to do something about tas..
         if (user.sessionUserType !== 'admin' &&
             user.sessionUserId !== req.query.user_id) {
-            return res.forbidden();
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'user_id' ]
+            });
         }
         if (!mongoose.validID(req.query.user_id)) {
             return res.requestError({
@@ -190,19 +193,12 @@ module.exports = function (router) {
                 utorid: 1,
                 status: 1,
                 student_number: 1
-                }
             }
-<<<<<<< 6530d05daa80aa7c7c5488c33a869ec3fd893c51
-        }]).exec().then(function(ret) {
+        }
+        ]).exec().then(function(ret) {
             return res.sendResponse(ret);
         });
-    }).all(function (req, res, next) {
-=======
-            ]).exec().then(function(ret) {
-                return res.sendResponse(ret);
-            });
     }).all(function(req, res, next) {
->>>>>>> added aggregation
         return res.invalidVerb();
     });
 };
