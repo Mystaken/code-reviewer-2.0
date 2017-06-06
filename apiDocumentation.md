@@ -111,7 +111,7 @@ GET
    "status": 200,
    "data" : [
       {
-         "userid": 1232,
+         "user_id": 1232,
          "student_id" 1314,
          "first_name" "Grey",
          "last_name": "Gxsanda",
@@ -153,7 +153,7 @@ GET
 {
    "status": 200,
    "data" : {
-      "userid": 1232,
+      "user_id": 1232,
       "student_id" 1314,
       "first_name" "Grey",
       "last_name": "Gxsanda",
