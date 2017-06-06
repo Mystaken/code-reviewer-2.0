@@ -53,7 +53,7 @@ GET
 #### Example Request Body
 ```
 {
-   "id": 1232
+   "user_id": 1232
 }
 ```
 #### Example Response
@@ -61,7 +61,7 @@ GET
 {
    "status": 200,
    "data" : {
-      "id": 1232,
+      "user_id": 1232,
       "utorid": "gxsanda1",
       "user_type": "Instructor",
       "first_name" "Grey",
