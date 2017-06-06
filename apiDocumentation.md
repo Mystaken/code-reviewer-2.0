@@ -154,7 +154,7 @@ GET
    "status": 200,
    "data" : {
       "user_id": 1232,
-      "student_id" 1314,
+      "student_number" 1314,
       "first_name" "Grey",
       "last_name": "Gxsanda",
       "utorid": "gxsanda1",
