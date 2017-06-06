@@ -2,7 +2,8 @@
 
 var validator   = require('../../../lib/validator'),
     sanitizer   = require('../../../lib/sanitizer'),
-    mongoose    = require('mongoose'),
+    utils       = require('../../../lib/utils'),
+
     user_model  = require('../../../schemas/users');
 
 
@@ -106,21 +107,71 @@ module.exports = function (router) {
     });
 
     router.route('/all').get(function(req, res, next) {
-        //if (!req.session.user) return res.status(403).end("Forbidden");
-        if (req.sessionUserType !== 'admin' && req.sessionUserType !== 'ta') return res.forbidden();
-        
+        var error,
+            query;
+        if (req.sessionUserType !== 'admin' &&
+            req.sessionUserType !== 'ta') {
+            return res.forbidden();
+        }
         if (req.query.student_number) {
             req.query.student_number = sanitizer.sanitize(req.query.student_number,
                 'stringToInteger');
         }
+        validator.validate(req.query, {
+            type: "object",
+            properties: {
+                user_id: {
+                    type: "string",
+                    maxLength: 100
+                },
+                email: {
+                    type: "string",
+                    maxLength: 100
+                },
+                first_name: {
+                    type: "string",
+                    maxLength: 100
+                },
+                last_name: {
+                    type: "string",
+                    maxLength: 100
+                },
+                utorid: {
+                    type: "string",
+                    maxLength: 100
+                },
+                student_number: {
+                    type: "number"
+                },
+                status: {
+                    type: "string",
+                    maxLength: 100
+                }
+            },
+            additionalProperties: false
+        });
 
-        validator.validate(req.query, query_shcema);
-        var error = validator.getLastErrors();
-        if (error) return res.requestError({ status: 400, message: error });
-
-        return user_model.findAsync({
-            _id: "5935ed0e5ecf04cc3388de8e"
-        }).then(function (ret) {
+        query = {
+            _id:        req.query.user_id,
+            email:      req.query.email,
+            first_name: req.query.first_name,
+            last_name:  req.query.last_name,
+            utorid:     req.query.utorid,
+            status:     req.query.status,
+            student_number: req.query.last_name
+        }
+        utils.clean(query);
+        return user_model.aggregate([
+            { "$project" : {
+                "user_id": "$_id",
+                "_id": 0,
+                "email": 1,
+                "first_name": 1,
+                "utorid": 1,
+                "status": 1,
+                "student_number": 1
+            }
+        }]).exec().then(function(ret) {
             return res.sendResponse(ret);
         });
     }).all(function (req, res, next) {

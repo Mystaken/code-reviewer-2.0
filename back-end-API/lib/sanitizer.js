@@ -1,4 +1,5 @@
 'use strict';
+
 var sanitize    = require('validator'),
     sanitizer;
 
