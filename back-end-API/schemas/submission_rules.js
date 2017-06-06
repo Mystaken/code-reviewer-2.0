@@ -1,4 +1,9 @@
-module.exports = {
+'use strict';
+
+var mongoose = require('mongoose'),
+    submissionRulesSchema;
+
+submissionRulesSchema = mongoose.Schema({
     name: {                         // name of this work
         type: String,
         required: true,
@@ -17,5 +22,8 @@ module.exports = {
     peer_review_deadline : Date,
     ta_review_deadline : Date,
     status: String
-}
+});
+
+
+module.exports = mongoose.model('submissionRules', submissionRulesSchema);
 

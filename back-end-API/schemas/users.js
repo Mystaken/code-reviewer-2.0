@@ -1,4 +1,9 @@
-module.exports = {
+'use strict';
+
+var mongoose = require('mongoose'),
+    userSchema;
+
+userSchema = mongoose.Schema({
     first_name : String,
     last_name : String,
     utorid : {
@@ -20,4 +25,6 @@ module.exports = {
     last_login : Date,
     contract_number: Number,    // number of contracts a TA has
     user_type: String           // one of  "ta", "student", "admin"
-}
+});
+
+module.exports = mongoose.model('users', userSchema);

@@ -3,7 +3,7 @@
 var validator   = require('../../lib/validator'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
-    user_model  = mongoose.getModel('user');
+    user_model  = require('../../schemas/users');
 
 module.exports = function (router) {
 
@@ -34,9 +34,9 @@ module.exports = function (router) {
                 params: [ 'user_id' ]
             });
         }
-        return user_model.findAsync({
+        return user_model.find({
             _id: req.query.user_id
-        }).then(function(users) {
+        }).exec().then(function(users) {
             if (!users || !users.length) {
                 return Promise.reject({
                     code: "NOT_FOUND",

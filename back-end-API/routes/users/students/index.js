@@ -1,8 +1,9 @@
 'use strict';
 
-var validator = require('../../../lib/validator'),
-    mongoose = require('mongoose'),
-    user_model = mongoose.getModel('user');
+var validator   = require('../../../lib/validator'),
+    sanitizer   = require('../../../lib/sanitizer'),
+    mongoose    = require('mongoose'),
+    user_model  = require('../../../schemas/users');
 
 
 // set the schema of the query
@@ -77,6 +78,60 @@ module.exports = function (router) {
         });
 
     }).all(function (req, res, next) {
+        return res.invalidVerb();
+    });
+
+    router.route('/all').get(function(req, res, next) {
+        var error,
+            query = req.query;
+        if (req.sessionUserType !== 'admin' &&
+            req.sessionUserType !== 'ta') {
+            return res.forbidden();
+        }
+        if (query.student_number) {
+            query.student_number = sanitizer.sanitize(query.student_number,
+                'stringToInteger');
+        }
+        validator.validate(query, {
+            type: "object",
+            properties: {
+                user_id: {
+                    type: "string",
+                    maxLength: 100
+                },
+                email: {
+                    type: "string",
+                    maxLength: 100
+                },
+                first_name: {
+                    type: "string",
+                    maxLength: 100
+                },
+                last_name: {
+                    type: "string",
+                    maxLength: 100
+                },
+                utorid: {
+                    type: "string",
+                    maxLength: 100
+                },
+                student_number: {
+                    type: "number"
+                },
+                status: {
+                    type: "string",
+                    maxLength: 100
+                }
+
+            },
+            additionalProperties: false
+        });
+        return user_model.findAsync({
+            _id: "5935ed0e5ecf04cc3388de8e"
+        }).then(function(ret) {
+            return res.sendResponse(ret);
+        });
+    }).all(function(req, res, next) {
         return res.invalidVerb();
     });
 };
