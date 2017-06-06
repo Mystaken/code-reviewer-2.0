@@ -82,7 +82,7 @@ function configureResponse (response) {
 
 function configureMiddleware(app) {
     app.use(function (req, res, next) {
-        req.sessionUserId   = "5934a1a4ea6bac5187aaad0c";
+        req.sessionUserId   = "5935ed0e5ecf04cc3388de8e";
         req.sessionUserType = "admin";
         next();
     })

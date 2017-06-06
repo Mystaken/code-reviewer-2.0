@@ -9,7 +9,7 @@ var mongoose    = require('mongoose'),
  * @param id {String} The mongo id to be verified.
  */
 function validID(id) {
-    return id.match(/^[0-9a-fA-F]{24}$/);
+    return id && id.match(/^[0-9a-fA-F]{24}$/);
 }
 module.exports = {
     /** Configures the mongoose
