@@ -93,6 +93,18 @@ GET
 | **student_number**     | Number |        No        |  The student number of the student.  |
 | **status** | String             |        No        |  The status of the student.   |
 
+#### Example Request Query
+```
+{
+   "userid": 1232,
+   "student_id" 1314,
+   "first_name" "Grey",
+   "last_name": "Gxsanda",
+   "utorid": "gxsanda1",
+   "email": "grey.gxsanda@mail.utoronto.ca",
+   "last_login": "01-23-13 13:03:32"
+}
+```
 #### Example Response
 ```
 {
