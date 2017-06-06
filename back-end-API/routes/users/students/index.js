@@ -8,13 +8,37 @@ var validator   = require('../../../lib/validator'),
 
 // set the schema of the query
 var query_shcema = {
-    type: "object", //json object
-    properties: {    // properties in the json object
-        work_id: {  type: "string" },
-        review_by: { type: "string" }   
+    type: "object",
+    properties: {
+        user_id: {
+            type: "string",
+            maxLength: 100
+        },
+        email: {
+            type: "string",
+            maxLength: 100
+        },
+        first_name: {
+            type: "string",
+            maxLength: 100
+        },
+        last_name: {
+            type: "string",
+            maxLength: 100
+        },
+        utorid: {
+            type: "string",
+            maxLength: 100
+        },
+        student_number: {
+            type: "number"
+        },
+        status: {
+            type: "string",
+            maxLength: 100
+        }
     },
-    additionalProperties: false, // no additional properties other than additional properties
-    //required: [] // required fields  
+    additionalProperties: false
 };
 
 module.exports = function (router) {
@@ -82,56 +106,24 @@ module.exports = function (router) {
     });
 
     router.route('/all').get(function(req, res, next) {
-        var error,
-            query = req.query;
-        if (req.sessionUserType !== 'admin' &&
-            req.sessionUserType !== 'ta') {
-            return res.forbidden();
-        }
-        if (query.student_number) {
-            query.student_number = sanitizer.sanitize(query.student_number,
+        //if (!req.session.user) return res.status(403).end("Forbidden");
+        if (req.sessionUserType !== 'admin' && req.sessionUserType !== 'ta') return res.forbidden();
+        
+        if (req.query.student_number) {
+            req.query.student_number = sanitizer.sanitize(req.query.student_number,
                 'stringToInteger');
         }
-        validator.validate(query, {
-            type: "object",
-            properties: {
-                user_id: {
-                    type: "string",
-                    maxLength: 100
-                },
-                email: {
-                    type: "string",
-                    maxLength: 100
-                },
-                first_name: {
-                    type: "string",
-                    maxLength: 100
-                },
-                last_name: {
-                    type: "string",
-                    maxLength: 100
-                },
-                utorid: {
-                    type: "string",
-                    maxLength: 100
-                },
-                student_number: {
-                    type: "number"
-                },
-                status: {
-                    type: "string",
-                    maxLength: 100
-                }
 
-            },
-            additionalProperties: false
-        });
+        validator.validate(req.query, query_shcema);
+        var error = validator.getLastErrors();
+        if (error) return res.requestError({ status: 400, message: error });
+
         return user_model.findAsync({
             _id: "5935ed0e5ecf04cc3388de8e"
-        }).then(function(ret) {
+        }).then(function (ret) {
             return res.sendResponse(ret);
         });
-    }).all(function(req, res, next) {
+    }).all(function (req, res, next) {
         return res.invalidVerb();
     });
 };
