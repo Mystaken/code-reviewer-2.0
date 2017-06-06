@@ -57,6 +57,7 @@ import { Http } from '@angular/http';
 
     .navbar-desktop a {
       color: #E8EAF6;
+      transition: background-color 0.3s ease;
     }
 
     .navbar-desktop a:hover {
@@ -119,6 +120,7 @@ import { Http } from '@angular/http';
       border-width: 25px 0 25px 25px;
       border-color: transparent transparent transparent #5C6BC0;
       z-index: 10;
+      transition: border-color 0.3s ease;
     }
 
     ul li.active a {
