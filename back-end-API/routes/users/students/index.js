@@ -8,6 +8,7 @@ var validator   = require('../../../lib/validator'),
     user_model  = require('../../../models/users'),
 
     student_get_schema      = require('../../../schemas/users/students/studentsGet'),
+    student_put_schema      = require('../../../schemas/users/students/studentsPut'),
     student_all_get_schema  = require('../../../schemas/users/students/studentsAllGet');
 
 module.exports = function (router) {
@@ -67,33 +68,7 @@ module.exports = function (router) {
         if (req.sessionUserType !== 'admin') {
             return res.forbidden();
         }
-        validator.validate(req.query, {
-            type: 'object',
-            properties: {
-                email: {
-                    type: "string",
-                    maxLength: 1000
-                },
-                first_name: {
-                    type: "string",
-                    maxLength: 100
-                },
-                last_name: {
-                    type: "string",
-                    maxLength: 100
-                },
-                utorid: {
-                    type: "string",
-                    maxLength: 100
-                },
-                student_number: {
-                    type: "number",
-                    maxLength: 100
-                }
-            },
-            additionalProperties: false,
-            required: [ "email", "first_name", "first_name", "last_name", "utorid", "student_number" ]
-        });
+        validator.validate(req.query, student_put_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
