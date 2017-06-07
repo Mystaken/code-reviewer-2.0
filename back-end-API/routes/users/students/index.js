@@ -76,39 +76,39 @@ module.exports = function (router) {
         }
         // checking if user exists
         return user_model.aggregate([
-            {
-                $match: {
-                    $or: [
-                        { utorid: req.body.utorid },
-                        { student_number: req.body.student_number },
-                        { email: req.body.email }
-                    ]
-                }   
-            }
-        ]).then(function(ret) {
-            // if user exists, return error message.
-            if (ret.length) {
-                return Promise.reject({
-                    code: "EXISTS",
-                    params: [ 'user_id' ]
-                })
-            }
-            // create new user
-            return new user_model({
-                first_name:     req.body.first_name,
-                last_name:      req.body.last_name,
-                email:          req.body.email,
-                utorid:         req.body.utorid,
-                student_number: req.body.student_number,
-                user_type:      'student',
-                status:         'Active'
-            }).save();
-        }).then(function(ret) {
-            // validate user
-            res.sendResponse(ret._id);
-        }).catch(function(err) {
-            return res.requestError(err);
-        });
+                {
+                    $match: {
+                        $or: [
+                            { utorid: req.body.utorid },
+                            { student_number: req.body.student_number },
+                            { email: req.body.email }
+                        ]
+                    }   
+                }
+            ]).then(function(ret) {
+                // if user exists, return error message.
+                if (ret.length) {
+                    return Promise.reject({
+                        code: "EXISTS",
+                        params: [ 'user_id' ]
+                    })
+                }
+                // create new user
+                return new user_model({
+                    first_name:     req.body.first_name,
+                    last_name:      req.body.last_name,
+                    email:          req.body.email,
+                    utorid:         req.body.utorid,
+                    student_number: req.body.student_number,
+                    user_type:      'student',
+                    status:         'Active'
+                }).save();
+            }).then(function(ret) {
+                // validate user
+                res.sendResponse(ret._id);
+            }).catch(function(err) {
+                return res.requestError(err);
+            });
 
     }).post(function (req, res, next) {
         //if (!req.session.user) return res.status(403).end("Forbidden");
