@@ -11,5 +11,6 @@ module.exports = {
                 delete obj[item];
             }
         }
+        return obj;
     }
 }

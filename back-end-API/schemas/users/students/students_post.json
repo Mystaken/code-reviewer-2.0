@@ -1,0 +1,20 @@
+{
+    "id": "student-post",
+    "type": "object",
+    "properties": {
+        "user_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "first_name": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "last_name": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "user_id" ]
+}

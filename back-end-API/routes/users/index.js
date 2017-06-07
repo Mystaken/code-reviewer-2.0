@@ -5,7 +5,7 @@ var validator   = require('../../lib/validator'),
     Promise     = require('bluebird'),
     user_model  = require('../../models/users'),
 
-    user_get_schema = require('../../schemas/users/usersGet');
+    user_get_schema = require('../../schemas/users/users_get');
 
 module.exports = function (router) {
 
@@ -13,7 +13,7 @@ module.exports = function (router) {
         var error,
             user_id;
 
-        if (req.sessionUserType !== 'admin') {
+        if (req.session_user_type !== 'admin') {
             return res.forbidden();
         }
         validator.validate(req.query, user_get_schema);

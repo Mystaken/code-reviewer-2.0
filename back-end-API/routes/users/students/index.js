@@ -7,9 +7,10 @@ var validator   = require('../../../lib/validator'),
 
     user_model  = require('../../../models/users'),
 
-    student_get_schema      = require('../../../schemas/users/students/studentsGet'),
-    student_put_schema      = require('../../../schemas/users/students/studentsPut'),
-    student_all_get_schema  = require('../../../schemas/users/students/studentsAllGet');
+    student_get_schema      = require('../../../schemas/users/students/students_get'),
+    student_put_schema      = require('../../../schemas/users/students/students_put'),
+    student_post_schema     = require('../../../schemas/users/students/students_post'),
+    student_all_get_schema  = require('../../../schemas/users/students/students_all_get');
 
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
@@ -21,8 +22,8 @@ module.exports = function (router) {
         }
 
         // need to do something about tas..
-        if (req.sessionUserType !== 'admin' &&
-            req.sessionUserId !== req.query.user_id) {
+        if (req.session_user_type !== 'admin' &&
+            req.session_user_id !== req.query.user_id) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'user_id' ]
@@ -66,7 +67,7 @@ module.exports = function (router) {
 
     }).put(function (req, res, next) {
         var error;
-        if (req.sessionUserType !== 'admin') {
+        if (req.session_user_type !== 'admin') {
             return res.forbidden();
         }
         validator.validate(req.body, student_put_schema);
@@ -111,18 +112,39 @@ module.exports = function (router) {
             });
 
     }).post(function (req, res, next) {
-        //if (!req.session.user) return res.status(403).end("Forbidden");
-        validator.validate(req.query, query_shcema);
-        var error = validator.getLastErrors();
-        if (error) return res.requestError({ status: 400, message: error });
+        var error,
+            query,
+            updateQuery;
 
-        user_model.getAsync({email:req.session.user}).then(function (user) {
-            if (user.user_type === "instructor" || user.id === req.query.user_id) {
-                //TODO KEVIN HELP TO　ＦＩＬＬ　ＩＮ　ＴＨＥ CODE FOR POST
+        if (req.session_user_type !== 'admin' &&
+            req.session_user_id !== req.query.user_id) {
+            return res.requestError({
+                code: 'NOT_FOUND',
+                params: [ 'user_id' ]
+            });
+        }
+
+        validator.validate(req.body, student_post_schema);
+        var error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: 'VALIDATION', message: error });
+        }
+
+        query = {
+            _id: req.body.user_id,
+            user_type: 'student'
+        };
+
+        return user_model.find(query).exec().then(function(ret) {
+            if (!ret.length) {
+                return Promise.reject({
+                        code: "NOT_FOUND",
+                        params: [ 'user_id' ]
+                    });
             }
-            return Promise.reject("Invalid user type, premission denied.");
-        }).then(function (data) { return res.sendResponse(data);
-        }).catch(function (err) { return res.requestError({ message: "Server Error" });
+            return user_model.findOneAndUpdate(query, {
+
+            })
         });
 
     }).delete(function (req, res, next) {
@@ -145,8 +167,8 @@ module.exports = function (router) {
     router.route('/all').get(function(req, res, next) {
         var error,
             query;
-        if (req.sessionUserType !== 'admin' &&
-            req.sessionUserType !== 'ta') {
+        if (req.session_user_type !== 'admin' &&
+            req.session_user_type !== 'ta') {
             return res.forbidden();
         }
         if (req.query.student_number) {
