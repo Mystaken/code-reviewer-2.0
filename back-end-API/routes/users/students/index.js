@@ -10,7 +10,7 @@ var validator   = require('../../../lib/validator'),
 
     student_get_schema      = require('../../../schemas/users/students/students_get'),
     student_put_schema      = require('../../../schemas/users/students/students_put'),
-    student_delete_schema      = require('../../../schemas/users/students/students_delete'),
+    student_delete_schema   = require('../../../schemas/users/students/students_delete'),
     student_post_schema     = require('../../../schemas/users/students/students_post'),
     student_all_get_schema  = require('../../../schemas/users/students/students_all_get');
 
