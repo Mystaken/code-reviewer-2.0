@@ -747,10 +747,11 @@ DELETE
 | annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": "#/annotationid" }` |
 
 #### Example Request Body
+```
 {
     "annotation_id": 123,
 }
-
+```
 #### Example Response
 ```
 {
