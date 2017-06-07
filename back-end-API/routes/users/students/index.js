@@ -4,6 +4,7 @@ var validator   = require('../../../lib/validator'),
     sanitizer   = require('../../../lib/sanitizer'),
     utils       = require('../../../lib/utils'),
     mongoose    = require('mongoose'),
+    Promise     = require('bluebird'),
 
     user_model  = require('../../../models/users'),
 
@@ -92,7 +93,7 @@ module.exports = function (router) {
                     return Promise.reject({
                         code: "EXISTS",
                         params: [ 'user_id' ]
-                    })
+                    });
                 }
                 // create new user
                 return new user_model({
@@ -114,7 +115,7 @@ module.exports = function (router) {
     }).post(function (req, res, next) {
         var error,
             query,
-            updateQuery;
+            update_query;
 
         if (req.session_user_type !== 'admin' &&
             req.session_user_id !== req.query.user_id) {
@@ -125,16 +126,26 @@ module.exports = function (router) {
         }
 
         validator.validate(req.body, student_post_schema);
-        var error = validator.getLastErrors();
+        error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: 'VALIDATION', message: error });
+        }
+
+        if (!mongoose.validID(req.query.user_id)) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'user_id' ]
+            });
         }
 
         query = {
             _id: req.body.user_id,
             user_type: 'student'
         };
-
+        update_query = utils.clean({
+            first_name: req.body.first_name,
+            last_name:  req.body.last_name
+        });
         return user_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
                 return Promise.reject({
@@ -142,14 +153,15 @@ module.exports = function (router) {
                         params: [ 'user_id' ]
                     });
             }
-            return user_model.findOneAndUpdate(query, {
-
-            })
+            return user_model.findOneAndUpdate(query, update_query)
+                .exec().then(function(ret) {
+                    res.sendResponse(ret._id);
+                });
         });
 
     }).delete(function (req, res, next) {
         //if (!req.session.user) return res.status(403).end("Forbidden");
-        validator.validate(req.query, query_shcema);
+        validator.validate(req.query, {});
         var error = validator.getLastErrors();
         if (error) return res.requestError({ status: 400, message: error });
 
@@ -188,7 +200,7 @@ module.exports = function (router) {
             status:     req.query.status,
             user_type:  'student',
             student_number: req.query.last_name,
-        }
+        };
         if (req.query.user_id) {
             if (!mongoose.validID(req.query.user_id)) {
                 return res.sendResponse([]);

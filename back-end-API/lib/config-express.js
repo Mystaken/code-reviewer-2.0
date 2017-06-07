@@ -61,7 +61,7 @@ function configureResponse (response) {
                     code: "NOT_FOUND",
                     params: [ "#/" + err.params ]
                 }]
-            })
+            });
         } else if (err.code === "EXISTS") {
             return this.status(404).send({
                 status: 404,
@@ -69,7 +69,7 @@ function configureResponse (response) {
                     code: "EXISTS",
                     params: [ "#/" + err.params ]
                 }]
-            })
+            });
         }
         return this.status(500).send({
             status: 500,
@@ -84,7 +84,7 @@ function configureResponse (response) {
         this.status(403).send({
             status: 403,
             message: "You do not have access to this page."
-        })
+        });
     };
 }
 
@@ -93,8 +93,9 @@ function configureMiddleware(app) {
         req.session_user_id   = "5935ed0e5ecf04cc3388de8e";
         req.session_user_type = "admin";
         next();
-    })
+    });
 }
+
 module.exports = {
     /** Configures the Express app
      * @param app {Express} the express app

@@ -26,7 +26,7 @@ var findReview = function(req, res) {
     }).catch(function(err) {
         return res.requestError({ message: "Server Error" });
     });
-}
+};
 
 module.exports = function (router) {
     router.route('/').get(function (req, res, next) {
