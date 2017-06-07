@@ -1,5 +1,5 @@
 {
-    "id": "user-get",
+    "id": "users-get",
     "type": "object",
     "properties": {
         "user_id": {

@@ -7,8 +7,8 @@ var validator   = require('../../../lib/validator'),
 
     user_model  = require('../../../models/users'),
 
-    student_get_schema = require('../../../schemas/users/students/studentsGet'),
-    student_all_get_schema = require('../../../schemas/users/students/studentsAllGet');
+    student_get_schema      = require('../../../schemas/users/students/studentsGet'),
+    student_all_get_schema  = require('../../../schemas/users/students/studentsAllGet');
 
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {

@@ -1,5 +1,5 @@
 {
-    "id": "student-get",
+    "id": "students-get",
     "type": "object",
     "properties": {
         "user_id": {
