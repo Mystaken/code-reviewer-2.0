@@ -171,12 +171,31 @@ module.exports = function (router) {
                 params: [ 'user_id' ]
             });
         }
-        validator.validate(req.query, student_delete_schema);
+        validator.validate(req.body, student_delete_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-
+        return user_model.find({
+            _id: mongoose.Types.ObjectId(req.body.user_id),
+            user_type: 'student'
+        }).exec().then(function(ret) {
+            if (!ret.length) {
+                return Promise.reject({
+                        code: "NOT_FOUND",
+                        params: [ 'user_id' ]
+                    });
+            }
+            return user_model.findOneAndUpdate({
+                    _id: mongoose.Types.ObjectId(req.body.user_id),
+                    user_type: 'student'
+                },{
+                    status: 'inactive'
+                })
+                .exec().then(function(ret) {
+                    res.sendResponse(ret._id);
+                });
+        });
     }).all(function (req, res, next) {
         return res.invalidVerb();
     });
