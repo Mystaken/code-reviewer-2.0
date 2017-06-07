@@ -6,6 +6,7 @@
       * [api/users/students/all - GET](#filter-students)
       * [api/users/students/ - GET](#get-student)
       * [api/users/students/ - PUT](#add-students)
+      * [api/users/students/ - POST](#update-students)
       * [api/users/students/upload - POST](#upload-student-file)
   * [**Works**](#works)
     * [api/works - GET](#get-work)
@@ -204,8 +205,42 @@ PUT
    "status": 200,
    "data" : 12352 
 }
-
 ```
+Update Students
+---
+Updates a student to the database
+#### Method
+POST
+#### URL Structure
+`api/users/students`
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|---------------|-----------------|--------------|--------------|
+| **user_id**     |  Int         |        Yes        |  The id of the student.|
+| **first_name** | String         |        No        |  The new first name of the student.  |
+| **last_name** | String          |        No        |  The new last name of the student.  |
+
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| user_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/user_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":"#/<additional_param>"}` |
+
+#### Example Request Body
+```
+{
+      "user_id": 123231,
+      "first_name" "Grey",
+      "last_name": "Gxsanda"
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : 123231
+}
 
 Upload Student File
 ---
