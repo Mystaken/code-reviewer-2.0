@@ -108,7 +108,6 @@ module.exports = function (router) {
                     status:         'Active'
                 }).save();
             }).then(function(ret) {
-                // validate user
                 res.sendResponse(ret._id);
             }).catch(function(err) {
                 return res.requestError(err);
