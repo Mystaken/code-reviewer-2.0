@@ -1,9 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    userSchema;
+    user_schema;
 
-userSchema = mongoose.Schema({
+user_schema = mongoose.Schema({
     first_name: String,
     last_name: String,
     utorid: {
@@ -21,10 +21,10 @@ userSchema = mongoose.Schema({
         required: true,
         unique: true
     },
-    status: String,            // active, deleted, inactive
+    status: String,            // active, inactive
     last_login : Date,
     contract_number: Number,    // number of contracts a TA has
     user_type: String           // one of  "ta", "student", "admin"
 });
 
-module.exports = mongoose.model('users', userSchema);
+module.exports = mongoose.model('users', user_schema);

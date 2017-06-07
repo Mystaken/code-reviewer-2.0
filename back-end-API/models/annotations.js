@@ -1,9 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    annotationsSchema;
+    annotations_schema;
 
-annotationsSchema = mongoose.Schema({
+annotations_schema = mongoose.Schema({
     work_id: mongoose.Schema.Types.ObjectId,
     review_by: mongoose.Schema.Types.ObjectId,          // the student id who writes this review
     annotation: String,
@@ -11,4 +11,4 @@ annotationsSchema = mongoose.Schema({
     end: Number
 });
 
-module.exports = mongoose.model('annotations', annotationsSchema);
+module.exports = mongoose.model('annotations', annotations_schema);

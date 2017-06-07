@@ -1,9 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    submissionsSchema;
+    submissions_schema;
 
-submissionsSchema = mongoose.Schema({
+submissions_schema = mongoose.Schema({
     author_id: mongoose.Schema.Types.ObjectId,        // utorid of the student
     ta_id: mongoose.Schema.Types.ObjectId,            // the TA who is going to mark this assignment
     code: String,                       // file content
@@ -15,4 +15,4 @@ submissionsSchema = mongoose.Schema({
     status: String                      // ['active', 'deleted']
 });
 
-module.exports = mongoose.model('submissions', submissionsSchema);
+module.exports = mongoose.model('submissions', submissions_schema);

@@ -1,9 +1,9 @@
 'use strict';
 
 var mongoose = require('mongoose'),
-    submissionRulesSchema;
+    submission_rules_schema;
 
-submissionRulesSchema = mongoose.Schema({
+submission_rules_schema = mongoose.Schema({
     name: {                         // name of this work
         type: String,
         required: true,
@@ -25,5 +25,5 @@ submissionRulesSchema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('submissionRules', submissionRulesSchema);
+module.exports = mongoose.model('submissionRules', submission_rules_schema);
 

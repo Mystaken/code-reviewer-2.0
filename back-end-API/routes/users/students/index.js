@@ -10,6 +10,7 @@ var validator   = require('../../../lib/validator'),
 
     student_get_schema      = require('../../../schemas/users/students/students_get'),
     student_put_schema      = require('../../../schemas/users/students/students_put'),
+    student_delete_schema      = require('../../../schemas/users/students/students_delete'),
     student_post_schema     = require('../../../schemas/users/students/students_post'),
     student_all_get_schema  = require('../../../schemas/users/students/students_all_get');
 
@@ -40,7 +41,8 @@ module.exports = function (router) {
         return user_model.aggregate([
             {
                 $match: {
-                    _id: mongoose.Types.ObjectId(req.query.user_id)
+                    _id: mongoose.Types.ObjectId(req.query.user_id),
+                    status: 'active'
                 }
             },{
                 $project: {
@@ -131,7 +133,7 @@ module.exports = function (router) {
             return res.requestError({ code: 'VALIDATION', message: error });
         }
 
-        if (!mongoose.validID(req.query.user_id)) {
+        if (!mongoose.validID(req.body.user_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'user_id' ]
@@ -139,12 +141,14 @@ module.exports = function (router) {
         }
 
         query = {
-            _id: req.body.user_id,
-            user_type: 'student'
+            _id: mongoose.Types.ObjectId(req.body.user_id),
+            user_type: 'student',
+            status: 'active'
         };
         update_query = utils.clean({
             first_name: req.body.first_name,
-            last_name:  req.body.last_name
+            last_name:  req.body.last_name,
+            status: 'active'
         });
         return user_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
@@ -160,17 +164,18 @@ module.exports = function (router) {
         });
 
     }).delete(function (req, res, next) {
-        //if (!req.session.user) return res.status(403).end("Forbidden");
-        validator.validate(req.query, {});
-        var error = validator.getLastErrors();
-        if (error) return res.requestError({ status: 400, message: error });
-
-        user_model.getAsync({email:req.session.user}).then(function (user) {
-            if (user.user_type === "instructor") //TODO KEVIN HELP TO　ＦＩＬＬ　ＩＮ　ＴＨＥ CODE FOR DELETE
-            return Promise.reject("Invalid user type, premission denied.");
-        }).then(function (data) { return res.sendResponse(data);
-        }).catch(function (err) { return res.requestError({ message: "Server Error" });
-        });
+        var error;
+        if (req.session_user_type !== 'admin') {
+            return res.requestError({
+                code: 'NOT_FOUND',
+                params: [ 'user_id' ]
+            });
+        }
+        validator.validate(req.query, student_delete_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
 
     }).all(function (req, res, next) {
         return res.invalidVerb();
