@@ -60,7 +60,7 @@ module.exports = function (router) {
             }
             return res.sendResponse(ret);
         }).catch(function(err) {
-            return res.requestError({ message: "Server Error" });
+            return res.requestError(err);
         });
 
     }).put(function (req, res, next) {
@@ -68,18 +68,24 @@ module.exports = function (router) {
         if (req.sessionUserType !== 'admin') {
             return res.forbidden();
         }
-        validator.validate(req.query, student_put_schema);
+        validator.validate(req.body, student_put_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        user_model.create({
-            first_name:     req.query.first_name,
-            last_name:      req.query.last_name,
-            email:          req.query.email,
-            status:         'Active',
-            student_number: req.query.student_number,
-            user_type:      'student'
+        // need to check for duplicate keys..
+        return new user_model({
+            first_name:     req.body.first_name,
+            last_name:      req.body.last_name,
+            email:          req.body.email,
+            utorid:         req.body.utorid,
+            student_number: req.body.student_number,
+            user_type:      'student',
+            status:         'Active'
+        }).save().then(function(ret) {
+            res.sendResponse(ret._id);
+        }).catch(function(err) {
+            return res.requestError(err);
         });
 
     }).post(function (req, res, next) {
@@ -158,6 +164,8 @@ module.exports = function (router) {
         }
         ]).exec().then(function(ret) {
             return res.sendResponse(ret);
+        }).catch(function(err) {
+            res.requestError(err);
         });
     }).all(function(req, res, next) {
         return res.invalidVerb();

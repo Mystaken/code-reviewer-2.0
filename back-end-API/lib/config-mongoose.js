@@ -18,5 +18,6 @@ module.exports = {
     configure: function (app) {
         mongoose.connect(config.mongo.server);
         mongoose.validID = validID;
+        mongoose.Promise = Promise;
     }
 };
