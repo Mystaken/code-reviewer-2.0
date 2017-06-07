@@ -1,0 +1,34 @@
+{
+    "id": "student-get-all",
+    "type": "object",
+    "properties": {
+        "user_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "email": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "first_name": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "last_name": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "utorid": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "student_number": {
+            "type": "number"
+        },
+        "status": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false
+}

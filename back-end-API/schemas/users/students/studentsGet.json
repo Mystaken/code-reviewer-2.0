@@ -1,0 +1,12 @@
+{
+    "id": "student-get",
+    "type": "object",
+    "properties": {
+        "user_id": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "user_id" ]
+}

@@ -5,58 +5,15 @@ var validator   = require('../../../lib/validator'),
     utils       = require('../../../lib/utils'),
     mongoose    = require('mongoose'),
 
-    user_model  = require('../../../schemas/users');
+    user_model  = require('../../../models/users'),
 
-
-// set the schema of the query
-var query_shcema = {
-    type: "object",
-    properties: {
-        user_id: {
-            type: "string",
-            maxLength: 100
-        },
-        email: {
-            type: "string",
-            maxLength: 100
-        },
-        first_name: {
-            type: "string",
-            maxLength: 100
-        },
-        last_name: {
-            type: "string",
-            maxLength: 100
-        },
-        utorid: {
-            type: "string",
-            maxLength: 100
-        },
-        student_number: {
-            type: "number"
-        },
-        status: {
-            type: "string",
-            maxLength: 100
-        }
-    },
-    additionalProperties: false
-};
+    student_get_schema = require('../../../schemas/users/students/studentsGet'),
+    student_all_get_schema = require('../../../schemas/users/students/studentsAllGet');
 
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
         var error;
-        validator.validate(req.query, {
-            type: 'object',
-            properties: {
-                user_id: {
-                    type: "string",
-                    maxLength: 100
-                }
-            },
-            additionalProperties: false,
-            required: [ "user_id" ]
-        });
+        validator.validate(req.query, student_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
@@ -193,39 +150,7 @@ module.exports = function (router) {
             req.query.student_number = sanitizer.sanitize(req.query.student_number,
                 'stringToInteger');
         }
-        validator.validate(req.query, {
-            type: "object",
-            properties: {
-                user_id: {
-                    type: "string",
-                    maxLength: 100
-                },
-                email: {
-                    type: "string",
-                    maxLength: 100
-                },
-                first_name: {
-                    type: "string",
-                    maxLength: 100
-                },
-                last_name: {
-                    type: "string",
-                    maxLength: 100
-                },
-                utorid: {
-                    type: "string",
-                    maxLength: 100
-                },
-                student_number: {
-                    type: "number"
-                },
-                status: {
-                    type: "string",
-                    maxLength: 100
-                }
-            },
-            additionalProperties: false
-        });
+        validator.validate(req.query, student_all_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });

@@ -3,7 +3,9 @@
 var validator   = require('../../lib/validator'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
-    user_model  = require('../../schemas/users');
+    user_model  = require('../../models/users'),
+
+    user_get_schema = require('../../schemas/users/usersGet');
 
 module.exports = function (router) {
 
@@ -14,17 +16,7 @@ module.exports = function (router) {
         if (req.sessionUserType !== 'admin') {
             return res.forbidden();
         }
-        validator.validate(req.query, {
-            type: "object",
-            properties: {
-                user_id: {
-                    type: "string",
-                    maxLength: 100
-                }
-            },
-            additionalProperties: false,
-            required: [ "user_id" ]
-        });
+        validator.validate(req.query, user_get_schema);
         error = validator.getLastErrors();
         if (error) return res.requestError({ code: "VALIDATION", message: error });
 
