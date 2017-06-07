@@ -7,6 +7,7 @@
       * [api/users/students/ - GET](#get-student)
       * [api/users/students/ - PUT](#add-students)
       * [api/users/students/ - POST](#update-students)
+      * [api/users/students/ - DELETE](#delete-students)
       * [api/users/students/upload - POST](#upload-student-file)
   * [**Works**](#works)
     * [api/works - GET](#get-work)
@@ -241,7 +242,39 @@ POST
    "status": 200,
    "data" : 123231
 }
+```
+Delete Students
+---
+Delete a student to the database. (set status to delete)
+#### Method
+POST
+#### URL Structure
+`api/users/students`
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|---------------|-----------------|--------------|--------------|
+| **user_id**     |  Int         |        Yes        |  The id of the student.|
 
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| user_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/user_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":"#/<additional_param>"}` |
+
+#### Example Request Body
+```
+{
+      "user_id": 123231
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : 123231
+}
+```
 Upload Student File
 ---
 Upload a student csv file and add the students to the server
