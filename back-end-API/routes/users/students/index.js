@@ -158,11 +158,7 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        if (req.query.user_id && !mongoose.validID(req.query.user_id)) {
-            return res.sendResponse([]);
-        }
         query = {
-            _id:        mongoose.Types.ObjectId(req.query.user_id),
             email:      req.query.email,
             first_name: req.query.first_name,
             last_name:  req.query.last_name,
@@ -170,6 +166,12 @@ module.exports = function (router) {
             status:     req.query.status,
             user_type:  'student',
             student_number: req.query.last_name,
+        }
+        if (req.query.user_id) {
+            if (!mongoose.validID(req.query.user_id)) {
+                return res.sendResponse([]);
+            }
+            query._id = mongoose.Types.ObjectId(req.query.user_id);
         }
         utils.clean(query);
         return user_model.aggregate([
