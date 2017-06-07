@@ -62,6 +62,14 @@ function configureResponse (response) {
                     params: [ "#/" + err.params ]
                 }]
             })
+        } else if (err.code === "EXISTS") {
+            return this.status(404).send({
+                status: 404,
+                message: [{
+                    code: "EXISTS",
+                    params: [ "#/" + err.params ]
+                }]
+            })
         }
         return this.status(500).send({
             status: 500,
