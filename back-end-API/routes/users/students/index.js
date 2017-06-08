@@ -53,7 +53,12 @@ module.exports = function (router) {
                     last_name: 1,
                     utorid: 1,
                     email: 1,
-                    last_login: 1
+                    last_login: { 
+                        $dateToString: { 
+                            format: "%Y-%m-%d %H:%M:%S", 
+                            date: "$last_login" 
+                        }
+                    }
                 }
             }
         ]).exec().then(function(ret) {
@@ -89,7 +94,7 @@ module.exports = function (router) {
                         ]
                     }   
                 }
-            ]).then(function(ret) {
+            ]).exec().then(function(ret) {
                 // if user exists, return error message.
                 if (ret.length) {
                     return Promise.reject({
@@ -104,6 +109,7 @@ module.exports = function (router) {
                     email:          req.body.email,
                     utorid:         req.body.utorid,
                     student_number: req.body.student_number,
+                    last_login:     new Date(),
                     user_type:      'student',
                     status:         'Active'
                 }).save();
@@ -231,6 +237,7 @@ module.exports = function (router) {
             query._id = mongoose.Types.ObjectId(req.query.user_id);
         }
         utils.clean(query);
+        // handle lastlogin!!
         return user_model.aggregate([
             { $match: query },
             { $project : {
@@ -240,7 +247,13 @@ module.exports = function (router) {
                 first_name: 1,
                 utorid: 1,
                 status: 1,
-                student_number: 1
+                student_number: 1,
+                last_login: { 
+                    $dateToString: { 
+                        format: "%Y-%m-%d %H:%M:%S", 
+                        date: "$last_login" 
+                    }
+                }
             }
         }
         ]).exec().then(function(ret) {

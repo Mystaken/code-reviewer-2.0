@@ -18,7 +18,9 @@ module.exports = function (router) {
         }
         validator.validate(req.query, user_get_schema);
         error = validator.getLastErrors();
-        if (error) return res.requestError({ code: "VALIDATION", message: error });
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
 
         if (!mongoose.validID(req.query.user_id)) {
             return res.requestError({
@@ -40,7 +42,13 @@ module.exports = function (router) {
                     first_name: 1,
                     last_name: 1,
                     user_type: 1,
-                    utorid: 1
+                    utorid: 1,
+                    last_login: { 
+                        $dateToString: { 
+                            format: "%Y-%m-%d %H:%M:%S", 
+                            date: "$last_login" 
+                        }
+                    }
                 }
             }
         ]).exec().then(function(users) {

@@ -1,0 +1,48 @@
+{
+    "id": "work-put",
+    "type": "object",
+    "properties": {
+        "name": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "num_peers": {
+            "type": "number",
+            "minimum": 0
+        },
+        "required_files": {
+            "type": "array",
+            "item": {
+                "type": "string",
+                "maxLength": 100
+            },
+            "maxLength": 100
+        },
+        "feedback_questions": {
+            "type": "array",
+            "item": {
+                "type": "string",
+                "maxLength": 100
+            },
+            "maxLength": 100
+        },
+        "repo_path": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "student_submission_deadline": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "peer_review_deadline": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "ta_review_deadline": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "name", "num_peers" ]
+}

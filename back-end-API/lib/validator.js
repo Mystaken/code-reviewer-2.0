@@ -1,9 +1,15 @@
 'use strict';
 var Promise = require('bluebird'),
     ZSchema = require('z-schema'),
+    utils   = require('./utils'),
     opt = {},
-    validator = new ZSchema(opt);
+    validator;
 
+
+ZSchema.registerFormat("date", function (str) {
+    return utils.validDate(str);
+});
+validator = new ZSchema(opt);
 
 module.exports = {
     validate: function(json, schema) {

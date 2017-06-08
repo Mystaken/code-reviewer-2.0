@@ -28,6 +28,11 @@
         "status": {
             "type": "string",
             "maxLength": 100
+        },
+        "last_login": {
+            "type": "string",
+            "format": "date",
+            "maxLength": 100
         }
     },
     "additionalProperties": false

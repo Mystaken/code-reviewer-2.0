@@ -21,9 +21,9 @@ submission_rules_schema = mongoose.Schema({
     student_submission_deadline : Date,
     peer_review_deadline : Date,
     ta_review_deadline : Date,
-    status: String
+    status: String                 //active, inactive
 });
 
 
-module.exports = mongoose.model('submissionRules', submission_rules_schema);
+module.exports = mongoose.model('submission_rules', submission_rules_schema);
 
