@@ -163,13 +163,16 @@ module.exports = function (router) {
                     });
             }
             return user_model.findOneAndUpdate(query, update_query)
-                .exec().then(function(ret) {
-                    res.sendResponse(ret._id);
-                });
+                .exec()
+        }).then(function(ret) {
+            res.sendResponse(ret._id);
+        }).catch(function (err) {
+            res.requestError(err);
         });
 
     }).delete(function (req, res, next) {
-        var error;
+        var error,
+            query;
         if (req.session_user_type !== 'admin') {
             return res.requestError({
                 code: 'NOT_FOUND',
@@ -181,25 +184,24 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        return user_model.find({
+        query = {
             _id: mongoose.Types.ObjectId(req.body.user_id),
             user_type: 'student'
-        }).exec().then(function(ret) {
+        }
+        return user_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
                 return Promise.reject({
                         code: "NOT_FOUND",
                         params: [ 'user_id' ]
                     });
             }
-            return user_model.findOneAndUpdate({
-                    _id: mongoose.Types.ObjectId(req.body.user_id),
-                    user_type: 'student'
-                },{
+            return user_model.findOneAndUpdate(query, {
                     status: 'inactive'
-                })
-                .exec().then(function(ret) {
-                    res.sendResponse(ret._id);
-                });
+                }).exec();
+        }).then(function(ret) {
+            res.sendResponse(ret._id);
+        }).catch(function (err) {
+            res.requestError(err);
         });
     }).all(function (req, res, next) {
         return res.invalidVerb();

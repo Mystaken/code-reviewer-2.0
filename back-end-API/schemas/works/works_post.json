@@ -1,7 +1,11 @@
 {
-    "id": "work-put",
+    "id": "works-put",
     "type": "object",
     "properties": {
+        "work_id": {
+            "type": "string",
+            "maxLength": 100
+        },
         "name": {
             "type": "string",
             "maxLength": 100
@@ -44,8 +48,13 @@
             "type": "string",
             "format": "date",
             "maxLength": 100
+        },
+        "status": {
+            "type": "string",
+            "format": "date",
+            "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "name", "num_peers" ]
+    "required": [ "work_id" ]
 }

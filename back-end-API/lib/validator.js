@@ -1,13 +1,15 @@
 'use strict';
 var Promise = require('bluebird'),
     ZSchema = require('z-schema'),
-    utils   = require('./utils'),
+    moment  = require('moment'),
     opt = {},
     validator;
 
 
-ZSchema.registerFormat("date", function (str) {
-    return utils.validDate(str);
+ZSchema.registerFormat("date", function (date) {
+    console.log(date);
+    console.log(moment(date, 'YYYY-MM-DD', true).isValid());
+    return date && moment(date, 'YYYY-MM-DD', true).isValid();
 });
 validator = new ZSchema(opt);
 

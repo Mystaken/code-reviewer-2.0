@@ -17,5 +17,8 @@
     "mongoose": "^4.10.0",
     "validator": "^7.0.0",
     "z-schema": "^3.17.0"
+  },
+  "devDependencies": {
+    "moment": "^2.18.1"
   }
 }

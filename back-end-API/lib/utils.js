@@ -12,13 +12,5 @@ module.exports = {
             }
         }
         return obj;
-    },
-
-    /*
-     * Returns true iff date is in the form YYYY-MM-DD
-     *
-     */
-    validDate: function(date) {
-        return date && date.match(/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/);
     }
 };

@@ -2,6 +2,7 @@
 
 var mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
+    moment      = require('moment'),
     config      = require('../config/config.json');
 
 /*
@@ -15,12 +16,17 @@ function validID(id) {
 
 /**
  * Returns the default date if no date provided.
+ * @param date {str} Optional. string in the form YYYY-MM-DD
+ * Return the Date of date if inputted, otherwise return a default date
  */
-function getDefaultDate() {
-    var res = new Date();
-    res.setFullYear(res.getFullYear() + 1);
-    return res;
+function getDefaultDate(date) {
+    if (date && moment(date, 'YYYY-MM-DD', true)) {
+        return new Date(date);
+    }
+    return moment().add(1, 'year').toDate();
 }
+
+
 module.exports = {
     /** Configures the mongoose
      * @param app {Express} the express app
