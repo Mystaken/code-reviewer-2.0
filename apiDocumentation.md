@@ -68,7 +68,8 @@ GET
       "user_type": "Instructor",
       "first_name" "Grey",
       "last_name": "Gxsanda",
-      "email": "grey.gxsanda@mail.utoronto.ca"
+      "email": "grey.gxsanda@mail.utoronto.ca",
+      "last_login": "01-23-13 13:03:32"
    }
 }
 ```
