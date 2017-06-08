@@ -333,7 +333,7 @@ GET
    "status": 200,
    "data": {
       "work_id", 123
-      "work_name": "Assignment 1",
+      "name": "Assignment 1",
       "num_peers": 5,
       "required_files": [ "a1.py", "a2.py"],
       "feedback_questions": [ "Is this good?" ],
@@ -356,7 +356,7 @@ PUT
 #### Request Body
 | Queries        |      Type      |  Required?   |  Description |
 |----------------|----------------|--------------|--------------|
-| **work_name**       |    String      |     Yes      |  The name of this work.  |
+| **name**       |    String      |     Yes      |  The name of this work.  |
 | **num_peers**  |    Number      |      Yes     |  The number of students who will be assigned to review each work. |
 | **required_files** | Array of Strings | No    | The required files for this assignment. |
 | **feedback_questions** | Array of Strings | No | The list of feedback questions for this work. |
@@ -376,7 +376,7 @@ PUT
 #### Example Request Body
 ```
 {
-   "work_name": "Assignment 1",
+   "name": "Assignment 1",
    "num_peers": 5,
    "required_files": [ "a1.py", "a2.py"],
    "repo_path": "assignment/a1",
