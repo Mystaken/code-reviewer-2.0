@@ -14,9 +14,6 @@ export class WorkTableComponent {
 
   fold = true;
 
-  var my_var = 1;
-  let my_var = 1;
-
 
   rows = [
 	    {
