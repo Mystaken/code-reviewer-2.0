@@ -1,21 +1,22 @@
-  <div>
+    <div>
       <ngx-datatable
         #myTable
-        class="ui selectable inverted table" 
+        class='material expandable'
         [columnMode]="'force'"
         [headerHeight]="50"
         [footerHeight]="50"
         [rowHeight]="50"
         [scrollbarV]="50"
-        [rows]='data'
+        [rows]='rows'
         (page)="onPage($event)">
 
-        <!-- Expanded Detail Template -->
+        <!-- Row Detail Template -->
         <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
           <ng-template let-row="row" ngx-datatable-row-detail-template>
             <div style="padding-left:35px;">
-              <div><strong>Work Information</strong></div>
-              <div>{{row.address.city}}, {{row.address.state}}</div>
+              <div>
+                edit student information here
+              </div>
             </div>
           </ng-template>
         </ngx-datatable-row-detail>
@@ -38,29 +39,24 @@
           </ng-template>
         </ngx-datatable-column>
 
+
+        <!-- columns -->
         <ngx-datatable-column name="Index" width="80">
           <ng-template let-row="row" ngx-datatable-cell-template>
-            <strong>{{row.$$index}}</strong>
+            <strong>{{rows.$$index}}</strong>
           </ng-template>
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Name" width="80">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <strong>{{rows.name}}</strong>
-          </ng-template>
+        <ngx-datatable-column name="Utorid" width="200">
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="UtorID" width="80">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <strong>{{rows.name}}</strong>
-          </ng-template>
+        <ngx-datatable-column name="Name" width="300">
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Email" width="200">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <strong>{{value}}</strong>
-          </ng-template>
+        <ngx-datatable-column name="Email">
         </ngx-datatable-column>
 
       </ngx-datatable>
     </div>
+
+    <create-new-work></create-new-work>
