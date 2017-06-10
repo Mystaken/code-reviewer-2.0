@@ -15,6 +15,7 @@ import { CreateNewWorkComponent} from './create-new-work.component'
 import { WorkTableComponent } from './work-table.component'
 import { AdminComponent } from './admin.component'
 import { StudentTableComponent } from './student-table.component'
+import { EditStudent } from './edit-student.component'
 
 
 @NgModule({
@@ -27,7 +28,8 @@ import { StudentTableComponent } from './student-table.component'
     CreateNewWorkComponent,
     WorkTableComponent,
     AdminComponent,
-    StudentTableComponent
+    StudentTableComponent,
+    EditStudent
   ],
   imports: [
     BrowserModule,
