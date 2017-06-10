@@ -14,8 +14,9 @@
         <ngx-datatable-row-detail [rowHeight]="100" #myDetailRow (toggle)="onDetailToggle($event)">
           <ng-template let-row="row" ngx-datatable-row-detail-template>
             <div style="padding-left:35px;">
-              <div><strong>Address</strong></div>
-              <div>{{row.address.city}}, {{row.address.state}}</div>
+              <div>
+                <create-new-work></create-new-work>
+              </div>
             </div>
           </ng-template>
         </ngx-datatable-row-detail>
@@ -61,3 +62,5 @@
 
       </ngx-datatable>
     </div>
+
+    <create-new-work></create-new-work>

@@ -8,7 +8,7 @@ import { Component } from '@angular/core'
 				<input mdInput placeholder="Work name" value="A0">
 			</md-input-container>
 			<md-select placeholder="Number of peers">
- 				<md-option *ngFor="let num of num_peers_options">
+ 				<md-option *ngFor="let num of num_peers_options" [value]="num">
     				{{ num }}
   				</md-option>
 			</md-select>
@@ -44,6 +44,13 @@ import { Component } from '@angular/core'
 			</md-input-container>
 			<md-datepicker #peer_review></md-datepicker>
 
+			<div>
+				<button type="submit" class="btn btn-success">Submit</button>
+
+
+				<button type="reset" class="btn btn-success">Reset</button>
+			</div>
+
 		</div>
 	`,
 	styles: [`
@@ -54,5 +61,7 @@ import { Component } from '@angular/core'
 
 
 export class CreateNewWorkComponent {
+
 	num_peers_options = [0, 1, 2, 3, 4, 5, 6, 7];
+
 }
