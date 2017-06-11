@@ -483,7 +483,7 @@ Get Feedback
 ---
 Return the feedback information for the feedback of the feedback_id.
 #### Method
-POST
+GET
 #### URL Structure
 `api/works/feedbacks`
 
