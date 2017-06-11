@@ -782,10 +782,11 @@ GET
 | submission does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param" "#/submission_id" }` |
 | submission exists user does not have access to the submission | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": "#/submission_id" }` |
 #### Example Request Body
+```
 {
     "submission_id": 42
 }
-
+```
 #### Example Response
 ```
 {
@@ -826,7 +827,7 @@ POST
 ```
 {
    "submission_id": 42,
-   "code": "def b():\n    print(1)",
+   "file_id": "def b():\n    print(1)",
    "file_name": "ex2.py",
    "mark": 0
 }
@@ -894,10 +895,11 @@ POST
 
 
 #### Example Request Body
+```
 {
     "author_id": 42
 }
-
+```
 #### Example Response
 ```
 {
