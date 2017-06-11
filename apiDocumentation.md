@@ -635,7 +635,7 @@ GET
 | work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND", "param":  "#/work_id" }` |
 #### Example Request Body
 {
-    "work_id": 42
+    "submission_id": 42
 }
 
 #### Example Response
@@ -643,7 +643,7 @@ GET
 {
    "status": 200,
    "data": {
-       "work_id": 123,
+       "submission_id": 123,
        "annotations": {
           "annotation": "A good one",
           "start": 4,
@@ -680,7 +680,7 @@ PUT
 | invalid start and end. | Return error status `400` with message: `{ "code": "INVALID_DATA", "param": "#/start"}, { "code": "INVALID_DATA", "param": "#/end" }` |
 #### Example Request Body
 {
-    "work_id": 123,
+    "submission_id": 123,
     "annotation": "A good one",
     "start": 4,
     "end": 10
@@ -718,7 +718,7 @@ POST
 | annotation exists user does not have access to the annotation | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": "#/annotationid"   }` |
 #### Example Request Body
 {
-    "work_id": 123,
+    "annotation_id": 123,
     "annotation": "A good one"
 }
 
