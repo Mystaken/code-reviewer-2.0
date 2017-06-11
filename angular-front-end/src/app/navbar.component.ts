@@ -49,6 +49,10 @@ import { Http } from '@angular/http';
        }
     }
 
+    .navbar {
+      border-width: 0px;
+    }
+
     .navbar-desktop {
       display: flex;
       justify-content: space-between;
@@ -91,7 +95,7 @@ import { Http } from '@angular/http';
       margin: 0 10px 0 0;
       text-indent: 35px;
       position: relative;
-      left: -10px;
+      left: -15px;
     }
 
     ul li:before {
@@ -99,7 +103,6 @@ import { Http } from '@angular/http';
       height: 0;
       width: 0;
       position: absolute;
-      left: -2px;
       border-style: solid;
       border-width: 25px 0 25px 25px;
       border-color: transparent transparent transparent #3F51B5;
@@ -135,7 +138,7 @@ import { Http } from '@angular/http';
     ul li a {
       display: block;
       background: #5C6BC0;
-      padding-left: 5px;
+      padding-left: 8px;
     }
 
     ul li a:hover {
