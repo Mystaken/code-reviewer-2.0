@@ -517,7 +517,7 @@ GET
             "Great"
         ],
         "mark": 79,
-        "author": 35,
+        "author_id": 35,
         "create_date": "10-06-30 23:32:32",
         "last_updated": "10-06-30 23:32:32"
    }
@@ -556,7 +556,7 @@ PUT
         "Great"
     ],
     "mark": 79,
-    "author": 35
+    "author_id": 35
 }
 ```
 #### Example Response
