@@ -679,13 +679,14 @@ PUT
 | work exists user does not have access to the work | Return error status `404` with message: `{ "code": "NOT_FOUND", "param":"#/work_id" }` |
 | invalid start and end. | Return error status `400` with message: `{ "code": "INVALID_DATA", "param": "#/start"}, { "code": "INVALID_DATA", "param": "#/end" }` |
 #### Example Request Body
+```
 {
     "submission_id": 123,
     "annotation": "A good one",
     "start": 4,
     "end": 10
 }
-
+```
 #### Example Response
 ```
 {
