@@ -333,7 +333,7 @@ GET
 {
    "status": 200,
    "data": {
-      "work_id": 123
+      "work_id": 123,
       "name": "Assignment 1",
       "num_peers": 5,
       "required_files": [ "a1.py", "a2.py"],
