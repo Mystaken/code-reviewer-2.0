@@ -1,0 +1,29 @@
+{
+    "id": "feedbacks-put",
+    "type": "object",
+    "properties": {
+        "work_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "feedbacks": {
+            "type": "array",
+            "item": {
+                "type": "string",
+                "maxLength": 1000
+            },
+            "maxLength": 100
+        },
+        "mark": {
+            "type": "number",
+            "maximum": 100,
+            "minimum": 0
+        },
+        "author": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "work_id", "feedbacks", "mark", "author" ]
+}
