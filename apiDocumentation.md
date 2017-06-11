@@ -511,7 +511,7 @@ GET
    "status": 200,
    "data" : {
         "feedback_id": 31
-        "work_id": 34,
+        "submission_id": 34,
         "feedbacks": [
             "Good",
             "Great"
@@ -550,7 +550,7 @@ PUT
 #### Example Request Body
 ```
 {
-    "work_id": 34,
+    "submission_id": 34,
     "feedbacks": [
         "Good",
         "Great"
