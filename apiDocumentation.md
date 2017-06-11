@@ -694,7 +694,7 @@ PUT
 }
 ```
 
-Update Annotation
+Update Annotation [NOT IMPLEMENTING UNTIL NEEDED]
 ---
 Update a annotation for a specific annotation_id.
 #### Method
