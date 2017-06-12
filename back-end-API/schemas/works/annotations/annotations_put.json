@@ -1,0 +1,22 @@
+{
+    "id": "annotations-put",
+    "type": "object",
+    "properties": {
+        "submission_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "annotation": {
+            "type": "string",
+            "maxLength": 1000
+        },
+        "start": {
+            "type": "number"
+        },
+        "end": {
+            "type": "number"
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "submission_id" ]
+}

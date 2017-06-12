@@ -1,0 +1,12 @@
+{
+    "id": "annotations-get",
+    "type": "object",
+    "properties": {
+        "submission_id": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "submission_id" ]
+}

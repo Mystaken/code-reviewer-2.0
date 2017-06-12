@@ -1,5 +1,5 @@
 {
-    "id": "feedbacks-put",
+    "id": "feedbacks-post",
     "type": "object",
     "properties": {
         "feedback_id": {

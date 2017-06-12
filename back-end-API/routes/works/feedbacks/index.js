@@ -1,16 +1,16 @@
 'use strict';
 
-var validator   = require('../../lib/validator'),
-    utils       = require('../../lib/utils'),
+var validator   = require('../../../lib/validator'),
+    utils       = require('../../../lib/utils'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
 
-    feedbacks_model   = require('../../models/feedbacks'),
-    submissions_model = require('../../models/submissions'),
+    feedbacks_model   = require('../../../models/feedbacks'),
+    submissions_model = require('../../../models/submissions'),
 
-    feedback_get_schema    = require('../../schemas/feedbacks/feedbacks_get'),
-    feedback_put_schema    = require('../../schemas/feedbacks/feedbacks_put'),
-    feedback_post_schema   = require('../../schemas/feedbacks/feedbacks_post');
+    feedback_get_schema    = require('../../../schemas/works/feedbacks/feedbacks_get'),
+    feedback_put_schema    = require('../../../schemas/works/feedbacks/feedbacks_put'),
+    feedback_post_schema   = require('../../../schemas/works/feedbacks/feedbacks_post');
 
 module.exports = function (router) {
 
@@ -31,7 +31,7 @@ module.exports = function (router) {
         return feedbacks_model.aggregate([
                 { 
                     $match: {
-                        _id: mongoose.Types.ObjectId(req.query.submission_id),
+                        _id: mongoose.Types.ObjectId(req.query.feedback_id),
                         status: 'active'
                     } 
                 },{
@@ -53,7 +53,7 @@ module.exports = function (router) {
                 return res.sendResponse(work);
             }).catch(function (error) {
                 res.requestError(error);
-            })
+            });
     }).put(function(req, res, next) {
         var error,
             date;
@@ -63,10 +63,10 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        if (!mongoose.validID(req.query.submission_id) || !mongoose.validID(req.query.submission_id)) {
+        if (!mongoose.validID(req.query.submission_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
-                params: [ 'submission_id', 'author_id' ]
+                params: [ 'submission_id' ]
             });
         }
         date = new Date();
@@ -74,7 +74,6 @@ module.exports = function (router) {
                 { 
                     $match: {
                         _id:        mongoose.Types.ObjectId(req.query.submission_id),
-                        author_id:  mongoose.Types.ObjectId(req.query.author_id),
                         status:     'active'
                     } 
                 }
@@ -85,10 +84,9 @@ module.exports = function (router) {
                         params: [ 'submission_id' ]
                     });
                 }
-            }).then(function() {
                 return new feedbacks_model({
                     work_id: req.body.work_id,
-                    author: req.body.author,
+                    author: work.author_id,
                     review_by: req.session_user_id,
                     feedbacks: req.body.feedbacks,
                     mark: req.body.mark,
@@ -142,5 +140,7 @@ module.exports = function (router) {
         }).catch(function (err) {
             res.requestError(err);
         });
+    }).all(function (req, res, next) {
+        return res.invalidVerb();
     });
 }
