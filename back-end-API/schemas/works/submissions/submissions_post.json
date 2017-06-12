@@ -1,0 +1,21 @@
+{
+    "id": "submissions-post",
+    "type": "object",
+    "properties": {
+        "submission_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "author_id": {
+            "type": "string",
+            "maxLength": 100,
+        },
+        "mark": {
+            "type": "number",
+            "maximum": 100,
+            "minimum": 0
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "ubmission_id" ]
+}
