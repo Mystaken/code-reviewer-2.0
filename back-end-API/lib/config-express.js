@@ -59,7 +59,7 @@ function configureResponse (response) {
                 status: 404,
                 message: [{
                     code: "NOT_FOUND",
-                    params: [ "#/" + err.params ]
+                    params: err.params.map(e=>'#/' + e)
                 }]
             });
         } else if (err.code === "EXISTS") {
@@ -67,7 +67,7 @@ function configureResponse (response) {
                 status: 404,
                 message: [{
                     code: "EXISTS",
-                    params: [ "#/" + err.params ]
+                    params: err.params.map(e=>'#/' + e)
                 }]
             });
         }

@@ -5,7 +5,6 @@ var mongoose = require('mongoose'),
 
 submissions_schema = mongoose.Schema({
     author_id: mongoose.Schema.Types.ObjectId,        // utorid of the student
-    ta_id: mongoose.Schema.Types.ObjectId,            // the TA who is going to mark this assignment
     code: String,                       // file content
     file_name: String,
     report: String,                     // the report.txt

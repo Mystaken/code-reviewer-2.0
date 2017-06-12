@@ -2,7 +2,7 @@
     "id": "feedbacks-put",
     "type": "object",
     "properties": {
-        "work_id": {
+        "submission_id": {
             "type": "string",
             "maxLength": 100
         },
@@ -19,11 +19,11 @@
             "maximum": 100,
             "minimum": 0
         },
-        "author": {
+        "author_id": {
             "type": "string",
             "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "work_id", "feedbacks", "mark", "author" ]
+    "required": [ "submission_id", "feedbacks", "mark", "author_id" ]
 }

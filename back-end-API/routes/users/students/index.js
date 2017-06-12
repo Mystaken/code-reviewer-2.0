@@ -111,7 +111,7 @@ module.exports = function (router) {
                     student_number: req.body.student_number,
                     last_login:     new Date(),
                     user_type:      'student',
-                    status:         'Active'
+                    status:         'active'
                 }).save();
             }).then(function(ret) {
                 res.sendResponse(ret._id);

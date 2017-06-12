@@ -7,8 +7,11 @@ feedbacks_schema = new mongoose.Schema({
 	work_id: mongoose.Schema.Types.ObjectId,
 	author: mongoose.Schema.Types.ObjectId,		// author of code
 	review_by: mongoose.Schema.Types.ObjectId,
-	feedbacks: [String],
-    mark : Number
+	feedbacks: [ String ],
+    mark : Number,
+    create_date: Date,
+    last_updated: Date,
+    status: String            // active, inactive
 });
 
 module.exports = mongoose.model('feedbacks', feedbacks_schema);
