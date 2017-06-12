@@ -16,6 +16,7 @@ import { WorkTableComponent } from './work-table.component'
 import { AdminComponent } from './admin.component'
 import { StudentTableComponent } from './student-table.component'
 import { EditStudent } from './edit-student.component'
+import { Submission } from './submission.component'
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { EditStudent } from './edit-student.component'
     WorkTableComponent,
     AdminComponent,
     StudentTableComponent,
-    EditStudent
+    EditStudent,
+    Submission
   ],
   imports: [
     BrowserModule,
