@@ -1,7 +1,7 @@
 'use strict';
 
 module.exports = function (router) {
-    router.route('/vc/:vc/').get(function (req, res, next) {
+    router.route('/').get(function (req, res, next) {
         res.sendResponse("API is live.");
 
     }).all(function (req, res, next) {

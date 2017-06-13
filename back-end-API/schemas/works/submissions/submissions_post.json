@@ -8,7 +8,7 @@
         },
         "author_id": {
             "type": "string",
-            "maxLength": 100,
+            "maxLength": 100
         },
         "mark": {
             "type": "number",
@@ -17,5 +17,5 @@
         }
     },
     "additionalProperties": false,
-    "required": [ "ubmission_id" ]
+    "required": [ "submission_id" ]
 }

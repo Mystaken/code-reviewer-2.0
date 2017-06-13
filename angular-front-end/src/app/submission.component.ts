@@ -4,8 +4,8 @@ import { Component } from '@angular/core'
     selector: 'submission',
     template: `
         <div>
-            Work Name: {{ work_name }}
-            Submission Deadline: {{ deadline }}
+            Work Name: {{ data.name }}
+            Submission Deadline: {{ data.student_submission_dead_line }}
         </div>
 
         <table>
