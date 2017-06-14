@@ -1,0 +1,74 @@
+[
+  {
+    "first_name": "Alice",
+    "email": "alice.harrington@mail.utoronto.ca",
+    "utorid": "alice1",
+    "student_number": 1001232131,
+    "status": "active",
+    "user_id": "5941bd9703c4291cb81a2e11",
+    "last_login": "2017-06-14 22:49:59"
+  },
+  {
+    "first_name": "Bob",
+    "email": "bob.cheng@mail.utoronto.ca",
+    "utorid": "bob1",
+    "student_number": 100235656,
+    "status": "active",
+    "user_id": "5941c23303c4291cb81a2e12",
+    "last_login": "2017-06-14 23:09:39"
+  },
+  {
+    "first_name": "Carol",
+    "email": "carol.estrada@mail.utoronto.ca",
+    "utorid": "carol1",
+    "student_number": 100564651,
+    "status": "active",
+    "user_id": "5941c25703c4291cb81a2e13",
+    "last_login": "2017-06-14 23:10:15"
+  },
+  {
+    "first_name": "David",
+    "email": "david.tafliovich@mail.utoronto.ca",
+    "utorid": "david1",
+    "student_number": 10006565456,
+    "status": "active",
+    "user_id": "5941c27803c4291cb81a2e14",
+    "last_login": "2017-06-14 23:10:48"
+  },
+  {
+    "first_name": "Eve",
+    "email": "eve.brestcher@mail.utoronto.ca",
+    "utorid": "eve",
+    "student_number": 1000654654,
+    "status": "active",
+    "user_id": "5941c28403c4291cb81a2e15",
+    "last_login": "2017-06-14 23:11:00"
+  },
+  {
+    "first_name": "Frank",
+    "email": "frank.pancer@mail.utoronto.ca",
+    "utorid": "frank1",
+    "student_number": 1007654654,
+    "status": "active",
+    "user_id": "5941c2cb03c4291cb81a2e16",
+    "last_login": "2017-06-14 23:12:11"
+  },
+  {
+    "first_name": "Grace",
+    "email": "grace.sans@mail.utoronto.ca",
+    "utorid": "grace1",
+    "student_number": 10000897,
+    "status": "active",
+    "user_id": "5941c2ec03c4291cb81a2e17",
+    "last_login": "2017-06-14 23:12:44"
+  },
+  {
+    "first_name": "Heidi",
+    "email": "heidi.shroeder@mail.utoronto.ca",
+    "utorid": "heidi1",
+    "student_number": 100065203984,
+    "status": "active",
+    "user_id": "5941c2ff03c4291cb81a2e18",
+    "last_login": "2017-06-14 23:13:03"
+  }
+]
