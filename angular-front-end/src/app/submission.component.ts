@@ -45,7 +45,7 @@ import { Component } from '@angular/core'
 })
 
 
-export class Submission {
+export class SubmissionComponent {
     data = {
       "work_id": 123,
       "name": "Assignment 1",

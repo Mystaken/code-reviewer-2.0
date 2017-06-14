@@ -1,6 +1,6 @@
 import { Component,ViewEncapsulation, ViewChild, OnInit } from '@angular/core'
 import { Http } from '@angular/http'
-import { WorkTableService } from './work-table.service'
+import { ApiService } from './api.service'
 
 
 @Component({
@@ -15,13 +15,13 @@ export class WorkTableComponent {
 
   data_from_service: any[];
 
-  constructor(private _workTableService: WorkTableService) {
+  constructor(private _apiService: ApiService) {
   }
 
   getData(): void {
-    var result = this._workTableService
+    var result = this._apiService
         .getPost()
-        .then(data => this.data_from_service = data);
+        .subscribe(data => this.data_from_service = data);
     console.log(result);
   }
 

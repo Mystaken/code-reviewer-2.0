@@ -30,7 +30,7 @@ import { Component, ElementRef, OnInit } from '@angular/core'
 })
 
 
-export class EditStudent {
+export class EditStudentComponent {
 
     status = "Active"; // populate from api
 
