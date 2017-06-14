@@ -6,6 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MdCheckboxModule, MaterialModule, MdNativeDateModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { Observable } from 'rxjs/Rx'
 
 import { WindowComponent } from './window.component'
 import { TodoListComponent } from './todo-list.component'
@@ -17,6 +18,7 @@ import { AdminComponent } from './admin.component'
 import { StudentTableComponent } from './student-table.component'
 import { EditStudent } from './edit-student.component'
 import { Submission } from './submission.component'
+import { WorkTableService } from './work-table.service'
 
 
 @NgModule({
@@ -44,7 +46,7 @@ import { Submission } from './submission.component'
     MdNativeDateModule,
     NgxDatatableModule
   ],
-  providers: [],
+  providers: [WorkTableService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

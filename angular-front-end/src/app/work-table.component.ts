@@ -1,4 +1,7 @@
-import { Component,ViewEncapsulation, ViewChild } from '@angular/core'
+import { Component,ViewEncapsulation, ViewChild, OnInit } from '@angular/core'
+import { Http } from '@angular/http'
+import { WorkTableService } from './work-table.service'
+
 
 @Component({
     selector: 'work-table',
@@ -6,7 +9,27 @@ import { Component,ViewEncapsulation, ViewChild } from '@angular/core'
     styleUrls: ['./work-table.component.css']
 })
 
+
+
 export class WorkTableComponent {
+
+  data_from_service: any[];
+
+  constructor(private _workTableService: WorkTableService) {
+  }
+
+  getData(): void {
+    var result = this._workTableService
+        .getPost()
+        .then(data => this.data_from_service = data);
+    console.log(result);
+  }
+
+  ngOnInit(): void {
+    this.getData();
+  }
+
+
 
 
   @ViewChild('myTable') table: any;
@@ -52,8 +75,9 @@ export class WorkTableComponent {
 
 
 
-  constructor() {
-  }
+
+
+
 
   onPage(event) {
     clearTimeout(this.timeout);
