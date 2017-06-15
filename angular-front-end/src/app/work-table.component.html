@@ -65,8 +65,10 @@
 
     <create-new-work></create-new-work>
 
-
+<!-- display an object -->
 <div *ngFor="let data of data_from_service">
   <p> {{data.id}}
   {{data.title}}</p>
 </div>
+
+{{data_from_service}}

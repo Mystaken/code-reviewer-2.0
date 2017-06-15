@@ -16,17 +16,17 @@ export class WorkTableComponent {
   data_from_service: any[];
 
   constructor(private _apiService: ApiService) {
+    this.getData();
   }
 
   getData(): void {
-    var result = this._apiService
+    this._apiService
         .getPost()
-        .subscribe(data => this.data_from_service = data);
-    console.log(result);
+        .subscribe(res => this.data_from_service = res.data);
+    // console.log(result);
   }
 
   ngOnInit(): void {
-    this.getData();
   }
 
 
@@ -68,7 +68,8 @@ export class WorkTableComponent {
                 "city": "Grazierville"
             }
         }
-    ]
+    ];
+
 
   expanded: any = {};
   timeout: any;
