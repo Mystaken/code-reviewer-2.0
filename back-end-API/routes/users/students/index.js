@@ -247,6 +247,7 @@ module.exports = function (router) {
                 _id: 0,
                 email: 1,
                 first_name: 1,
+                last_name: 1,
                 utorid: 1,
                 status: 1,
                 student_number: 1,
