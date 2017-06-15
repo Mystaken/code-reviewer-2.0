@@ -5,6 +5,8 @@ var express     = require('express'),
     bodyParser      = require('body-parser'),
     cookieParser    = require('cookie-parser'),
     mongoose        = require('mongoose'),
+    cors            = require('cors'),
+
 
     config      = require('./config/config.json'),
     API_PORT    = 3000,
@@ -20,6 +22,7 @@ app.use(bodyParser.json())
     .use(cookieParser())
     .use(kraken(spec.onconfig))
     .use(express.static(APP_DIR))
+    .use(cors())    // enable all cors requests
 
 app.get('/kenny/', function(res, req, next) {
     return res.sendResponse("EHH");
