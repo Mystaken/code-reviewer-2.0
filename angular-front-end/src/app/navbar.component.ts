@@ -17,7 +17,7 @@ import { Http } from '@angular/http';
                 *ngFor="let sub_tab_name of tab.sub_tab_names"
                 (click)="on_click(tab.tab_name ,sub_tab_name.id);"
                 >
-                <md-icon>dialpad</md-icon>
+                <md-icon>assignment</md-icon>
                 <span>{{ sub_tab_name.name }}</span>
               </button>
             </md-menu>
@@ -25,9 +25,8 @@ import { Http } from '@angular/http';
         </ul>
       </div>
       <div class="user-info">
-        <p>
-          {{ username }}&nbsp;(<a href="#">Log&nbsp;out</a>)
-        </p>
+        <span>{{ username }}</span>
+        <button><md-icon>exit_to_app</md-icon></button>
       </div>
     </div>
 
@@ -69,8 +68,10 @@ import { Http } from '@angular/http';
       text-decoration: underline;
     }
 
-    .navbar-desktop p {
+    .navbar-desktop span {
       color: #E8EAF6;
+      position: relative;
+      bottom: 4px;
     }
 
     .stage-buttons {
@@ -78,8 +79,13 @@ import { Http } from '@angular/http';
       display: flex;
     }
 
-    .user-info {
-      margin: 15px 20px 0 0;
+    button {
+      margin: 8px 10px 0 10px;
+    }
+
+    button>md-icon {
+      position: relative;
+      top: 3px;
     }
 
     ul {
