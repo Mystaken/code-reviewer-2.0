@@ -27,7 +27,7 @@ GET
   <tbody>
     <tr>
       <td><b>user_id</b> not inputted</td>
-      <td><center>400</center></td>
+      <td>400</td>
       <td>
 <pre>
 {
