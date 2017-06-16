@@ -26,12 +26,12 @@ import { Http } from '@angular/http';
       </div>
       <div class="user-info">
         <span>{{ username }}</span>
-        <button><md-icon>exit_to_app</md-icon></button>
+        <button class="nav-btn"><md-icon>exit_to_app</md-icon></button>
       </div>
     </div>
 
     <div class="navbar-mobile">
-      <button><md-icon>menu</md-icon></button>
+      <button class="nav-btn"><md-icon>menu</md-icon></button>
     </div>
   </div>
   `,
@@ -79,11 +79,11 @@ import { Http } from '@angular/http';
       display: flex;
     }
 
-    button {
+    button.nav-btn {
       margin: 8px 10px 0 10px;
     }
 
-    button>md-icon {
+    button.nav-btn>md-icon {
       position: relative;
       top: 3px;
     }
