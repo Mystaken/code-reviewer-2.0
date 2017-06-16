@@ -450,7 +450,7 @@ POST
 
 Get All Work
 ---
-Get the work for the id.
+Get all the works.
 #### Method
 GET
 #### URL Structure
