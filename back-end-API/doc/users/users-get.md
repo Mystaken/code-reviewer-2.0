@@ -16,4 +16,23 @@ GET
 
 
 # Validation
-<table><tbody><tr>a</tr></tbody></table>
+<table>
+  <thead>
+    <tr>
+      <td>Action</td>
+      <td>Expected Status</td>
+      <td>Expected Response</td>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>**user_id** not inputted</td>
+      <td>`400`</td>
+      <td>
+        ```
+        {"code":"OBJECT_ADDITIONAL_PROPERTIES","param": "#/user_id" }
+        ```
+      </td>
+    </tr>
+  </tbody>
+</table>
