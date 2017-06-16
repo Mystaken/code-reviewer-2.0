@@ -9,7 +9,8 @@ var validator   = require('../../lib/validator'),
 
     works_get_schema    = require('../../schemas/works/works_get'),
     works_put_schema    = require('../../schemas/works/works_put'),
-    works_post_schema   = require('../../schemas/works/works_post');
+    works_post_schema   = require('../../schemas/works/works_post'),
+    works_all_get_schema   = require('../../schemas/works/works_all_get');
 
 
 module.exports = function (router) {
@@ -162,6 +163,51 @@ module.exports = function (router) {
             res.sendResponse(ret._id);
         }).catch(function (err) {
             res.requestError(err);
+        });
+    }).all(function (req, res, next) {
+        return res.invalidVerb();
+    });
+
+
+    router.route('/all').get(function(req, res, next) {
+        var error;
+        validator.validate(req.query, works_all_get_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+        return submission_rules_model.aggregate([
+            { 
+                $project : {
+                    work_id: "$_id",
+                    _id: 0,
+                    num_peers: 1,
+                    required_files: 1,
+                    feedback_questions: 1,
+                    student_submission_deadline: { 
+                        $dateToString: { 
+                            format: "%Y-%m-%d", 
+                            date: "$student_submission_deadline" 
+                        }
+                    },
+                    peer_review_deadline: { 
+                        $dateToString: { 
+                            format: "%Y-%m-%d", 
+                            date: "$peer_review_deadline" 
+                        }
+                    },
+                    ta_review_deadline: { 
+                        $dateToString: { 
+                            format: "%Y-%m-%d", 
+                            date: "$ta_review_deadline" 
+                        }
+                    }
+                }
+            }
+        ]).exec().then(function(works) {
+            return res.sendResponse(works);
+        }).catch(function(err) {
+            return res.requestError(err);
         });
     }).all(function (req, res, next) {
         return res.invalidVerb();

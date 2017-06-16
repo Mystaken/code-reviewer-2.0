@@ -1,0 +1,5 @@
+{
+    "id": "works-get",
+    "type": "object",
+    "additionalProperties": false
+}
