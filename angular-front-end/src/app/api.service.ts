@@ -13,6 +13,7 @@ export class ApiService {
             .map(res => res.json());
     }
 
+    // get all the students
     getStudents() {
         return this._http.get("http://localhost:3000/api/users/students/all")
             .map(function(res) {

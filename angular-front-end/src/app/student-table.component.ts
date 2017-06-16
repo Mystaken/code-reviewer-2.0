@@ -12,6 +12,7 @@ import { ApiService } from './api.service'
 export class StudentTableComponent {
 
     rows : any[];
+    expandable_tabs : Boolean[];
 
     constructor(private _apiService: ApiService) {
         this.getStudents();
@@ -24,6 +25,7 @@ export class StudentTableComponent {
     }
 
     ngOnInit(): void {
+        this.getStudents();
     }
 
     test() {
@@ -37,8 +39,6 @@ export class StudentTableComponent {
     @ViewChild('myTable') table: any;
 
 
-    fold = true;
-
     onPage(event) {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
@@ -47,8 +47,8 @@ export class StudentTableComponent {
     }
 
     toggleExpandRow(row) {
-        console.log('Toggled Expand Row!', row);
         this.table.rowDetail.toggleExpandRow(row);
+        row.fold = !row.fold;
     }
 
     onDetailToggle(event) {
