@@ -31,7 +31,7 @@ import { Http } from '@angular/http';
     </div>
 
     <div class="navbar-mobile">
-      <h2 style="color: #FFF;">Mobile placeholder</h2>
+      <button><md-icon>menu</md-icon></button>
     </div>
   </div>
   `,
