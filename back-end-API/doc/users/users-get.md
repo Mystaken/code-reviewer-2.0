@@ -26,12 +26,16 @@ GET
   </thead>
   <tbody>
     <tr>
-      <td>**user_id** not inputted</td>
-      <td>`400`</td>
+      <td><b>user_id</b> not inputted</td>
+      <td><i>400</i></td>
       <td>
-        ```
-        {"code":"OBJECT_ADDITIONAL_PROPERTIES","param": "#/user_id" }
-        ```
+<pre>
+{
+  "code":"OBJECT_ADDITIONAL_PROPERTIES",
+  "param": "#/user_id" 
+}
+  
+</pre>
       </td>
     </tr>
   </tbody>
