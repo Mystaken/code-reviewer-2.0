@@ -16,9 +16,6 @@ GET
 
 
 # Validation
-| Action                  | Expected Status  | Expected Response                                                       |
-|-------------------------|------------------|-------------------------------------------------------------------------|
-| user_id not inputted    |       `400`      |
-```
-{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param": "#/user_id" }
-``` |
+| Action                  | Expected Status | Expected Response                                                       |
+|-------------------------|-----------------|-------------------------------------------------------------------------|
+| user_id not inputted    | `400`           | `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param": "#/user_id" }`     |
