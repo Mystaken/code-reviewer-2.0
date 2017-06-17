@@ -27,14 +27,14 @@ POST
 | **user_id** not inputted.                         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/user_id" ] }` |
 | Additional Fields inputted.                       | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
 | Session user does not have access to **user_id**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
-| No active user with **user_id**.                  | 403    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
+| No active user with **user_id**.                  | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
 | Session user does not have access to route.       | 403    | `{ "code": "Forbidden" }`                                                 |
 
 
 #### Example Request Body
 ```
 {
-  "user_id": "59447dc6fe01ea7a6edb4e34" ,
+  "user_id": "59447dc6fe01ea7a6edb4e34",
   "first_name" "Grey",
   "last_name": "Gxsanda"
 }

@@ -34,7 +34,7 @@ GET
 #### Example Request Query
 ```
 {
-    "user_id": 1232,
+    "user_id": "59447dc6fe01ea7a6edb4e34",
     "student_id" 1314,
     "first_name" "Grey",
     "last_name": "Gxsanda",
@@ -49,7 +49,7 @@ GET
     "status": 200,
     "data" : [
         {
-            "user_id": 1232,
+            "user_id": "59447dc6fe01ea7a6edb4e34",
             "student_number" 1314,
             "first_name" "Grey",
             "last_name": "Gxsanda",

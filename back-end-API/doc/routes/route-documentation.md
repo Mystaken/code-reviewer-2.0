@@ -15,8 +15,12 @@ Routes
 
         * [api/users/students/ - PUT](users/students/students-put.md)
 
-            `Add a new student`
+            `Add a new student.`
 
         * [api/users/students/ - POST](users/students/students-post.md)
 
-            `Update a student`
+            `Update a student.`
+        * [api/users/students/ - DELETE](users/students/students-delete.md)
+
+            `Delete a student.`   
+* ### Works
