@@ -22,15 +22,15 @@ Routes
 
             `Delete a student.`   
 * ### Works
-    * [api/works/all - GET](/works/works-get-all.md)
+    * [api/works/all - GET](works/works-get-all.md)
 
         `Get all works that match an inputted filters.`
-    * [api/works - GET](/works/works-get.md)
+    * [api/works - GET](works/works-get.md)
 
         `Get information for a work.`
-    * [api/works - PUT](/works/works-put.md)
+    * [api/works - PUT](works/works-put.md)
 
         `Add a new work.`
-    * [api/works - POST](/works/works-post.md)
+    * [api/works - POST](works/works-post.md)
 
         `Update a work.`
