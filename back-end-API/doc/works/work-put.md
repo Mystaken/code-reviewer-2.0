@@ -38,10 +38,7 @@ PUT
    "num_peers": 5,
    "required_files": [ "a1.py", "a2.py"],
    "repo_path": "assignment/a1",
-   "student_submission_dead_line": "2017-12-17",
    "feedback_questions": [ "Is this good?" ],
-   "peer_review_deadline": "2017-12-30",
-   "ta_review_deadline": "2017-12-30"
 }
 ```
 
