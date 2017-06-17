@@ -21,14 +21,6 @@ GET
 
 ### Validation
 <table>
-  <thead>
-    <tr>
-      <td>Action</td>
-      <td>Expected Status</td>
-      <td>Expected Response</td>
-    </tr>
-  </thead>
-
   <tbody>
 
     <tr>
