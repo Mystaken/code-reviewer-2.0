@@ -21,16 +21,25 @@ GET
 
 ### Validation
 <table>
+  <thead>
+    <tr>
+      <td>Action</td>
+      <td>Expected Status</td>
+      <td>Expected Response</td>
+    </tr>
+  </thead>
+
   <tbody>
+
     <tr>
       <td><b>user_id</b> not inputted</td>
       <td>400</td>
       <td>
-  <pre>
+<pre>
 {
   "code":"OBJECT_MISSING_REQUIRED_PROPERTY",
   "param": "#/user_id" 
-}]
+}
 </pre>
       </td>
     </tr>
