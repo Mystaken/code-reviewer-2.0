@@ -1,0 +1,17 @@
+[
+    {
+        "name": "A0",
+        "num_peers": 3,
+        "required_files": ["a0.py"]
+    },
+    {
+        "name": "A1",
+        "num_peers": 4,
+        "required_files": ["a1_testing.py", "a1_design.py"]
+    },
+    {
+        "name": "A2",
+        "num_peers": 2,
+        "required_files": ["a2.py"]
+    }
+]
