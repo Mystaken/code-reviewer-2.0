@@ -23,29 +23,9 @@ PUT
 | **student_number** | Number  | Yes       |  The student number of the student.|
 
 ### Validation
-<table>
-  <thead>
-    <tr>
-      <td>Action</td>
-      <td>Expected Status</td>
-      <td>Expected Response</td>
-    </tr>
-  </thead>
-
-  <tbody>
-
-    <tr>
-      <td>Required field not inputted</td>
-      <td><i>400</i></td>
-      <td>
-<pre>
-For each field:
-{
-  "code":"OBJECT_ADDITIONAL_PROPERTIES",
-  "param": "#/{{field.name}}" 
-}
-</pre>
-      </td>
-    </tr>
-  </tbody>
-</table>
+| Action                                      | Status | Expected Response                                                     |
+|---------------------------------------------|--------|-----------------------------------------------------------------------|
+| Session user does not have access to route. | 403    | `{ "code": "Forbidden"}`                                               |
+| Required field not inputted                 | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": "#/<field>" }` |
+| Additional fields inputted                  | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": "#/<field>" }`     |
+| Student already exists                      | 400    | `{ "code": "EXISTS", "param": "#/email
