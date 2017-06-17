@@ -8,15 +8,13 @@ Routes
     * #### Students
         * [api/users/students/all - GET](users/students/students-get-all.md)
 
-            `Get all students that match an inputted filter.`
+            `Get all students that match an inputted filters.`
         * [api/users/students/ - GET](users/students/students-get.md)
 
             `Get information for a student.`
-
         * [api/users/students/ - PUT](users/students/students-put.md)
 
             `Add a new student.`
-
         * [api/users/students/ - POST](users/students/students-post.md)
 
             `Update a student.`
@@ -24,3 +22,15 @@ Routes
 
             `Delete a student.`   
 * ### Works
+    * [api/works/all - GET](/works/work-get-all.md)
+
+        `Get all works that match an inputted filters.`
+    * [api/works - GET](/works/work-get.md)
+
+        `Get information for a work.`
+    * [api/works - PUT](/works/work-put.md)
+
+        `Add a new work.`
+    * [api/works - POST](/works/work-post.md)
+
+        `Update a work.`

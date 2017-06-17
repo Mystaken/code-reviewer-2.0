@@ -12,7 +12,7 @@ GET
 ### User Privileges
 * `Other`: Full Access
 
-### Request Body
+### Request Query
 | Field       | Type   | Required? | Description          |
 |------------ |--------|-----------|----------------------|
 | **work_id** | String | Yes       | The id of this work. |
@@ -24,10 +24,11 @@ GET
 | Additional Fields inputted.     | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
 | No active work with **work_id** | 404    | `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }`                       |
 
+
 #### Example Request Body
 ```
 {
-    "work_id": 123
+    "work_id": "5935ed0e5ecf04cc3388de8e"
 }
 ```
 
@@ -36,7 +37,7 @@ GET
 {
     "status": 200,
     "data": {
-        "work_id": 123,
+        "work_id": "5935ed0e5ecf04cc3388de8e",
         "name": "Assignment 1",
         "num_peers": 5,
         "required_files": [ "a1.py", "a2.py"],
