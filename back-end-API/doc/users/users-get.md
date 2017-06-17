@@ -20,26 +20,13 @@ GET
 
 
 ### Validation
-<table>
-  <thead>
-    <tr>
-      <td>Action</td>
-      <td>Expected Status</td>
-      <td>Expected Response</td>
-    </tr>
-  </thead>
+| Action                                    | Status | Expected Response                                                     |
+|-------------------------------------------|--------|-----------------------------------------------------------------------|
+| **user_id** not inputted                  | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": "#/user_id" }` |
+| Additional Fields inputted                | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": "#/<field>" }`     |
+| Session user has no access to **user_id** | 404    | `{ "code": "NOT_FOUND", "param": "user_id" }`                         |
+| **user_id** does not exists               | 404    | `{ "code": "NOT_FOUND", "param": "user_id" }`                         |
 
-  <tbody>
-
-    <tr>
-      <td><b>user_id</b> not inputted</td>
-      <td>400</td>
-      <td>
-      </td>
-    </tr>
-
-  </tbody>
-</table>
 
 #### Example Request Body
 ```
