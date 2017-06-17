@@ -13,7 +13,7 @@ GET
 
 ### User Privileges
 * `Administrator`: Full Access
-* `Student`: On access to **session_user_id**
+* `Student`: Only access to **session_user_id**
 * `TA`: If TA is reviewing the students work.
 
 ### Request Query
@@ -29,7 +29,7 @@ GET
 | Additional Fields inputted.           | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
 | Student has no access to **user_id**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
 | TA has no access to **user_id**.      | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
-| No active user with **user_id**       | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
+| No active user with **user_id**.      | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
 | **user_id** exists but not a student. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
 
 

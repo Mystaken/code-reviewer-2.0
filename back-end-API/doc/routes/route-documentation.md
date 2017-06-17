@@ -34,3 +34,13 @@ Routes
     * [api/works - POST](works/works-post.md)
 
         `Update a work.`
+    * #### Feedbacks
+        * [/api/works/feedbacks - GET](works/feedbacks/feedbacks-get.md)
+
+            `Get information for a feedback.`
+        * [/api/works/feedbacks - PUT](works/feedbacks/feedbacks-put.md)
+
+            `Add a new feedback.`
+        * [/api/works/feedbacks - POST](works/feedbacks/feedbacks-post.md)
+
+            `Update a feedback.`

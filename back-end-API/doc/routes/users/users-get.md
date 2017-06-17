@@ -11,7 +11,7 @@ GET
 
 ### User Privileges
 * `Administrator`: Full Access
-* `Other`: On access to **session_user_id**
+* `Other`: Only access to **session_user_id**
 
 ### Request Query
 | Field          | Type   | Required? | Description           |

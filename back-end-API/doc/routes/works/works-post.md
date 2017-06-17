@@ -1,7 +1,7 @@
 Update Work
 ===
 ### Description
-Update the work of given **work_id**. NOTE: will overwrite original.
+Update the work information of given **work_id**. NOTE: will overwrite original.
 
 ### Method
 POST

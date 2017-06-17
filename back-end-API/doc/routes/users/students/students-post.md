@@ -1,7 +1,7 @@
 Update Student
 ===
 ### Description
-Update the students info of the given **user_id**
+Update the students information of the given **user_id**
 
 ### Method
 POST
@@ -11,7 +11,7 @@ POST
 
 ### User Privileges
 * `Administrator`: Full Access
-* `Student`: On access to **session_user_id**
+* `Student`: Only access to **session_user_id**
 * `Other`: No access
 
 ### Request Body
