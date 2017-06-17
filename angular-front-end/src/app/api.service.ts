@@ -16,9 +16,13 @@ export class ApiService {
     // get all the students
     getStudents() {
         return this._http.get("http://localhost:3000/api/users/students/all")
-            .map(function(res) {
-                return res.json().data;
-            });
+            .map(res => res.json().data);
+    }
+
+    // get all the works
+    getWorks() {
+        return this._http.get("http://localhost:3000/api/works/all")
+            .map(res => res.json().data);
     }
 
 

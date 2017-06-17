@@ -21,8 +21,8 @@
           </ng-template>
         </ngx-datatable-row-detail>
 
-        <!-- Column Templates -->
-         <ngx-datatable-column
+        <!-- column of expand buttons -->
+        <ngx-datatable-column
           [width]="50"
           [resizeable]="false"
           [sortable]="false"
@@ -39,36 +39,17 @@
           </ng-template>
         </ngx-datatable-column>
 
-
-        <!-- columns -->
-        <ngx-datatable-column name="Index" width="80">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <strong>{{row.$$index}}</strong>
-          </ng-template>
+        <!-- all other data columns -->
+        <ngx-datatable-column name="Work Name" prop="name">
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Name" width="200">
-          <ng-template let-value="value" ngx-datatable-cell-template>
-            <strong>{{value}}</strong>
-          </ng-template>
+        <ngx-datatable-column name="Stage" prop="status">
         </ngx-datatable-column>
 
-        <ngx-datatable-column name="Stage" width="300">
-
-        </ngx-datatable-column>
-
-        <ngx-datatable-column name="Deadline">
+        <ngx-datatable-column name="Number of Peers" prop="num_peers">
         </ngx-datatable-column>
 
       </ngx-datatable>
     </div>
-
+    <button (click)="test()">abc</button>
     <create-new-work></create-new-work>
-
-<!-- display an object -->
-<div *ngFor="let data of data_from_service">
-  <p> {{data.id}}
-  {{data.title}}</p>
-</div>
-
-{{data_from_service}}

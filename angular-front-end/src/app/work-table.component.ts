@@ -10,90 +10,47 @@ import { ApiService } from './api.service'
 })
 
 
-
 export class WorkTableComponent {
 
-  data_from_service: any[];
+    rows: any[];
 
-  constructor(private _apiService: ApiService) {
-    this.getData();
-  }
+    constructor(private _apiService: ApiService) {
+        this.getWorks();
+    } 
 
-  getData(): void {
-    this._apiService
-        .getPost()
-        .subscribe(res => this.data_from_service = res.data);
-    // console.log(result);
-  }
+    getWorks(): void {
+        this._apiService
+            .getWorks()
+            .subscribe(data => this.rows = data);
+    }
 
-  ngOnInit(): void {
-  }
+    ngOnInit(): void {
+        this.getWorks();
+    }
 
+    test() {
+        console.log(this.rows);
+    }
 
+    expanded: any = {};
+    timeout: any;
 
+    @ViewChild('myTable') table: any;
 
-  @ViewChild('myTable') table: any;
+    onPage(event) {
+        clearTimeout(this.timeout);
+        this.timeout = setTimeout(() => {
+            console.log('paged!', event);
+        }, 100);
+    }
 
-  fold = true;
+    toggleExpandRow(row) {
+        console.log('Toggled Expand Row!', row);
+        this.table.rowDetail.toggleExpandRow(row);
+    }
 
-
-  rows = [
-        {
-            "id": 0,
-            "name": "A0",
-            "stage": "Marks Released",
-            "deadline": "no deadline",
-            "address": {
-                "state": "South Carolina",
-                "city": "Glendale"
-            }
-        },
-        {
-            "id": 1,
-            "name": "A1",
-            "stage": "Peer Review",
-            "deadline": "June 15, 2017",
-            "address": {
-                "state": "Arizona",
-                "city": "Beaverdale"
-            }
-        },
-        {
-            "id": 2,
-            "name": "A2",
-            "stage": "Submission",
-            "deadline": "June 7, 2017",
-            "address": {
-                "state": "New Mexico",
-                "city": "Grazierville"
-            }
-        }
-    ];
-
-
-  expanded: any = {};
-  timeout: any;
-
-
-
-
-
-
-
-  onPage(event) {
-    clearTimeout(this.timeout);
-    this.timeout = setTimeout(() => {
-      console.log('paged!', event);
-    }, 100);
-  }
-
-  toggleExpandRow(row) {
-    console.log('Toggled Expand Row!', row);
-    this.table.rowDetail.toggleExpandRow(row);
-  }
-
-  onDetailToggle(event) {
-    console.log('Detail Toggled', event);
-  }
+    onDetailToggle(event) {
+        console.log('Detail Toggled', event);
+    }
 
 }

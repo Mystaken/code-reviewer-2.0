@@ -1,6 +1,7 @@
-import { Component,ViewEncapsulation, ViewChild } from '@angular/core'
+import { Component,ViewEncapsulation, ViewChild, OnInit } from '@angular/core'
 import { Http } from '@angular/http'
 import { ApiService } from './api.service'
+
 
 @Component({
 	selector: 'student-table',
@@ -11,8 +12,7 @@ import { ApiService } from './api.service'
 
 export class StudentTableComponent {
 
-    rows : any[];
-    expandable_tabs : Boolean[];
+    rows: any[];
 
     constructor(private _apiService: ApiService) {
         this.getStudents();
@@ -35,14 +35,12 @@ export class StudentTableComponent {
     expanded: any = {};
     timeout: any;
 
-
     @ViewChild('myTable') table: any;
-
 
     onPage(event) {
         clearTimeout(this.timeout);
         this.timeout = setTimeout(() => {
-          console.log('paged!', event);
+            console.log('paged!', event);
         }, 100);
     }
 
