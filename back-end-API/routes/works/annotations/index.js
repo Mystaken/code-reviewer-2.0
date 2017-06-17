@@ -57,7 +57,7 @@ module.exports = function (router) {
                             _id: 0,
                         }
                     }
-                ]).exec()
+                ]).exec();
             }).then(function (ret) {
                 return res.sendResponse(ret);
             }).catch(function (err) {
@@ -94,7 +94,7 @@ module.exports = function (router) {
         query = {
             _id: mongoose.Types.ObjectId(req.body.annotation_id),
             status: 'active'
-        }
+        };
         return annotations_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
                 return Promise.reject({
@@ -113,4 +113,4 @@ module.exports = function (router) {
     }).all(function (req, res, next) {
         return res.invalidVerb();
     });
-}
+};

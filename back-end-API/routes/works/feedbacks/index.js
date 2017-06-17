@@ -50,7 +50,7 @@ module.exports = function (router) {
                         params: [ 'feedback_id' ]
                     });
                 }
-                return res.sendResponse(work);
+                return res.sendResponse(submission);
             }).catch(function (error) {
                 res.requestError(error);
             });
@@ -73,8 +73,8 @@ module.exports = function (router) {
         return submissions_model.aggregate([
                 { 
                     $match: {
-                        _id:        mongoose.Types.ObjectId(req.query.submission_id),
-                        status:     'active'
+                        _id:    mongoose.Types.ObjectId(req.query.submission_id),
+                        status: 'active'
                     } 
                 }
             ]).exec().then(function (work) {
@@ -134,7 +134,7 @@ module.exports = function (router) {
                     });
             }
             return feedbacks_model.findOneAndUpdate(find_query, update_query)
-                .exec()
+                .exec();
         }).then(function(ret) {
             res.sendResponse(ret._id);
         }).catch(function (err) {
@@ -143,4 +143,4 @@ module.exports = function (router) {
     }).all(function (req, res, next) {
         return res.invalidVerb();
     });
-}
+};

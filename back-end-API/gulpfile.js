@@ -8,7 +8,7 @@ gulp.task('jshint', function(APP_SRC) {
         './routes/*.js',
         './lib/**/*.js',
         './lib/*.js',
-        './models/**/*.js'],
+        './models/**/*.js',
         './models/*.js'])
         .pipe(jshint("./config/.jshintrc"))
         .on('end', function(){ util.log('Jshint finished.'); })

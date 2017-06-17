@@ -31,7 +31,7 @@ module.exports = function (router) {
         var match_query = {
             _id: mongoose.Types.ObjectId(req.query.submission_id),
             status: 'active'
-        }
+        };
 
         // if user is a student, it must be his own work, otherwise 404
         if (req.session_user_type === 'student' ) {

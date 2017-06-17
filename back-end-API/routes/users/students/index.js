@@ -188,7 +188,7 @@ module.exports = function (router) {
                     });
             }
             return user_model.findOneAndUpdate(query, update_query)
-                .exec()
+                .exec();
         }).then(function(ret) {
             res.sendResponse(ret._id);
         }).catch(function (err) {
@@ -212,7 +212,7 @@ module.exports = function (router) {
         query = {
             _id: mongoose.Types.ObjectId(req.body.user_id),
             user_type: 'student'
-        }
+        };
         return user_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
                 return Promise.reject({
