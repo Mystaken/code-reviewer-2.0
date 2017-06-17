@@ -13,13 +13,15 @@ module.exports = function (router) {
         var error,
             user_id;
 
-        if (req.session_user_type !== 'admin') {
-            return res.forbidden();
-        }
         validator.validate(req.query, user_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
+        }
+
+        if (req.session_user_type !== 'admin' &&
+            req.session_user_id !== req.query.user_id) {
+            return res.forbidden();
         }
 
         if (!mongoose.validID(req.query.user_id)) {
