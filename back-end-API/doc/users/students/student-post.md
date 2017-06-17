@@ -14,7 +14,7 @@ POST
 * `Student`: On access to **session_user_id**
 * `Other`: No access
 
-### Request Query
+### Request Body
 | Queries        | Type   | Required? | Description                        |
 |----------------|--------|-----------|------------------------------------|
 | **user_id**    | String | Yes       | The id of the student.             |
@@ -27,8 +27,8 @@ POST
 | **user_id** not inputted.                         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/user_id" ] }` |
 | Additional Fields inputted.                       | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
 | Session user does not have access to **user_id**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
+| No active user with **user_id**.                  | 403    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
 | Session user does not have access to route.       | 403    | `{ "code": "Forbidden" }`                                                 |
-| No active user with **user_id**.                  | 403    | `{ "code": "Forbidden" }`                                                 |
 
 
 #### Example Request Body

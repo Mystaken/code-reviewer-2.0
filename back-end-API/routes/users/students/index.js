@@ -235,8 +235,7 @@ module.exports = function (router) {
     router.route('/all').get(function(req, res, next) {
         var error,
             query;
-        if (req.session_user_type !== 'admin' &&
-            req.session_user_type !== 'ta') {
+        if (req.session_user_type !== 'admin') {
             return res.forbidden();
         }
         if (req.query.student_number) {
@@ -264,7 +263,6 @@ module.exports = function (router) {
             query._id = mongoose.Types.ObjectId(req.query.user_id);
         }
         utils.clean(query);
-        // handle lastlogin!!
         return user_model.aggregate([
             { $match: query },
             { $project : {

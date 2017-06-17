@@ -29,7 +29,7 @@ PUT
 | Required field not inputted.                | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/<field>" ] }`      |
 | Additional fields inputted.                 | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`          |
 | Active student already exists.              | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
-| Deleted student already exists.             | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+| Deleted student exists.                     | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
 #### Example Request Body
 ```
 {
