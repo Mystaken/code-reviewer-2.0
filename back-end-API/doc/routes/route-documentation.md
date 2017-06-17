@@ -4,4 +4,5 @@ Routes
 * ### Users
   * [api/users/ - GET](users/users-get.md)
   
-    ```Get information for a user.```
+    `Get information for a user.`
+  *
