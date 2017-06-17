@@ -40,6 +40,7 @@ module.exports = function (router) {
                 $project : {
                     work_id: "$_id",
                     _id: 0,
+                    name: 1,
                     num_peers: 1,
                     required_files: 1,
                     feedback_questions: 1,
