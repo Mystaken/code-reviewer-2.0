@@ -183,6 +183,7 @@ module.exports = function (router) {
                     work_id: "$_id",
                     _id: 0,
                     num_peers: 1,
+                    name: 1,
                     required_files: 1,
                     feedback_questions: 1,
                     student_submission_deadline: { 
