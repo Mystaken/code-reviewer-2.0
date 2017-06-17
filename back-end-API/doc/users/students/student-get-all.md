@@ -15,7 +15,7 @@ GET
 * `Other`: Not Allowed
 
 ### Request Query
-| Queries            | Type   | Required? | Description                        |
+| Field              | Type   | Required? | Description                        |
 |--------------------|--------|-----------|------------------------------------|
 | **email**          | String | No        | The email of the student.          |
 | **user_id**        | String | No        | The id of the student.             |

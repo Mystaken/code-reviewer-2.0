@@ -14,7 +14,7 @@ GET
 * `Other`: On access to **session_user_id**
 
 ### Request Query
-| Queries        | Type   | Required? | Description           |
+| Field          | Type   | Required? | Description           |
 |----------------|--------|-----------|-----------------------|
 | **user_id**    | String | Yes       |  The id of the user.  |
 

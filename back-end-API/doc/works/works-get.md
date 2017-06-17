@@ -3,14 +3,17 @@ Get Work
 ### Description
 Return the work information for the user with **work_id**
 
+### Method
+GET
+
 ### URL Structure
 `api/works`
 
 ### User Privileges
-* `Other`: Full access
+* `Other`: Full Access
 
 ### Request Body
-| Queries     | Type   | Required? | Description          |
+| Field       | Type   | Required? | Description          |
 |------------ |--------|-----------|----------------------|
 | **work_id** | String | Yes       | The id of this work. |
 
@@ -38,10 +41,7 @@ Return the work information for the user with **work_id**
       "num_peers": 5,
       "required_files": [ "a1.py", "a2.py"],
       "feedback_questions": [ "Is this good?" ],
-      "repo_path": "assignment/a1",
-      "student_submission_dead_line": "2017-12-17",
-      "peer_review_deadline": "2017-12-30",
-      "ta_review_deadline": "2017-12-30"
+      "repo_path": "assignment/a1"
    }
 }
 ```

@@ -14,7 +14,7 @@ PUT
 * `Other`: Not Allowed
 
 ### Request Body
-| Queries            | Type    | Required? |  Description                       |
+| Field              | Type    | Required? |  Description                       |
 |--------------------|---------|-----------|------------------------------------|
 | **email**          | String  | Yes       |  The email of the student.         |
 | **first_name**     | String  | Yes       |  The first name of the student.    |

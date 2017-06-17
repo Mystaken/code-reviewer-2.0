@@ -15,7 +15,7 @@ POST
 * `Other`: No access
 
 ### Request Body
-| Queries        | Type   | Required? | Description                        |
+| Field          | Type   | Required? | Description                        |
 |----------------|--------|-----------|------------------------------------|
 | **user_id**    | String | Yes       | The id of the student.             |
 | **first_name** | String | No        | The new first name of the student. |
