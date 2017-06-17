@@ -83,7 +83,7 @@ function configureResponse (response) {
     response.forbidden = function (err) {
         this.status(403).send({
             status: 403,
-            message: "You do not have access to this page."
+            message: "Forbidden."
         });
     };
 }

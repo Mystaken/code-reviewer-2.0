@@ -99,7 +99,7 @@ module.exports = function (router) {
                 if (ret.length) {
                     return Promise.reject({
                         code: "EXISTS",
-                        params: [ 'user_id' ]
+                        params: [ 'email', "student_number", "utorid" ]
                     });
                 }
                 // create new user

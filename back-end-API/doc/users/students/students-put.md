@@ -10,8 +10,8 @@ PUT
 `api/users/students/`
 
 ### User Privileges
-`Administrator`: Full Access
-`Other`: Not Allowed
+* `Administrator`: Full Access
+* `Other`: Not Allowed
 
 ### Request Body
 | Queries            | Type    | Required? |  Description                       |
