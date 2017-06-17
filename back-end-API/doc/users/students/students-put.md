@@ -28,8 +28,8 @@ PUT
 | Session user does not have access to route. | 403    | `{ "code": "Forbidden" }`                                                      |
 | Required field not inputted.                | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/<field>" ] }`      |
 | Additional fields inputted.                 | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`          |
-| Student already exists.                     | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
-
+| Active student already exists.              | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+| Deleted student already exists.             | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
 #### Example Request Body
 ```
 {
@@ -44,6 +44,6 @@ PUT
 ```
 {
    "status": 200,
-   "data" : "59447dc6fe01ea7a6edb4e34" 
+   "data" : "59447dc6fe01ea7a6edb4e34"
 }
 ```

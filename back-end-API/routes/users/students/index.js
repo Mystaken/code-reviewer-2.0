@@ -145,13 +145,16 @@ module.exports = function (router) {
         var error,
             query,
             update_query;
-
-        if (req.session_user_type !== 'admin' &&
+        if (req.session_user_type !== 'admin' ||
+            req.session_user_type !== 'student') {
+          return res.forbidden();
+        }
+        if (req.session_user_type === 'student' &&
             req.session_user_id !== req.query.user_id) {
-            return res.requestError({
-                code: 'NOT_FOUND',
-                params: [ 'user_id' ]
-            });
+          return res.requestError({
+              code: 'NOT_FOUND',
+              params: [ 'user_id' ]
+          });
         }
 
         validator.validate(req.body, student_post_schema);
