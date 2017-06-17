@@ -10,9 +10,8 @@ GET
 `api/users/`
 
 ### User Privileges
-`Administrator`: Full Access
-
-`Other`: Only if **user_id** is same as session user.
+* `Administrator`: Full Access
+* `Other`: Only if **user_id** is same as session user.
 
 ### Request Query
 | Queries        | Type   | Required? | Description           |
