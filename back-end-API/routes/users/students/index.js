@@ -6,7 +6,8 @@ var validator   = require('../../../lib/validator'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
 
-    user_model  = require('../../../models/users'),
+    user_model      = require('../../../models/users'),
+    feedback_model  = require('../../../models/feedbacks'),
 
     student_get_schema      = require('../../../schemas/users/students/students_get'),
     student_put_schema      = require('../../../schemas/users/students/students_put'),
@@ -17,20 +18,13 @@ var validator   = require('../../../lib/validator'),
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
         var error;
+
         validator.validate(req.query, student_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
 
-        // need to do something about tas..
-        if (req.session_user_type !== 'admin' &&
-            req.session_user_id !== req.query.user_id) {
-            return res.requestError({
-                code: "NOT_FOUND",
-                params: [ 'user_id' ]
-            });
-        }
         if (!mongoose.validID(req.query.user_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
@@ -38,40 +32,68 @@ module.exports = function (router) {
             });
         }
 
-        return user_model.aggregate([
-            {
-                $match: {
-                    _id: mongoose.Types.ObjectId(req.query.user_id),
-                    status: 'active'
-                }
-            },{
-                $project: {
-                    user_id: "$_id",
-                    _id: 0,
-                    student_number: 1,
-                    first_name: 1,
-                    last_name: 1,
-                    utorid: 1,
-                    email: 1,
-                    last_login: { 
-                        $dateToString: { 
-                            format: "%Y-%m-%d %H:%M:%S", 
-                            date: "$last_login" 
-                        }
-                    }
-                }
+        return Promise.try(function() {
+            if (req.session_user_type === 'admin') {
+                return;
             }
-        ]).exec().then(function(ret) {
-            if (!ret.length) {
+            if (req.session_user_type === 'student' &&
+                req.session_user_id !== req.query.user_id) {
                 return Promise.reject({
                     code: "NOT_FOUND",
                     params: [ 'user_id' ]
                 });
             }
-            return res.sendResponse(ret);
-        }).catch(function(err) {
-            return res.requestError(err);
-        });
+            return feedback_model.aggregate([
+                    {
+                        $match: {
+                            review_by:req.session_user_id,
+                            author: req.query.user_id 
+                        }
+                    }
+                ]).then(function(ret) {
+                    if (!ret && !ret.length) {
+                        return Promise.reject({
+                            code: "NOT_FOUND",
+                            params: [ 'user_id' ]
+                        });
+                    }
+                });
+            }).then(function(ret) {
+                return user_model.aggregate([
+                    {
+                        $match: {
+                            _id: mongoose.Types.ObjectId(req.query.user_id),
+                            status: 'active'
+                        }
+                    },{
+                        $project: {
+                            user_id: "$_id",
+                            _id: 0,
+                            student_number: 1,
+                            first_name: 1,
+                            last_name: 1,
+                            utorid: 1,
+                            email: 1,
+                            last_login: { 
+                                $dateToString: { 
+                                    format: "%Y-%m-%d %H:%M:%S", 
+                                    date: "$last_login" 
+                                }
+                            }
+                        }
+                    }
+                ]).exec();
+            }).then(function(ret) {
+                if (!ret || !ret.length) {
+                    return Promise.reject({
+                        code: "NOT_FOUND",
+                        params: [ 'user_id' ]
+                    });
+                }
+                return res.sendResponse(ret);
+            }).catch(function(err) {
+                return res.requestError(err);
+            });
 
     }).put(function (req, res, next) {
         var error;

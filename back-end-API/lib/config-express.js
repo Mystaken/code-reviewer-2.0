@@ -90,8 +90,8 @@ function configureResponse (response) {
 
 function configureMiddleware(app) {
     app.use(function (req, res, next) {
-        req.session_user_id   = "5935ed0e5ecf04cc3388de8e";
-        req.session_user_type = "admin";
+        req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
+        req.session_user_type = "student";
         next();
     });
 }
