@@ -35,12 +35,6 @@ GET
       <td><b>user_id</b> not inputted</td>
       <td>400</td>
       <td>
-<pre>
-{
-  "code":"OBJECT_MISSING_REQUIRED_PROPERTY",
-  "param": "#/user_id" 
-}
-</pre>
       </td>
     </tr>
 
