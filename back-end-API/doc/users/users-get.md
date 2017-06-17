@@ -36,45 +36,6 @@ GET
       </td>
     </tr>
 
-    <tr>
-      <td>Additional Fields inputted</td>
-      <td><i>400</i></td>
-      <td>
-<pre>
-For each field
-{
-  "code":"OBJECT_ADDITIONAL_PROPERTIES",
-  "param": "#/user_id" 
-}]
-</pre>
-      </td>
-    </tr>
-
-    <tr>
-      <td><b>user_id</b> exists but session user does not have permission.</td>
-      <td><i>404</i></td>
-      <td>
-<pre>
-{
-  "code":"NOT_FOUND",
-  "param": "#/user_id" 
-}
-</pre>
-      </td>
-    </tr>
-
-    <tr>
-      <td>No user found for <b>user_id</b></td>
-      <td><i>404</i></td>
-      <td>
-<pre>
-{
-  "code":"NOT_FOUND",
-  "param": "#/user_id" 
-}
-</pre>
-      </td>
-    </tr>
   </tbody>
 </table>
 
