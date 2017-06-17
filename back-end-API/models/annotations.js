@@ -9,7 +9,11 @@ annotations_schema = mongoose.Schema({
     annotation: String,
     start: Number,
     end: Number,
-    status: String    //active, inactive
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        required: true
+    }
 });
 
 module.exports = mongoose.model('annotations', annotations_schema);

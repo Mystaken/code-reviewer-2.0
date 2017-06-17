@@ -17,9 +17,12 @@ submission_rules_schema = mongoose.Schema({
     required_files : [String],
     repo_path: String,
     feedback_questions: [String],
-    status: String                 //active, inactive
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        required: true
+    }
 });
 
 
 module.exports = mongoose.model('submission_rules', submission_rules_schema);
-

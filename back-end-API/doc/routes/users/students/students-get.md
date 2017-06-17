@@ -36,21 +36,21 @@ GET
 #### Example Request Body
 ```
 {
-      "user_id": "59447dc6fe01ea7a6edb4e34" 
+    "user_id": "59447dc6fe01ea7a6edb4e34" 
 }
 ```
 #### Example Response
 ```
 {
-   "status": 200,
-   "data" : {
-      "user_id": "59447dc6fe01ea7a6edb4e34" ,
-      "student_number" 1314,
-      "first_name" "Grey",
-      "last_name": "Gxsanda",
-      "utorid": "gxsanda1",
-      "email": "grey.gxsanda@mail.utoronto.ca",
-      "last_login": "01-23-13 13:03:32"
-   }
+    "status": 200,
+    "data" : {
+        "user_id": "59447dc6fe01ea7a6edb4e34" ,
+        "student_number" 1314,
+        "first_name" "Grey",
+        "last_name": "Gxsanda",
+        "utorid": "gxsanda1",
+        "email": "grey.gxsanda@mail.utoronto.ca",
+        "last_login": "01-23-13 13:03:32"
+    }
 }
 ```

@@ -34,29 +34,30 @@ GET
 #### Example Request Query
 ```
 {
-   "user_id": 1232,
-   "student_id" 1314,
-   "first_name" "Grey",
-   "last_name": "Gxsanda",
-   "utorid": "gxsanda1",
-   "email": "grey.gxsanda@mail.utoronto.ca",
-   "last_login": "01-23-13 13:03:32"
+    "user_id": 1232,
+    "student_id" 1314,
+    "first_name" "Grey",
+    "last_name": "Gxsanda",
+    "utorid": "gxsanda1",
+    "email": "grey.gxsanda@mail.utoronto.ca",
+    "last_login": "01-23-13 13:03:32"
 }
 ```
 #### Example Response
 ```
 {
-   "status": 200,
-   "data" : [
-      {
-         "user_id": 1232,
-         "student_number" 1314,
-         "first_name" "Grey",
-         "last_name": "Gxsanda",
-         "utorid": "gxsanda1",
-         "email": "grey.gxsanda@mail.utoronto.ca",
-         "last_login": "01-23-13 13:03:32"
-      },
-   ]
+    "status": 200,
+    "data" : [
+        {
+            "user_id": 1232,
+            "student_number" 1314,
+            "first_name" "Grey",
+            "last_name": "Gxsanda",
+            "utorid": "gxsanda1",
+            "email": "grey.gxsanda@mail.utoronto.ca",
+            "last_login": "01-23-13 13:03:32"
+        },
+        ...
+    ]
 }
 ```

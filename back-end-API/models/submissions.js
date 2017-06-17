@@ -10,8 +10,12 @@ submissions_schema = mongoose.Schema({
     report: String,                     // the report.txt
     self_assess: Number,               // mark by author himself
     mark: Number,                      // actual mark of this submission
-    delete_date: Date,                  // the date this submission becomes inactive/deleted
-    status: String                      // ['active', 'deleted']
+    delete_date: Date,
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        required: true
+    }
 });
 
 module.exports = mongoose.model('submissions', submissions_schema);

@@ -11,7 +11,11 @@ feedbacks_schema = new mongoose.Schema({
     mark : Number,
     create_date: Date,
     last_updated: Date,
-    status: String            // active, inactive
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        required: true
+    }
 });
 
 module.exports = mongoose.model('feedbacks', feedbacks_schema);

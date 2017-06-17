@@ -34,18 +34,18 @@ PUT
 #### Example Request Body
 ```
 {
-   "name": "Assignment 1",
-   "num_peers": 5,
-   "required_files": [ "a1.py", "a2.py"],
-   "repo_path": "assignment/a1",
-   "feedback_questions": [ "Is this good?" ],
+    "name": "Assignment 1",
+    "num_peers": 5,
+    "required_files": [ "a1.py", "a2.py"],
+    "repo_path": "assignment/a1",
+    "feedback_questions": [ "Is this good?" ]
 }
 ```
 
 #### Example Response
 ```
 {
-   "status": 200,
-   "data": 14
+    "status": 200,
+    "data": 14
 }
 ```

@@ -21,7 +21,11 @@ user_schema = mongoose.Schema({
         required: true,
         unique: true
     },
-    status: String,            // active, inactive
+    status: {
+        type: String,
+        enum: ['active', 'inactive'],
+        required: true
+    },
     last_login : Date,
     contract_number: Number,    // number of contracts a TA has
     user_type: String           // one of  "ta", "student", "admin"

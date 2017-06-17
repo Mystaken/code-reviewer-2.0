@@ -42,8 +42,8 @@ POST
 #### Example Response
 ```
 {
-  "status": 200,
-  "data" : "59447dc6fe01ea7a6edb4e34" 
+    "status": 200,
+    "data" : "59447dc6fe01ea7a6edb4e34" 
 }
 ```
 

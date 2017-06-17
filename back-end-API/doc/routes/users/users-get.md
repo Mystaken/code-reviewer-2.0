@@ -31,21 +31,21 @@ GET
 #### Example Request Body
 ```
 {
-   "user_id": "5935ed0e5ecf04cc3388de8e"
+    "user_id": "5935ed0e5ecf04cc3388de8e"
 }
 ```
 #### Example Response
 ```
 {
-   "status": 200,
-   "data" : {
-      "user_id": 1232,
-      "utorid": "gxsanda1",
-      "user_type": "Instructor",
-      "first_name" "Grey",
-      "last_name": "Gxsanda",
-      "email": "grey.gxsanda@mail.utoronto.ca",
-      "last_login": "01-23-13 13:03:32"
-   }
+    "status": 200,
+    "data" : {
+        "user_id": 1232,
+        "utorid": "gxsanda1",
+        "user_type": "Instructor",
+        "first_name" "Grey",
+        "last_name": "Gxsanda",
+        "email": "grey.gxsanda@mail.utoronto.ca",
+        "last_login": "01-23-13 13:03:32"
+    }
 }
 ```
