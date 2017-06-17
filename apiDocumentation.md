@@ -9,6 +9,13 @@
       * [api/users/students/ - POST](#update-students)
       * [api/users/students/ - DELETE](#delete-students)
       * [api/users/students/upload - POST](#upload-student-file)
+    * [**TAs**](#tas)
+      * [api/users/ta/ - GET](#get-ta)
+      * [api/users/ta/ - PUT](#add-ta)
+      * [api/users/ta/ - POST](#update-ta)
+      * [api/users/ta/ - DELETE](#delete-ta)
+      * [api/users/ta/ - POST](#upload-ta-file)
+      
   * [**Works**](#works)
     * [api/works - GET](#get-work)
     * [api/works - PUT](#create-work)
@@ -298,6 +305,198 @@ UTORiD,First Name,Last Name,Student Number,Email
    "status": 200
 }
 ```
+
+TAs
+===
+
+Get TA
+---
+##### Method
+GET
+##### URL structure
+`/api/users/tas`
+##### Request Query
+
+| Parameter       |      Type      | Required? |  Description |
+|---------------|-------------|---|--------|
+| **user_id**     |  String         | Yes | The id of the TA. |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| user_id not inputted | Return error status `400` with message: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param": "#/user_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":"#/<additional_param>"}` |
+| user exists but user doesn't have permission to view user. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": "#/user_id" }` |
+| user does not exist. | Return error status `404` with message: `{ "code": "NOT_FOUND", "param": "#/user_id" }` |
+
+#### Example Request Body
+```
+{
+      "user_id": 1232
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : {
+      "user_id": 1232,
+      "student_number" 1314,
+      "first_name" "Grey",
+      "last_name": "Gxsanda",
+      "utorid": "gxsanda1",
+      "email": "grey.gxsanda@mail.utoronto.ca",
+      "number"
+      "last_login": "01-23-13 13:03:32"
+   }
+}
+
+```
+
+Add TA
+---
+Adds a ta to the database
+#### Method
+PUT
+#### URL Structure
+`api/users/tas`
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|---------------|-----------------|--------------|--------------|
+| **email**     |  String         |        Yes        |  The email of the TA.|
+| **first_name** | String         |        Yes        |  The first name of the TA.  |
+| **last_name** | String          |        Yes        |  The last name of the TA.  |
+| **utorid** | String             |        Yes        |  The utorid of the TA.  |
+| **student_number**     | Number |        Yes        |  The student number of the TA.  |
+| **contract_number** | Number    |        Yes        |  The number of contracts the TA has. |
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| field not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/<field>"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":"#/<additional_param>"}` |
+
+#### Example Request Body
+```
+{
+      "student_number": 1232,
+      "first_name" "Grey",
+      "last_name": "Gxsanda",
+      "utorid": "gxsanda1",
+      "email": "grey.gxsanda@mail.utoronto.ca"
+      "contract_number": 1
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : 12352 
+}
+```
+Update TA
+---
+Updates a TA to the database
+#### Method
+POST
+#### URL Structure
+`api/users/tas`
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|---------------|-----------------|--------------|--------------|
+| **user_id**     |  Int          |        Yes        |  The id of the TA.|
+| **first_name** | String         |        No        |  The new first name of the TA.  |
+| **last_name** | String          |        No        |  The new last name of the TA.  |
+| **contract_number** | Number    |        No        |  The number of contracts the TA has. |
+| **email**           | String    |        No        |  The email of the TA. |
+| **utorid** | String             |        No        |  The utorid of the TA.  |
+| **student_number**     | Number |        No        |  The student number of the TA.  |
+
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| user_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/user_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":"#/<additional_param>"}` |
+
+#### Example Request Body
+```
+{
+      "user_id": 123231,
+      "first_name": "Grey",
+      "last_name": "Gxsanda",
+      "contract_number": 1,
+      "email": "grey.gxsanda@mail.utoronto.ca",
+      "utorid": "gxsanda1",
+      "student_number" 1314,
+}
+
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : 123231
+}
+
+```
+Delete TA
+---
+Delete a TA to the database. (set status to delete)
+#### Method
+POST
+#### URL Structure
+`api/users/tas`
+#### Request Body
+| Queries        |      Type      |  Required?   |  Description |
+|---------------|-----------------|--------------|--------------|
+| **user_id**     |  Int         |        Yes        |  The id of the TA.|
+
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| user_id not inputted | Return error status `400` with message for each field: `{"code":"OBJECT_MISSING_REQUIRED_PROPERTY","param":"#/user_id"}` |
+| Additional fields entered | Return error status `400` with message for each additonal_param: `{"code":"OBJECT_ADDITIONAL_PROPERTIES","param":"#/<additional_param>"}` |
+
+#### Example Request Body
+```
+{
+      "user_id": 123231
+}
+```
+#### Example Response
+```
+{
+   "status": 200,
+   "data" : 123231
+}
+```
+Upload TA File
+---
+Upload a TA csv file and add the TA to the server
+#### Method
+POST
+
+#### File format
+UTORiD,First Name,Last Name,Student Number,Email,Contract Number
+
+#### Validation
+|  Action  |  Expected Result |
+|---------------|-------------|
+| CSV file corrupted/incorrect format | Return `400` with message { "code": "INVALID_INPUT", error: "#/file" } |
+#### URL Structure
+`api/users/tas/upload`
+
+#### Example Response
+```
+{
+   "status": 200
+}
+```
+
+
+
 
 Works
 ===
