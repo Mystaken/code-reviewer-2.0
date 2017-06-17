@@ -1,4 +1,4 @@
-Put Students
+Add Student
 ===
 ### Description
 Create a student from the provided student information.
