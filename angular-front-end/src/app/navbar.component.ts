@@ -4,48 +4,95 @@ import { Http } from '@angular/http';
   selector: 'navbar',
   template: `
   <div class="navbar">
-    <div class="navbar-desktop">
-      <div class="stage-buttons">
-        <ul>
-          <li *ngFor="let tab of tabs" md-raised-button [mdMenuTriggerFor]="menu">
-            <a href="#">{{ tab.tab_name }}</a>
-
-            <!-- dropdown -->
-            <md-menu #menu="mdMenu">
-              <button
-                md-menu-item
-                *ngFor="let sub_tab_name of tab.sub_tab_names"
-                (click)="on_click(tab.tab_name ,sub_tab_name.id);"
-                >
-                <md-icon>assignment</md-icon>
-                <span>{{ sub_tab_name.name }}</span>
-              </button>
-            </md-menu>
-          </li>
-        </ul>
-      </div>
-      <div class="user-info">
-        <span>{{ username }}</span>
-        <button class="nav-btn"><md-icon>exit_to_app</md-icon></button>
-      </div>
+  <div class="navbar-desktop">
+    <div class="stage-buttons">
+      <ul>
+        <li *ngFor="let tab of tabs" md-raised-button [mdMenuTriggerFor]="menu">
+        <a href="#">{{ tab.tab_name }}</a>
+        <!-- dropdown -->
+        <md-menu #menu="mdMenu">
+          <button
+          md-menu-item
+          *ngFor="let sub_tab_name of tab.sub_tab_names"
+          (click)="on_click(tab.tab_name ,sub_tab_name.id);"
+          >
+          <md-icon>assignment</md-icon>
+          <span>{{ sub_tab_name.name }}</span>
+          </button>
+        </md-menu>
+        </li>
+      </ul>
     </div>
-
-    <div class="navbar-mobile">
-      <button class="nav-btn"><md-icon>menu</md-icon></button>
+    <div>
+      <span>{{ username }}</span>
+      <button class="nav-btn">
+        <md-icon>exit_to_app</md-icon>
+      </button>
+    </div>
+  </div>
+  <div class="navbar-mobile">
+    <div class="overlay"></div>
+    <div class="nav-btn-bar">
+      <button class="nav-btn" onclick="$('.sidebar, .overlay').show();">
+        <md-icon>menu</md-icon>
+      </button>
+    </div>
+    <div class="sidebar">
+      <button class="nav-btn" onclick="$('.sidebar, .overlay').hide();">
+        <md-icon>clear</md-icon>
+      </button>
+      <!-- start -->
+      <!-- Overlay for fixed sidebar -->
+      <hr>
+      <div class="user-info-mobile">
+        {{ username }}&nbsp;(<a href="#">Log&nbsp;out</a>)
+      </div>
+      <div>
+        <hr>
+        <!-- Material sidebar -->
+        <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
+          <!-- Sidebar navigation -->
+          <ul class="nav sidebarnav">
+            <li class="dropdown" *ngFor="let tab of tabs">
+              <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
+              <b class="caret"></b>
+              {{ tab.tab_name }}
+              </a>
+              <ul class="nav sidebarnav submenu">
+                <li *ngFor="let sub_tab_name of tab.sub_tab_names">
+                  <a href="#" tabindex="-1">
+                  {{ sub_tab_name.name }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </aside>
+        <!-- end -->
+      </div>
     </div>
   </div>
   `,
   styles: [`
     @media (max-width: 1023px) {
-       .navbar-desktop {
+       div.navbar-desktop {
           display: none !important;
        }
     }
 
     @media (min-width: 1024px) {
-       .navbar-mobile {
+       div.navbar-mobile {
           display: none !important;
        }
+    }
+
+    div.overlay {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, .5);
+      z-index: 9998;
+      display: none;
     }
 
     .navbar {
@@ -80,7 +127,7 @@ import { Http } from '@angular/http';
     }
 
     button.nav-btn {
-      margin: 8px 10px 0 10px;
+      margin: 8px 10px;
     }
 
     button.nav-btn>md-icon {
@@ -88,12 +135,12 @@ import { Http } from '@angular/http';
       top: 3px;
     }
 
-    ul {
+    .stage-buttons ul {
       margin: 0px;
       padding: 0px;
     }
 
-    ul li {
+    .stage-buttons ul li {
       display: inline-block;
       height: 50px;
       line-height: 50px;
@@ -104,7 +151,7 @@ import { Http } from '@angular/http';
       left: -15px;
     }
 
-    ul li:before {
+    .stage-buttons ul li:before {
       content: " ";
       height: 0;
       width: 0;
@@ -115,11 +162,11 @@ import { Http } from '@angular/http';
       z-index: 0;
     }
 
-    ul li:first-child:before {
+    .stage-buttons ul li:first-child:before {
       border-color: transparent;
     }
 
-    ul li a:after {
+    .stage-buttons ul li a:after {
       content: " ";
       height: 0;
       width: 0;
@@ -132,29 +179,67 @@ import { Http } from '@angular/http';
       transition: border-color 0.3s ease;
     }
 
-    ul li.active a {
+    .stage-buttons ul li.active a {
       background: #4fc3f7;
       z-index: 100;
     }
 
-    ul li.active a:after {
+    .stage-buttons ul li.active a:after {
       border-left-color: #4fc3f7;
     }
 
-    ul li a {
+    .stage-buttons ul li a {
       display: block;
       background: #5C6BC0;
       padding-left: 8px;
     }
 
-    ul li a:hover {
+    .stage-buttons ul li a:hover {
       background: #7986CB;
     }
 
-    ul li a:hover:after {
-      border-color: transparent transparent transparent #7986CB;
+    .stage-buttons ul li a:hover:after {
+      border-color: transparent transparent transparent #7986CB !important;
     }
 
+    div.nav-btn-bar {
+      height: 50px;
+    }
+
+    div.sidebar {
+      width: 256px;
+      background-color: #FFF;
+      position: fixed;
+      height: calc(100% + 50px);
+      z-index: 9999;
+      top: -50px;
+      padding-top: 50px;
+    }
+
+    a.sidebar-item {
+      margin-top: 50px;
+      margin-left: 30px;
+    }
+
+    button+hr {
+      margin-top: 0;
+    }
+
+    ul.submenu {
+      display: none;
+    }
+
+    li.open ul.submenu {
+      display: block;
+    }
+
+    div.sidebar {
+      display: none;
+    }
+
+    div.user-info-mobile {
+      padding-left: 15px;
+    }
   `]
 })
 
