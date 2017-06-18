@@ -41,17 +41,13 @@ import { Http } from '@angular/http';
       <button class="nav-btn" onclick="$('.sidebar, .overlay').hide();">
         <md-icon>clear</md-icon>
       </button>
-      <!-- start -->
-      <!-- Overlay for fixed sidebar -->
       <hr>
       <div class="user-info-mobile">
         {{ username }}&nbsp;(<a href="#">Log&nbsp;out</a>)
       </div>
       <div>
         <hr>
-        <!-- Material sidebar -->
         <aside id="sidebar" class="sidebar sidebar-default open" role="navigation">
-          <!-- Sidebar navigation -->
           <ul class="nav sidebarnav">
             <li class="dropdown" *ngFor="let tab of tabs">
               <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
@@ -68,7 +64,6 @@ import { Http } from '@angular/http';
             </li>
           </ul>
         </aside>
-        <!-- end -->
       </div>
     </div>
   </div>
