@@ -7,7 +7,6 @@ var validator   = require('../../../lib/validator'),
     Promise     = require('bluebird'),
 
     user_model      = require('../../../models/users'),
-    feedback_model  = require('../../../models/feedbacks'),
 
     student_get_schema      = require('../../../schemas/users/students/students_get'),
     student_put_schema      = require('../../../schemas/users/students/students_put'),
@@ -43,11 +42,11 @@ module.exports = function (router) {
                     params: [ 'user_id' ]
                 });
             }
-            return feedback_model.aggregate([
+            return user_model.aggregate([
                     {
                         $match: {
-                            review_by:req.session_user_id,
-                            author: req.query.user_id 
+                            _id: mongoose.Types.ObjectId(req.query.user_id),
+                            user_type: 'student'
                         }
                     }
                 ]).then(function(ret) {
