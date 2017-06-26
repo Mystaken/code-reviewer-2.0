@@ -44,3 +44,16 @@ Routes
         * [/api/works/feedbacks - POST](works/feedbacks/feedbacks-post.md)
 
             `Update a feedback.`
+    * #### Feedbacks
+        * [/api/works/annotations/all - GET](works/feedbacks/annotations-all-get.md)
+        
+            `Get annotation information for all annotations of a submission.`
+        * [/api/works/annotations - GET](works/feedbacks/annotations-get.md)
+
+            `Get annotation information for all annotations of a submission written by a specific user.`
+        * [/api/works/annotations - PUT](works/feedbacks/annotations-put.md)
+
+            `Add an annotation.`
+        * [/api/works/annotations - DELETE](works/feedbacks/annotations-delete.md)
+
+            `Delete an annotation.`
