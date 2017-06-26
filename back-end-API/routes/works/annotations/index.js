@@ -43,15 +43,6 @@ module.exports = function (router) {
                         review_by: mongoose.Types.ObjectId(req.query.user_id),
                         status:    'active'
                     }
-                },
-                { 
-                    $project : {
-                        annotation_id: "$_id",
-                        _id: 0,
-                        annotation: 1,
-                        start: 1,
-                        end: 1
-                    }
                 }
             ]).exec().then(function(ret) {
                 if (!ret || !ret.length) {
@@ -60,6 +51,25 @@ module.exports = function (router) {
                         params: [ 'submission_id' ]
                     });
                 }
+                return annotations_model.aggregate([
+                        {
+                            $match: {
+                                submission_id:       mongoose.Types.ObjectId(req.query.submission_id),
+                                review_by: mongoose.Types.ObjectId(req.query.user_id),
+                                status:    'active'
+                            }
+                        },
+                        {
+                            $project : {
+                                annotation_id: "$_id",
+                                _id: 0,
+                                annotation: 1,
+                                start: 1,
+                                end: 1
+                            }
+                        }
+                    ]).exec();
+            }).then(function(ret) {
                 return res.sendResponse({
                         review_by:     req.query.user_id,
                         submission_id: req.query.submission_id,
@@ -102,16 +112,6 @@ module.exports = function (router) {
         return submissions_model.aggregate([
                 {
                     $match: match_query
-                },
-                { 
-                    $project : {
-                        annotation_id: "$_id",
-                        _id: 0,
-                        review_by: 1,
-                        annotation: 1,
-                        start: 1,
-                        end: 1
-                    }
                 }
             ]).exec().then(function(ret) {
                 if (!ret || !ret.length) {
@@ -120,6 +120,25 @@ module.exports = function (router) {
                         params: [ 'submission_id' ]
                     });
                 }
+                return annotations_model.aggregate([
+                        {
+                            $match: {
+                                submission_id:    mongoose.Types.ObjectId(req.query.submission_id),
+                                status: 'active'
+                            }
+                        },
+                        { 
+                            $project : {
+                                annotation_id: "$_id",
+                                _id: 0,
+                                review_by: 1,
+                                annotation: 1,
+                                start: 1,
+                                end: 1
+                            }
+                        }
+                    ]).exec();
+            }).then(function (ret) {
                 return res.sendResponse({
                         submission_id: req.query.submission_id,
                         annotations: ret
