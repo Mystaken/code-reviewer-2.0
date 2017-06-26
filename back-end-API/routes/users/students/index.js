@@ -46,7 +46,9 @@ module.exports = function (router) {
                     {
                         $match: {
                             _id: mongoose.Types.ObjectId(req.query.user_id),
-                            user_type: 'student'
+                            user_type: 'student',
+                            status: 'active'
+
                         }
                     }
                 ]).then(function(ret) {
