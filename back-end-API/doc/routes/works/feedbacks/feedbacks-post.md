@@ -22,12 +22,12 @@ POST
 | **mark**        | Number          | No        | The new mark assigned to this student.                          |
 
 ### Validation
-| Action                                      | Status | Expected Response                                                             |
-|---------------------------------------------|--------|-------------------------------------------------------------------------------|
-| **feedback_id** not inputted.               | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/feedback_id" ] }` |
-| Additional Fields inputted.                 | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`         |
-| No active feedback with **feedback_id**.    | 404    | `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }`                       |
-| Session user does not have access to route. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }`                       |
+| Action                                                | Status | Expected Response                                                             |
+|-------------------------------------------------------|--------|-------------------------------------------------------------------------------|
+| **feedback_id** not inputted.                         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/feedback_id" ] }` |
+| Additional Fields inputted.                           | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`         |
+| No active feedback with **feedback_id**.              | 404    | `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }`                       |
+| Session user does not have access to **feedback_id**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/feedback_id" ] }`                       |
 
 #### Example Request Body
 ```

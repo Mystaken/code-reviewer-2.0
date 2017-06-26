@@ -24,13 +24,13 @@ POST
 | **repo_path**          | String           | No        | The markus repo path                          |
 
 ### Validation
-| Action                              | Status | Expected Response                                                         |
-|-------------------------------------|--------|---------------------------------------------------------------------------|
-| **work_id** not inputted.           | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/work_id" ] }` |
-| Additional Fields inputted.         | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
-| No active work with **work_id**.    | 404    | `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }`                       |
-| **num_peers** than maximum allowed. | 400    | `{ "code": "MAXIMUM","param": [ "#/num_peers" ] }`                        |
-| **num_peers** than minimum allowed. | 400    | `{ "code": "MINIMUM","param": [ "#/num_peers" ] }`                        |
+| Action                               | Status | Expected Response                                                         |
+|--------------------------------------|--------|---------------------------------------------------------------------------|
+| **work_id** not inputted or invalid. | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/work_id" ] }` |
+| Additional Fields inputted.          | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
+| No active work with **work_id**.     | 404    | `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }`                       |
+| **num_peers** than maximum allowed.  | 400    | `{ "code": "MAXIMUM","param": [ "#/num_peers" ] }`                        |
+| **num_peers** than minimum allowed.  | 400    | `{ "code": "MINIMUM","param": [ "#/num_peers" ] }`                        |
 
 #### Example Request Body
 ```

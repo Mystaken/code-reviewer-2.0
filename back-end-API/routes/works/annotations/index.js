@@ -76,6 +76,7 @@ module.exports = function (router) {
             annotations: req.body.annotation,
             start: req.body.start,
             end: req.body.end,
+            review_by: mongoose.Types.ObjectId(req.session_user_id),
             status: 'active'
         }).then(function (ret) {
             return res.sendResponse(ret._id);
@@ -111,6 +112,33 @@ module.exports = function (router) {
             res.requestError(err);
         });
     }).all(function (req, res, next) {
+        return res.invalidVerb();
+    });
+
+
+    router.route('/all').get(function(req, res, next) {
+        var error;
+
+        validator.validate(req.query, annotations_get_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+
+        if (!mongoose.validID(req.query.submissions_id)) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'submissions_id' ]
+            });
+        }
+
+        if (!mongoose.validID(req.query.submissions_id)) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'user_id' ]
+            });
+        }
+    }).all(function(req, res, next) {
         return res.invalidVerb();
     });
 };

@@ -22,7 +22,7 @@ DELETE
 ### Validation
 | Action                                       | Status | Expected Response                                                         |
 |----------------------------------------------|--------|---------------------------------------------------------------------------|
-| **user_id** not inputted.                    | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/user_id" ] }` |
+| **user_id** not inputted or invalid.         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/user_id" ] }` |
 | Additional Fields inputted.                  | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
 | No active user with **user_id**.             | 404    | `{ "code": "NOT_FOUND", "param": [ "#/user_id" ] }`                       |
 | Session user does not have access to route.  | 403    | `{ "code": "Forbidden" }`                                                 |
