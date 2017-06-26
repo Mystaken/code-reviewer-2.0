@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     feedbacks_schema;
 
 feedbacks_schema = new mongoose.Schema({
-	work_id: mongoose.Schema.Types.ObjectId,
+	submission_id: mongoose.Schema.Types.ObjectId,
 	author: mongoose.Schema.Types.ObjectId,		// author of code
 	review_by: mongoose.Schema.Types.ObjectId,
 	feedbacks: [ String ],

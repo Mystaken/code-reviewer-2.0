@@ -22,7 +22,7 @@ GET
 ### Validation
 | Action                                                  | Status | Expected Response                                                               |
 |---------------------------------------------------------|--------|---------------------------------------------------------------------------------|
-| **submission_id** not inputted or invalid.              | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/submission_id" ] }` |
+| **submission_id** not inputted.                         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/submission_id" ] }` |
 | Additional Fields inputted.                             | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`           |
 | No annotations for **submission_id**                    | 200    | Empty list                                                                      |
 | No active submission with **submission_id**.            | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
@@ -40,6 +40,7 @@ GET
     "status": 200,
     "data": {
         "submission_id": "5935ed0e5ecf04cc3388de8e",
+        "review_by": "5935ed0e5ecf04cc3388de8e",
         "annotations": [
             {
                 "annotation": "A good one",

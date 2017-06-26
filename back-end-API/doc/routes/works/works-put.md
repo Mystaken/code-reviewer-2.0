@@ -24,12 +24,12 @@ PUT
 
 
 ### Validation
-| Action                                          | Status | Expected Response                                                         |
-|-------------------------------------------------|--------|---------------------------------------------------------------------------|
-| **name** not inputted or invalid.               | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/name" ] }`    |
-| Additional Fields inputted.                     | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
-| **num_peers** greater than maximum allowed.     | 400    | `{ "code": "MAXIMUM","param": [ "#/num_peers" ] }`                        |
-| **num_peers** lower than minimum allowed.       | 400    | `{ "code": "MINIMUM","param": [ "#/num_peers" ] }`                        |
+| Action                                      | Status | Expected Response                                                         |
+|---------------------------------------------|--------|---------------------------------------------------------------------------|
+| **name** not inputted.                      | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/name" ] }`    |
+| Additional Fields inputted.                 | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`     |
+| **num_peers** greater than maximum allowed. | 400    | `{ "code": "MAXIMUM","param": [ "#/num_peers" ] }`                        |
+| **num_peers** lower than minimum allowed.   | 400    | `{ "code": "MINIMUM","param": [ "#/num_peers" ] }`                        |
 
 #### Example Request Body
 ```

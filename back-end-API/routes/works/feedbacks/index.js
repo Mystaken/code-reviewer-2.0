@@ -38,7 +38,7 @@ module.exports = function (router) {
                     $project: {
                         feedback_id: "$_id",
                         _id: 0,
-                        work_id: 1,
+                        submission_id: 1,
                         feedbacks: 1,
                         mark: 1
                     }
@@ -85,7 +85,7 @@ module.exports = function (router) {
                     });
                 }
                 return new feedbacks_model({
-                    work_id: req.body.work_id,
+                    submission_id: req.body.submission_id,
                     author: work.author_id,
                     review_by: req.session_user_id,
                     feedbacks: req.body.feedbacks,

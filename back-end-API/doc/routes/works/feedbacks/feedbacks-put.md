@@ -15,11 +15,11 @@ PUT
 * `Other`: Only access to **session_user_id**
 
 ### Request Body
-| Field           | Type            | Required? | Description                                                  |
-|-----------------|-----------------|-----------|--------------------------------------------------------------|
-| **work_id**     | Number          | Yes       |  The id of the work this feedback belongs to.                |
-| **feedbacks**   | Array of String | Yes       |  The feedback answers to the feedback questsion in the work. |
-| **mark**        | Number          | Yes       |  The mark assigned to this student.                          |
+| Field                 | Type            | Required? | Description                                                  |
+|-----------------------|-----------------|-----------|--------------------------------------------------------------|
+| **submission_id**     | Number          | Yes       |  The id of the work this feedback belongs to.                |
+| **feedbacks**         | Array of String | Yes       |  The feedback answers to the feedback questsion in the work. |
+| **mark**              | Number          | Yes       |  The mark assigned to this student.                          |
 
 ### Validation
 | Action                                 | Status | Expected Response                                                             |

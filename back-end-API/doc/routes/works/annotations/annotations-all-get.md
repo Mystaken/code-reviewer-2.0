@@ -11,7 +11,7 @@ GET
 
 ### User Privileges
 * `Administrator`: Full Access
-* `Other`: Only if **submission_id** belongs to session user
+* `Other`: Only if **user_id** is session user
 
 ### Request Query
 | Field             | Type   | Required? | Description               |
@@ -21,12 +21,11 @@ GET
 ### Validation
 | Action                                                  | Status | Expected Response                                                               |
 |---------------------------------------------------------|--------|---------------------------------------------------------------------------------|
-| **submission_id** not inputted or invalid.              | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/submission_id" ] }` |
-| **user_id** not inputted or invalid.                    | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/user_id" ] }` |
+| **submission_id** not inputted.                         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/submission_id" ] }` |
+| **user_id** not inputted or invalid.                    | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/user_id" ] }`       |
 | Additional Fields inputted.                             | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`           |
 | No annotations for **submission_id**                    | 200    | Empty list                                                                      |
 | No active submission with **submission_id**.            | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
-| Session user does not have access to route.             | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
 | Session user does not have access to **submission_id**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
 
 #### Example Request Body
@@ -42,6 +41,7 @@ GET
         "submission_id": "5935ed0e5ecf04cc3388de8e",
         "annotations": [
             {
+                "review_by": "5935ed0e5ecf04cc3388de8e",
                 "annotation": "A good one",
                 "start": 4,
                 "end": 10,

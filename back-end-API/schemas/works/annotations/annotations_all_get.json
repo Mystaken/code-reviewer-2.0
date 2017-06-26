@@ -1,12 +1,8 @@
 {
-    "id": "annotations-get",
+    "id": "annotations-all-get",
     "type": "object",
     "properties": {
         "submission_id": {
-            "type": "string",
-            "maxLength": 100
-        },
-        "user_id": {
             "type": "string",
             "maxLength": 100
         }
