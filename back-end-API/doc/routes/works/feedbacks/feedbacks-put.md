@@ -24,7 +24,6 @@ PUT
 ### Validation
 | Action                                 | Status | Expected Response                                                             |
 |----------------------------------------|--------|-------------------------------------------------------------------------------|
-| **work_id** not inputted.              | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/work_id" ] }`     |
 | Required field not inputted.           | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/<field>" ] }`     |
 | Additional fields inputted.            | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`         |
 | **mark** greater than maximum allowed. | 400    | `{ "code": "MAXIMUM","param": [ "#/mark" ] }`                                 |

@@ -1,4 +1,4 @@
-Get All Annotations
+Get All Annotation
 ===
 ### Description
 Return all annotations for a specific **submission_id**.

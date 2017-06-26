@@ -1,4 +1,4 @@
-Get Annotations
+Get Annotation
 ===
 ### Description
 Return all annotations for a specific **submission_id** written by **user_id**.
@@ -7,7 +7,7 @@ Return all annotations for a specific **submission_id** written by **user_id**.
 GET
 
 ### URL Structure
-`api/work/annotations/all`
+`api/work/annotations`
 
 ### User Privileges
 * `Administrator`: Full Access

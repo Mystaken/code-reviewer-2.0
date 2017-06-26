@@ -1,10 +1,13 @@
-Delete Annotations
+Delete Annotation
 ===
 ### Description
 Delete annotations with **annotation_id**.
 
+### Method
+DELETE
+
 ### URL Structure
-`api/work/annotations/all`
+`api/work/annotations`
 
 ### User Privileges
 * `Administrator`: Full Access
