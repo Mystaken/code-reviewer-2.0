@@ -30,61 +30,38 @@ module.exports = function (router) {
                 params: [ 'user_id' ]
             });
         }
-
-        return Promise.try(function() {
-            if (req.session_user_type === 'admin') {
-                return;
-            }
-            if (req.session_user_type === 'student' &&
-                req.session_user_id !== req.query.user_id) {
-                return Promise.reject({
-                    code: "NOT_FOUND",
-                    params: [ 'user_id' ]
-                });
-            }
-            return user_model.aggregate([
-                    {
-                        $match: {
-                            _id: mongoose.Types.ObjectId(req.query.user_id),
-                            user_type: 'student',
-                            status: 'active'
-
-                        }
+        if (req.session_user_type === 'student' &&
+            req.session_user_id !== req.query.user_id) {
+            return Promise.reject({
+                code: "NOT_FOUND",
+                params: [ 'user_id' ]
+            });
+        }
+        return user_model.aggregate([
+                {
+                    $match: {
+                        _id: mongoose.Types.ObjectId(req.query.user_id),
+                        user_type: 'student',
+                        status: 'active'
                     }
-                ]).then(function(ret) {
-                    if (!ret && !ret.length) {
-                        return Promise.reject({
-                            code: "NOT_FOUND",
-                            params: [ 'user_id' ]
-                        });
-                    }
-                });
-            }).then(function(ret) {
-                return user_model.aggregate([
-                    {
-                        $match: {
-                            _id: mongoose.Types.ObjectId(req.query.user_id),
-                            status: 'active'
-                        }
-                    },{
-                        $project: {
-                            user_id: "$_id",
-                            _id: 0,
-                            student_number: 1,
-                            first_name: 1,
-                            last_name: 1,
-                            utorid: 1,
-                            email: 1,
-                            last_login: { 
-                                $dateToString: { 
-                                    format: "%Y-%m-%d %H:%M:%S", 
-                                    date: "$last_login" 
-                                }
+                },{
+                    $project: {
+                        user_id: "$_id",
+                        _id: 0,
+                        student_number: 1,
+                        first_name: 1,
+                        last_name: 1,
+                        utorid: 1,
+                        email: 1,
+                        last_login: { 
+                            $dateToString: { 
+                                format: "%Y-%m-%d %H:%M:%S", 
+                                date: "$last_login" 
                             }
                         }
                     }
-                ]).exec();
-            }).then(function(ret) {
+                }
+            ]).exec().then(function(ret) {
                 if (!ret || !ret.length) {
                     return Promise.reject({
                         code: "NOT_FOUND",
