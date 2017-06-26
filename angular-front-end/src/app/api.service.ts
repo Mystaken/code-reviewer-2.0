@@ -31,7 +31,7 @@ export class ApiService {
     createNewWork(name: string, num_peers: number) {
         let headers = new Headers({'Content-Type': 'application/json'});
         return this.http
-            .post("http://localhost:3000/api/works", JSON.stringify({name: name, num_peers: num_peers}), {headers: this.headers});
+            .put("http://localhost:3000/api/works", JSON.stringify({name: name, num_peers: num_peers}), {headers: this.headers});
     }
 
 
