@@ -1,5 +1,5 @@
 {
-    "id": "students-post",
+    "id": "student-post",
     "type": "object",
     "properties": {
         "user_id": {

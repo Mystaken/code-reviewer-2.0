@@ -1,10 +1,10 @@
 {
-    "id": "students-post",
+    "id": "tas-put",
     "type": "object",
     "properties": {
-        "user_id": {
+        "email": {
             "type": "string",
-            "maxLength": 100
+            "maxLength": 1000
         },
         "first_name": {
             "type": "string",
@@ -13,8 +13,16 @@
         "last_name": {
             "type": "string",
             "maxLength": 100
+        },
+        "utorid": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "student_number": {
+            "type": "number",
+            "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "user_id" ]
+    "required": [ "email", "first_name", "last_name" ]
 }
