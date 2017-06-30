@@ -1,4 +1,4 @@
-Get Work
+Get Submission
 ===
 ### Description
 Return the submission information for **submission_id**
