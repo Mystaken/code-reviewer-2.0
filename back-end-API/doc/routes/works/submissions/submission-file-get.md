@@ -7,7 +7,7 @@ Return the file for **file_id**.
 GET
 
 ### URL Structure
-`api/works/submissions`
+`api/works/submissions/file`
 
 ### User Privileges
 * `Administrator`: Full Access
