@@ -14,9 +14,9 @@ GET
 * `Other`: Only if submission of the **file_id** belongs to session_user or is being reviewed by session user.
 
 ### Request Query
-| Field             | Type   | Required? | Description                |
-|-------------------|--------|-----------|----------------------------|
-| **file_id**       | String | Yes       | The id of this submission. |
+| Field             | Type   | Required? | Description          |
+|-------------------|--------|-----------|----------------------|
+| **file_id**       | String | Yes       | The id of this file. |
 
 ### Validation
 | Action                                                  | Status | Expected Response                                                         |
