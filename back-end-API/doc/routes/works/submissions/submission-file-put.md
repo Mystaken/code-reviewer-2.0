@@ -16,7 +16,7 @@ PUT
 ### Request Body
 | Field             | Type   | Required? | Description                |
 |-------------------|--------|-----------|----------------------------|
-| **file_id**       | String | Yes       | The id of this submission. |
+| **submission_id** | String | Yes       | The id of this submission. |
 
 ### Validation
 | Action                                               | Status | Expected Response                                                               |
