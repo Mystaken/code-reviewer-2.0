@@ -34,6 +34,9 @@ Routes
     * [api/works - POST](works/works-post.md)
 
         `Update a work.`
+    * [api/works - DELETE](works/works-delete.md)
+
+        `Update a work.`
     * #### Feedbacks
         * [/api/works/feedbacks - GET](works/feedbacks/feedbacks-get.md)
 
