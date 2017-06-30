@@ -40,7 +40,7 @@ GET
        "submission_id": 42,
        "work_id": 123,
        "author_id": 142,
-       "file_name": "ex1.py",
+       "files: ["5935ed0e5ecf04cc3388de8e", "5935ed0e5ecf04cc3388de8e"],
        "mark": 0
    }
 }
