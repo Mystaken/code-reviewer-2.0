@@ -57,3 +57,19 @@ Routes
         * [/api/works/annotations - DELETE](works/annotations/annotations-delete.md)
 
             `Delete an annotation.`
+    * #### Submissions
+        * [/api/works/submissions - GET](works/submissions/submissions-get.md)
+        
+            `Get information about a submission.`
+        * [/api/works/submissions - POST](works/submissions/submissions-post.md)
+
+            `Update a submission.`
+        * [/api/works/submissions/files - GET](works/submissions/submissions-files-get.md)
+
+            `Get a file from a submission.`
+        * [/api/works/submissions/files - PUT](works/submissions/submissions-files-put.md)
+
+            `Add a file to a submission.`
+        * [/api/works/submissions/files - DELETE](works/submissions/submissions-files-delete.md)
+
+            `Get a file from a submission.`
