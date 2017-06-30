@@ -37,7 +37,7 @@ GET
 {
    "status": 200,
    "data": {
-       "submission_id": 42,
+       "submission_id": "5935ed0e5ecf04cc3388de8e",
        "work_id": 123,
        "author_id": 142,
        "files: ["5935ed0e5ecf04cc3388de8e", "5935ed0e5ecf04cc3388de8e"],
