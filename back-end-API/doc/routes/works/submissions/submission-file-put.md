@@ -24,7 +24,7 @@ PUT
 | **submission_id** not inputted.                      | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/submission_id" ] }` |
 | Additional Fields inputted.                          | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`           |
 | No active submission with **submission_id**.         | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
-| Session user does not have access to **submission**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
+| Session user does not have access to **submission_d**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
 
 #### Example Request Body
 ```
