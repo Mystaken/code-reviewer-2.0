@@ -1,9 +1,9 @@
 Routes
 ===
 * ### API
-* [api/users/ - GET](api-get.md)
-        
-        `Get status of API.`
+    * [api/users/ - GET](api-get.md)
+            
+            `Get status of API.`
 * ### Users
     * [api/users/ - GET](users/users-get.md)
 
