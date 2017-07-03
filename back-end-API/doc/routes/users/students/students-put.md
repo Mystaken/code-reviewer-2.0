@@ -1,7 +1,7 @@
 Add Student
 ===
 ### Status
-<div style="color: orange;">Development</div>
+<div style="font-size: 50px; color: orange;">Development</div>
 
 ### Description
 Create a student from the provided student information.
