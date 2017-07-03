@@ -1,8 +1,5 @@
 Create Work
 ===
-### Status
-<div style="color: orange;">Quality Check</div>
-
 ### Description
 Create a work from the provided work information.
 
