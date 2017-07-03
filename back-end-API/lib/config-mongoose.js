@@ -1,9 +1,9 @@
 'use strict';
 
-var mongoose    = require('mongoose'),
-    Promise     = require('bluebird'),
-    moment      = require('moment'),
-    config      = require('../config/config.json');
+var mongoose = require('mongoose'),
+    Promise  = require('bluebird'),
+    moment   = require('moment'),
+    config   = require('../config/config.json');
 
 /*
  * Returns true iff the given id is valid.
@@ -26,15 +26,31 @@ function getDefaultDate(date) {
     return moment().add(1, 'year').toDate();
 }
 
+/**
+ * Sets up and connects to mongo.
+ * opt.server {str} The location of the server
+ * Returns a promise that will resolve on connect.
+ */
+function setup(opt) {
+    mongoose.Promise = Promise;
+    mongoose.validID = validID;
+    mongoose.getDefaultDate = getDefaultDate;
+    return mongoose.connect(opt.server);
+}
 
 module.exports = {
+    /**
+     * Sets up and connects to mongo.
+     * opt.server {str} The location of the server
+     */
+    setup: setup,
+
     /** Configures the mongoose
      * @param app {Express} the express app
      */
-    configure: function (app) {
-        mongoose.connect(config.mongo.server);
-        mongoose.validID = validID;
-        mongoose.Promise = Promise;
-        mongoose.getDefaultDate = getDefaultDate;
+    configure: function (app, opt) {
+        setup({
+            server: config.mongo.server
+        });
     }
 };

@@ -92,21 +92,39 @@ function configureResponse (response) {
     };
 }
 
-function configureMiddleware(app) {
-    app.use(function (req, res, next) {
-        req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
-        req.session_user_type = "admin";
-        next();
-    });
+function configureMiddleware(app, opt) {
+    switch(opt.enviroment) {
+        case "production":
+            app.use(function (req, res, next) {
+                req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
+                req.session_user_type = "admin";
+                next();
+            });
+            break;
+        case "development":
+            app.use(function (req, res, next) {
+                req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
+                req.session_user_type = "admin";
+                next();
+            });
+            break;
+        case "test":
+            app.use(function (req, res, next) {
+                req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
+                req.session_user_type = "admin";
+                next();
+            });
+            break;
+    }
 }
 
 module.exports = {
     /** Configures the Express app
      * @param app {Express} the express app
      */
-    configure: function (app) {
-        configureRequest(express.request);
-        configureResponse(express.response);
-        configureMiddleware(app);
+    configure: function (app, opt) {
+        configureRequest(express.request, opt);
+        configureResponse(express.response, opt);
+        configureMiddleware(app, opt);
     }
 };

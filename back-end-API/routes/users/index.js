@@ -3,6 +3,7 @@
 var validator   = require('../../lib/validator'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
+
     user_model  = require('../../models/users'),
 
     user_get_schema = require('../../schemas/users/users_get');
