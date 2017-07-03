@@ -29,7 +29,7 @@ function configureResponse (response) {
      * This function should be used instead of request.send
      */
     response.sendResponse = function (response) {
-        return this.send({
+        return this.status(200).send({
             status: 200,
             data : response
         });
@@ -38,7 +38,7 @@ function configureResponse (response) {
     /** Sends a 403 status if route exist but verb is incorrect.
      */
     response.invalidVerb = function () {
-        return this.send({
+        return this.status(403).send({
             status: 403
         });
     };
@@ -104,7 +104,7 @@ function configureMiddleware(app, opt) {
         case "development":
             app.use(function (req, res, next) {
                 req.session_user_id = req.query.session_user_id || req.body.session_user_id;
-                req.session_user_type = req.query.session_user_type | req.body.session_user_type;
+                req.session_user_type = req.query.session_user_type | req.body.session_user_type || 'admin';
                 next();
             });
             break;

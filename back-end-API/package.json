@@ -18,6 +18,8 @@
     "z-schema": "^3.17.0"
   },
   "devDependencies": {
+    "chai": "^4.0.2",
+    "chai-http": "^3.0.0",
     "colors": "^1.1.2",
     "gulp-mocha": "^4.3.1",
     "jshint": "^2.9.2",
