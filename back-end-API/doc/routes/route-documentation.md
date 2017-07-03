@@ -1,6 +1,6 @@
 Routes
 ===
-* API
+* ### API
 * [api/users/ - GET](api-get.md)
         
         `Get status of API.`
