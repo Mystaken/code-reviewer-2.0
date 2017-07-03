@@ -49,7 +49,7 @@ module.exports = {
      * @param app {Express} the express app
      */
     configure: function (app, opt) {
-        setup({
+        return setup({
             server: config.mongo.server
         });
     }

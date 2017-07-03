@@ -7,8 +7,9 @@ var configExpress   = require('./config-express'),
 module.exports = function(app) {
     return {
         configure: function (opt) {
-            configMongoose.configure(app, opt);
-            configExpress.configure(app, opt);
+            return configMongoose.configure(app, opt).then(function(ret) {
+                return configExpress.configure(app, opt);
+            });
         },
         onconfig: function (config, next) {
             next(null, config);

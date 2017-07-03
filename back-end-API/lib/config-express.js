@@ -119,5 +119,6 @@ module.exports = {
         configureRequest(express.request, opt);
         configureResponse(express.response, opt);
         configureMiddleware(app, opt);
+        return Promise.resolve();
     }
 };

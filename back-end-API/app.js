@@ -34,10 +34,13 @@ function validateArgs() {
 }
 
 function startApp() {
-    var args = validateArgs();
-    if (args.error) {
+    var opt;
+    logger.setup();
+    opt = validateArgs();
+    if (opt.error) {
         return;
     }
+    logger.setup();
 
     app.use(bodyParser.json())
         .use(cookieParser())
@@ -45,13 +48,14 @@ function startApp() {
         .use(express.static(APP_DIR))
         .use(cors()); //REMOVE THIS LATER.
 
-    spec.configure({
-        environment: args.environment
+    spec.configure(opt).then(function() {
+        app.listen(API_PORT, function() {
+            logger.info("Server started at PORT: " + API_PORT);
+        });    
+    }).catch(function(err) {
+        logger.fatal(err);
     });
 
-    app.listen(API_PORT, function() {
-        logger.info("Server started at PORT: " + API_PORT);
-    });
 }
 
 
