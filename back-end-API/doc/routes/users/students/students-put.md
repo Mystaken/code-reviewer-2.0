@@ -1,5 +1,8 @@
 Add Student
 ===
+### Status
+<div style="color: orange;">Development</div>
+
 ### Description
 Create a student from the provided student information.
 
@@ -29,6 +32,12 @@ PUT
 | Additional fields inputted.                 | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`          |
 | Active student already exists.              | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
 | Deleted student exists.                     | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+| **email** length greater than 1000.         | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+| **first_name** length greater than 100.     | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+| **last_name** length greater than 100.      | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+| **utorid** length greater than 100.         | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+| **student_number** length greater than 100. | 400    | `{ "code": "EXISTS", "param": [ "#/email", "#/utorid", "#/student_number" ] }` |
+
 #### Example Request Body
 ```
 {
