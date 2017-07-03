@@ -93,7 +93,7 @@ function configureResponse (response) {
 }
 
 function configureMiddleware(app, opt) {
-    switch(opt.enviroment) {
+    switch(opt.environment) {
         case "production":
             app.use(function (req, res, next) {
                 req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
@@ -103,15 +103,8 @@ function configureMiddleware(app, opt) {
             break;
         case "development":
             app.use(function (req, res, next) {
-                req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
-                req.session_user_type = "admin";
-                next();
-            });
-            break;
-        case "test":
-            app.use(function (req, res, next) {
-                req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
-                req.session_user_type = "admin";
+                req.session_user_id = req.query.session_user_id || req.body.session_user_id;
+                req.session_user_type = req.query.session_user_type | req.body.session_user_type;
                 next();
             });
             break;

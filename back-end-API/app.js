@@ -19,16 +19,16 @@ function validateArgs() {
     var args = process.argv.slice(2),
         ret  = {};
 
-    ret.enviroment = args[args.indexOf('--env') + 1];
+    ret.environment = args[args.indexOf('--env') + 1];
 
-    if (ret.enviroment) {
-        if (ret.enviroment !== 'production' || ret.enviroment !== 'development') {
+    if (ret.environment) {
+        if (ret.environment !== 'production' || ret.environment !== 'development') {
             logger.fatal('Environment can only be set to \'production\' or \'development\'.');
             ret.error = true;
         }
     } else {
-        logger.warn('No environment set. Defaulting to \'development\'');
-        ret.enviroment = 'development';
+        logger.warn('No environment set. Defaulting to \'development\'.');
+        ret.environment = 'development';
     }
     return ret;
 }
@@ -46,9 +46,8 @@ function startApp() {
         .use(cors()); //REMOVE THIS LATER.
 
     spec.configure({
-        enviroment: args.enviroment
+        environment: args.environment
     });
-
 
     app.listen(API_PORT, function() {
         logger.info("Server started at PORT: " + API_PORT);
