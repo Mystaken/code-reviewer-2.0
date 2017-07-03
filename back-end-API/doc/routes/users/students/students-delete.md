@@ -7,7 +7,7 @@ Delete a student of the given **user_id**
 DELETE
 
 ### URL Structure
-`api/users/students/`
+`api/users/students`
 
 ### User Privileges
 * `Administrator`: Full Access

@@ -7,7 +7,7 @@ Create a student from the provided student information.
 PUT
 
 ### URL Structure
-`api/users/students/`
+`api/users/students`
 
 ### User Privileges
 * `Administrator`: Full Access

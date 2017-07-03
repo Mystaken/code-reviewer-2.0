@@ -7,7 +7,7 @@ Update the students information of the given **user_id**
 POST
 
 ### URL Structure
-`api/users/students/`
+`api/users/students`
 
 ### User Privileges
 * `Administrator`: Full Access

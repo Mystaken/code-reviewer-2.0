@@ -7,7 +7,7 @@ Return the user information for the user with **user_id**
 GET
 
 ### URL Structure
-`api/users/`
+`api/users`
 
 ### User Privileges
 * `Administrator`: Full Access
