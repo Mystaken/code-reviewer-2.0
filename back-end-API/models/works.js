@@ -25,4 +25,4 @@ submission_rules_schema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('submission_rules', submission_rules_schema);
+module.exports = mongoose.model('works', submission_rules_schema);

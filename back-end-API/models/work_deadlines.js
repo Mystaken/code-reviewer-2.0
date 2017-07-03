@@ -18,4 +18,4 @@ deadline_schema = mongoose.Schema({
 });
 
 
-module.exports = mongoose.model('submission_rules', deadline_schema);
+module.exports = mongoose.model('work_deadlines', deadline_schema);

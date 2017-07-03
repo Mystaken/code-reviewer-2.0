@@ -6,7 +6,7 @@ var mongoose = require('mongoose'),
 submissions_schema = mongoose.Schema({
     author_id: mongoose.Schema.Types.ObjectId,        // utorid of the student
     code: String,                       // file content
-    file_name: String,
+    files: [ mongoose.Schema.Types.ObjectId ],
     report: String,                     // the report.txt
     self_assess: Number,               // mark by author himself
     mark: Number,                      // actual mark of this submission

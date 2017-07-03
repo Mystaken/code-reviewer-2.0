@@ -5,7 +5,7 @@ var validator   = require('../../lib/validator'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
 
-    submission_rules_model  = require('../../models/submission_rules'),
+    submission_rules_model  = require('../../models/works'),
 
     works_get_schema    = require('../../schemas/works/works_get'),
     works_put_schema    = require('../../schemas/works/works_put'),
