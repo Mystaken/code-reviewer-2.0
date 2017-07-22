@@ -1,7 +1,7 @@
 import { Component,ViewEncapsulation, ViewChild, OnInit } from '@angular/core'
 import { Http } from '@angular/http'
 import { ApiService } from './api.service'
-
+import 'rxjs/add/operator/map';
 
 @Component({
 	selector: 'student-table',

@@ -19,7 +19,7 @@
             "maxLength": 100
         },
         "student_number": {
-            "type": "number",
+            "type": "string",
             "maxLength": 100
         }
     },
