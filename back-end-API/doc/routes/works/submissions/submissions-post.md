@@ -33,7 +33,7 @@ POST
 ```
 {
     "submission_id": "5935ed0e5ecf04cc3388de8e"
-    "mark": "99"
+    "mark": 99
 }
 ```
 #### Example Response
