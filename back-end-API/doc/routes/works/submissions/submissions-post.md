@@ -32,7 +32,7 @@ POST
 #### Example Request Body
 ```
 {
-    "file_id": "5935ed0e5ecf04cc3388de8e"
+    "submission_id": "5935ed0e5ecf04cc3388de8e"
     "mark": "99"
 }
 ```
