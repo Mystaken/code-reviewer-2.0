@@ -33,7 +33,7 @@ PUT
     "file": "def func(a, b):\n    pass"
 }
 ```
-#### Example Request Body
+#### Example Response
 ```
 {
     "status": 200,
