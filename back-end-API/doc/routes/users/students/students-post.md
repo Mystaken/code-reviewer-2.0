@@ -35,7 +35,7 @@ POST
 ```
 {
   "user_id": "59447dc6fe01ea7a6edb4e34",
-  "first_name" "Grey",
+  "first_name": "Grey",
   "last_name": "Gxsanda"
 }
 ```
