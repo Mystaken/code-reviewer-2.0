@@ -28,10 +28,7 @@ GET
             "num_peers": 5,
             "required_files": [ "a1.py", "a2.py"],
             "feedback_questions": [ "Is this good?" ],
-            "repo_path": "assignment/a1",
-            "student_submission_deadline": "2017-10-20",
-            "peer_review_deadline": "2017-10-20",
-            "ta_review_deadline": "2017-10-20"
+            "repo_path": "assignment/a1"
         },
         ...
     ]
