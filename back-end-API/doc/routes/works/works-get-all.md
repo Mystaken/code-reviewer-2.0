@@ -28,7 +28,8 @@ GET
             "num_peers": 5,
             "required_files": [ "a1.py", "a2.py"],
             "feedback_questions": [ "Is this good?" ],
-            "repo_path": "assignment/a1"
+            "repo_path": "assignment/a1",
+            "status": "active"
         },
         ...
     ]
