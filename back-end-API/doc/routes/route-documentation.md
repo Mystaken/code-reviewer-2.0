@@ -70,10 +70,6 @@ APP Routes
         * [/api/works/submissions - POST](works/submissions/submissions-post.md)
 
             `Update a submission.`
-      
-        * [/api/works/submissions/files/upload - POST](works/submissions/submissions-files-upload.md)
-
-            `Upload a submission.`
         * [/api/works/submissions/files - GET](works/submissions/submissions-files-get.md)
 
             `Get a file from a submission.`
@@ -82,4 +78,7 @@ APP Routes
             `Add a file to a submission.`
         * [/api/works/submissions/files - DELETE](works/submissions/submissions-files-delete.md)
 
-            `Get a file from a submission.`
+            `Get a file from a submission.`      
+        * [/api/works/submissions/files/upload - POST](works/submissions/submissions-files-upload.md)
+
+            `Upload a submission.`
