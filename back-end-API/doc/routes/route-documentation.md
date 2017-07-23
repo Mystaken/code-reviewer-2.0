@@ -50,7 +50,7 @@ APP Routes
         * [/api/works/feedbacks - POST](works/feedbacks/feedbacks-post.md)
 
             `Update a feedback.`
-    * #### Feedbacks
+    * #### Annotations
         * [/api/works/annotations/all - GET](works/annotations/annotations-all-get.md)
         
             `Get annotation information for all annotations of a submission.`
