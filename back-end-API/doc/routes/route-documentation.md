@@ -73,7 +73,7 @@ APP Routes
       
         * [/api/works/submissions/upload - POST](works/submissions/submissions-upload-post.md)
 
-            `Get a file from a submission.`
+            `Upload a submission.`
         * [/api/works/submissions/files - GET](works/submissions/submissions-files-get.md)
 
             `Get a file from a submission.`
