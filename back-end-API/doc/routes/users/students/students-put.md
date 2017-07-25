@@ -20,7 +20,7 @@ PUT
 | **first_name**     | String  | Yes       |  The first name of the student.    |
 | **last_name**      | String  | Yes       |  The last name of the student.     |
 | **utorid**         | String  | Yes       |  The utorid of the student.        |
-| **student_number** | Number  | Yes       |  The student number of the student.|
+| **student_number** | String  | Yes       |  The student number of the student.|
 
 ### Validation
 | Action                                      | Status | Expected Response                                                               |
