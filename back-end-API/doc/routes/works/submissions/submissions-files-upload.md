@@ -14,10 +14,10 @@ POST
 * `Other`: Only if **work_id** belongs to session user.
 
 ### Request Body
-| Field       | Type   | Required? | Description                |
-|-------------|--------|-----------|----------------------------|
-| **work_id** | String | Yes       | The id of this submission. |
-| **files**   | Files  | Yes       | The files to be uploaded.  |
+| Field             | Type   | Required? | Description                |
+|-------------------|--------|-----------|----------------------------|
+| **work_id**       | String | Yes       | The id of this submission. |
+| **submissions**   | Files  | Yes       | The files to be uploaded.  |
 
 ### Validation
 | Action                                            | Status | Expected Response                                                               |
