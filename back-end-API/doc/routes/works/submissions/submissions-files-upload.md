@@ -21,10 +21,10 @@ POST
 ### Validation
 | Action                                            | Status | Expected Response                                                               |
 |---------------------------------------------------|--------|---------------------------------------------------------------------------------|
-| **work_id** not inputted.                         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/submission_id" ] }` |
+| **work_id** not inputted.                         | 400    | `{ "code": "OBJECT_MISSING_REQUIRED_PROPERTY","param": [ "#/work_id" ] }` |
 | Additional Fields inputted.                       | 400    | `{ "code": "OBJECT_ADDITIONAL_PROPERTIES","param": [ "#/<field>" ] }`           |
-| No active submission with **work_id**.            | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
-| Session user does not have access to **work_id**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/submission_id" ] }`                       |
+| No active submission with **work_id**.            | 404    | `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }`                       |
+| Session user does not have access to **work_id**. | 404    | `{ "code": "NOT_FOUND", "param": [ "#/work_id" ] }`                       |
 
 #### Example Request Body
 ```
