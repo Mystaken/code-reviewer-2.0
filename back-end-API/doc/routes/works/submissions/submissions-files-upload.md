@@ -4,10 +4,10 @@ Upload Submission File
 Upload a file to **work_id**.
 
 ### Method
-PUT
+POST
 
 ### URL Structure
-`api/works/submissions/files`
+`api/works/submissions/files/upload`
 
 ### User Privileges
 * `Administrator`: Full Access
