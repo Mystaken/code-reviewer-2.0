@@ -7,7 +7,7 @@ Upload a file to **work_id**.
 POST
 
 ### URL Structure
-`api/works/submissions/files/upload`
+`api/works/submissions/files`
 
 ### User Privileges
 * `Administrator`: Full Access
