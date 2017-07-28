@@ -13,10 +13,11 @@ POST
 * `Administrator`: Full Access
 
 ### Request Body
-| Field             | Type   | Required? | Description                |
-|-------------------|--------|-----------|----------------------------|
-| **work_id**       | String | Yes       | The id of this submission. |
-| **submission**    | File   | Yes       | The file to be uploaded.  |
+| Field          | Type   | Required? | Description                            |
+|----------------|--------|-----------|----------------------------------------|
+| **work_id**    | String | Yes       | The id of the work for the submission. |
+| **submission** | File   | Yes       | The file to be uploaded.               |
+| **name**       | String | Yes       | The name of this submission.           |
 
 ### Validation
 | Action                                            | Status | Expected Response                                                               |
