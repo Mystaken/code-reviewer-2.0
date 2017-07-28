@@ -10,7 +10,7 @@ POST
 `api/works/submissions/files`
 
 ### User Privileges
-* `Administrator`: Full Access
+* `Other`: Full Access
 
 ### Request Body
 | Field          | Type   | Required? | Description                            |
