@@ -36,6 +36,6 @@ POST
 ```
 {
     "status": 200,
-    "data": [ "2315ed0e5ecf04cc3388de8e", "2315ed0e5ecf04cc3388de8e" ] // the file_id
+    "data": "2315ed0e5ecf04cc3388de8e"// the file_id
 }
 ```
