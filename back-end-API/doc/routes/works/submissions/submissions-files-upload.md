@@ -11,7 +11,6 @@ POST
 
 ### User Privileges
 * `Administrator`: Full Access
-* `Other`: Only if **work_id** belongs to session user.
 
 ### Request Body
 | Field             | Type   | Required? | Description                |
@@ -29,14 +28,13 @@ POST
 #### Example Request Body
 ```
 {
-    "work_id": "5935ed0e5ecf04cc3388de8e",
-    "file": "def func(a, b):\n    pass"
+    "work_id": "5935ed0e5ecf04cc3388de8e"
 }
 ```
 #### Example Response
 ```
 {
     "status": 200,
-    "data": "2315ed0e5ecf04cc3388de8e" // the file_id
+    "data": [ "2315ed0e5ecf04cc3388de8e", "2315ed0e5ecf04cc3388de8e" ] // the file_id
 }
 ```
