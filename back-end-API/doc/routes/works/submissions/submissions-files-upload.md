@@ -30,7 +30,8 @@ POST
 #### Example Request Body
 ```
 {
-    "work_id": "5935ed0e5ecf04cc3388de8e"
+    "work_id": "5935ed0e5ecf04cc3388de8e",
+    "name": "a1"
 }
 ```
 #### Example Response
