@@ -10,8 +10,7 @@ PUT
 `api/works/submissions/files`
 
 ### User Privileges
-* `Administrator`: Full Access
-* `Other`: Only if **work_id** belongs to session user.
+* `Other`: Full Access
 
 ### Request Body
 | Field       | Type   | Required? | Description                            |
