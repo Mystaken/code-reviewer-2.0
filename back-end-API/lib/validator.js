@@ -7,18 +7,20 @@ var Promise = require('bluebird'),
 
 
 ZSchema.registerFormat("date", function (date) {
-    console.log(date);
-    console.log(moment(date, 'YYYY-MM-DD', true).isValid());
     return date && moment(date, 'YYYY-MM-DD', true).isValid();
 });
 validator = new ZSchema(opt);
 
-module.exports = {
-    validate: function(json, schema) {
-        return validator.validate(json, schema);
-    },
+function validate(json, schema) {
+    return validator.validate(json, schema);
+}
 
-    getLastErrors: function() {
+function validateDev(json, schema) {
+    schema.additionalProperties = true;
+    return validator.validate(json, schema);
+}
+module.exports = {
+    getLastErrors: function(opt) {
         var last_errors = validator.getLastErrors();
         if (last_errors) {
             return last_errors.map(function (err) {
@@ -37,6 +39,28 @@ module.exports = {
                     param: path
                 };
             });
+        }
+    },
+    configure: function(opt) {
+        if (opt.environment === 'production') {
+            this.validate = validate;
+        } else {
+            this.validate = validateDev;
+        }
+        return Promise.resolve();
+    },
+    validFile: function(opt) {
+        if (!opt.file) {
+            return [{
+                code: 'OBJECT_MISSING_REQUIRED_PROPERTY',
+                param: [ '#/' + opt.name ] 
+            }];
+        }
+        if (!opt.file.name || !opt.file.size || opt.file.length) {
+            return [{
+                code: "INVALID_TYPE",
+                param: [ "#/" + opt.name ] 
+            }];
         }
     }
 };

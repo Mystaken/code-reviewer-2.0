@@ -14,6 +14,7 @@ function logDate() {
 function log(str) {
     console.log(str);
 }
+
 module.exports = {
     fatal: log,
     error: log,

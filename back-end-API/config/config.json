@@ -1,6 +1,13 @@
-{ 
+{
+    "app": {
+        "name": "APP",
+        "doc_link": "https://github.com/BoZhaoUTSC/code-reviewer-2.0/blob/master/back-end-API/doc/routes/route-documentation.md"
+    }, 
     "mongo" : {
-        "server": "mongodb://localhost/csca08"
+        "server": "mongodb://localhost/csca08",
+        "opt": {
+          "useMongoClient": true
+        }
     },
     "specialization": {
     },
@@ -28,16 +35,18 @@
             }
         },
         "multipart": {
-            "enabled": false,
-            "priority": 0,
-            "module": "kraken-js/middleware/multipart",
-            "arguments": [
-                {
-                    "uploadDir": "/tmp/upload",
-                    "keepExtensions": true,
-                    "hash": "sha1"
-                }
-            ]
+            "enabled": true,
+            "module": {
+                "name": "kraken-js/middleware/multipart",
+                "arguments": [
+                    {
+                        "uploadDir": "/tmp/upload",
+                        "keepExtensions": true,
+                        "hash": "sha1",
+                        "multiples": true
+                    }
+                ]
+            }
         },
         "logger": {
             "enabled": false

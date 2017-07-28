@@ -10,6 +10,7 @@ var validator   = require('../../lib/validator'),
     works_get_schema    = require('../../schemas/works/works_get'),
     works_put_schema    = require('../../schemas/works/works_put'),
     works_post_schema   = require('../../schemas/works/works_post'),
+    works_delete_schema   = require('../../schemas/works/works_delete'),
     works_all_get_schema   = require('../../schemas/works/works_all_get');
 
 
@@ -43,25 +44,7 @@ module.exports = function (router) {
                     name: 1,
                     num_peers: 1,
                     required_files: 1,
-                    feedback_questions: 1,
-                    student_submission_deadline: { 
-                        $dateToString: { 
-                            format: "%Y-%m-%d", 
-                            date: "$student_submission_deadline" 
-                        }
-                    },
-                    peer_review_deadline: { 
-                        $dateToString: { 
-                            format: "%Y-%m-%d", 
-                            date: "$peer_review_deadline" 
-                        }
-                    },
-                    ta_review_deadline: { 
-                        $dateToString: { 
-                            format: "%Y-%m-%d", 
-                            date: "$ta_review_deadline" 
-                        }
-                    }
+                    feedback_questions: 1
                 }
             }
         ]).exec().then(function(work) {
@@ -92,9 +75,6 @@ module.exports = function (router) {
             required_files: req.body.required_files || [],
             feedback_questions: req.body.feedback_questions || [],
             repo_path: req.body.repo_path || "",
-            student_submission_deadline: mongoose.getDefaultDate(req.body.student_submission_deadline),
-            peer_review_deadline: mongoose.getDefaultDate(req.body.peer_review_deadline),
-            ta_review_deadline: mongoose.getDefaultDate(req.body.ta_review_deadline),
             status: 'active'
         };
         //check if work exists
@@ -108,7 +88,7 @@ module.exports = function (router) {
                 if (ret.length) {
                     return Promise.reject({
                         code: "EXISTS",
-                        params: [ 'work_id' ]
+                        params: [ 'name' ]
                     });
                 }
                 return new submission_rules_model(query).save();
@@ -165,6 +145,36 @@ module.exports = function (router) {
         }).catch(function (err) {
             res.requestError(err);
         });
+    }).delete(function (req, res, next) {
+        var error,
+            query;
+        if (req.session_user_type !== 'admin') {
+            return res.forbidden();
+        }
+
+        validator.validate(req.body, works_delete_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+        query = {
+            _id: mongoose.Types.ObjectId(req.body.work_id)
+        };
+        return submission_rules_model.find(query).exec().then(function(ret) {
+            if (!ret.length) {
+                return Promise.reject({
+                        code: "NOT_FOUND",
+                        params: [ 'work_id' ]
+                    });
+            }
+            return submission_rules_model.findOneAndUpdate(query, {
+                    status: 'inactive'
+                }).exec();
+        }).then(function(ret) {
+            res.sendResponse(ret._id);
+        }).catch(function (err) {
+            res.requestError(err);
+        });
     }).all(function (req, res, next) {
         return res.invalidVerb();
     });
@@ -186,24 +196,7 @@ module.exports = function (router) {
                     name: 1,
                     required_files: 1,
                     feedback_questions: 1,
-                    student_submission_deadline: { 
-                        $dateToString: { 
-                            format: "%Y-%m-%d", 
-                            date: "$student_submission_deadline" 
-                        }
-                    },
-                    peer_review_deadline: { 
-                        $dateToString: { 
-                            format: "%Y-%m-%d", 
-                            date: "$peer_review_deadline" 
-                        }
-                    },
-                    ta_review_deadline: { 
-                        $dateToString: { 
-                            format: "%Y-%m-%d", 
-                            date: "$ta_review_deadline" 
-                        }
-                    }
+                    status: 1
                 }
             }
         ]).exec().then(function(works) {

@@ -1,0 +1,12 @@
+{
+    "id": "works-delete",
+    "type": "object",
+    "properties": {
+        "work_id": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "work_id" ]
+}

@@ -22,7 +22,7 @@ function validID(id) {
 function getDefaultDate(date) {
     if (date && moment(date, 'YYYY-MM-DD', true)) {
         return new Date(date);
-    }
+    } 
     return moment().add(1, 'year').toDate();
 }
 
@@ -35,7 +35,7 @@ function setup(opt) {
     mongoose.Promise = Promise;
     mongoose.validID = validID;
     mongoose.getDefaultDate = getDefaultDate;
-    return mongoose.connect(opt.server);
+    return mongoose.connect(opt.server, config.mongo.opt);
 }
 
 module.exports = {

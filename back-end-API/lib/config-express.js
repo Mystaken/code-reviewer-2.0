@@ -65,8 +65,8 @@ function configureResponse (response) {
                 }]
             });
         } else if (err.code === "EXISTS") {
-            return this.status(404).send({
-                status: 404,
+            return this.status(400).send({
+                status: 400,
                 message: [{
                     code: "EXISTS",
                     params: err.params.map(function(e) {
@@ -76,8 +76,7 @@ function configureResponse (response) {
             });
         }
         return this.status(500).send({
-            status: 500,
-            error: err
+            status: 500
         });
     };
 
@@ -96,15 +95,15 @@ function configureMiddleware(app, opt) {
     switch(opt.environment) {
         case "production":
             app.use(function (req, res, next) {
-                req.session_user_id   = "59447dc6fe01ea7a6edb4e33";
-                req.session_user_type = "admin";
+                req.session_user_id   = '597454be305f03346c012275';
+                req.session_user_type = 'admin';
                 next();
             });
             break;
         case "development":
             app.use(function (req, res, next) {
-                req.session_user_id = req.query.session_user_id || req.body.session_user_id;
-                req.session_user_type = req.query.session_user_type | req.body.session_user_type || 'admin';
+                req.session_user_id = req.query.session_user_id || req.body.session_user_id || opt.user_id;
+                req.session_user_type = req.query.session_user_type || req.body.session_user_type || opt.user_type;
                 next();
             });
             break;

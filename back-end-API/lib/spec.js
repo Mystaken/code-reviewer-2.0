@@ -1,14 +1,17 @@
 'use strict';
 
 var configExpress   = require('./config-express'),
-    configMongoose     = require('./config-mongoose');
+    configMongoose  = require('./config-mongoose'),
+    validator       = require('./validator');
 
 
 module.exports = function(app) {
     return {
         configure: function (opt) {
-            return configMongoose.configure(app, opt).then(function(ret) {
+            return configMongoose.configure(app, opt).then(function() {
                 return configExpress.configure(app, opt);
+            }).then(function() {
+                return validator.configure(app, opt);
             });
         },
         onconfig: function (config, next) {
