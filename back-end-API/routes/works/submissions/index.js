@@ -140,7 +140,8 @@ module.exports = function (router) {
                 {
                     $match: {
                         _id: mongoose.Types.ObjectId(req.query.submission_file_id),
-                        status: 'active'
+                        status: 'active',
+                        author_id: req.session_user_id
                     }
                 },{
                     $project: {
