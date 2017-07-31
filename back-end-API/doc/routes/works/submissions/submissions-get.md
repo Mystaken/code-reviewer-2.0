@@ -38,9 +38,10 @@ GET
    "status": 200,
    "data": {
        "submission_id": "5935ed0e5ecf04cc3388de8e",
-       "work_id": 123,
-       "author_id": 142,
-       "code": "blah blah"
+       "work_id": "5935ed0e5ecf04cc3388de8f",
+       "author_id": "5935ed0e5ecf04cc3388de8f",
+       "files": ["5935ed0e5ecf04cc3388de8e", "5935ed0e5ecf04cc3388de8f"],
+       "create_date": "1996-12-30"
    }
 }
 ```
