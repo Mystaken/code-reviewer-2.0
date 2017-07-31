@@ -20,6 +20,44 @@ var validator = require('../../../lib/validator'),
 
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
+        var error;
+        if (!mongoose.validID(req.query.submission_id)) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'submission_id' ]
+            });
+        }
+        return submissions_model.aggregate([
+            {
+                $match: {
+                    _id: mongoose.Types.ObjectId(req.query.submission_id)
+                },{
+                    $project: {
+                        submission_id: "$_id",
+                        _id: 0,
+                        files: 1,
+                        author_id: 1,
+                        work_id: 1,
+                        create_date: { 
+                            $dateToString: { 
+                                format: "%Y-%m-%d %H:%M:%S", 
+                                date: "$last_login" 
+                            }
+                        }
+                    }
+                }  
+            }
+        ]).exec().then(function(ret) {
+            if (!ret || !ret.length) {
+                return Promise.reject({
+                        code: "NOT_FOUND",
+                        params: [ 'submission_id' ]
+                    });
+            }
+            return res.sendResponse(ret);
+        }).catch(function(err) {
+            return res.requestError(err);
+        });
     }).put(function(req, res, next) {
         var error;
         if (!mongoose.validID(req.body.work_id)) {
@@ -144,6 +182,7 @@ module.exports = function (router) {
                 },{
                     $project: {
                         submission_file_id: "$_id",
+                        _id: 0,
                         work_id: 1,
                         author_id: 1,
                         code: 1
