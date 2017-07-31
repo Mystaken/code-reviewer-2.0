@@ -9,7 +9,8 @@ var validator = require('../../../lib/validator'),
     submission_files_model = require('../../../models/submission_files'),
     submissions_model      = require('../../../models/submissions'),
     works_model            = require('../../../models/works'),
-
+    
+    submissions_get_schema = require('../../../schemas/works/submissions/submissions_get'),
     submissions_put_schema = require('../../../schemas/works/submissions/submissions_put'),
     submission_files_get_schema    = require('../../../schemas/works/submissions/submission_files_get'),
     submission_files_delete_schema = require('../../../schemas/works/submissions/submission_files_delete'),
@@ -26,6 +27,11 @@ module.exports = function (router) {
                 code: "NOT_FOUND",
                 params: [ 'submission_id' ]
             });
+        }
+        validator.validate(req.body, submissions_get_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
         }
         return submissions_model.aggregate([
             {
