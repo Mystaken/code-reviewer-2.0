@@ -1,7 +1,7 @@
 Add Submission File
 ===
 ### Description
-Add a file to **work_id**.
+Add a file to **submission_id**.
 
 ### Method
 PUT
