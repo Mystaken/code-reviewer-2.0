@@ -1,5 +1,5 @@
 {
-    "id": "submissions-get",
+    "id": "submissions-put",
     "type": "object",
     "properties": {
         "work_id": {
