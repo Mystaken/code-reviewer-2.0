@@ -36,7 +36,8 @@ module.exports = function (router) {
         return submissions_model.aggregate([
             {
                 $match: {
-                    _id: mongoose.Types.ObjectId(req.query.submission_id)
+                    _id: mongoose.Types.ObjectId(req.query.submission_id),
+                    author_id: req.session_user_id
                 },{
                     $project: {
                         submission_id: "$_id",
@@ -146,6 +147,7 @@ module.exports = function (router) {
                 },{
                     $project: {
                         submission_file_id: "$_id",
+                        name: 1,
                         work_id: 1,
                         author_id: 1,
                         code: 1
