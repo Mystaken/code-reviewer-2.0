@@ -1,0 +1,12 @@
+{
+    "id": "submissions-delete",
+    "type": "object",
+    "properties": {
+        "submission_file_id": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "submission_file_id" ]
+}

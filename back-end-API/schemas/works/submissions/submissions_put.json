@@ -1,12 +1,12 @@
 {
-    "id": "submissions-delete",
+    "id": "submissions-get",
     "type": "object",
     "properties": {
-        "submission_id": {
+        "work_id": {
             "type": "string",
             "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "submission_id" ]
+    "required": [ "work_id" ]
 }

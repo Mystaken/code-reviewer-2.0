@@ -5,13 +5,13 @@ var validator   = require('../../lib/validator'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
 
-    submission_rules_model  = require('../../models/works'),
+    works_model  = require('../../models/works'),
 
     works_get_schema    = require('../../schemas/works/works_get'),
     works_put_schema    = require('../../schemas/works/works_put'),
     works_post_schema   = require('../../schemas/works/works_post'),
-    works_delete_schema   = require('../../schemas/works/works_delete'),
-    works_all_get_schema   = require('../../schemas/works/works_all_get');
+    works_delete_schema = require('../../schemas/works/works_delete'),
+    works_all_get_schema = require('../../schemas/works/works_all_get');
 
 
 module.exports = function (router) {
@@ -30,7 +30,7 @@ module.exports = function (router) {
                 params: [ 'work_id' ]
             });
         }
-        return submission_rules_model.aggregate([
+        return works_model.aggregate([
             { 
                 $match: {
                     _id: mongoose.Types.ObjectId(req.query.work_id),
@@ -78,7 +78,7 @@ module.exports = function (router) {
             status: 'active'
         };
         //check if work exists
-        return submission_rules_model.aggregate([
+        return works_model.aggregate([
                 {
                     $match: {
                         name: req.body.name
@@ -91,7 +91,7 @@ module.exports = function (router) {
                         params: [ 'name' ]
                     });
                 }
-                return new submission_rules_model(query).save();
+                return new works_model(query).save();
             }).then(function(ret) {
                 res.sendResponse(ret._id);
             }).catch(function(err) {
@@ -132,14 +132,14 @@ module.exports = function (router) {
             update_query.ta_review_deadline = mongoose.getDefaultDate(req.body.ta_review_deadline);
         }
         utils.clean(update_query);
-        return submission_rules_model.find(find_query).exec().then(function(ret) {
+        return works_model.find(find_query).exec().then(function(ret) {
             if (!ret.length) {
                 return Promise.reject({
                         code: "NOT_FOUND",
                         params: [ 'work_id' ]
                     });
             }
-            return submission_rules_model.findOneAndUpdate(find_query, update_query).exec();
+            return works_model.findOneAndUpdate(find_query, update_query).exec();
         }).then(function(ret) {
             res.sendResponse(ret._id);
         }).catch(function (err) {
@@ -160,14 +160,14 @@ module.exports = function (router) {
         query = {
             _id: mongoose.Types.ObjectId(req.body.work_id)
         };
-        return submission_rules_model.find(query).exec().then(function(ret) {
+        return works_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
                 return Promise.reject({
                         code: "NOT_FOUND",
                         params: [ 'work_id' ]
                     });
             }
-            return submission_rules_model.findOneAndUpdate(query, {
+            return works_model.findOneAndUpdate(query, {
                     status: 'inactive'
                 }).exec();
         }).then(function(ret) {
@@ -187,7 +187,7 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        return submission_rules_model.aggregate([
+        return works_model.aggregate([
             { 
                 $project : {
                     work_id: "$_id",

@@ -1,20 +1,16 @@
 {
-    "id": "submissions-file-put",
+    "id": "submissions-file-upload",
     "type": "object",
     "properties": {
         "name": {
             "type": "string",
             "maxLength": 100
         },
-        "content": {
-            "type": "string",
-            "minLength": 1
-        },
-        "work_id": {
+        "submission_id": {
             "type": "string",
             "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "work_id" ]
+    "required": [ "submission_id", "name" ]
 }

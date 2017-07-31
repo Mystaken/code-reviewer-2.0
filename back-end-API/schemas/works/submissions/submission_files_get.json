@@ -2,11 +2,11 @@
     "id": "submissions-get",
     "type": "object",
     "properties": {
-        "submission_id": {
+        "submission_file_id": {
             "type": "string",
             "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "submission_id" ]
+    "required": [ "submission_file_id" ]
 }
