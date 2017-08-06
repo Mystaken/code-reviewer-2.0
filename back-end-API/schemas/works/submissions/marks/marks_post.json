@@ -1,0 +1,15 @@
+{
+    "id": "marks-get",
+    "type": "object",
+    "properties": {
+        "submission_id": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "marks": {
+            "type": "number"
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "submission_id" ]
+}

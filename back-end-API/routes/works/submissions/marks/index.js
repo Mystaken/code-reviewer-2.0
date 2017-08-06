@@ -29,13 +29,13 @@ module.exports = function (router) {
                 $match: {
                     _id: mongoose.Types.ObjectId(req.query.submission_id),
                     author_id: req.body.author_id
-                },{
-                    $project: {
-                        submission_id: "$_id",
-                        _id: 0,
-                        mark: 1
-                    }
-                }  
+                }
+            },{
+                $project: {
+                    submission_id: "$_id",
+                    _id: 0,
+                    mark: 1
+                }
             }
         ]).exec().then(function(ret) {
              if (!ret || !ret.length) {
@@ -83,3 +83,4 @@ module.exports = function (router) {
     }).all(function (req, res, next) {
         return res.invalidVerb();
     });
+}

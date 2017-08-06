@@ -38,21 +38,21 @@ module.exports = function (router) {
                 $match: {
                     _id: mongoose.Types.ObjectId(req.query.submission_id),
                     author_id: req.session_user_id
-                },{
-                    $project: {
-                        submission_id: "$_id",
-                        _id: 0,
-                        files: 1,
-                        author_id: 1,
-                        work_id: 1,
-                        create_date: { 
-                            $dateToString: { 
-                                format: "%Y-%m-%d %H:%M:%S", 
-                                date: "$last_login" 
-                            }
+                }
+            },{
+                $project: {
+                    submission_id: "$_id",
+                    _id: 0,
+                    files: 1,
+                    author_id: 1,
+                    work_id: 1,
+                    create_date: { 
+                        $dateToString: { 
+                            format: "%Y-%m-%d %H:%M:%S", 
+                            date: "$last_login" 
                         }
                     }
-                }  
+                }
             }
         ]).exec().then(function(ret) {
             if (!ret || !ret.length) {
