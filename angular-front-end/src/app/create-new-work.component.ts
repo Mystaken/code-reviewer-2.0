@@ -49,10 +49,10 @@ import { ApiService } from './api.service'
 			<md-datepicker #peer_review></md-datepicker>
 -->
 			<div>
-				<button type="submit" class="btn btn-success" (click)="submit();">Submit</button>
+				<div type="submit" class="btn btn-success" (click)="submit();">Submit</div>
 
 
-				<button type="reset" class="btn btn-success">Reset</button>
+				<div type="reset" class="btn btn-success">Reset</div>
 			</div>
 
 		</div>
