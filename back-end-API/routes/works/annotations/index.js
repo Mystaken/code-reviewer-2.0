@@ -25,10 +25,10 @@ module.exports = function (router) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
 
-        if (req.session_user_type !== 'admin' &&
-            req.session_user_id !== req.query.user_id) {
-            return res.forbidden();
-        }
+        // if (req.session_user_type !== 'admin' &&
+        //     req.session_user_id !== req.query.user_id) {
+        //     return res.forbidden();
+        // }
 
         if (!mongoose.validID(req.query.submissions_id)) {
             return res.requestError({
