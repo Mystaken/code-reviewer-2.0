@@ -1,4 +1,4 @@
-import { Headers, Http } from '@angular/http';
+import { Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Rx';
 
@@ -35,17 +35,26 @@ export class ApiService {
     }
 
 
-
     // get all the submissions belongs to student 
     getSubmissions(user_id: string) {
-        const query = {user_id: user_id};
-        return this.http.get("http://localhost:3000/api/works/submissions/all", query)
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('user_id', user_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
+        
+        return this.http.get("http://localhost:3000/api/works/submissions/all", requestOptions)
             .map(res => res.json().data);
     }
 
-
     // @kevin this might be helpfull, change them it they are wrong 
     getOneSubmission(sub_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('submission_id', sub_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
+
         const query = {submission_id : sub_id}; // hardcode sub_id
         return this.http.get("http://localhost:3000/api/works/submissions", query)
             .map(res => res.json().data);    
