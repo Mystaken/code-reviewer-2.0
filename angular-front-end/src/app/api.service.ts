@@ -47,7 +47,7 @@ export class ApiService {
             .map(res => res.json().data);
     }
 
-    // @kevin this might be helpfull, change them it they are wrong 
+    // get one submission 
     getOneSubmission(sub_id: string) {
         let params: URLSearchParams = new URLSearchParams();
         params.set('submission_id', sub_id);
@@ -55,32 +55,42 @@ export class ApiService {
         let requestOptions = new RequestOptions();
         requestOptions.params = params;
 
-        const query = {submission_id : sub_id}; // hardcode sub_id
-        return this.http.get("http://localhost:3000/api/works/submissions", query)
+        return this.http.get("http://localhost:3000/api/works/submissions", requestOptions)
             .map(res => res.json().data);    
     }
 
     // get all annotations of one submission
     getAnnotations(user_id: string, sub_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('submission_id', sub_id);
+        params.set('review_by', user_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
+
+        return this.http.get("http://localhost:3000/api/works/annotations", requestOptions)
+            .map(res => res.json().data);
+    }
+
+
+    // // get the actual code of the submission
+    // getCode(subf_id: string) {
+    //     let params: URLSearchParams = new URLSearchParams();
+    //     params.set('submission_id', sub_id);
+
+    //     let requestOptions = new RequestOptions();
+    //     requestOptions.params = params;
+    //     const query = {submission_file_id : subf_id};
+    //     return this.http.get("http://localhost:3000/api/works/submissions/files", requestOptions)
+    //         .map(res => res.json().data);
+    // }
+
+    // // get all the feedbacks of on submission
+    getFeedbacks(user_id: string, sub_id: string) {
         const query = {submission_id : sub_id, review_by : user_id};
         return this.http.get("http://localhost:3000/api/works/annotations", query)
             .map(res => res.json().data);
     }
-
-
-    // get the actual code of the submission
-    getCode(subf_id: string) {
-        const query = {submission_file_id : subf_id};
-        return this.http.get("http://localhost:3000/api/works/submissions/files", query)
-            .map(res => res.json().data);
-    }
-
-    // // get all the feedbacks of on submission
-    // getFeedbacks(user_id: string, sub_id: string) {
-    //     const query = {submission_id : sub_id, review_by : user_id};
-    //     return this.http.get("http://localhost:3000/api/works/annotations", query)
-    //         .map(res => res.json().data);
-    // }
 
 
 }
