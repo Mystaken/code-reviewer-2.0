@@ -7,11 +7,13 @@
     margin-left: 1px;
     margin-right: 1px;
 }
+
 .jmessage.show {
   padding: 5px;
   visibility: visible;
   opacity: 1;
 }
+
 .jmessage {
     position: absolute;
     margin: 10px;
@@ -31,12 +33,18 @@
          -moz-user-select: none;
           -ms-user-select: none;
               user-select: none;
-
 }
+
 .jcontent {
     margin: 20px;
 }
+
 .jitem > * {
     font-family: Roboto;
     color: black !important;
+}
+
+/* Fix pop-up menu overlaps with navbar */
+.cdk-overlay-pane {
+  top: 50px !important;
 }
