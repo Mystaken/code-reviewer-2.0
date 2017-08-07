@@ -9,7 +9,7 @@
           <button
           md-menu-item
           *ngFor="let sub_tab_name of tab.sub_tab_names"
-          (click)="on_click(tab.tab_name ,sub_tab_name.id);"
+          (click)="onClick(tab.tab_name, sub_tab_name.value);"
           >
           <md-icon>assignment</md-icon>
           <span>{{ sub_tab_name.name }}</span>
