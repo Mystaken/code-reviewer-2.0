@@ -79,6 +79,7 @@ export class NavbarComponent {
     };
 
     if (stageMapping[stage]) {
+      $('img').hide();
       Object.keys(stageMapping).forEach(function(nextStage) {
         if (nextStage === stage) {
           $(stageMapping[nextStage]).show();
