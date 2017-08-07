@@ -48,10 +48,13 @@
                 <b class="caret"></b> {{ tab.tab_name }}
               </a>
               <ul class="nav sidebarnav submenu">
-                <li *ngFor="let sub_tab_name of tab.sub_tab_names">
+                <li *ngFor="let sub_tab_name of tab.sub_tab_names" (click)="onClick(tab.tab_name, sub_tab_name.value);">
                   <a href="#" tabindex="-1">{{ sub_tab_name.name }}</a>
                 </li>
               </ul>
+            </li>
+            <li>
+              <a (click)="onClick('Admin', 'Admin');">Admin</a>
             </li>
           </ul>
         </aside>
