@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { OnInit } from '@angular/core';
+import { ApiService } from './api.service'
 import * as $ from 'jquery';
 
 @Component({
@@ -9,10 +9,19 @@ import * as $ from 'jquery';
   styleUrls: ['./navbar.component.css']
 })
 
-
-
-
 export class NavbarComponent {
+  constructor(private _apiService: ApiService) {
+      this.getWorks();
+  } 
+
+  getWorks(): void {
+      this._apiService
+          .getWorks()
+          .subscribe(function(data) {
+            //populate the  `tabs`
+          });
+  }
+
   ngOnInit() {
     var stageMapping = {
         'Submit': 'submission',
@@ -91,9 +100,4 @@ export class NavbarComponent {
       alert('Comming soon');
     }
   }
-
-  constructor (private http: Http) {
-  }
-  // an example of ajax request
-    // title = this.http.get('localhost:3000/api');
 }
