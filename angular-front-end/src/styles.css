@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+body {
+    font-family: Roboto;
+    font-size: 16px;
+}
+.jcomment {
+    position: relative;
+    height: 32px;
+    display: inline;
+    background-color: #87CEEB;
+    margin-left: 1px;
+    margin-right: 1px;
+}
+.jmessage.show {
+  padding: 5px;
+  visibility: visible;
+  opacity: 1;
+}
+.jmessage {
+    position: absolute;
+    margin: 10px;
+    background-color: white;
+    color: black;
+    visibility: hidden;
+    opacity: 0;
+    width: 400px;
+    z-index: 999;
+    top: 10px;
+    left: 0;
+    transition: 0.2s ease-out;
+    box-shadow: 0 11px 15px -7px rgba(0,0,0,.2), 0 10px 38px 3px rgba(0,0,0,.14);
+    -webkit-touch-callout: none;
+      -webkit-user-select: none; 
+       -khtml-user-select: none;
+         -moz-user-select: none; 
+          -ms-user-select: none; 
+              user-select: none;
+
+}
+.jcontent {
+    margin: 20px;
+}
+.jitem > * {
+    font-family: Roboto;
+    color: black !important;
+}

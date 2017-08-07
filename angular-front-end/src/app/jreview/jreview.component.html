@@ -1,0 +1,18 @@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/agate.min.css">
+<div id="edit-code">
+    <div class="code-block"><code [innerHTML]="displayCode" class="python" id="code"></code></div>
+    <div class="toolbar">
+        <md-list>
+            <h2 md-subheader>
+                {{file_name}}
+            </h2>
+            <md-divider></md-divider>
+            <md-list-item>
+                <button md-button (click)="addComments()">
+                    <md-icon>comment</md-icon>
+                        Comment
+                    </button>
+            </md-list-item>
+        </md-list>
+    </div>
+</div>

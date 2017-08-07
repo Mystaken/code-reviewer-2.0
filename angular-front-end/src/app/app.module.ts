@@ -6,7 +6,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { MdCheckboxModule, MaterialModule, MdNativeDateModule } from '@angular/material';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
-
+import { JreviewModule } from './jreview/jreview.module'
 
 import { WindowComponent } from './window.component'
 import { TodoListComponent } from './todo-list.component'
@@ -47,6 +47,7 @@ import { ApiService } from './api.service'
     MaterialModule,
     MdNativeDateModule,
     NgxDatatableModule,
+    JreviewModule
   ],
   providers: [ApiService],
   bootstrap: [AppComponent]

@@ -1,0 +1,16 @@
+.code-block  {
+    width: 750px;
+}
+
+#code {
+    white-space: pre-wrap;
+    background-image: url("https://lh3.googleusercontent.com/-OXpVYPTayGs/WAEs4IUoYII/AAAAAAAAAOg/RCJDCfLYyT8QPLG-0wp6P8K1iRth5XVLQCJoC/w2100-h990/wallhaven-320504.png");
+
+}
+#edit-code {
+    display: flex;
+}
+
+.toolbark {
+    margin: auto;
+}

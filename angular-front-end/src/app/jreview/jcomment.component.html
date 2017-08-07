@@ -1,0 +1,14 @@
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.10/semantic.min.css" />
+
+
+<div class="jcomment" (click)="open()">
+    <h1>test</h1>
+    <div class="jmessage" [class.show]="show">
+    <div class="jcontent">
+        <div *ngFor="let comment of comments;">
+            {{comment}}
+        </div>
+    </div>
+    </div>
+</div>
+<ng-content></ng-content>
