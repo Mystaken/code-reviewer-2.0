@@ -5,8 +5,10 @@ var mongoose = require('mongoose'),
 
 feedbacks_schema = new mongoose.Schema({
 	submission_id: mongoose.Schema.Types.ObjectId,
+    work_id: mongoose.Schema.Types.ObjectId,
 	author: mongoose.Schema.Types.ObjectId,		// author of code
 	review_by: mongoose.Schema.Types.ObjectId,
+    mark_by: mongoose.Schema.Types.ObjectId,
 	feedbacks: [ String ],
     mark : Number,
     create_date: Date,
