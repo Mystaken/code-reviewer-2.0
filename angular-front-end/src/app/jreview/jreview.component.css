@@ -43,8 +43,8 @@
 
 .dismiss-btn {
   position: fixed;
-  top: 40%;
-  left: 40%;
+  bottom: 50px;
+  left: 50%;
 }
 
 #instruction-highlight {
