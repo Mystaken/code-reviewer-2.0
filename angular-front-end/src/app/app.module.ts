@@ -18,10 +18,8 @@ import { AdminComponent } from './admin.component'
 import { StudentTableComponent } from './student-table.component'
 import { EditStudentComponent } from './edit-student.component'
 import { SubmissionComponent } from './submission.component'
+import { TipsComponent } from './tips.component'
 import { ApiService } from './api.service'
-
-
-
 
 @NgModule({
   declarations: [
@@ -35,7 +33,8 @@ import { ApiService } from './api.service'
     AdminComponent,
     StudentTableComponent,
     EditStudentComponent,
-    SubmissionComponent
+    SubmissionComponent,
+    TipsComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,9 +46,13 @@ import { ApiService } from './api.service'
     MaterialModule,
     MdNativeDateModule,
     NgxDatatableModule,
-    JreviewModule
+    JreviewModule,
   ],
-  providers: [ApiService],
-  bootstrap: [AppComponent]
+  providers: [
+    ApiService,
+  ],
+  bootstrap: [
+    AppComponent,
+  ],
 })
 export class AppModule { }

@@ -1,0 +1,17 @@
+<!-- This will be made into ramdom programming tips. For now it's hard-coded. -->
+<div class="alert alert-warning">
+  <h3>ProTip: In-place swapping of two numbers.</h3>
+  <p>Python provides an intuitive way to do assignments and swapping in one line. Please refer the below example.</p>
+  <div class="code-block">
+    <br>
+<code class="python" id="code">print(x, y)
+x, y = y, x
+print(x, y)
+#1 (10, 20)
+#2 (20, 10)
+</code>
+    <br>
+  </div>
+  <p>The assignment on the right seeds a new tuple. While the left one instantly unpacks that (unreferenced) tuple to the names &lt;a&gt; and &lt;b&gt;.</p>
+  <p>Once the assignment is through, the new tuple gets unreferenced and flagged for garbage collection. The swapping of variables also occurs at eventually.</p>
+</div>
