@@ -12,14 +12,44 @@ import * as $ from 'jquery';
 export class NavbarComponent {
   constructor(private _apiService: ApiService) {
       this.getWorks();
-  } 
+  }
 
-  getWorks(): void {
-      this._apiService
-          .getWorks()
-          .subscribe(function(data) {
-            //populate the  `tabs`
-          });
+  getWorks() {
+    var tabs = [
+      {
+        tab_name: 'Submit',
+        sub_tab_names: [],
+      },
+      {
+        tab_name: 'Reflect',
+        sub_tab_names: [],
+      },
+      {
+        tab_name: 'Review',
+        sub_tab_names: [],
+      },
+      {
+        tab_name: 'Results',
+        sub_tab_names: [],
+      },
+    ];
+
+    this._apiService
+      .getWorks()
+      .subscribe(function(data) {
+        data.forEach(function(nextWork) {
+          if (nextWork.status === 'active') {
+            tabs.forEach(function(nextTab) {
+              nextTab.sub_tab_names.push({
+                value: nextWork.work_id,
+                name: nextWork.name,
+              });
+            });
+          }
+        });
+      });
+
+    return tabs;
   }
 
   ngOnInit() {
@@ -39,44 +69,7 @@ export class NavbarComponent {
   }
 
   username = 'Student Name';
-  tabs = [
-    {
-      tab_name: 'Submit',
-      sub_tab_names: [
-        {
-          value: 'a1',
-          name: 'Assignment 1',
-        },
-      ],
-    },
-    {
-      tab_name: 'Reflect',
-      sub_tab_names: [
-        {
-          value: 'a1',
-          name: 'Assignment 1',
-        },
-      ],
-    },
-    {
-      tab_name: 'Review',
-      sub_tab_names: [
-        {
-          value: 'a1',
-          name: 'Assignment 1',
-        },
-      ],
-    },
-    {
-      tab_name: 'Results',
-      sub_tab_names: [
-        {
-          id: 'a1',
-          name: 'Assignment 1',
-        },
-      ],
-    },
-  ];
+  tabs = this.getWorks();
 
   onClick = function(stage, workId) {
     var stageMapping = {
