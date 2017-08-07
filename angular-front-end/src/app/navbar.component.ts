@@ -97,7 +97,7 @@ export class NavbarComponent {
         }
       });
     } else {
-      alert('Comming soon');
+      alert('Coming soon');
     }
   }
 }
