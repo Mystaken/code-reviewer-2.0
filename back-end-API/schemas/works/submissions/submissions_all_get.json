@@ -5,8 +5,11 @@
         "author_id": {
             "type": "string",
             "maxLength": 100
+        },
+        "work_id": {
+            "type": "string",
+            "maxLength": 100
         }
     },
-    "additionalProperties": false,
-    "required": [ "author_id" ]
+    "additionalProperties": false
 }

@@ -12,7 +12,7 @@ var validator = require('../../../lib/validator'),
     
     submissions_get_schema = require('../../../schemas/works/submissions/submissions_get'),
     submissions_put_schema = require('../../../schemas/works/submissions/submissions_put'),
-    submission_all_get_schema = require('../../../schemas/works/submissions/submission_all_get'),
+    submissions_all_get_schema = require('../../../schemas/works/submissions/submissions_all_get'),
     submission_files_get_schema    = require('../../../schemas/works/submissions/submission_files_get'),
     submission_files_delete_schema = require('../../../schemas/works/submissions/submission_files_delete'),
     submission_files_put_schema    = require('../../../schemas/works/submissions/submission_files_put'),
@@ -133,11 +133,14 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
+
+        var query = {}
+        if (req.query.work_id) query.work_id = mongoose.Types.ObjectId(req.query.work_id);
+        if (req.query.user_id) query.author_id = mongoose.Types.ObjectId(req.query.user_id);
+
         return submissions_model.aggregate([
             {
-                $match: {
-                    author_id: mongoose.Types.ObjectId(req.query.user_id)
-                }
+                $match: query
             },{
                 $project: {
                     submission_id: "$_id",
