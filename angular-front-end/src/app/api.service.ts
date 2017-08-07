@@ -78,7 +78,7 @@ export class ApiService {
     // get the actual code of the submission
     getCode(subf_id: string) {
         let params: URLSearchParams = new URLSearchParams();
-        params.set('submission_id', subf_id);
+        params.set('submission_file_id', subf_id);
 
         let requestOptions = new RequestOptions();
         requestOptions.params = params;
