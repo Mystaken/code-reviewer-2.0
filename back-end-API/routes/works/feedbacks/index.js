@@ -10,7 +10,8 @@ var validator   = require('../../../lib/validator'),
 
     feedback_get_schema    = require('../../../schemas/works/feedbacks/feedbacks_get'),
     feedback_put_schema    = require('../../../schemas/works/feedbacks/feedbacks_put'),
-    feedback_post_schema   = require('../../../schemas/works/feedbacks/feedbacks_post');
+    feedback_post_schema   = require('../../../schemas/works/feedbacks/feedbacks_post'),
+    feedback_all_get_schema = require('../../../schemas/works/feedbacks/feedbacks_all_get');
 
 module.exports = function (router) {
 
@@ -142,5 +143,49 @@ module.exports = function (router) {
         });
     }).all(function (req, res, next) {
         return res.invalidVerb();
+    });
+
+    router.route('/all').get(function(req, res, next) {
+
+        var error;
+
+        validator.validate(req.query, feedback_all_get_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+
+
+        var query = req.query
+        if (req.query.submission_id) query.submission_id = mongoose.Types.ObjectId(req.query.submission_id);
+        if (req.query.work_id) query.work_id = mongoose.Types.ObjectId(req.query.work_id);
+        if (req.query.author) query.author = mongoose.Types.ObjectId(req.query.author);
+        if (req.query.review_by) query.review_by = mongoose.Types.ObjectId(req.query.review_by);
+
+        return feedbacks_model.aggregate([
+            { 
+                $match: query
+            },{
+                $project: {
+                    feedback_id: "$_id",
+                    _id: 0,
+                    submission_id: 1,
+                    feedbacks: 1,
+                    mark: 1,
+                    author: 1,
+                    review_by: 1
+                }
+            }
+        ]).exec().then(function (submission) {
+            if (!submission || !submission.length) {
+                return res.requestError({
+                    code: "NOT_FOUND",
+                    params: [ 'feedback_id' ]
+                });
+            }
+            return res.sendResponse(submission);
+        }).catch(function (error) {
+            res.requestError(error);
+        });
     });
 };
