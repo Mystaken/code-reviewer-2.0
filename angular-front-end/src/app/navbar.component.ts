@@ -58,7 +58,7 @@ export class NavbarComponent {
         'Reflect': '',
         'Review': 'j-review',
         'Results': '',
-        'Admin stuff': 'admin',
+        'Admin': 'admin',
     };
 
     Object.keys(stageMapping).forEach(function(nextStage) {
@@ -77,7 +77,7 @@ export class NavbarComponent {
         'Reflect': '',
         'Review': 'j-review',
         'Results': '',
-        'Admin stuff': 'admin',
+        'Admin': 'admin',
     };
 
     if (stageMapping[stage]) {

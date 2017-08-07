@@ -164,3 +164,14 @@ div.sidebar {
 div.user-info-mobile {
   padding-left: 15px;
 }
+
+.admin-btn {
+  line-height: 50px;
+  background-color: rgb(92, 107, 192);
+  padding: 0 20px;
+}
+
+.admin-btn:hover {
+  background: #7986CB;
+  cursor: pointer;
+}

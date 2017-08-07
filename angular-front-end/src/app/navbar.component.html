@@ -1,23 +1,22 @@
-  <div class="navbar">
+<div class="navbar">
   <div class="navbar-desktop">
     <div class="stage-buttons">
       <ul>
         <li *ngFor="let tab of tabs" md-raised-button [mdMenuTriggerFor]="menu">
-        <a href="#">{{ tab.tab_name }}</a>
-        <!-- dropdown -->
-        <md-menu #menu="mdMenu">
-          <button
-          md-menu-item
-          *ngFor="let sub_tab_name of tab.sub_tab_names"
-          (click)="onClick(tab.tab_name, sub_tab_name.value);"
-          >
-          <md-icon>assignment</md-icon>
-          <span>{{ sub_tab_name.name }}</span>
-          </button>
-        </md-menu>
+          <a href="#">{{ tab.tab_name }}</a>
+          <!-- dropdown -->
+          <md-menu #menu="mdMenu">
+            <button md-menu-item *ngFor="let sub_tab_name of tab.sub_tab_names" (click)="onClick(tab.tab_name, sub_tab_name.value);">
+              <md-icon>assignment</md-icon>
+              <span>{{ sub_tab_name.name }}</span>
+            </button>
+          </md-menu>
         </li>
       </ul>
     </div>
+    <a class="admin-btn" (click)="onClick('Admin', 'Admin');">
+      Admin
+    </a>
     <div>
       <span>{{ username }}</span>
       <button class="nav-btn">
@@ -46,14 +45,11 @@
           <ul class="nav sidebarnav">
             <li class="dropdown" *ngFor="let tab of tabs">
               <a class="ripple-effect dropdown-toggle" href="#" data-toggle="dropdown">
-              <b class="caret"></b>
-              {{ tab.tab_name }}
+                <b class="caret"></b> {{ tab.tab_name }}
               </a>
               <ul class="nav sidebarnav submenu">
                 <li *ngFor="let sub_tab_name of tab.sub_tab_names">
-                  <a href="#" tabindex="-1">
-                  {{ sub_tab_name.name }}
-                  </a>
+                  <a href="#" tabindex="-1">{{ sub_tab_name.name }}</a>
                 </li>
               </ul>
             </li>
@@ -62,3 +58,4 @@
       </div>
     </div>
   </div>
+</div>
