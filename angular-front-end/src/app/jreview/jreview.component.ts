@@ -1,4 +1,4 @@
-import { 
+import {
     Component,
     ElementRef,
     Input,
@@ -21,7 +21,7 @@ import * as $ from 'jquery';
     ]
 })
 export class JreviewComponent implements AfterViewInit, OnInit  {
-    @Input() 
+    @Input()
     code;
     @Input()
     comments;
@@ -39,6 +39,13 @@ export class JreviewComponent implements AfterViewInit, OnInit  {
                     $(c).children('.jmessage').removeClass('show');
                 }
             });
+        });
+
+        // Create keyboard shortcut "Press C" for add comment.
+        $(document).keydown(function(event) {
+          if ($('.comment-btn') && event.which === 67) {
+            $('.comment-btn').trigger('click');
+          }
         });
     }
     ngOnInit() {
