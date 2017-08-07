@@ -1,5 +1,6 @@
-import { Component } from '@angular/core'
+import { Component } from '@angular/core';
 import { Http } from '@angular/http';
+import { OnInit } from '@angular/core';
 @Component({
   selector: 'navbar',
   templateUrl: './navbar.component.html',
@@ -11,6 +12,9 @@ import { Http } from '@angular/http';
 
 export class NavbarComponent {
   // color of buttons
+  ngOnInit() {
+    // ...
+  }
   color = ["Red", "Orange", "Yellow", "Olive", "Green"];
   username = "The Student's Name"
   tabs = [{
