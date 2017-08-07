@@ -87,8 +87,31 @@ export class ApiService {
             .map(res => res.json().data);
     }
 
+    // get all annotations of one submission
+    getAnnotations(user_id: string, sub_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('submission_id', sub_id);
+        params.set('user_id', user_id);
 
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
 
+        return this.http.get("http://localhost:3000/api/works/annotations", requestOptions)
+            .map(res => res.json().data);
+    }
+
+    // get all the feedbacks of one submission
+    getFeedbacks(sub_id: string, user_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('submission_id', sub_id);
+        params.set('author', user_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
+
+        return this.http.get("http://localhost:3000/api/works/feedbacks/all", requestOptions)
+            .map(res => res.json().data);
+    }
 
     // // get one submission 
     // getOneSubmission(sub_id: string) {
@@ -101,33 +124,4 @@ export class ApiService {
     //     return this.http.get("http://localhost:3000/api/works/submissions", requestOptions)
     //         .map(res => res.json().data);    
     // }
-
-    // get all annotations of one submission
-    getAnnotations(user_id: string, sub_id: string) {
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('submission_id', sub_id);
-        params.set('review_by', user_id);
-
-        let requestOptions = new RequestOptions();
-        requestOptions.params = params;
-
-        return this.http.get("http://localhost:3000/api/works/annotations", requestOptions)
-            .map(res => res.json().data);
-    }
-
-
-    // get all the feedbacks of on submission
-    getFeedbacks(work_id: string, sub_id: string) {
-        let params: URLSearchParams = new URLSearchParams();
-        params.set('submission_id', sub_id);
-        params.set('review_by', user_id);
-
-        let requestOptions = new RequestOptions();
-        requestOptions.params = params;
-        return this.http.get("http://localhost:3000/api/works/feedbacks/all", query)
-            .map(res => res.json().data);
-    }
-
-
-
 }
