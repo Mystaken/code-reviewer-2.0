@@ -85,12 +85,45 @@ export class ApiService {
     //         .map(res => res.json().data);
     // }
 
-    // // get all the feedbacks of on submission
-    getFeedbacks(user_id: string, sub_id: string) {
+    // get to review list
+    getToReview(work_id:string, user_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('work_id', work_id);
+        params.set('review_by', user_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
+
+        return this.http.get("http://localhost:3000/api/works/feedbacks/all", RequestOptions)
+            .map(res => res.json().data);
+    }
+
+    // get review_by list
+    getReviewBy(work_id:string, user_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('work_id', work_id);
+        params.set('author', user_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
+
+        return this.http.get("http://localhost:3000/api/works/feedbacks/all", RequestOptions)
+            .map(res => res.json().data);
+    }
+
+    // get all the feedbacks of on submission
+    getFeedbacks(work_id: string, sub_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('submission_id', sub_id);
+        params.set('review_by', user_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
         const query = {submission_id : sub_id, review_by : user_id};
         return this.http.get("http://localhost:3000/api/works/annotations", query)
             .map(res => res.json().data);
     }
+
 
 
 }
