@@ -1,12 +1,12 @@
 {
-    "id": "submissions-get",
+    "id": "submissions-all-get",
     "type": "object",
     "properties": {
-        "submission_id": {
+        "author_id": {
             "type": "string",
             "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "submission_id" ]
+    "required": [ "author_id" ]
 }

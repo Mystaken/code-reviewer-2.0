@@ -12,10 +12,12 @@ var validator = require('../../../lib/validator'),
     
     submissions_get_schema = require('../../../schemas/works/submissions/submissions_get'),
     submissions_put_schema = require('../../../schemas/works/submissions/submissions_put'),
+    submission_all_get_schema = require('../../../schemas/works/submissions/submissions_all_get'),
     submission_files_get_schema    = require('../../../schemas/works/submissions/submission_files_get'),
     submission_files_delete_schema = require('../../../schemas/works/submissions/submission_files_delete'),
     submission_files_put_schema    = require('../../../schemas/works/submissions/submission_files_put'),
     submission_files_upload_schema = require('../../../schemas/works/submissions/submission_files_upload');
+
 
 
 
@@ -122,6 +124,47 @@ module.exports = function (router) {
     }).all(function (req, res, next) {
         return res.invalidVerb();
     });
+
+
+    router.route("/all").get(function(req, res, next) {
+        var error;
+        validator.validate(req.body, submissions_all_get_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+        return submissions_model.aggregate([
+            {
+                $match: {
+                    author_id: mongoose.Types.ObjectId(req.query.user_id)
+                }
+            },{
+                $project: {
+                    submission_id: "$_id",
+                    _id: 0,
+                    files: 1,
+                    author_id: 1,
+                    work_id: 1,
+                    create_date: { 
+                        $dateToString: { 
+                            format: "%Y-%m-%d %H:%M:%S", 
+                            date: "$last_login" 
+                        }
+                    }
+                }
+            }
+        ]).exec().then(function(ret) {
+            if (!ret || !ret.length) {
+                return Promise.reject({
+                        code: "NOT_FOUND",
+                        params: [ 'submission_id' ]
+                    });
+            }
+            return res.sendResponse(ret);
+        }).catch(function(err) {
+            return res.requestError(err);
+        });
+    });  
 
     router.route('/files').get(function(req, res, next) {
         var error;

@@ -38,7 +38,7 @@ export class ApiService {
 
     // get all the submissions belongs to student 
     getSubmissions(user_id: string) {
-        const query = {author_id: user_id};
+        const query = {user_id: user_id};
         return this.http.get("http://localhost:3000/api/works/submissions/all", query)
             .map(res => res.json().data);
     }
