@@ -11,9 +11,9 @@
         (page)="onPage($event)">
 
         <!-- Row Detail Template -->
-        <ngx-datatable-row-detail [rowHeight]="200" #myDetailRow (toggle)="onDetailToggle($event)">
+        <ngx-datatable-row-detail [rowHeight]="400" #myDetailRow (toggle)="onDetailToggle($event)">
           <ng-template let-row="row" ngx-datatable-row-detail-template>
-            <div style="padding-left:35px;">
+            <div style="padding:35px; background: #F5F5F5;">
               <div>
                 <md-input-container>
                   <input mdInput placeholder="Work name" [(ngModel)]="row.name">
@@ -24,6 +24,48 @@
                       {{ num }}
                     </md-option>
                 </md-select>
+
+                <br>
+                <md-input-container>
+                  <input mdInput placeholder="repo path" [(ngModel)]="row.repo_path">
+                </md-input-container>
+
+                <md-input-container>
+                  <input mdInput placeholder="file name" [(ngModel)]="row.required_files[0]">
+                </md-input-container>
+
+                <div type="submit" class="btn btn-success" (click)="loadSubmission(row)"> load</div>
+
+
+                <br>
+                <md-checkbox>
+                  Enable student submission:
+                </md-checkbox>
+                <md-input-container>
+                  <input mdInput [mdDatepicker]="student_submission" placeholder="Submission deadline">
+                  <button mdSuffix [mdDatepickerToggle]="student_submission"></button>
+                </md-input-container>
+                <md-datepicker #student_submission></md-datepicker>
+
+                <br>
+                <md-checkbox>
+                  Enable self review:
+                </md-checkbox>
+                <md-input-container>
+                  <input mdInput [mdDatepicker]="self_review" placeholder="Self review deadline">
+                  <button mdSuffix [mdDatepickerToggle]="self_review"></button>
+                </md-input-container>
+                <md-datepicker #self_review></md-datepicker>
+
+                <br>
+                <md-checkbox>
+                  Enable peer review:
+                </md-checkbox>
+                <md-input-container>
+                  <input mdInput [mdDatepicker]="peer_review" placeholder="Peer review deadline">
+                  <button mdSuffix [mdDatepickerToggle]="peer_review"></button>
+                </md-input-container>
+                <md-datepicker #peer_review></md-datepicker>
 
                 <div>
                   <div type="submit" class="btn btn-success" (click)="edit(row)"> Submit</div>

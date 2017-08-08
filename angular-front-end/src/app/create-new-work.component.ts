@@ -22,7 +22,7 @@ import { WorkTableComponent } from './work-table.component';
 				<input mdInput placeholder="Repo path">
 			</md-input-container>
 
-			<!-- deadlines 
+			
 			<br>
 			<md-checkbox>
 				Enable student submission:
@@ -52,7 +52,7 @@ import { WorkTableComponent } from './work-table.component';
 				<button mdSuffix [mdDatepickerToggle]="peer_review"></button>
 			</md-input-container>
 			<md-datepicker #peer_review></md-datepicker>
--->
+
 			<div>
 				<div type="submit" class="btn btn-success" (click)="submit();">Submit</div>
 
