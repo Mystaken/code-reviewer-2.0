@@ -1,6 +1,7 @@
-import { Component } from '@angular/core'
-import { Http } from '@angular/http'
-import { ApiService } from './api.service'
+import { Component } from '@angular/core';
+import { Http } from '@angular/http';
+import { ApiService } from './api.service';
+import { WorkTableComponent } from './work-table.component';
 
 @Component({
 	selector: 'create-new-work',
@@ -16,6 +17,10 @@ import { ApiService } from './api.service'
     				{{ num }}
   				</md-option>
 			</md-select>
+
+			<md-input-container>
+				<input mdInput placeholder="Repo path">
+			</md-input-container>
 
 			<!-- deadlines 
 			<br>
@@ -72,15 +77,17 @@ export class CreateNewWorkComponent {
 	num_peers = 0;
 
 	submit() {
-		console.log(1);
-		console.log(this.work_name, this.num_peers);
+		var workTableComponent = this.workTableComponent;
 		return this.apiService
 			.createNewWork(this.work_name, this.num_peers)
-			.subscribe(p=>p);
+			.subscribe(function(data) {
+				workTableComponent.getWorks();
+			});
 	}
 
 
-	constructor(private apiService: ApiService) {
+	constructor(private apiService: ApiService, 
+		private workTableComponent: WorkTableComponent) {
     }
 
 }

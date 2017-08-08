@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Http } from '@angular/http';
-import { ApiService } from './api.service'
+import { ApiService } from './api.service';
 import * as $ from 'jquery';
 
 @Component({

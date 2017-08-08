@@ -7,7 +7,8 @@ export class ApiService {
 
     private headers = new Headers({'Content-Type': 'application/json'});
 
-    constructor(private http: Http) { }
+    constructor(private http: Http) { 
+    }
 
 
     getPost(): Observable<any> {

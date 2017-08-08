@@ -18,19 +18,16 @@ export class WorkTableComponent {
         this.getWorks();
     } 
 
-    getWorks(): void {
+    getWorks() {
         this._apiService
             .getWorks()
             .subscribe(data => this.rows = data);
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
         this.getWorks();
     }
 
-    test() {
-        console.log(this.rows);
-    }
 
     expanded: any = {};
     timeout: any;
@@ -45,6 +42,7 @@ export class WorkTableComponent {
     }
 
     toggleExpandRow(row) {
+        console.log(this.table.rowDetail);
         console.log('Toggled Expand Row!', row);
         this.table.rowDetail.toggleExpandRow(row);
     }

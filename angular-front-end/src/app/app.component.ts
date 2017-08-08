@@ -14,7 +14,7 @@ import 'rxjs/add/operator/toPromise';
 
 export class AppComponent {
   
-  comments;
+  comments = [];
   file_name="a1.py";
   title=`class Book():
     '''A class representing a book.'''
@@ -32,15 +32,4 @@ export class AppComponent {
         self._title = title
         self._retail_cost = retail_cost
         self._sale_cost = sale_cost`;
-  constructor(private http: Http) {
-    this.comments = []/*"0,20,abc".split('\n').map(function(comment) {
-            var cmt = comment.split(',');
-            return {
-                start: parseInt(cmt[0]),
-                end: parseInt(cmt[1]),
-                comment: cmt[2]
-            };
-        });*/
-    console.log(this.comments)
-  }
 }
