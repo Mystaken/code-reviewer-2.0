@@ -72,6 +72,20 @@ export class WorkTableComponent {
 
     }
 
+    loadSubmission(row) {
+        //TODO:
+        // read file `row.repo_path + "/" + utorid + "/" + required_file` i forgot..
+
+        // you will need to call this._apiService.createSubmission(..) 
+        // and this._apiService.createSubmissionFile(...)
+        // those two functions are not implemented.. I will do it when I wake up 
+        // just assume they are there.
+        // or you can simple console what you read from file for testing
+
+        // show a message saying successful loaded..
+
+    }
+
     edit(row) {
         console.log(row.work_id);
         console.log(row);
