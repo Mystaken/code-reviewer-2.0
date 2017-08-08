@@ -4,14 +4,13 @@
   <p>Python provides an intuitive way to do assignments and swapping in one line. Please refer the below example.</p>
   <div class="code-block">
     <br>
-<code class="python" id="code">print(x, y)
+<code id="code">x = 10
+y = 20
+print(x, y)  # 10 20
 x, y = y, x
-print(x, y)
-#1 (10, 20)
-#2 (20, 10)
+print(x, y)  # 20 10
 </code>
     <br>
   </div>
-  <p>The assignment on the right seeds a new tuple. While the left one instantly unpacks that (unreferenced) tuple to the names &lt;a&gt; and &lt;b&gt;.</p>
-  <p>Once the assignment is through, the new tuple gets unreferenced and flagged for garbage collection. The swapping of variables also occurs at eventually.</p>
+  <p>The assignment on the right seeds a new tuple. While the left one instantly unpacks that tuple to the names &lt;a&gt; and &lt;b&gt;.</p>
 </div>
