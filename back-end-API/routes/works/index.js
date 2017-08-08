@@ -98,6 +98,7 @@ module.exports = function (router) {
                 return res.requestError(err);
             });
     }).post(function(req, res, next) {
+        console.log(req.body);
         var error,
             find_query,
             update_query;
@@ -108,6 +109,7 @@ module.exports = function (router) {
         validator.validate(req.body, works_post_schema);
         error = validator.getLastErrors();
         if (error) {
+            console.log("????");
             return res.requestError({ code: "VALIDATION", message: error });
         }
         find_query = {

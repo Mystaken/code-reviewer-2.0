@@ -15,7 +15,21 @@
           <ng-template let-row="row" ngx-datatable-row-detail-template>
             <div style="padding-left:35px;">
               <div>
-                <create-new-work></create-new-work>
+                <md-input-container>
+                  <input mdInput placeholder="Work name" [(ngModel)]="row.name">
+                </md-input-container>
+
+                <md-select placeholder="Number of peers" [(ngModel)]="row.num_peers">
+                  <md-option *ngFor="let num of num_peers_options" [value]="num">
+                      {{ num }}
+                    </md-option>
+                </md-select>
+
+                <div>
+                  <div type="submit" class="btn btn-success" (click)="edit(row)"> Submit</div>
+                  <div type="reset" class="btn btn-success">Reset</div>
+                </div>
+
               </div>
             </div>
           </ng-template>

@@ -35,6 +35,13 @@ export class ApiService {
             .put("http://localhost:3000/api/works", JSON.stringify({name: name, num_peers: num_peers}), {headers: this.headers});
     }
 
+    // edit a new work
+    editWork(query) {
+        let headers = new Headers({'Content-Type': 'application/json'});
+        return this.http
+            .post("http://localhost:3000/api/works", JSON.stringify(query), {headers: this.headers});
+    }
+
     // return a list of user_id that is going to review
     getToReview(work_id:string, user_id: string) {
         let params: URLSearchParams = new URLSearchParams();
