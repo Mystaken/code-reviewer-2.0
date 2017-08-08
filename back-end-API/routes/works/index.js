@@ -44,6 +44,7 @@ module.exports = function (router) {
                     name: 1,
                     num_peers: 1,
                     required_files: 1,
+                    repo_path: 1,
                     feedback_questions: 1
                 }
             }

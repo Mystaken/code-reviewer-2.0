@@ -22,6 +22,14 @@ import { WorkTableComponent } from './work-table.component';
 				<input mdInput placeholder="Repo path">
 			</md-input-container>
 
+            <br>
+            <md-input-container>
+              <input mdInput placeholder="repo path" [(ngModel)]="repo_path">
+            </md-input-container>
+
+            <md-input-container>
+              <input mdInput placeholder="file name" [(ngModel)]="required_files">
+            </md-input-container>
 			
 			<br>
 			<md-checkbox>
@@ -75,6 +83,8 @@ export class CreateNewWorkComponent {
 
 	work_name = "enter work name here";
 	num_peers = 0;
+	repo_path = "";
+	required_files = ""; // it should be a list, x = [required_files]
 
 	submit() {
 		var workTableComponent = this.workTableComponent;
