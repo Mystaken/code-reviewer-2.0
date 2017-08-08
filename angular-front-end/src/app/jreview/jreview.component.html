@@ -9,6 +9,14 @@
     </md-list>
   </div>
   <div class="code-block"><code [innerHTML]="displayCode" class="python" id="code"></code></div>
+    <div class="ui list">
+      <div class="item" *ngFor="let comment of comments; let i = index">
+        {{comment.comment}}
+        <div class="right floated content">
+          <i class="remove icon" (click)="deleteComment(i);"></i>
+        </div>
+      </div>
+    </div>
   <button class="comment-btn" md-button (click)="addComments()">
     <md-icon>comment</md-icon>
     <u>C</u>omment

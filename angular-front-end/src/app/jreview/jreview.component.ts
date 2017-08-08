@@ -24,7 +24,7 @@ export class JreviewComponent implements AfterViewInit, OnInit  {
     @Input()
     code;
     @Input()
-    comments;
+    comments = [];
     @Input()
     file_name
     private changed = false;
@@ -32,7 +32,6 @@ export class JreviewComponent implements AfterViewInit, OnInit  {
     seperatedComments;
 
     constructor(private el: ElementRef, private sanitizer:DomSanitizer, public dialog: MdDialog) {
-        console.log(this.comments);
         $(document).on('click', function(event) {
             $('.jcomment').each(function (i, c) {
                 if(!c.contains(event.target)) {
@@ -181,13 +180,9 @@ export class JreviewComponent implements AfterViewInit, OnInit  {
             curr,
             len;
         while(i >= 0) {
-            console.log(cmts);
             curr = this.seperatedComments[i].comments.reduce(function(a, b) {
                 return (cmts[a] || { comment: ""}).comment.length + cmts[b].comment.length;
             }, -1);
-            console.log(this.seperatedComments[i]);
-            console.log(this.comments);
-            console.log('--', curr);
             if (start - curr > this.seperatedComments[i].end) {
                 start = start - curr;
                 end = end - curr;
@@ -203,20 +198,21 @@ export class JreviewComponent implements AfterViewInit, OnInit  {
         if (end > 0 && end - start > 3) {
             let dialogRef = this.dialog.open(JcommentDialogComponent);
             dialogRef.afterClosed().subscribe(result => {
-                console.log(result);
                 if (result) {
                     this.comments[this.comments.length-1].comment = result
                     this.updateComments();
                 } else {
                     this.comments.splice(-1, 1);
-                    console.log(this.comments)
                     this.updateComments();
                 }
             });
         }  else {
             this.comments.splice(-1, 1);
-            console.log(this.comments)
             this.updateComments();
         }
+    }
+    deleteComment(i) {
+      this.comments.splice(i, 1);
+      this.updateComments();
     }
 }
