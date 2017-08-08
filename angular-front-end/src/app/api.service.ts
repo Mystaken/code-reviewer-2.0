@@ -62,6 +62,20 @@ export class ApiService {
             .map(res => res.review_by);
     }
 
+    // return a list of user_id that is going to review
+    getToMark(work_id:string, user_id: string) {
+        let params: URLSearchParams = new URLSearchParams();
+        params.set('work_id', work_id);
+        params.set('mark_by', user_id);
+
+        let requestOptions = new RequestOptions();
+        requestOptions.params = params;
+
+        return this.http.get("http://localhost:3000/api/works/feedbacks/all", RequestOptions)
+            .map(res => res.json().data)
+            .map(res => res.author);
+    }
+
     // get all the submissions belongs to student 
     getSubmissions(work_id: string, user_id: string) {
         let params: URLSearchParams = new URLSearchParams();
