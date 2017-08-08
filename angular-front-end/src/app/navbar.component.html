@@ -25,7 +25,7 @@
     </div>
   </div>
   <div class="navbar-mobile">
-    <div class="overlay"></div>
+    <div class="overlay" onclick="$('.sidebar, .overlay').hide();"></div>
     <div class="nav-btn-bar">
       <button class="nav-btn" onclick="$('.sidebar, .overlay').show();">
         <md-icon>menu</md-icon>
@@ -49,12 +49,12 @@
               </a>
               <ul class="nav sidebarnav submenu">
                 <li *ngFor="let sub_tab_name of tab.sub_tab_names" (click)="onClick(tab.tab_name, sub_tab_name.value);">
-                  <a href="#" tabindex="-1">{{ sub_tab_name.name }}</a>
+                  <a href="#" tabindex="-1" onclick="$('.sidebar, .overlay').hide();">{{ sub_tab_name.name }}</a>
                 </li>
               </ul>
             </li>
             <li>
-              <a (click)="onClick('Admin', 'Admin');">Admin</a>
+              <a href="#" (click)="onClick('Admin', 'Admin');" onclick="$('.sidebar, .overlay').hide();">Admin</a>
             </li>
           </ul>
         </aside>
