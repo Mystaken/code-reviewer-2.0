@@ -37,6 +37,7 @@ export class ApiService {
 
   // edit a new work
   editWork(query) {
+    delete query.status;
     let headers = new Headers({'Content-Type': 'application/json'});
     return this.http
       .post("http://localhost:3000/api/works", JSON.stringify(query), {headers: this.headers});

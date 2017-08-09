@@ -87,7 +87,6 @@ export class WorkTableComponent {
   }
 
   edit(row) {
-    delete row.status;
     return this._apiService
       .editWork(this.createQuery(row))
       .subscribe(function(data) {
