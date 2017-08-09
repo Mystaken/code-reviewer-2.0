@@ -45,6 +45,11 @@
 }
 
 /* Fix pop-up menu overlaps with navbar */
-.cdk-overlay-pane {
-  top: 50px !important;
+.mat-menu-panel {
+  position: absolute;
+  top: 50px;
+}
+
+html.fix-opaque-dialog-background {
+  overflow-y: initial;
 }
