@@ -1,113 +1,90 @@
-    <div>
-      <ngx-datatable
-        #myTable
-        class='material expandable'
-        [columnMode]="'force'"
-        [headerHeight]="50"
-        [footerHeight]="50"
-        [rowHeight]="50"
-        [scrollbarV]="50"
-        [rows]='rows'
-        (page)="onPage($event)">
+<div>
+  <ngx-datatable #myTable class='material expandable' [columnMode]="'force'" [headerHeight]="50" [footerHeight]="50" [rowHeight]="50" [scrollbarV]="50" [rows]='rows' (page)="onPage($event)">
 
-        <!-- Row Detail Template -->
-        <ngx-datatable-row-detail [rowHeight]="400" #myDetailRow (toggle)="onDetailToggle($event)">
-          <ng-template let-row="row" ngx-datatable-row-detail-template>
-            <div style="padding:35px; background: #F5F5F5;">
-              <div>
-                <md-input-container>
-                  <input mdInput placeholder="Work name" [(ngModel)]="row.name">
-                </md-input-container>
+    <!-- Row Detail Template -->
+    <ngx-datatable-row-detail [rowHeight]="400" #myDetailRow (toggle)="onDetailToggle($event)">
+      <ng-template let-row="row" ngx-datatable-row-detail-template>
+        <div style="padding:35px; background: #F5F5F5;">
+          <div>
+            <md-input-container>
+              <input mdInput placeholder="Work name" [(ngModel)]="row.name">
+            </md-input-container>
 
-                <md-select placeholder="Number of peers" [(ngModel)]="row.num_peers">
-                  <md-option *ngFor="let num of num_peers_options" [value]="num">
-                      {{ num }}
-                    </md-option>
-                </md-select>
+            <md-select placeholder="Number of peers" [(ngModel)]="row.num_peers">
+              <md-option *ngFor="let num of num_peers_options" [value]="num">
+                {{ num }}
+              </md-option>
+            </md-select>
 
-                <br>
-                <md-input-container>
-                  <input mdInput placeholder="repo path" [(ngModel)]="row.repo_path">
-                </md-input-container>
+            <br>
+            <md-input-container>
+              <input mdInput placeholder="repo path" [(ngModel)]="row.repo_path">
+            </md-input-container>
 
-                <md-input-container>
-                  <input mdInput placeholder="file name" [(ngModel)]="row.required_files[0]">
-                </md-input-container>
+            <md-input-container>
+              <input mdInput placeholder="file name" [(ngModel)]="row.required_files[0]">
+            </md-input-container>
 
-                <div type="submit" class="btn btn-success" (click)="loadSubmission(row)"> load</div>
+            <div type="submit" class="btn btn-success" (click)="loadSubmission(row)"> load</div>
 
+            <br>
+            <md-checkbox>
+              Enable student submission:
+            </md-checkbox>
+            <md-input-container>
+              <input mdInput [mdDatepicker]="student_submission" placeholder="Submission deadline">
+              <button mdSuffix [mdDatepickerToggle]="student_submission"></button>
+            </md-input-container>
+            <md-datepicker #student_submission></md-datepicker>
 
-                <br>
-                <md-checkbox>
-                  Enable student submission:
-                </md-checkbox>
-                <md-input-container>
-                  <input mdInput [mdDatepicker]="student_submission" placeholder="Submission deadline">
-                  <button mdSuffix [mdDatepickerToggle]="student_submission"></button>
-                </md-input-container>
-                <md-datepicker #student_submission></md-datepicker>
+            <br>
+            <md-checkbox>
+              Enable self review:
+            </md-checkbox>
+            <md-input-container>
+              <input mdInput [mdDatepicker]="self_review" placeholder="Self review deadline">
+              <button mdSuffix [mdDatepickerToggle]="self_review"></button>
+            </md-input-container>
+            <md-datepicker #self_review></md-datepicker>
 
-                <br>
-                <md-checkbox>
-                  Enable self review:
-                </md-checkbox>
-                <md-input-container>
-                  <input mdInput [mdDatepicker]="self_review" placeholder="Self review deadline">
-                  <button mdSuffix [mdDatepickerToggle]="self_review"></button>
-                </md-input-container>
-                <md-datepicker #self_review></md-datepicker>
+            <br>
+            <md-checkbox>
+              Enable peer review:
+            </md-checkbox>
+            <md-input-container>
+              <input mdInput [mdDatepicker]="peer_review" placeholder="Peer review deadline">
+              <button mdSuffix [mdDatepickerToggle]="peer_review"></button>
+            </md-input-container>
+            <md-datepicker #peer_review></md-datepicker>
 
-                <br>
-                <md-checkbox>
-                  Enable peer review:
-                </md-checkbox>
-                <md-input-container>
-                  <input mdInput [mdDatepicker]="peer_review" placeholder="Peer review deadline">
-                  <button mdSuffix [mdDatepickerToggle]="peer_review"></button>
-                </md-input-container>
-                <md-datepicker #peer_review></md-datepicker>
-
-                <div>
-                  <div type="submit" class="btn btn-success">Distribute Student</div>
-                  <div type="submit" class="btn btn-success">Distribute TA</div>
-                  <div type="submit" class="btn btn-success" (click)="edit(row)">Submit</div>
-
-                </div>
-
-              </div>
+            <div>
+              <div type="submit" class="btn btn-success">Distribute Student</div>
+              <div type="submit" class="btn btn-success">Distribute TA</div>
+              <div type="submit" class="btn btn-success" (click)="edit(row)">Submit</div>
+              <div type="submit" class="btn btn-danger" (click)="delete(row)">Delete</div>
             </div>
-          </ng-template>
-        </ngx-datatable-row-detail>
+          </div>
+        </div>
+      </ng-template>
+    </ngx-datatable-row-detail>
 
-        <!-- column of expand buttons -->
-        <ngx-datatable-column
-          [width]="50"
-          [resizeable]="false"
-          [sortable]="false"
-          [draggable]="false"
-          [canAutoResize]="false">
-          <ng-template let-row="row" ngx-datatable-cell-template>
-            <i class="glyphicon"
-              href="#"
-              [class.glyphicon-chevron-right]="fold"
-              [class.glyphicon-chevron-down]="!fold"
-              title="Expand/Collapse Row"
-              (click)="toggleExpandRow(row)">
-            </i>
-          </ng-template>
-        </ngx-datatable-column>
+    <!-- column of expand buttons -->
+    <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false" [canAutoResize]="false">
+      <ng-template let-row="row" ngx-datatable-cell-template>
+        <i class="glyphicon" href="#" [class.glyphicon-chevron-right]="fold" [class.glyphicon-chevron-down]="!fold" title="Expand/Collapse Row" (click)="toggleExpandRow(row)"></i>
+      </ng-template>
+    </ngx-datatable-column>
 
-        <!-- all other data columns -->
-        <ngx-datatable-column name="Work Name" prop="name">
-        </ngx-datatable-column>
+    <!-- all other data columns -->
+    <ngx-datatable-column name="Work Name" prop="name">
+    </ngx-datatable-column>
 
-        <ngx-datatable-column name="Stage" prop="status">
-        </ngx-datatable-column>
+    <ngx-datatable-column name="Stage" prop="status">
+    </ngx-datatable-column>
 
-        <ngx-datatable-column name="Number of Peers" prop="num_peers">
-        </ngx-datatable-column>
-
-      </ngx-datatable>
-    </div>
-    <button (click)="test()">abc</button>
-    <create-new-work></create-new-work>
+    <ngx-datatable-column name="Number of Peers" prop="num_peers">
+    </ngx-datatable-column>
+  </ngx-datatable>
+</div>
+<button (click)="test()">abc</button>
+<create-new-work></create-new-work>
