@@ -16,7 +16,7 @@ export class WorkTableComponent {
 
     constructor(private _apiService: ApiService) {
         this.getWorks();
-    } 
+    }
 
     getWorks() {
         this._apiService
@@ -76,9 +76,9 @@ export class WorkTableComponent {
         //TODO:
         // read file `row.repo_path + "/" + utorid + "/" + required_file` i forgot..
 
-        // you will need to call this._apiService.createSubmission(..) 
+        // you will need to call this._apiService.createSubmission(..)
         // and this._apiService.createSubmissionFile(...)
-        // those two functions are not implemented.. I will do it when I wake up 
+        // those two functions are not implemented.. I will do it when I wake up
         // just assume they are there.
         // or you can simple console what you read from file for testing
 
@@ -89,7 +89,7 @@ export class WorkTableComponent {
     edit(row) {
         console.log(row.work_id);
         console.log(row);
-
+        delete row.status;
         return this._apiService
             .editWork(this.createQuery(row))
             .subscribe(function(data) {
