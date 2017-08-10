@@ -51,6 +51,7 @@ export class WorkTableComponent {
     // this.work_name = row.name;
     // this.num_peers = row.num;
     this.table.rowDetail.toggleExpandRow(row);
+    this.test();
   }
 
   onDetailToggle(event) {
@@ -105,8 +106,64 @@ export class WorkTableComponent {
   }
 
 
-    createMessage(self_review){
-        console.log("***", self_review);
-        return self_review ? "enabled" : "disabled"
-    }
+  createMessage(self_review){
+    console.log("***", self_review);
+    return self_review ? "enabled" : "disabled"
+  }
+
+  // !!!!!!!! 
+  distributeStudent(row) {
+    this._apiService
+      .getSubmissions(row.work_id, null)
+      .subscribe(function(submissions) {
+        // SUFFLE  
+        var len = submissions.lenth;
+        var current_index = len, temp, random_index;
+        // While there remain elements to shuffle...
+        while (0 !== current_index) {
+          // Pick a remaining element...
+          random_index = Math.floor(Math.random() * current_index);
+          current_index -= 1;
+          // And swap it with the current element.
+          temp = submissions[current_index];
+          submissions[current_index] = submissions[random_index];
+          submissions[random_index] = temp;
+        }
+
+        // DISTRIBUTE 
+        for (var i = 0; i < len; i ++) { // TODO!!! comfirm num_peers (popup)
+          for (var j = 1; j <= row.num_peers; j ++) {
+
+            var query = {
+              'submission_id': submissions[i].submission_id,
+              'author': submissions[i].author_id,
+              'review_by': submissions[(i + j) % len].author_id
+            }
+
+            this._apiService
+              .createFeedback(query)
+              .subscribe(data => data)
+          }
+        }
+      })
+  }
+
+  test() {
+    var x = null;
+    if (x) console.log("!!!!!!!!!!!!!!");
+
+    var submissions = [1, 2, 3, 4, 5, 6, 7]
+        var current_index = submissions.length, temp, random_index;
+        // While there remain elements to shuffle...
+        while (0 !== current_index) {
+          // Pick a remaining element...
+          random_index = Math.floor(Math.random() * current_index);
+          current_index -= 1;
+          // And swap it with the current element.
+          temp = submissions[current_index];
+          submissions[current_index] = submissions[random_index];
+          submissions[random_index] = temp;
+        }
+        console.log(submissions);
+  }
 }

@@ -89,8 +89,8 @@ module.exports = function (router) {
                     submission_id: req.body.submission_id,
                     author: work.author_id,
                     review_by: req.session_user_id,
-                    feedbacks: req.body.feedbacks,
-                    mark: req.body.mark,
+                    feedbacks: req.body.feedbacks || [],
+                    mark: req.body.mark || 0,
                     create_date: date,
                     last_updated: date,
                     status: 'active'

@@ -35,6 +35,19 @@ export class ApiService {
       .put("http://localhost:3000/api/works", JSON.stringify(query), {headers: this.headers});
   }
 
+  createFeedback(query) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this.http
+      .put("http://localhost:3000/api/works/feedbacks", JSON.stringify(query), {headers: this.headers});
+  }
+
+  createAnnotation(query) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this.http
+      .put("http://localhost:3000/api/works/annotations", JSON.stringify(query), {headers: this.headers});
+  }
+
+
   // edit a new work
   editWork(query) {
     delete query.status;
@@ -95,8 +108,8 @@ export class ApiService {
   // get all the submissions belongs to student
   getSubmissions(work_id: string, user_id: string) {
     let params: URLSearchParams = new URLSearchParams();
-    params.set('work_id', work_id);
-    params.set('user_id', user_id);
+    if (work_id) params.set('work_id', work_id);
+    if (user_id) params.set('user_id', user_id);
 
     let requestOptions = new RequestOptions();
     requestOptions.params = params;
@@ -142,6 +155,8 @@ export class ApiService {
     return this.http.get("http://localhost:3000/api/works/feedbacks/all", requestOptions)
       .map(res => res.json().data);
   }
+
+
 
   // // get one submission
   // getOneSubmission(sub_id: string) {
