@@ -28,7 +28,7 @@
             <div type="submit" class="btn btn-success" (click)="loadSubmission(row)"> load</div>
 
             <br>
-            <md-checkbox>
+            <md-checkbox >
               Enable student submission:
             </md-checkbox>
             <md-input-container>
@@ -38,24 +38,27 @@
             <md-datepicker #student_submission></md-datepicker>
 
             <br>
-            <md-checkbox>
-              Enable self review:
-            </md-checkbox>
-            <md-input-container>
-              <input mdInput [mdDatepicker]="self_review" placeholder="Self review deadline">
-              <button mdSuffix [mdDatepickerToggle]="self_review"></button>
-            </md-input-container>
-            <md-datepicker #self_review></md-datepicker>
-
-            <br>
-            <md-checkbox>
-              Enable peer review:
+            <md-checkbox [(ngModel)]="row.peer_review" 
+            (change)="row.self_review_message=createMessage(row.peer_review)">
+              Peer Review is {{row.peer_review_message}}.
             </md-checkbox>
             <md-input-container>
               <input mdInput [mdDatepicker]="peer_review" placeholder="Peer review deadline">
               <button mdSuffix [mdDatepickerToggle]="peer_review"></button>
             </md-input-container>
             <md-datepicker #peer_review></md-datepicker>
+
+            <br>
+            <md-checkbox [(ngModel)]="row.self_review" 
+            (change)="row.self_review_message=createMessage(row.self_review)">
+              Self Review is {{row.self_review_message}}.
+            </md-checkbox>
+
+            <br><br>
+            <md-checkbox [(ngModel)]="row.mark_review" 
+            (change)="row.self_review_message=createMessage(row.mark_review)">
+              Mark Review is {{row.mark_review_message}}.
+            </md-checkbox>
 
             <div>
               <div type="submit" class="btn btn-success">Distribute Student</div>

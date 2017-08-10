@@ -45,6 +45,9 @@ export class WorkTableComponent {
 
   toggleExpandRow(row) {
     console.log('Toggled Expand Row!', row);
+    row.self_review_message = this.createMessage(row.self_review);
+    row.peer_review_message = this.createMessage(row.peer_review);
+    row.mark_review_message = this.createMessage(row.mark_review);
     // this.work_name = row.name;
     // this.num_peers = row.num;
     this.table.rowDetail.toggleExpandRow(row);
@@ -63,7 +66,10 @@ export class WorkTableComponent {
       status: row.status,
       feedback_questions: row.feedback_questions,
       required_files: row.required_files,
-      work_id: row.work_id
+      work_id: row.work_id,
+      self_review: row.self_review,
+      peer_review: row.peer_review,
+      mark_review: row.mark_review
     };
     return query;
 
@@ -84,6 +90,7 @@ export class WorkTableComponent {
   }
 
   edit(row) {
+      console.log(row);
     return this._apiService
       .editWork(this.createQuery(row))
       .subscribe(function(data) {
@@ -96,4 +103,10 @@ export class WorkTableComponent {
       .subscribe(function(data) {
       });
   }
+
+
+    createMessage(self_review){
+        console.log("***", self_review);
+        return self_review ? "enabled" : "disabled"
+    }
 }

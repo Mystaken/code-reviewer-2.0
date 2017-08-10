@@ -37,18 +37,6 @@
         "status": {
             "type": "string",
             "maxLength": 100
-        },
-        "peer_review": {
-            "type": "string",
-            "maxLength": 100
-        },
-        "self_review": {
-            "type": "string",
-            "maxLength": 100
-        },
-        "mark_review": {
-            "type": "string",
-            "maxLength": 100
         }
     },
     "additionalProperties": false,

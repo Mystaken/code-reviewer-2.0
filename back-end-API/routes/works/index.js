@@ -77,9 +77,9 @@ module.exports = function (router) {
             required_files: req.body.required_files || [],
             feedback_questions: req.body.feedback_questions || [],
             repo_path: req.body.repo_path || "",
-            peer_review: 'inactive',
-            self_review: 'inactive',
-            mark_review: 'inactive',
+            peer_review: false,
+            self_review: false,
+            mark_review: false,
             status: 'active'
         };
         //check if work exists
