@@ -68,6 +68,7 @@ module.exports = function (router) {
         validator.validate(req.body, works_put_schema);
         error = validator.getLastErrors();
         if (error) {
+            console.log("BADDDDD");
             return res.requestError({ code: "VALIDATION", message: error });
         }
         query = {
@@ -76,6 +77,9 @@ module.exports = function (router) {
             required_files: req.body.required_files || [],
             feedback_questions: req.body.feedback_questions || [],
             repo_path: req.body.repo_path || "",
+            peer_review: 'inactive',
+            self_review: 'inactive',
+            mark_review: 'inactive',
             status: 'active'
         };
         //check if work exists
@@ -96,6 +100,7 @@ module.exports = function (router) {
             }).then(function(ret) {
                 res.sendResponse(ret._id);
             }).catch(function(err) {
+                console.log("NOOOOO", err);
                 return res.requestError(err);
             });
     }).post(function(req, res, next) {
@@ -123,6 +128,9 @@ module.exports = function (router) {
             required_files: req.body.required_files,
             feedback_questions: req.body.feedback_questions,
             repo_path: req.body.repo_path,
+            peer_review: req.body.peer_review,
+            self_review: req.body.self_review,
+            mark_review: req.body.mark_review,
             status: 'active'
         };
         if (req.body.student_submission_deadline) {
@@ -198,7 +206,11 @@ module.exports = function (router) {
                     num_peers: 1,
                     name: 1,
                     required_files: 1,
+                    repo_path: 1,
                     feedback_questions: 1,
+                    peer_review: 1,
+                    self_review: 1,
+                    mark_review: 1,
                     status: 1
                 }
             }

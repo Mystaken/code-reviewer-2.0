@@ -29,21 +29,6 @@
         "repo_path": {
             "type": "string",
             "maxLength": 100
-        },
-        "student_submission_deadline": {
-            "type": "string",
-            "format": "date",
-            "maxLength": 100
-        },
-        "peer_review_deadline": {
-            "type": "string",
-            "format": "date",
-            "maxLength": 100
-        },
-        "ta_review_deadline": {
-            "type": "string",
-            "format": "date",
-            "maxLength": 100
         }
     },
     "additionalProperties": false,

@@ -34,24 +34,20 @@
             "type": "string",
             "maxLength": 100
         },
-        "student_submission_deadline": {
-            "type": "string",
-            "format": "date",
-            "maxLength": 100
-        },
-        "peer_review_deadline": {
-            "type": "string",
-            "format": "date",
-            "maxLength": 100
-        },
-        "ta_review_deadline": {
-            "type": "string",
-            "format": "date",
-            "maxLength": 100
-        },
         "status": {
             "type": "string",
-            "format": "date",
+            "maxLength": 100
+        },
+        "peer_review": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "self_review": {
+            "type": "string",
+            "maxLength": 100
+        },
+        "mark_review": {
+            "type": "string",
             "maxLength": 100
         }
     },

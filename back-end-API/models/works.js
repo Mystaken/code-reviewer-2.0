@@ -17,6 +17,18 @@ submission_rules_schema = mongoose.Schema({
     required_files : [String],
     repo_path: String,
     feedback_questions: [String],
+    peer_review: {
+        type: String,
+        enum: ['active', 'inactive']
+    },
+    self_reivew: {
+        type: String,
+        enum: ['active', 'inactive']
+    },
+    mark_review: {
+        type: String,
+        enum: ['active', 'inactive']
+    },
     status: {
         type: String,
         enum: ['active', 'inactive'],

@@ -29,10 +29,10 @@ export class ApiService {
   }
 
   // create a new work
-  createNewWork(name: string, num_peers: number) {
+  createNewWork(query) {
     let headers = new Headers({'Content-Type': 'application/json'});
     return this.http
-      .put("http://localhost:3000/api/works", JSON.stringify({name: name, num_peers: num_peers}), {headers: this.headers});
+      .put("http://localhost:3000/api/works", JSON.stringify(query), {headers: this.headers});
   }
 
   // edit a new work

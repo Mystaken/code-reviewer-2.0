@@ -32,24 +32,21 @@ export class WorkTableComponent {
   expanded: any = {};
   timeout: any;
   num_peers_options = [0, 1, 2, 3, 4, 5, 6, 7];
-  work_name = "";
-  num_peers = 0;
+  // work_name = "";
+  // num_peers = 0;
 
   @ViewChild('myTable') table: any;
 
   onPage(event) {
     clearTimeout(this.timeout);
     this.timeout = setTimeout(() => {
-      console.log('paged!', event);
     }, 100);
   }
 
   toggleExpandRow(row) {
-    console.log(this.table.rowDetail);
     console.log('Toggled Expand Row!', row);
-    this.work_name = row.name;
-    this.num_peers = row.num;
-    console.log(this.work_name);
+    // this.work_name = row.name;
+    // this.num_peers = row.num;
     this.table.rowDetail.toggleExpandRow(row);
   }
 
@@ -95,7 +92,7 @@ export class WorkTableComponent {
 
   delete(row) {
     return this._apiService
-      .deleteWork(this.createQuery({'work_id': row.work_id}))
+      .deleteWork({'work_id': row.work_id})
       .subscribe(function(data) {
       });
   }

@@ -18,10 +18,6 @@ import { WorkTableComponent } from './work-table.component';
   				</md-option>
 			</md-select>
 
-			<md-input-container>
-				<input mdInput placeholder="Repo path">
-			</md-input-container>
-
             <br>
             <md-input-container>
               <input mdInput placeholder="repo path" [(ngModel)]="repo_path">
@@ -86,10 +82,21 @@ export class CreateNewWorkComponent {
 	repo_path = "";
 	required_files = ""; // it should be a list, x = [required_files]
 
+	createQuery() {
+
+		return {
+			'name': this.work_name,
+			'num_peers': this.num_peers,
+			'repo_path': this.repo_path,
+			'required_files': [this.required_files],
+		}
+	}
+
 	submit() {
 		var workTableComponent = this.workTableComponent;
+		console.log("***", this.createQuery());
 		return this.apiService
-			.createNewWork(this.work_name, this.num_peers)
+			.createNewWork(this.createQuery())
 			.subscribe(function(data) {
 				workTableComponent.getWorks();
 			});
