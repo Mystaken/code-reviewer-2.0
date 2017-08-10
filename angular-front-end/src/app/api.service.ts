@@ -47,6 +47,17 @@ export class ApiService {
       .put("http://localhost:3000/api/works/annotations", JSON.stringify(query), {headers: this.headers});
   }
 
+  createSubmission(query) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this.http
+      .put("http://localhost:3000/api/works/submissionss", JSON.stringify(query), {headers: this.headers});
+  }
+
+  createSubmissionFile(query) {
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this.http
+      .put("http://localhost:3000/api/works/submissions/files", JSON.stringify(query), {headers: this.headers});
+  }
 
   // edit a new work
   editWork(query) {
