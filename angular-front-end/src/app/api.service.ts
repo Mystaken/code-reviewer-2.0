@@ -17,8 +17,14 @@ export class ApiService {
   }
 
   // get all the students
-  getStudents() {
-    return this.http.get("http://localhost:3000/api/users/students/all")
+  getStudents(query) {
+    let params: URLSearchParams = new URLSearchParams();
+    if (query.utorid) params.set('utorid', query.utorid);
+
+    let requestOptions = new RequestOptions();
+    requestOptions.params = params;
+
+    return this.http.get("http://localhost:3000/api/users/students/all", RequestOptions)
       .map(res => res.json().data);
   }
 
