@@ -55,7 +55,7 @@ module.exports = function (router) {
                     params: [ 'work_id' ]
                 });
             }
-            return res.sendResponse(work);
+            return res.sendResponse(work[0]);
         }).catch(function(err) {
             return res.requestError(err);
         });
