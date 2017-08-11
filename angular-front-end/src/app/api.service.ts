@@ -184,9 +184,15 @@ export class ApiService {
 
 
   loadSubmissions(query) {
+    let params: URLSearchParams = new URLSearchParams();
+    //params.set('submission_id', );
+    //params.set('author', user_id);
+
+    let requestOptions = new RequestOptions();
+    requestOptions.params = params;
       console.log("loadddd");
-    let headers = new Headers({'Content-Type': 'application/json'});
-    return this.http
-      .post("http://localhost:3000/api/works/submissions/load", JSON.stringify(query), {headers: this.headers});
+
+    return this.http.get("http://localhost:3000/api/works/submissions/load", requestOptions)
+        .map(res => res.json().data);
   }
 }

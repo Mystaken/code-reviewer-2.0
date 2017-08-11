@@ -77,36 +77,21 @@ export class WorkTableComponent {
   }
 
   loadSubmission(row) {
-    return this._apiService
-      .loadSubmissions(row)
-      .subscribe(data => data);
-    //TODO:
-    // read file `row.repo_path + "/" + utorid + "/" + required_file` i forgot..
-
-    // you will need to call this._apiService.createSubmission(..)
-    // and this._apiService.createSubmissionFile(...)
-    // those two functions are not implemented.. I will do it when I wake up
-    // just assume they are there.
-    // or you can simple console what you read from file for testing
-
-    // show a message saying successful loaded..
-
-    // fs.readdir("./../../../a2/", function(err, files) {
-    //   console.log(files);
-    //   //var count = 0;
-    //   // files.forEach(function(file) {
-    //   // var obj;
-    //   // fs.readFile(filePath, 'utf8', function (err, data) {
-    //   //   obj = JSON.parse(data);
-    //   //   count++;
-    //   //               if(count === files.length){
-    //   //                  resolve(self.people);
-    //   //               }
-    //   //           });
-    //   //       });
-    // });
-
+    return this._apiService.loadSubmissions(row).subscribe(function(data) {
+      for (var i = 0; i < data.utorids.length; i ++) {
+        this._apiService.getStudents({'utoird': data.utorids[i]}).subscribe(function(student) {
+          var query = {'work_id': row.work_id, 'author_id': student.user_id, 'name':row.name}
+          this._apiService.createSubmissionFiles(query).subscribe(function(subf_id) {
+            var query = {'work_id': row.work_id, 'author_id': student.user_id, 'files': [subf_id]}
+            this._apiService.createSubmission(query).subscribe(function(data) {
+              console.log('DONE!');
+            });
+          });
+        });
+      }
+    });
   }
+
 
   edit(row) {
       console.log(row);

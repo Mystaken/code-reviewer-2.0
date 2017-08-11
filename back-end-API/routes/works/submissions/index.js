@@ -170,24 +170,23 @@ module.exports = function (router) {
         });
     });
 
-    router.route("/load").post(function(req, res, next) {
+    router.route("/load").get(function(req, res, next) {
         var repo_path = "./../a2/";
         var file_name = 'regex_functions.py';
         fs.readdir(repo_path, function(err, files) {
+            var codes = []
             var count = 0;
             files.forEach(function(file) {
                 var file_path = repo_path + file + '/a2/' + file_name;
                 fs.readFile(file_path, 'utf8', function (err, data) {
-                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
-                    console.log(data);
-                    // TODO: CREATE submissions AND submission_files
-
-
-
-
-
-                    //count++;
-                    //if(count === files.length) reutrn..
+                    codes.push(data);
+                    count++;
+                    if(count === files.length) {
+                        return res.sendResponse({
+                            'utorids': files,
+                            'codes': codes
+                        })
+                    }
                 });
             });
         });
