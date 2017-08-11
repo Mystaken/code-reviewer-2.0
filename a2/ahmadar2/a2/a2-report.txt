@@ -1,0 +1,645 @@
+Autotested Results for a2 submitted by Arsalan Ahmad (ahmadar2)
+Generated at 2016-04-01T02:39:24
+
+Summary of Results: 13 out of 44 tests successfully passed
+--
+
+Tests for test_regex_match.TestRegexMatch (5/18 passed)
+--
+
+1) Correctly matches starred regexes?                                                 .. ok!
+2) Correctly matches various matches of empty string?                                 .. ok!
+3) Correctly rejects near bar-stars?                                                  .. ok!
+4) Correctly matches leaf regexes?                                                    .. ok!
+5) Correctly rejects near dot-bars?                                                   .. ok!
+6) Correctly matches barred regexes?                                                  .. failed
+.. because False is not true : Rejects valid match: (BarTree(Leaf('e'), Leaf('2')), '2') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 70, in test_bar_okay
+        "Rejects valid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid match: (BarTree(Leaf('e'), Leaf('2')), '2')
+
+7) Correctly rejects near dot-stars?                                                  .. failed
+.. because True is not false : Accepts invalid match: (StarTree(DotTree(Leaf('1'), Leaf('1'))), '111') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 131, in test_dot_star_fail
+        "Accepts invalid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid match: (StarTree(DotTree(Leaf('1'), Leaf('1'))), '111')
+
+8) Correctly rejects near bar-star-dots?                                              .. failed
+.. because True is not false : Accepts invalid match: (StarTree(StarTree(Leaf('2'))), '2 2222') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 167, in test_bar_star_dot_fail
+        "Accepts invalid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid match: (StarTree(StarTree(Leaf('2'))), '2 2222')
+
+9) Correctly matches dot-bar regexes?                                                 .. failed
+.. because False is not true : Rejects valid match: (DotTree(BarTree(Leaf('0'), Leaf('1')), BarTree(Leaf('2'), Leaf('0'))), '12') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 103, in test_dot_bar_ok
+        "Rejects valid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid match: (DotTree(BarTree(Leaf('0'), Leaf('1')), BarTree(Leaf('2'), Leaf('0'))), '12')
+
+10) Correctly rejects near-dots?                                                       .. failed
+.. because True is not false : Accepts invalid match: (DotTree(Leaf('1'), Leaf('0')), '1') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 63, in test_dot_fail
+        "Accepts invalid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid match: (DotTree(Leaf('1'), Leaf('0')), '1')
+
+11) Correctly rejects near-stars?                                                      .. failed
+.. because True is not false : Accepts invalid match: (StarTree(Leaf('1')), '1 1') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 93, in test_star_fail
+        "Accepts invalid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid match: (StarTree(Leaf('1')), '1 1')
+
+12) Correct on difficult case for star (1|(1.2))*?                                     .. failed
+.. because False is not true : Rejects valid match: (StarTree(BarTree(Leaf('1'), DotTree(Leaf('1'), Leaf('2')))), '11212') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 178, in test_difficult_star
+        "Rejects valid match: {}".format((r,s)))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid match: (StarTree(BarTree(Leaf('1'), DotTree(Leaf('1'), Leaf('2')))), '11212')
+
+13) Correctly matches bar-star-dot regexes?                                            .. failed
+.. because False is not true : Rejects valid match: (BarTree(StarTree(Leaf('2')), DotTree(Leaf('1'), Leaf('0'))), '10') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 157, in test_bar_star_dot_ok
+        "Rejects valid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid match: (BarTree(StarTree(Leaf('2')), DotTree(Leaf('1'), Leaf('0'))), '10')
+
+14) Correctly matches dotted regexes?                                                  .. failed
+.. because False is not true : Rejects valid match: (DotTree(Leaf('e'), Leaf('2')), '2') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 54, in test_dot_okay
+        "Rejects valid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid match: (DotTree(Leaf('e'), Leaf('2')), '2')
+
+15) Correctly matches dot-star regexes?                                                .. failed
+.. because False is not true : Rejects valid match: (DotTree(StarTree(Leaf('1')), StarTree(Leaf('2'))), '112') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 123, in test_dot_star_ok
+        "Rejects valid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid match: (DotTree(StarTree(Leaf('1')), StarTree(Leaf('2'))), '112')
+
+16) Correctly matches bar-star regexes?                                                .. failed
+.. because False is not true : Rejects valid match: (BarTree(StarTree(Leaf('1')), StarTree(Leaf('0'))), '000') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 139, in test_bar_star_ok
+        "Rejects valid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid match: (BarTree(StarTree(Leaf('1')), StarTree(Leaf('0'))), '000')
+
+17) Correctly rejects near-bars?                                                       .. failed
+.. because True is not false : Accepts invalid match: (BarTree(Leaf('1'), Leaf('2')), '') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 78, in test_bar_fail
+        "Accepts invalid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid match: (BarTree(Leaf('1'), Leaf('2')), '')
+
+18) Correct rejects near-leaves?                                                       .. failed
+.. because True is not false : Accepts invalid match: (Leaf('e'), 'e') (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_regex_match.py", line 38, in test_leaf_fail
+        "Accepts invalid match: {}".format(t))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid match: (Leaf('e'), 'e')
+
+
+
+Tests for test_build_regex_tree.TestBuildRegexTree (2/5 passed)
+--
+
+1) Correctly builds bar trees?                                                        .. ok!
+2) Correctly builds dot trees?                                                        .. ok!
+3) Correctly builds bar-dot trees?                                                    .. failed
+.. because BarTree(DotTree(Leaf('0'), Leaf('1')), DotTree(Leaf('2'), Leaf('e'))) != BarTree(Leaf(['0', '1']), Leaf('.')) : Regex tree BarTree(DotTree(Leaf('0'), Leaf('1')), DotTree(Leaf('2'), Leaf('e'))) doesn't match ((0.1)|(2.e)). (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_build_regex_tree.py", line 66, in test_bar_dot
+        t[0], t[1]))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: BarTree(DotTree(Leaf('0'), Leaf('1')), DotTree(Leaf('2'), Leaf('e'))) != BarTree(Leaf(['0', '1']), Leaf('.')) : Regex tree BarTree(DotTree(Leaf('0'), Leaf('1')), DotTree(Leaf('2'), Leaf('e'))) doesn't match ((0.1)|(2.e)).
+
+4) Correctly builds leaves?                                                           .. error
+.. because string index out of range (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_build_regex_tree.py", line 23, in test_leaf
+        self.assertEqual(t[0], build_regex_tree(t[1]),
+    
+      File "/home/a08test/submissions/ahmadar2/a2/regex_functions.py", line 164, in build_regex_tree
+        if regex_list[0][1][-1] == '*':
+    
+    IndexError: string index out of range
+
+5) Correctly builds star trees?                                                       .. error
+.. because string index out of range (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_build_regex_tree.py", line 49, in test_star
+        self.assertEqual(t[0], build_regex_tree(t[1]),
+    
+      File "/home/a08test/submissions/ahmadar2/a2/regex_functions.py", line 164, in build_regex_tree
+        if regex_list[0][1][-1] == '*':
+    
+    IndexError: string index out of range
+
+
+
+Tests for test_is_regex.TestIsRegex (5/16 passed)
+--
+
+1) Dot regexes accepted?                                                              .. ok!
+2) Leaf regular expressions accepted?                                                 .. ok!
+3) Bar-dot regexes accepted?                                                          .. ok!
+4) Bar-star-dot regexes accepted?                                                     .. ok!
+5) Bar regexes accepted?                                                              .. ok!
+6) Star regexes accepted?                                                             .. failed
+.. because False is not true : Rejects valid regex: e* (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 66, in test_star_ok
+        "Rejects valid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid regex: e*
+
+7) Dot-star-like non-regexes rejected?                                                .. failed
+.. because True is not false : Accepts invalid regex: 0.1* (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 119, in test_dot_star_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: 0.1*
+
+8) Bar-dot-line non-regexes rejected?                                                 .. failed
+.. because True is not false : Accepts invalid regex: (0.1|2.e) (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 89, in test_bar_dot_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: (0.1|2.e)
+
+9) Dot-star regexes accepted?                                                         .. failed
+.. because False is not true : Rejects valid regex: (0.(1.2*))* (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 112, in test_dot_star_ok
+        "Rejects valid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid regex: (0.(1.2*))*
+
+10) Bar-like non-regexes rejected?                                                     .. failed
+.. because True is not false : Accepts invalid regex: 0|1 (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 45, in test_bar_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: 0|1
+
+11) Dot-like non-regexes rejected?                                                     .. failed
+.. because True is not false : Accepts invalid regex: 0.1 (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 59, in test_dot_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: 0.1
+
+12) Bar-star-dot non-regexes rejected?                                                 .. failed
+.. because True is not false : Accepts invalid regex: 0*|1.2 (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 137, in test_bar_star_dot_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: 0*|1.2
+
+13) Star-like non-regexes rejected?                                                    .. failed
+.. because True is not false : Accepts invalid regex: (2*) (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 73, in test_star_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: (2*)
+
+14) Bar-star regexes accepted?                                                         .. failed
+.. because False is not true : Rejects valid regex: (0|(1|2*))* (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 97, in test_bar_star_ok
+        "Rejects valid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : Rejects valid regex: (0|(1|2*))*
+
+15) Leaf non-regexes rejected?                                                         .. failed
+.. because True is not false : Accepts invalid regex: (1) (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 31, in test_leaf_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: (1)
+
+16) Bar-star-like non-regexes rejected?                                                .. failed
+.. because True is not false : Accepts invalid regex: 0|1* (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_is_regex.py", line 104, in test_bar_star_fail
+        "Accepts invalid regex: {}".format(r))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 648, in assertFalse
+        raise self.failureException(msg)
+    
+    AssertionError: True is not false : Accepts invalid regex: 0|1*
+
+
+
+Tests for test_all_regex_perms.TestAllRegexPermutations (0/4 passed)
+--
+
+1) Correctly produces unique permutation of leaf?                                     .. failed
+.. because {'e'} != ['e'] : Different permutation set: {'e'}, ['e'] (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_all_regex_perms.py", line 30, in test_leaf
+        set(s), all_regex_permutations(s)))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: {'e'} != ['e'] : Different permutation set: {'e'}, ['e']
+
+2) Correctly produces permutations of binary regexes?                                 .. failed
+.. because ['(0.1)', '0.(1)', '(1.0)', '1.(0)', '(1).0', '(0).1'] != {'(1.0)', '(0.1)'} : Different permutation sets: ['(0.1)', '0.(1)', '(1.0)', '1.(0)', '(1).0', '(0).1'], {'(1.0)', '(0.1)'} (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_all_regex_perms.py", line 41, in test_binary
+        all_regex_permutations(t[0]), t[1]))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: ['(0.1)', '0.(1)', '(1.0)', '1.(0)', '(1).0', '(0).1'] != {'(1.0)', '(0.1)'} : Different permutation sets: ['(0.1)', '0.(1)', '(1.0)', '1.(0)', '(1).0', '(0).1'], {'(1.0)', '(0.1)'}
+
+3) test_all_regex_perms.TestAllRegexPermutations.test_empty_results                   .. failed
+.. because False is not true : No regular expressions can be formed from ||(011) but returned a non-empty collection (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_all_regex_perms.py", line 22, in test_empty_results
+        " but returned a non-empty collection").format(s))
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : No regular expressions can be formed from ||(011) but returned a non-empty collection
+
+4) Correctly produces permutations of long regex?                                     .. failed
+.. because ['(0*.1)*', '0*.(1)*', '*(0.1)*', '0.*(1)[394 chars]).1'] != {'(0.1**)', '(1.0**)', '(0.1)**', '(0.1*)[86 chars].1)'} (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/ahmadar2/a2/test_all_regex_perms.py", line 50, in test_long
+        self.assertEqual(all_regex_permutations(s), p)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: ['(0*.1)*', '0*.(1)*', '*(0.1)*', '0.*(1)[394 chars]).1'] != {'(0.1**)', '(1.0**)', '(0.1)**', '(0.1*)[86 chars].1)'}
+
+
+
+Tests for test_pep8.TestPEP8 (1/1 passed)
+--
+
+1) test_pep8.TestPEP8.test_pep8                                                       .. ok!
+
+

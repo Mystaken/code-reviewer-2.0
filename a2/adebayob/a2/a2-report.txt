@@ -1,0 +1,211 @@
+Autotested Results for a2 submitted by Babatope Adebayo (adebayob)
+Generated at 2016-04-01T02:39:24
+
+Summary of Results: 0 out of 5 tests successfully passed
+--
+
+Tests for unittest.loader.ModuleImportFailure (0/5 passed)
+--
+
+1) unittest.loader.ModuleImportFailure.test_is_regex                                  .. error
+.. because Failed to import test module: test_is_regex
+Traceback (most recent call last):
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+    __import__(name)
+  File "/home/a08test/submissions/adebayob/a2/test_is_regex.py", line 3, in <module>
+    from regex_functions import *
+  File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+    from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                  ^
+SyntaxError: invalid character in identifier
+ (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 32, in testFailure
+        raise exception
+    
+    ImportError: Failed to import test module: test_is_regex
+    Traceback (most recent call last):
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+        module = self._get_module_from_name(name)
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+        __import__(name)
+      File "/home/a08test/submissions/adebayob/a2/test_is_regex.py", line 3, in <module>
+        from regex_functions import *
+      File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+        from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                      ^
+    SyntaxError: invalid character in identifier
+    
+
+2) unittest.loader.ModuleImportFailure.test_regex_match                               .. error
+.. because Failed to import test module: test_regex_match
+Traceback (most recent call last):
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+    __import__(name)
+  File "/home/a08test/submissions/adebayob/a2/test_regex_match.py", line 3, in <module>
+    from regex_functions import *
+  File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+    from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                  ^
+SyntaxError: invalid character in identifier
+ (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 32, in testFailure
+        raise exception
+    
+    ImportError: Failed to import test module: test_regex_match
+    Traceback (most recent call last):
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+        module = self._get_module_from_name(name)
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+        __import__(name)
+      File "/home/a08test/submissions/adebayob/a2/test_regex_match.py", line 3, in <module>
+        from regex_functions import *
+      File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+        from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                      ^
+    SyntaxError: invalid character in identifier
+    
+
+3) unittest.loader.ModuleImportFailure.test_build_regex_tree                          .. error
+.. because Failed to import test module: test_build_regex_tree
+Traceback (most recent call last):
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+    __import__(name)
+  File "/home/a08test/submissions/adebayob/a2/test_build_regex_tree.py", line 3, in <module>
+    from regex_functions import *
+  File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+    from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                  ^
+SyntaxError: invalid character in identifier
+ (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 32, in testFailure
+        raise exception
+    
+    ImportError: Failed to import test module: test_build_regex_tree
+    Traceback (most recent call last):
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+        module = self._get_module_from_name(name)
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+        __import__(name)
+      File "/home/a08test/submissions/adebayob/a2/test_build_regex_tree.py", line 3, in <module>
+        from regex_functions import *
+      File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+        from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                      ^
+    SyntaxError: invalid character in identifier
+    
+
+4) unittest.loader.ModuleImportFailure.test_pep8                                      .. error
+.. because Failed to import test module: test_pep8
+Traceback (most recent call last):
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+    __import__(name)
+  File "/home/a08test/submissions/adebayob/a2/test_pep8.py", line 3, in <module>
+    import regex_functions
+  File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+    from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                  ^
+SyntaxError: invalid character in identifier
+ (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 32, in testFailure
+        raise exception
+    
+    ImportError: Failed to import test module: test_pep8
+    Traceback (most recent call last):
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+        module = self._get_module_from_name(name)
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+        __import__(name)
+      File "/home/a08test/submissions/adebayob/a2/test_pep8.py", line 3, in <module>
+        import regex_functions
+      File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+        from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                      ^
+    SyntaxError: invalid character in identifier
+    
+
+5) unittest.loader.ModuleImportFailure.test_all_regex_perms                           .. error
+.. because Failed to import test module: test_all_regex_perms
+Traceback (most recent call last):
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+    __import__(name)
+  File "/home/a08test/submissions/adebayob/a2/test_all_regex_perms.py", line 4, in <module>
+    from regex_functions import *
+  File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+    from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                  ^
+SyntaxError: invalid character in identifier
+ (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 32, in testFailure
+        raise exception
+    
+    ImportError: Failed to import test module: test_all_regex_perms
+    Traceback (most recent call last):
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+        module = self._get_module_from_name(name)
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+        __import__(name)
+      File "/home/a08test/submissions/adebayob/a2/test_all_regex_perms.py", line 4, in <module>
+        from regex_functions import *
+      File "/home/a08test/submissions/adebayob/a2/regex_functions.py", line 23
+        from regextree import RegexTree, StarTree, DotTree, BarTree, Leaf
+                                      ^
+    SyntaxError: invalid character in identifier
+    
+
+
+

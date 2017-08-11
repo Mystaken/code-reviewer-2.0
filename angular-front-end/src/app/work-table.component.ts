@@ -148,22 +148,22 @@ export class WorkTableComponent {
       })
   }
 
-  test() {
-    var x = null;
-    if (x) console.log("!!!!!!!!!!!!!!");
+  // test() {
+  //   var x = null;
+  //   if (x) console.log("!!!!!!!!!!!!!!");
 
-    var submissions = [1, 2, 3, 4, 5, 6, 7]
-        var current_index = submissions.length, temp, random_index;
-        // While there remain elements to shuffle...
-        while (0 !== current_index) {
-          // Pick a remaining element...
-          random_index = Math.floor(Math.random() * current_index);
-          current_index -= 1;
-          // And swap it with the current element.
-          temp = submissions[current_index];
-          submissions[current_index] = submissions[random_index];
-          submissions[random_index] = temp;
-        }
-        console.log(submissions);
-  }
+  //   var submissions = [1, 2, 3, 4, 5, 6, 7]
+  //       var current_index = submissions.length, temp, random_index;
+  //       // While there remain elements to shuffle...
+  //       while (0 !== current_index) {
+  //         // Pick a remaining element...
+  //         random_index = Math.floor(Math.random() * current_index);
+  //         current_index -= 1;
+  //         // And swap it with the current element.
+  //         temp = submissions[current_index];
+  //         submissions[current_index] = submissions[random_index];
+  //         submissions[random_index] = temp;
+  //       }
+  //       console.log(submissions);
+  // }
 }
