@@ -1,6 +1,6 @@
-import { Component,ViewEncapsulation, ViewChild, OnInit } from '@angular/core'
-import { Http } from '@angular/http'
-import { ApiService } from './api.service'
+import { Component,ViewEncapsulation, ViewChild, OnInit } from '@angular/core';
+import { Http } from '@angular/http';
+import { ApiService } from './api.service';
 
 
 @Component({
@@ -51,7 +51,7 @@ export class WorkTableComponent {
     // this.work_name = row.name;
     // this.num_peers = row.num;
     this.table.rowDetail.toggleExpandRow(row);
-    this.test();
+    this.loadSubmission(row);
   }
 
   onDetailToggle(event) {
@@ -77,6 +77,9 @@ export class WorkTableComponent {
   }
 
   loadSubmission(row) {
+    return this._apiService
+      .loadSubmissions(row)
+      .subscribe(data => data);
     //TODO:
     // read file `row.repo_path + "/" + utorid + "/" + required_file` i forgot..
 
@@ -87,6 +90,21 @@ export class WorkTableComponent {
     // or you can simple console what you read from file for testing
 
     // show a message saying successful loaded..
+
+    // fs.readdir("./../../../a2/", function(err, files) {
+    //   console.log(files);
+    //   //var count = 0;
+    //   // files.forEach(function(file) {
+    //   // var obj;
+    //   // fs.readFile(filePath, 'utf8', function (err, data) {
+    //   //   obj = JSON.parse(data);
+    //   //   count++;
+    //   //               if(count === files.length){
+    //   //                  resolve(self.people);
+    //   //               }
+    //   //           });
+    //   //       });
+    // });
 
   }
 

@@ -5,6 +5,7 @@ var validator = require('../../../lib/validator'),
     reader    = require('../../../lib/reader'),
     mongoose  = require('mongoose'),
     Promise   = require('bluebird'),
+    fs        = require('fs'),
 
     submission_files_model = require('../../../models/submission_files'),
     submissions_model      = require('../../../models/submissions'),
@@ -167,7 +168,33 @@ module.exports = function (router) {
         }).catch(function(err) {
             return res.requestError(err);
         });
-    });  
+    });
+
+    router.route("/load").post(function(req, res, next) {
+        var repo_path = "./../a2/";
+        var file_name = 'regex_functions.py';
+        fs.readdir(repo_path, function(err, files) {
+            var count = 0;
+            files.forEach(function(file) {
+                var file_path = repo_path + file + '/a2/' + file_name;
+                fs.readFile(file_path, 'utf8', function (err, data) {
+                    console.log("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@");
+                    console.log(data);
+                    // TODO: CREATE submissions AND submission_files
+
+
+
+
+
+                    //count++;
+                    //if(count === files.length) reutrn..
+                });
+            });
+        });
+    });
+
+    
+
 
     router.route('/files').get(function(req, res, next) {
         var error;

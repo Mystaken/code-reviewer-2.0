@@ -180,4 +180,13 @@ export class ApiService {
   //   return this.http.get("http://localhost:3000/api/works/submissions", requestOptions)
   //     .map(res => res.json().data);
   // }
+
+
+
+  loadSubmissions(query) {
+      console.log("loadddd");
+    let headers = new Headers({'Content-Type': 'application/json'});
+    return this.http
+      .post("http://localhost:3000/api/works/submissions/load", JSON.stringify(query), {headers: this.headers});
+  }
 }
