@@ -20,7 +20,7 @@ export class StudentTableComponent {
 
     getStudents(): void {
         this._apiService
-            .getStudents()
+            .getStudents({})
             .subscribe(data => this.rows = data);
     }
 
