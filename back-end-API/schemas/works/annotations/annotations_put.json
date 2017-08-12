@@ -6,6 +6,10 @@
             "type": "string",
             "maxLength": 100
         },
+        "submission_file_id": {
+            "type": "string",
+            "maxLength": 100
+        },
         "annotation": {
             "type": "string",
             "maxLength": 1000
@@ -18,5 +22,5 @@
         }
     },
     "additionalProperties": false,
-    "required": [ "submission_id" ]
+    "required": [ "submission_id", "submission_file_id", "annotation", "start", "end" ]
 }

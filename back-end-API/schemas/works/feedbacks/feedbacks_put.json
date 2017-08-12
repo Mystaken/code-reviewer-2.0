@@ -6,6 +6,10 @@
             "type": "string",
             "maxLength": 100
         },
+        "author_id": {
+            "type": "string",
+            "maxLength": 100
+        },
         "feedbacks": {
             "type": "array",
             "item": {
@@ -21,5 +25,5 @@
         }
     },
     "additionalProperties": false,
-    "required": [ "submission_id", "feedbacks", "mark", "author_id" ]
+    "required": [ "submission_id", "author_id" ]
 }

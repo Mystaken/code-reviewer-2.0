@@ -34,7 +34,7 @@ import { ApiService } from './api.service'
     StudentTableComponent,
     EditStudentComponent,
     SubmissionComponent,
-    TipsComponent,
+    TipsComponent
   ],
   imports: [
     BrowserModule,
@@ -46,13 +46,13 @@ import { ApiService } from './api.service'
     MaterialModule,
     MdNativeDateModule,
     NgxDatatableModule,
-    JreviewModule,
+    JreviewModule
   ],
   providers: [
     ApiService,
   ],
   bootstrap: [
-    AppComponent,
+    AppComponent
   ],
 })
 export class AppModule { }

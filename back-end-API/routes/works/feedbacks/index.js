@@ -64,7 +64,7 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        if (!mongoose.validID(req.query.submission_id)) {
+        if (!mongoose.validID(req.body.submission_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'submission_id' ]
@@ -74,13 +74,12 @@ module.exports = function (router) {
         return submissions_model.aggregate([
                 { 
                     $match: {
-                        _id:    mongoose.Types.ObjectId(req.query.submission_id),
-                        status: 'active'
+                        _id: mongoose.Types.ObjectId(req.body.submission_id)
                     } 
                 }
             ]).exec().then(function (work) {
                 if (!work || !work.length) {
-                    return res.requestError({
+                    return Promise.reject({
                         code: "NOT_FOUND",
                         params: [ 'submission_id' ]
                     });
@@ -96,9 +95,9 @@ module.exports = function (router) {
                     status: 'active'
                 }).save();
             }).then(function(ret) {
-                res.sendResponse(ret._id);
+                return res.sendResponse(ret._id);
             }).catch(function (error) {
-                res.requestError(error);
+                return res.requestError(error);
             });
     }).post(function(req, res, next) {
         var error,
