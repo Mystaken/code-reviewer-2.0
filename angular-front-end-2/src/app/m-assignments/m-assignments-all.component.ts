@@ -34,11 +34,19 @@ export class MAssignmentsAllComponent {
   addAssignment(work_id) {
     return this._assignmentsAPI.getAssignment({
       work_id: work_id
-    }).subscribe((res) => this.assignments.push(res));
+    }).subscribe((res) => {
+      this.assignments.push(res);
+      this.loadSubmissions({'work_id':work_id});
+    });
   }
 
-  loadSubmission(assignment) {
+  loadSubmissions(assignment) {
     //console.log(assignment);
     return this._assignmentsAPI.loadSubmissions(assignment).subscribe((res) => {console.log("DONEEEEE")});
+  }
+
+  loadSubmissionFiles(assignment) {
+    //console.log(assignment);
+    return this._assignmentsAPI.loadSubmissionFiles(assignment).subscribe((res) => {console.log("DONEEEEE")});
   }
 }

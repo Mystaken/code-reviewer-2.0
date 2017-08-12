@@ -25,4 +25,8 @@ export class MAssignmentsService {
   loadSubmissions(params) {
     return this._api.post('works/submissions/loadSubmissions', params);
   }
+
+  loadSubmissionFiles(params) {
+    return this._api.post('works/submissions/loadSubmissionFiles', params);
+  }
 }

@@ -172,56 +172,68 @@ module.exports = function (router) {
         });
     });
 
+
+
     router.route("/loadSubmissions").post(function(req, res, next) {
         if (req.session_user_type !== 'admin') return res.forbidden();
-        console.log(req.body);
-        var repo_path = "./../" + req.body.repo_path;
-        var file_name = req.body.required_files[0];
-        fs.readdir(repo_path, function(err, files) {
-            var count = 1;
-            files.forEach(function(utorid) {
-                var file_path = repo_path + '/'+ utorid + '/a2/' + file_name;
-                fs.readFile(file_path, 'utf8', function (err, code) {
-                    var temp_count = count;
-                    return user_model.aggregate([
-                        { $match: {'utorid': utorid, status: 'active'} },
-                        { $project : { user_id: "$_id", _id: 0 } }
-                    ]).exec().then(function(student) {
-                        return new submission_files_model({
-                            author_id: student[0].user_id,
-                            name: file_name,
-                            work_id: req.body.work_id,
-                            create_date: new Date(),
-                            code: code,
-                            status: 'active'
-                        }).save();
-                    }).then(function(ret) { // no need to check if work or submission exist.
-                        return new submissions_model({
-                            author_id: req.session_user_id,
-                            work_id: req.body.work_id,
-                            create_date: new Date(),
-                            files: [ret._id]
-                        }).save();
-                    }).then(function(ret) {
-                        console.log("DONE!!!!", ret.files, temp_count);
-                        if (temp_count === files.length) return res.sendResponse(ret);
-                    }).catch(function(err) {
-                        console.log("NOPPEEE");
-                        res.requestError(err);
+        return user_model.aggregate([
+            { $match: {user_type: 'student', status:'active'} },
+            { $project : { _id: 1 } }
+        ]).exec().then(function(students) {
+            var count = 0;
+            students.forEach(function(student) {
+                new submissions_model({
+                    author_id: mongoose.Types.ObjectId(student._id),
+                    work_id: mongoose.Types.ObjectId(req.body.work_id),
+                    create_date: new Date(),
+                    files: []
+                }).save();
+                count ++;
+                if (count === students.length) {
+                    return res.sendResponse('done');
+                }
+            });
+        }).catch(function(err) {
+            res.requestError(err);
+        });
+    });
+
+    router.route("/loadSubmissionFiles").post(function(req, res, next) {
+        if (req.session_user_type !== 'admin') return res.forbidden();
+        var repo_name = "./../" + req.body.repo_path;
+        var folder_name = req.body.folder_name;
+        req.body.required_files.forEach(function(file_name) {
+            fs.readdir(repo_name, function(err, files) {
+                var count = 1;
+                files.forEach(function(utorid) {
+                    var file_path = repo_name + '/'+ utorid + '/' + 'a2' + '/' + file_name;
+                    fs.readFile(file_path, 'utf8', function (err, code) {
+                        var temp_count = count;
+                        return user_model.aggregate([
+                            { $match: {'utorid': utorid, status: 'active'} },
+                            { $project : { _id: 1 } }
+                        ]).exec().then(function(student) {
+                            return new submission_files_model({
+                                author_id: mongoose.Types.ObjectId(student[0]._id),
+                                name: file_name,
+                                work_id: mongoose.Types.ObjectId(req.body.work_id),
+                                create_date: new Date(),
+                                code: code,
+                                status: 'active'
+                            }).save();
+                        }).then(function(ret) {
+                            return submissions_model.update(
+                                { 'work_id': mongoose.Types.ObjectId(ret.work_id),
+                                  'author_id': mongoose.Types.ObjectId(ret.author_id)}, 
+                                { $push: {'files': mongoose.Types.ObjectId(ret._id) }
+                            }).exec().then(function() {
+                                if (temp_count === files.length) return res.sendResponse('file DONE!');
+                            }).catch(function(err) {
+                                res.requestError(err);
+                            });
+                        });
                     });
-                    // console.log(code);
-                    // // codes.push(data);
-                    // count++;
-                    //  if(count === files.length) {
-                    //     console.log("**************************************************");
-                    //     console.log("**************************************************");
-                    //     console.log("**************************************************");
-                    //     console.log("**************************************************");
-                    //      return res.sendResponse({
-                    // // //         'utorids': files,
-                    // // //         'codes': codes
-                    //      })
-                    //  }
+                    count ++;
                 });
             });
         });
