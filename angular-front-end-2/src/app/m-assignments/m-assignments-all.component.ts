@@ -36,4 +36,9 @@ export class MAssignmentsAllComponent {
       work_id: work_id
     }).subscribe((res) => this.assignments.push(res));
   }
+
+  loadSubmission(assignment) {
+    //console.log(assignment);
+    return this._assignmentsAPI.loadSubmissions(assignment).subscribe((res) => {console.log("DONEEEEE")});
+  }
 }

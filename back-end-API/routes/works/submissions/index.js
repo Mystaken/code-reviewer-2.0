@@ -10,6 +10,7 @@ var validator = require('../../../lib/validator'),
     submission_files_model = require('../../../models/submission_files'),
     submissions_model      = require('../../../models/submissions'),
     works_model            = require('../../../models/works'),
+    user_model             = require('../../../models/users'),
     
     submissions_get_schema = require('../../../schemas/works/submissions/submissions_get'),
     submissions_put_schema = require('../../../schemas/works/submissions/submissions_put'),
@@ -17,7 +18,8 @@ var validator = require('../../../lib/validator'),
     submission_files_get_schema    = require('../../../schemas/works/submissions/submission_files_get'),
     submission_files_delete_schema = require('../../../schemas/works/submissions/submission_files_delete'),
     submission_files_put_schema    = require('../../../schemas/works/submissions/submission_files_put'),
-    submission_files_upload_schema = require('../../../schemas/works/submissions/submission_files_upload');
+    submission_files_upload_schema = require('../../../schemas/works/submissions/submission_files_upload'),
+    student_all_get_schema  = require('../../../schemas/users/students/students_all_get');
 
 
 
@@ -170,23 +172,56 @@ module.exports = function (router) {
         });
     });
 
-    router.route("/load").get(function(req, res, next) {
-        var repo_path = "./../a2/";
-        var file_name = 'regex_functions.py';
+    router.route("/loadSubmissions").post(function(req, res, next) {
+        if (req.session_user_type !== 'admin') return res.forbidden();
+        console.log(req.body);
+        var repo_path = "./../" + req.body.repo_path;
+        var file_name = req.body.required_files[0];
         fs.readdir(repo_path, function(err, files) {
-            var codes = []
-            var count = 0;
-            files.forEach(function(file) {
-                var file_path = repo_path + file + '/a2/' + file_name;
-                fs.readFile(file_path, 'utf8', function (err, data) {
-                    codes.push(data);
-                    count++;
-                    if(count === files.length) {
-                        return res.sendResponse({
-                            'utorids': files,
-                            'codes': codes
-                        })
-                    }
+            var count = 1;
+            files.forEach(function(utorid) {
+                var file_path = repo_path + '/'+ utorid + '/a2/' + file_name;
+                fs.readFile(file_path, 'utf8', function (err, code) {
+                    var temp_count = count;
+                    return user_model.aggregate([
+                        { $match: {'utorid': utorid, status: 'active'} },
+                        { $project : { user_id: "$_id", _id: 0 } }
+                    ]).exec().then(function(student) {
+                        return new submission_files_model({
+                            author_id: student[0].user_id,
+                            name: file_name,
+                            work_id: req.body.work_id,
+                            create_date: new Date(),
+                            code: code,
+                            status: 'active'
+                        }).save();
+                    }).then(function(ret) { // no need to check if work or submission exist.
+                        return new submissions_model({
+                            author_id: req.session_user_id,
+                            work_id: req.body.work_id,
+                            create_date: new Date(),
+                            files: [ret._id]
+                        }).save();
+                    }).then(function(ret) {
+                        console.log("DONE!!!!", ret.files, temp_count);
+                        if (temp_count === files.length) return res.sendResponse(ret);
+                    }).catch(function(err) {
+                        console.log("NOPPEEE");
+                        res.requestError(err);
+                    });
+                    // console.log(code);
+                    // // codes.push(data);
+                    // count++;
+                    //  if(count === files.length) {
+                    //     console.log("**************************************************");
+                    //     console.log("**************************************************");
+                    //     console.log("**************************************************");
+                    //     console.log("**************************************************");
+                    //      return res.sendResponse({
+                    // // //         'utorids': files,
+                    // // //         'codes': codes
+                    //      })
+                    //  }
                 });
             });
         });

@@ -21,4 +21,8 @@ export class MAssignmentsService {
   getAssignment(params) {
     return this._api.get('works', params);
   }
+
+  loadSubmissions(params) {
+    return this._api.post('works/submissions/loadSubmissions', params);
+  }
 }

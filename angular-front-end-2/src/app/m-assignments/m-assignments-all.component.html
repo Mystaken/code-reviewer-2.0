@@ -33,6 +33,9 @@
         </td>
         <td>{{assignment.feedback_questions}}</td>
         <td>{{assignment.required_files}}</td>
+        <td>
+          <div (click)="loadSubmission(assignment)">load</div>
+        </td>
       </tr>
     </tbody>
   </table>
