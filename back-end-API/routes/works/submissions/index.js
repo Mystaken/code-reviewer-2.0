@@ -40,7 +40,7 @@ module.exports = function (router) {
             {
                 $match: {
                     _id: mongoose.Types.ObjectId(req.query.submission_id),
-                    author_id: req.session_user_id
+                    author_id: mongoose.Types.ObjectId(req.session_user_id)
                 }
             },{
                 $project: {
