@@ -64,7 +64,7 @@ module.exports = function (router) {
                         params: [ 'submission_id' ]
                     });
             }
-            return res.sendResponse(ret);
+            return res.sendResponse(ret[0]);
         }).catch(function(err) {
             return res.requestError(err);
         });
