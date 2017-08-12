@@ -26,4 +26,4 @@ submissions_files_schema = mongoose.Schema({
     }
 });
 
-module.exports = mongoose.model('submissions_files', submissions_files_schema);
+module.exports = mongoose.model('submission_files', submissions_files_schema);

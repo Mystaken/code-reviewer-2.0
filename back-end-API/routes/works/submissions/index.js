@@ -288,7 +288,8 @@ module.exports = function (router) {
             });
     }).put(function(req, res, next) {
         var error,
-            query;
+            query,
+            submission_old;
         if (!mongoose.validID(req.body.submission_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
@@ -313,6 +314,7 @@ module.exports = function (router) {
                         params: [ 'submission_id' ]
                     });
             }
+            submission_old = ret[0];
             return new submission_files_model({
                 author_id: req.session_user_id,
                 name: req.body.name,
@@ -322,7 +324,12 @@ module.exports = function (router) {
                 status: 'active'
             }).save();
         }).then(function(ret) {
-            return res.sendResponse(ret._id);
+            submission_old.files.push(ret._id);
+            return submissions_model.findOneAndUpdate(query, {
+                files: submission_old.files,
+            }).exec().then(function() {
+                return res.sendResponse(ret._id);
+            });
         }).catch(function(err) {
             return res.requestError(err);
         });
