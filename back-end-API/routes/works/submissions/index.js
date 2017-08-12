@@ -31,7 +31,7 @@ module.exports = function (router) {
                 params: [ 'submission_id' ]
             });
         }
-        validator.validate(req.body, submissions_get_schema);
+        validator.validate(req.query, submissions_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
