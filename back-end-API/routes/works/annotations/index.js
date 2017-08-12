@@ -10,7 +10,7 @@ var validator   = require('../../../lib/validator'),
     feedbacks_model        = require('../../../models/feedbacks'),
     submission_files_model = require('../../../models/submission_files'),
 
-    annotations_all_get_schema = require('../../../schemas/works/annotations/annotations_get'),
+    annotations_all_get_schema = require('../../../schemas/works/annotations/annotations_all_get'),
     annotations_get_schema     = require('../../../schemas/works/annotations/annotations_get'),
     annotations_put_schema     = require('../../../schemas/works/annotations/annotations_put'),
     annotations_delete_schema  = require('../../../schemas/works/annotations/annotations_delete');
@@ -151,7 +151,7 @@ module.exports = function (router) {
         if (!mongoose.validID(req.query.submission_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
-                params: [ 'submission_id' ]
+                params: [ 'submission_file_id' ]
             });
         }
         match_query = {
@@ -168,13 +168,13 @@ module.exports = function (router) {
                 if (!ret || !ret.length) {
                     return Promise.reject({
                         code: "NOT_FOUND",
-                        params: [ 'submission_id' ]
+                        params: [ 'submission_file_id' ]
                     });
                 }
                 return annotations_model.aggregate([
                         {
                             $match: {
-                                submission_id:    mongoose.Types.ObjectId(req.query.submission_id),
+                                submission_id: mongoose.Types.ObjectId(req.query.submission_id),
                                 status: 'active'
                             }
                         },
@@ -182,6 +182,8 @@ module.exports = function (router) {
                             $project : {
                                 annotation_id: "$_id",
                                 _id: 0,
+                                submission_id: 1,
+                                submission_file_id: 1,
                                 review_by: 1,
                                 annotation: 1,
                                 start: 1,
