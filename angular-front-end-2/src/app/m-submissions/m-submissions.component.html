@@ -1,0 +1,77 @@
+<m-header></m-header>
+<!-- if assignment does not exist -->
+<m-notfound-item *ngIf="!exists" [name]="'submission'"></m-notfound-item>
+<!-- if assignment exists -->
+<div class="ui doubling stackable grid submissions container" *ngIf="exists">
+  <div class="four wide column">
+    <div class="ui segment">
+      <h2 class="ui dividing header">
+        Assignment 1
+      </h2>
+      <table class="ui very basic single lined table"><tbody>
+          <tr><td>Deadline:</td><td>N/A</td></tr>
+      </tbody></table>
+      <h4 class="ui dividing header">Required Files</h4>
+      <div class="ui list">
+        <a class="item"
+          *ngFor="let file of assignment.required_files">
+          <i class="yellow help icon" *ngIf="!file.has_uploaded"></i>
+          <i class="green file icon" *ngIf="file.has_uploaded"></i>
+          <div class="content">
+            <div class="description">{{file.name}}</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="ui vertical fluid menu">
+      <div class="ui secondary vertical pointing fluid menu">
+        <a class="active blue item">
+          Submit
+          <div class="ui blue left pointing label">1</div>
+        </a>
+        <a class="item">
+          Review
+          <div class="ui label">0</div>
+        </a>
+        <a class="item">
+          Feedbacks
+          <div class="ui label">0</div>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="twelve wide column">
+    <table class="ui single lined table">
+      <thead>
+        <tr>
+          <th>Required Files</th>
+          <th>Updated Time</th>
+          <th>Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            <label for="file">
+              <div class="ui right labeled icon small basic button">
+                <i class="upload icon"></i>
+                a1.py
+              </div>
+            </label>
+            <input type="file" hidden id="file">
+          </td>
+          <td>2017-02-09</td>
+          <td>
+            <div class="ui green label">
+              Uploaded
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <m-review
+      [submission]="submission">
+    </m-review>
+  </div>
+</div>
+<m-footer></m-footer>

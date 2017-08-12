@@ -1,0 +1,34 @@
+
+<div class="ui students container">
+  <table class="ui table">
+    <thead>
+      <th>Student Number</th>
+      <th>First Name</th>
+      <th>Last Name</th>
+      <th>UtorID</th>
+      <th>Email</th>
+      <th>Last Login</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let student of students">
+        <td>{{student.student_number}}</td>
+        <td>
+          <m-editable
+            [value]="student.first_name"
+            [onChange]="updateStudent(student, 'first_name')">
+          </m-editable>
+        </td>
+        <td>
+          <m-editable
+            [value]="student.last_name"
+            [onChange]="updateStudent(student, 'last_name')">
+          </m-editable>
+        </td>
+        <td>{{student.utorid}}</td>
+        <td>{{student.email}}</td>
+        <td>{{student.last_login}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

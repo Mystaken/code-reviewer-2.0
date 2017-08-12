@@ -1,0 +1,20 @@
+<div>
+    <div class="text"
+      [class.hidden]="editting"
+      [class.changed]="changes!=value"
+      (click)="editting=true">
+      {{changes}}
+    </div>
+  <div class="ui mini right action input edit"
+    [class.hidden]="!editting">
+
+    <input type="text"
+      [(ngModel)]="changes">
+    <div class="ui mini icon primary button" (click)="change()">
+      <i class="check icon"></i>
+    </div>
+    <div class="ui mini icon negative button" (click)="reject()">
+      <i class="remove icon"></i>
+    </div>
+  </div>
+</div>

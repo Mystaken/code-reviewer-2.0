@@ -1,0 +1,29 @@
+<div class="ui massive inverted blue stackable mheader menu">
+  <div class="ui container">
+    <a class="header item"
+      routerLink="/dashboard">
+      <img class="ui mini image" src="assets/images/icon-circle-blue.png">
+      Code Reviewer
+    </a>
+    <a class="active item"
+      routerLink="/assignments"
+      [class.active]="selected==='Assignments'">
+      Assignments
+    </a>
+    <a class="item"
+      routerLink="/students"
+      [class.active]="selected==='Students'">
+      Students
+    </a>
+    <div class="right labeled menu">
+      <a class="item">
+        <i class="user icon"></i>
+        Login
+      </a>
+      <a class="item">
+        <i class="info icon"></i>
+        Help
+      </a>
+    </div>
+  </div>
+</div>

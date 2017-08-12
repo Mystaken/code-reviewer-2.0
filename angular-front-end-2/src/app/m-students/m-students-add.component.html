@@ -1,0 +1,74 @@
+<div class="ui segment">
+  <h4 class="ui cursor dividing header" (click)="addNew=!addNew">
+    <i class="plus icon" *ngIf="!addNew"></i>
+    <i class="minus icon" *ngIf="addNew"></i>
+    Add Student
+  </h4>
+  <div class="ui inverted dimmer" [class.active]="addingStudent">
+    <div class="ui text loader">Submitting...</div>
+  </div>
+  <div class="ui form" *ngIf="addNew">
+    <div class="two fields">
+      <div class="field"
+        [class.error]="pendingStudent.first_name.error"
+        (click)="pendingStudent.first_name.error=false">
+        <label>First Name</label>
+        <input type="text" 
+          placeholder="First Name"
+          [(ngModel)]="pendingStudent.first_name.content">
+      </div>
+      <div class="field"
+        [class.error]="pendingStudent.last_name.error"
+        (click)="pendingStudent.last_name.error=false">
+        <label>Last Name</label>
+        <input type="text"
+          placeholder="Last Name"
+          [(ngModel)]="pendingStudent.last_name.content">
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field"
+        [class.error]="pendingStudent.utorid.error"
+        (click)="pendingStudent.utorid.error=false">
+        <label>UtorID</label>
+        <input type="text"
+          placeholder="UtorID"
+          [(ngModel)]="pendingStudent.utorid.content">
+      </div>
+      <div class="field"
+        [class.error]="pendingStudent.student_number.error"
+        (click)="pendingStudent.student_number.error=false">
+        <label>Student Number</label>
+        <input type="text"
+          placeholder="Student Number"
+          [(ngModel)]="pendingStudent.student_number.content">
+      </div>
+    </div>
+    <div class="field"
+      [class.error]="pendingStudent.email.error"
+        (click)="pendingStudent.email.error=false">
+      <label>Email</label>
+      <input type="text"
+        placeholder="Email"
+        [(ngModel)]="pendingStudent.email.content">
+    </div>
+    <div class="ui primary right labeled icon button"
+      (click)="addStudent()">
+      <i class="caret right icon"></i>
+      Add Student
+    </div>
+  </div>
+  <div class="ui message"
+    [ngClass]='newStudentMsg.type'
+    [hidden]='!newStudentMsg.show'>
+    <i class="close icon" (click)="closeStudentMsg()"></i>
+    <div class="content">
+      {{newStudentMsg.message}}
+    </div>
+  </div>
+  <!-- batch upload -->
+  <div class="ui segment" *ngIf="addNew">
+    <h4 class="ui dividing header">Batch Upload</h4>
+    To be Worked on.
+  </div>
+</div>

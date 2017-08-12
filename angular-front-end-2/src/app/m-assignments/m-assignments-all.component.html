@@ -1,0 +1,40 @@
+<div class="ui assignments container">
+  <table class="ui table">
+    <thead>
+      <th>Assignment</th>
+      <th>Status</th>
+      <th># of Peers</th>
+      <th>Repo Path</th>
+      <th>Feedback Questions</th>
+      <th>Required Files</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let assignment of assignments">
+        <td>
+          <m-editable
+            [value]="assignment.name"
+            [onChange]="updateAssignment(assignment,'name')">
+          </m-editable>
+        </td>
+        <td>
+          {{assignment.status}}
+        </td>
+        <td>
+          <m-editable
+            [value]="assignment.num_peers"
+            [onChange]="updateAssignment(assignment, 'num_peers')">
+          </m-editable>
+        </td>
+        <td>
+          <m-editable
+            [value]="assignment.repo_path"
+            [onChange]="updateAssignment(assignment, 'repo_path')">
+          </m-editable>
+        </td>
+        <td>{{assignment.feedback_questions}}</td>
+        <td>{{assignment.required_files}}</td>
+      </tr>
+    </tbody>
+  </table>
+  
+</div>

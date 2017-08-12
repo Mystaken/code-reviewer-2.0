@@ -1,0 +1,129 @@
+
+<div class="ui segment">
+  <h4 class="ui cursor dividing header" (click)="addNew=!addNew">
+    <i class="plus icon" *ngIf="!addNew"></i>
+    <i class="minus icon" *ngIf="addNew"></i>
+    Add Assignment
+  </h4>
+  <div class="ui inverted dimmer" [class.active]="submittingAssignment">
+    <div class="ui text loader">Submitting...</div>
+  </div>
+  <div class="ui form" *ngIf="addNew">
+    <div class="three fields">
+      <div class="field"
+        [class.error]="pendingAssignment.name.error"
+        (click)="pendingAssignment.name.error=false">
+        <label>Assignment Name</label>
+        <input type="text"
+          placeholder="Assignment Name"
+          [(ngModel)]="pendingAssignment.name.content">
+      </div>
+      <div class="field"
+        [class.error]="pendingAssignment.num_peers.error"
+        (click)="pendingAssignment.num_peers.error=false">
+        <label>Number of peers review</label>
+        <input
+          type="text"
+          value="0"
+          [(ngModel)]="pendingAssignment.num_peers.content">
+      </div>
+      <div class="field"
+        [class.error]="pendingAssignment.repo_path.error"
+        (click)="pendingAssignment.repo_path.error=false">
+        <label>Repo Path</label>
+        <input type="text" 
+          placeholder="Repo Path"
+          [(ngModel)]="pendingAssignment.repo_path.content">
+      </div>
+    </div>
+    <div class="field">
+      <label>Deadlines</label>
+      <div class="three fields">
+        <div class="field"
+          [class.error]="pendingAssignment.submission_deadline.error"
+          (click)="pendingAssignment.submission_deadline.error=false">
+          <m-calendar 
+            [type]="'datetime'"
+            [placeholder]="'Submission Deadline'"
+            [today]="true"
+            [(ngModel)]="pendingAssignment.submission_deadline.content">
+          </m-calendar>
+        </div>
+        <div class="field"
+          [class.error]="pendingAssignment.peer_review_deadline.error"
+          (click)="pendingAssignment.peer_review_deadline.error=false">
+          <m-calendar
+            [type]="'datetime'"
+            [placeholder]="'Peer Review Deadline'"
+            [today]="true"
+            [(ngModel)]="pendingAssignment.peer_review_deadline.content">
+          </m-calendar>
+        </div>
+        <div class="field"
+          [class.error]="pendingAssignment.mark_release_date.error"
+          (click)="pendingAssignment.mark_release_date.error=false">
+          <m-calendar
+            [type]="'datetime'"
+            [placeholder]="'Mark Release Date'"
+            [today]="true"
+            [(ngModel)]="pendingAssignment.mark_release_date.content">
+          </m-calendar>
+        </div>
+      </div>
+    </div>
+    <div class="ui segment">
+      <h5 class="ui dividing header">Feedback Questions:</h5>
+      <div class="ui list">
+        <div class="item" 
+          *ngFor="let question of pendingAssignment.feedback_questions.content;let i=index">
+          <i class="remove icon" (click)="pendingAssignment.feedback_questions.content.splice(i, 1)"></i>
+          {{question}}
+          
+        </div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <div class="ui action input">
+              <input type="text" placeholder="Feedback" [(ngModel)]="newFeedback">
+              <div class="ui primary button" (click)="addFeedbackQuestion()"><i class="plus icon"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui segment">
+      <h5 class="ui dividing header">Required Files:</h5>
+      <div class="ui list">
+        <div class="item"
+          *ngFor="let file of pendingAssignment.required_files.content; let i=index">
+          <i class="remove icon" (click)="pendingAssignment.required_files.content.splice(i, 1)"></i>
+          {{file}}
+        </div>
+      </div>
+      <div class="two fields">
+        <div class="field">
+          <div class="ui action input">
+            <input type="text" placeholder="File" [(ngModel)]="newRequiredFile">
+            <div class="ui primary button" (click)="addRequiredFile()"><i class="plus icon"></i></div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ui primary right labeled icon button" (click)="addAssignment()">
+      <i class="caret right icon"></i>
+      Submit
+    </div>
+  </div>
+  <div class="ui message"
+    [ngClass]="newAssignmentsMsg.type"
+    *ngIf="newAssignmentsMsg.show">
+    <i class="close icon" (click)="closeAssignmentsMsg()"></i>
+    <div class="content">
+      {{newAssignmentsMsg.message}}
+    </div>
+  </div>
+  <!-- batch upload -->
+  <div class="ui segment" *ngIf="addNew">
+    <h4 class="ui dividing header">Batch Upload</h4>
+    To be Worked on.
+  </div>
+</div>

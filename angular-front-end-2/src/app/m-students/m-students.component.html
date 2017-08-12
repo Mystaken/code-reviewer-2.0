@@ -1,0 +1,9 @@
+<m-header [selected]="'Students'"></m-header>
+<div class="ui students container">
+  <div class="ui dividing header">
+    Students
+  </div>
+  <m-students-add (studentAdded)="allStudents.addStudent($event)"></m-students-add>
+  <m-students-all #allStudents></m-students-all>
+</div>
+<m-footer></m-footer>
