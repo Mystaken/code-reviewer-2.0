@@ -316,12 +316,12 @@ module.exports = function (router) {
             return new submission_files_model({
                 author_id: req.session_user_id,
                 name: req.body.name,
-                work_id: ret.work_id,
+                work_id: ret[0].work_id,
                 create_date: new Date(),
                 code: req.body.content,
                 status: 'active'
             }).save();
-        }).then(function() {
+        }).then(function(ret) {
             return res.sendResponse(ret._id);
         }).catch(function(err) {
             return res.requestError(err);
