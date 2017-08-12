@@ -302,7 +302,6 @@ module.exports = function (router) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
         query = {
-            status: 'active',
             _id: mongoose.Types.ObjectId(req.body.submission_id)
         };
         return submissions_model.aggregate([
