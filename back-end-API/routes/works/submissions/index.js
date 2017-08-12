@@ -214,7 +214,7 @@ module.exports = function (router) {
                     $match: {
                         _id: mongoose.Types.ObjectId(req.query.submission_file_id),
                         status: 'active',
-                        author_id: req.session_user_id
+                        author_id: mongoose.Types.ObjectId(req.session_user_id)
                     }
                 },{
                     $project: {
