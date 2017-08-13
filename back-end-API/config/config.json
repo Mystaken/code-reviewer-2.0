@@ -11,7 +11,11 @@
     },
     "specialization": {
     },
-
+    "cookie": {
+        "session": {
+            "name": "cr_session_user"
+        }
+    },
     "middleware": {
 
         "router": {

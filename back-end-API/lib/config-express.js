@@ -1,9 +1,10 @@
 'use strict';
 
-var express     = require('express'),
-    Promise     = require('bluebird'),
-    path        = require('path'),
-    sanitizer   = require('./sanitizer');
+var express   = require('express'),
+    Promise   = require('bluebird'),
+    path      = require('path'),
+    config    = require('../config/config'),
+    sanitizer = require('./sanitizer');
 
 /** Configures the functions to the request object.
  * @param request {Express.request} the request object
@@ -97,6 +98,13 @@ function configureMiddleware(app, opt) {
             app.use(function (req, res, next) {
                 req.session_user_id   = '597454be305f03346c012275';
                 req.session_user_type = 'admin';
+                res.cookie(config.cookie.session.name,
+                  JSON.stringify({
+                    session_user_id: req.session_user_id,
+                    session_user_type: req.session_user_type
+                  }),{
+                    expires: new Date(Date.now() + 900000)
+                  });
                 next();
             });
             break;
@@ -104,6 +112,13 @@ function configureMiddleware(app, opt) {
             app.use(function (req, res, next) {
                 req.session_user_id = req.query.session_user_id || req.body.session_user_id || opt.user_id;
                 req.session_user_type = req.query.session_user_type || req.body.session_user_type || opt.user_type;
+                res.cookie(config.cookie.session.name,
+                  JSON.stringify({
+                    session_user_id: req.session_user_id,
+                    session_user_type: req.session_user_type
+                  }),{
+                    expires: new Date(Date.now() + 900000)
+                  });
                 next();
             });
             break;
