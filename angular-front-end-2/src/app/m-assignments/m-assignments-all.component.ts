@@ -9,13 +9,15 @@ import { MAssignmentsService } from './m-assignments.service';
 })
 export class MAssignmentsAllComponent {
   assignments = []
+  actionsDropdown = {
+    action: "combo"
+  }
   constructor(private _assignmentsAPI: MAssignmentsService) {}
 
   ngOnInit() {
     this._assignmentsAPI.getAllAssignments({})
       .subscribe((res) => {
         this.assignments = res;
-        console.log(res)
       });
   }
 

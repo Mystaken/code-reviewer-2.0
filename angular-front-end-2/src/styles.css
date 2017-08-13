@@ -18,8 +18,16 @@ body {
 .jmessage {
   position: absolute;
   display:none;
+  top: 2em;
+  left: 0;
+  max-width: 250px;
+  border: 1px solid #d4d4d5;
+  background: #fff;
+  padding: .833em 1em;
+  border-radius: .28571429rem;
+  box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15);
 }
-.jmessage span {
+.jmessage *:not(i) {
   font-family: Lato,'Helvetica Neue',Arial,Helvetica,sans-serif !important;
   color: black !important;
 }
@@ -28,18 +36,12 @@ body {
 }
 .jmessage.show {
   display: block;
-  border: 1px solid #d4d4d5;
-  max-width: 250px;
-  background: #fff;
-  padding: .833em 1em;
-  border-radius: .28571429rem;
-  box-shadow: 0 2px 4px 0 rgba(34,36,38,.12), 0 2px 10px 0 rgba(34,36,38,.15);
   z-index: 999;
 }
 
 .jmessage.show:before {
   top: -.30714286em;
-  left: 1em;
+  left: 0.5em;
   right: auto;
   bottom: auto;
   margin-left: 0;

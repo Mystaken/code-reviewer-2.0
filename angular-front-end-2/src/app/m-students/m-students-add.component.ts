@@ -93,7 +93,7 @@ export class MStudentsAddComponent {
         last_name: this.pendingStudent.last_name.content,
         utorid: this.pendingStudent.utorid.content,
         email: this.pendingStudent.email.content,
-        student_number: this.pendingStudent.student_number.content,
+        student_number: parseInt(this.pendingStudent.student_number.content),
       }).subscribe(response => {
           this.showStudentMsg({
             type: 'green',

@@ -64,7 +64,7 @@ export class MReviewComponent {
     }
 
     $('.jcomment').on('click', function() {
-      $( this ).children('.jmessage').addClass('show')
+      $( this ).children('.jmessage').addClass('show');
     });
   }
   updateComments() {
