@@ -47,7 +47,7 @@ export class MAssignmentsAllComponent {
 
   loadSubmissionFiles(assignment) {
     //console.log(assignment);
-    return this._assignmentsAPI.loadSubmissionFiles(assignment).subscribe((res) => {console.log("DONEEEEE")});
+    return this._assignmentsAPI.loadSubmissionFiles(assignment).subscribe((res) => {console.log("doneee")});
   }
 
   distribute(assignment) {

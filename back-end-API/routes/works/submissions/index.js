@@ -203,11 +203,13 @@ module.exports = function (router) {
         if (req.session_user_type !== 'admin') return res.forbidden();
         var repo_name = "./../" + req.body.repo_path;
         var folder_name = req.body.folder_name;
+        var required_files = req.body.required_files.length;
         req.body.required_files.forEach(function(file_name) {
+            var count = 0;
             fs.readdir(repo_name, function(err, files) {
-                var count = 1;
                 files.forEach(function(utorid) {
                     var file_path = repo_name + '/'+ utorid + '/' + folder_name + '/' + file_name;
+                    console.log(file_path);
                     fs.readFile(file_path, 'utf8', function (err, code) {
                         var temp_count = count;
                         return user_model.aggregate([
@@ -228,13 +230,18 @@ module.exports = function (router) {
                                   'author_id': mongoose.Types.ObjectId(ret.author_id)}, 
                                 { $push: {'files': mongoose.Types.ObjectId(ret._id) }
                             }).exec().then(function() {
-                                if (temp_count === files.length) return res.sendResponse('file DONE!');
+                                count ++;
+
+                                if (count === files.length) required_files --;
+                                console.log(count, files.length, required_files);
+                                if (count === files.length && required_files === 0) {
+                                    return res.sendResponse('file DONE!');
+                                }
                             }).catch(function(err) {
                                 res.requestError(err);
                             });
                         });
                     });
-                    count ++;
                 });
             });
         });
@@ -244,7 +251,7 @@ module.exports = function (router) {
 
     router.route("/distribute").post(function(req, res, next) {
         if (req.session_user_type !== 'admin') return res.forbidden();
-        return submissions_model.aggregate([
+        return submission_files_model.aggregate([
             { $match: { 'work_id': mongoose.Types.ObjectId(req.body.work_id) }},
             { $project : { _id: 1, author_id: 1 } }
         ]).exec().then(function(submissions) {
