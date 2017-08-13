@@ -1,27 +1,31 @@
-<div class="ui massive inverted blue stackable mheader menu">
+<div class="ui massive inverted green stackable mheader menu"
+  [class.green]="userType=='admin'"
+  [class.blue]="userType==='student'">
   <div class="ui container">
     <a class="header item"
       routerLink="/dashboard">
-      <img class="ui mini image" src="assets/images/icon-circle-blue.png">
+      <img class="ui mini image" [src]="crIcon">
       Code Reviewer
     </a>
     <a class="active item"
       routerLink="/assignments"
-      [class.active]="selected==='Assignments'">
+      [class.active]="selected==='Assignments'"
+      *ngIf="userType=='admin'">
       Assignments
     </a>
     <a class="item"
       routerLink="/students"
-      [class.active]="selected==='Students'">
+      [class.active]="selected==='Students'"
+      *ngIf="userType=='admin'">
       Students
     </a>
     <div class="right labeled menu">
       <a class="item">
         <i class="user icon"></i>
-        Login
+        {{userTypeDisplay}}
       </a>
       <a class="item">
-        <i class="info icon"></i>
+        <i class="help icon"></i>
         Help
       </a>
     </div>

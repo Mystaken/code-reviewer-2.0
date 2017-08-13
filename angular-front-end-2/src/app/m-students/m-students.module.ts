@@ -7,8 +7,6 @@ import { MFooterModule } from '../m-footer/m-footer.module';
 import { MCommonModule } from '../m-common/m-common.module';
 
 import { MStudentsService } from './m-students.service';
-import { APIRoutingService } from '../services/api-routing.service';
-import { ValidationService } from '../services/validation.service';
 
 import { MStudentsAddComponent } from './m-students-add.component';
 import { MStudentsComponent } from './m-students.component';
@@ -34,9 +32,7 @@ import { MStudentsAllComponent } from './m-students-all.component';
     MStudentsAddComponent
   ],
   providers: [
-    APIRoutingService,
-    MStudentsService,
-    ValidationService
+    MStudentsService
   ]
 })
 export class MStudentsModule { }

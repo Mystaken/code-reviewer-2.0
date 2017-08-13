@@ -5,6 +5,7 @@ import { HttpModule } from '@angular/http';
 import { RoutingModule } from '../routing.module';
 import { MHeaderComponent } from './m-header.component';
 
+
 @NgModule({
   declarations: [
     MHeaderComponent
@@ -19,7 +20,7 @@ import { MHeaderComponent } from './m-header.component';
   ],
   providers: [],
   bootstrap: [
-  MHeaderComponent
+    MHeaderComponent
   ]
 })
 export class MHeaderModule { }

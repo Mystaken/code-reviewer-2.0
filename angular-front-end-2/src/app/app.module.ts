@@ -9,12 +9,17 @@ import { MAssignmentsModule } from './m-assignments/m-assignments.module';
 import { MStudentsModule } from './m-students/m-students.module';
 import { MSubmissionsModule } from './m-submissions/m-submissions.module'
 import { RoutingModule } from './routing.module';
+import { CookieModule } from 'ngx-cookie';
 
+import { APIRoutingService } from './services/api-routing.service';
+import { SessionUserService } from './services/session-user.service';
+import { ValidationService } from './services/validation.service';
+import { CookieService } from 'ngx-cookie';
 import { AppComponent } from './app.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
+    AppComponent
   ],
   imports: [
     RoutingModule,
@@ -24,9 +29,14 @@ import { AppComponent } from './app.component';
     MNotFoundModule,
     MAssignmentsModule,
     MStudentsModule,
-    MSubmissionsModule
+    MSubmissionsModule,
+    CookieModule.forRoot()
   ],
   providers: [
+    APIRoutingService,
+    SessionUserService,
+    ValidationService,
+    CookieService
   ],
   bootstrap: [
     AppComponent

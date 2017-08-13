@@ -1,4 +1,5 @@
 import { Component, Input } from '@angular/core';
+import { SessionUserService } from '../services/session-user.service';
 
 @Component({
   selector: 'm-header',
@@ -8,4 +9,17 @@ import { Component, Input } from '@angular/core';
 export class MHeaderComponent {
   @Input()
   selected;
+  userType;
+  userTypeDisplay;
+  crIcon;
+  constructor(private _userService: SessionUserService) {
+    this.userType = this._userService.getUserType();
+    if (this.userType === 'admin') {
+      this.crIcon = 'assets/images/icon-circle-green.png';
+      this.userTypeDisplay = 'Administrator';
+    } else if (this.userType === 'student') {
+      this.crIcon = 'assets/images/icon-circle-blue.png';
+      this.userTypeDisplay = 'Student';
+    }
+  }
 }
