@@ -1,13 +1,37 @@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/agate.min.css">
+
 <div class="review wrapper">
   <div class="ui top attached tabular menu">
     <a class="active item"><i class="blue user icon"></i></a>
     <a class="item"><i class="purple user icon"></i></a>
     <a class="item"><i class="green user icon"></i></a>
+    <div class="right secondary menu">
+      <div class="item">
+        <div class="ui tiny basic button" (click)="addComment()">
+          <i class="comment icon"></i>
+          Annotate
+        </div>
+      </div>
+    </div>
   </div>
   <div class="ui bottom attached segment">
-    <div class="code-block">
+    <div class="code wrapper">
       <code [innerHTML]="displayCode" class="python" id="code"></code>
     </div>
   </div>
-  <m-modal></m-modal>
+  <m-modal #newAnnotation [modalClass]="'mini'">
+    <div class="content">
+      <div class="ui form">
+        <div class="field">
+          <textarea rows="2" [(ngModel)]="annotation_input"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="actions">
+      <div class="ui positive right labeled icon button">
+        Add Annotation
+        <i class="comment icon"></i>
+      </div>
+    </div>
+  </m-modal>
 </div>

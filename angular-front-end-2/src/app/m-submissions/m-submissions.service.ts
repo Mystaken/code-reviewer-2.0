@@ -14,6 +14,10 @@ export class MSubmissionsService {
   }
 
   getAllAnnotations(params) {
-    return this._api.get('works/annotations/all', params);
+    return this._api.get('works/annotations', params);
+  }
+
+  addAnnotation(params) {
+    return this._api.put('works/annotations', params);
   }
 }

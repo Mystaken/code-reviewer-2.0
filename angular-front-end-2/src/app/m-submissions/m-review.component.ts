@@ -7,7 +7,7 @@ import {
   AfterViewInit,
   ViewChild
 } from '@angular/core';
-import { MdDialog, MdDialogRef } from '@angular/material';
+import { MModalComponent } from '../m-common/m-modal.component';
 import { MSubmissionsService } from './m-submissions.service';
 import * as hljs from 'highlight.js';
 import * as $ from 'jquery';
@@ -19,44 +19,58 @@ import * as $ from 'jquery';
 })
 export class MReviewComponent {
   @Input() submission;
-  selectedFile = 0;
+  @ViewChild('newAnnotation') modal: MModalComponent;
+  selectedFile;
+  allAnnotations = []
   annotations = [];
   seperatedComments = [];
   displayCode = "";
   changed = false;
+  annotation_input = "";
+
   constructor(private _submissionsAPI: MSubmissionsService, private el: ElementRef) {
 
+    $(document).on('click', function(event) {
+        $('.jcomment').each(function (i, c) {
+            if(!c.contains(event.target)) {
+                $(c).children('.jmessage').removeClass('show');
+            }
+        });
+    });
   }
   ngOnInit() {
-    this.selectFile(0);
-  }
-
-  selectFile(idx) {
     this._submissionsAPI.getAllAnnotations({
       submission_id: this.submission.submission_id
     }).subscribe((res) => {
-      this.annotations = res.annotations;
-      this.updateComments();
+      this.allAnnotations = res.annotations;
+      this.selectFile(0);
     });
+  }
+
+  selectFile(idx) {
+    this.selectedFile = idx;
+    this.annotations = this.allAnnotations.filter((annotation) => {
+      return annotation.submission_file_id === this.submission.files[idx].submission_file_id;
+    });
+    this.updateComments();
   }
   ngAfterViewInit() {
       setTimeout(_=>this.updateComments());
   }
   ngAfterViewChecked() {
-      if (this.changed) {
-          hljs.highlightBlock(this.el.nativeElement.querySelector("#code"));
-          this.changed = false;
-      }
-      $('.jcomment').on('click', function() {
-          $( this ).children('.jmessage').addClass('show')
-      });
+    if (this.changed) {
+      hljs.highlightBlock(this.el.nativeElement.querySelector("#code"));
+      this.changed = false;
+    }
+
+    $('.jcomment').on('click', function() {
+      $( this ).children('.jmessage').addClass('show')
+    });
   }
   updateComments() {
-    console.log(this.annotations);
-    console.log(this.submission);
     this.seperatedComments = this.seperateIntervals(this.annotations);
     this.displayCode = this.updateCodeComments(this.submission.files[0].code, this.seperatedComments);
-    console.log(this.displayCode);
+    this.changed = true;
   }
 
   /*
@@ -139,23 +153,89 @@ export class MReviewComponent {
   }
 
   /* Adds highlights to code */
-  updateCodeComments(code, comments) {
-    var reversed = comments.sort(function(a, b){ return b.end - a.end;}),
-        displayComments,
-        i;
+  updateCodeComments(code, annotations) {
+    var reversed = annotations.sort(function(a, b){ return b.end - a.end;}),
+      displayComments,
+      i;
     for (i = 0; i < reversed.length; i++) {
-      displayComments = '<div class="jmessage"><div class="jcontent"><div class="jitem">' +
+      displayComments = '<div class="jmessage"><div class="ui list">' +
         reversed[i].annotations
-          .map(i => this.annotations[i].annotation)
-          .join('</div><div class="jitem">') +
-        '</div></div></div>';
-      code = code.slice(0, reversed[i].start) +
-        '<div class="jcomment">' +
+          .map(i => '<a class="item"><i class="comment icon"></i><div class="content"><div class="description">' + 
+            this.annotations[i].annotation +'</div></div></a>').join('') + '</div></div>'
+        code = code.slice(0, reversed[i].start) +
+        '<span class="jcomment">' +
         code.slice(reversed[i].start, reversed[i].end) +
         displayComments +
-        '</div>' +
+        '</span>' +
         code.slice(reversed[i].end);
     }
     return code;
+  }
+  getSelectionCharOffsetsWithin(element) {
+    var start = 0, end = 0;
+    var sel, range, priorRange;
+    sel = window.getSelection();
+    if (typeof sel != "undefined" && sel && sel.rangeCount) {
+      range =  sel.getRangeAt(0);
+      priorRange = range.cloneRange();
+      priorRange.selectNodeContents(element);
+      priorRange.setEnd(range.startContainer, range.startOffset);
+      start = priorRange.toString().length;
+      end = start + range.toString().length;
+    }
+    return {
+      start: start,
+      end: end
+    };
+  }
+
+  addComment() {
+    var interval = this.getSelectionCharOffsetsWithin(this.el.nativeElement.querySelector("#code")),
+      sc = this.seperatedComments,
+      start = interval.start,
+      end = interval.end,
+      cmts = this.annotations,
+      tmp,
+      i;
+
+    for (i = sc.length - 1; i >= 0; i--) {
+      tmp = 0;
+      sc[i].annotations.forEach(function(i) {
+        tmp += cmts[i].annotation.length;
+      });
+      if (start - tmp > sc[i].start) {
+        start -= tmp;
+      }
+      if (end - tmp >= sc[i].end) {
+        end -= tmp;
+      }
+    }
+    if (end > 0 && end - start > 3) {
+      this.modal.show({
+        onApprove: (value) => {
+          let submission_id = this.submission.submission_id;
+          let submission_file_id = this.submission.files[this.selectedFile].submission_file_id;
+          let comment = this.annotation_input;
+          this._submissionsAPI.addAnnotation({
+            start: start,
+            end: end,
+            annotation: comment,
+            submission_id: submission_id,
+            submission_file_id: submission_file_id
+          }).subscribe((res) => {
+            cmts.push({
+              annotation: comment,
+              annotation_id: res,
+              end: end,
+              start: start,
+              submission_file_id: submission_file_id,
+              submission_id: submission_id
+            });
+            this.updateComments();
+          })
+        },
+        onHide: () => this.annotation_input = ""
+      });
+    }
   }
 }

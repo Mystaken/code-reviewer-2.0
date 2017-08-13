@@ -7,19 +7,13 @@ declare var $: any;
   styleUrls: ['./m-modal.component.css']
 })
 export class MModalComponent {
-  @Input() settings: ModalOptions;
   @Input() modalClass = "";
-  modal: HTMLElement
   constructor(private parentElement: ElementRef) {}
 
   ngAfterViewInit(): void {
-    this.modal = this.parentElement.nativeElement.children[0];
-    $(this.modal).modal(this.settings)
   }
 
-  show() {
-    $(this.modal).show()
+  show(settings) {
+    $('.ui.modal').modal(settings).modal('show');
   }
-}
-export interface ModalOptions {
 }
