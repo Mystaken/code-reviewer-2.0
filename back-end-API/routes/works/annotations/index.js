@@ -26,10 +26,10 @@ module.exports = function (router) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
 
-        if (!mongoose.validID(req.query.submissions_id)) {
+        if (!mongoose.validID(req.query.submission_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
-                params: [ 'submissions_id' ]
+                params: [ 'submission_id' ]
             });
         }
         return feedbacks_model.aggregate([
@@ -82,7 +82,6 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-
         if (!mongoose.validID(req.body.submission_file_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
@@ -119,7 +118,7 @@ module.exports = function (router) {
                 }
                 return new annotations_model({
                     submission_file_id: mongoose.Types.ObjectId(req.body.submission_file_id),
-                    review_by: mongoose.Types.ObjectId(req.body.session_user_id),
+                    review_by: mongoose.Types.ObjectId(req.session_user_id),
                     status: 'active',
                     end: req.body.end,
                     start: req.body.start,
