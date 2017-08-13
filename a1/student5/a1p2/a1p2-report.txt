@@ -1,0 +1,91 @@
+Autotested Results for a1p2 submitted by Ansaf Ahmad (ahmadans)
+Generated at 2016-03-12T23:59:30
+
+Summary of Results: 0 out of 2 tests successfully passed
+--
+
+Tests for unittest.loader.ModuleImportFailure (0/2 passed)
+--
+
+1) unittest.loader.ModuleImportFailure.test_a1                                        .. error
+.. because Failed to import test module: test_a1
+Traceback (most recent call last):
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+    __import__(name)
+  File "/home/a08test/submissions/ahmadans/a1p2/test_a1.py", line 5, in <module>
+    import a1
+  File "/home/a08test/submissions/ahmadans/a1p2/a1.py", line 102
+    if(self.dimension_checker(i=i, j=j)):
+    ^
+IndentationError: unexpected indent
+ (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 32, in testFailure
+        raise exception
+    
+    ImportError: Failed to import test module: test_a1
+    Traceback (most recent call last):
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+        module = self._get_module_from_name(name)
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+        __import__(name)
+      File "/home/a08test/submissions/ahmadans/a1p2/test_a1.py", line 5, in <module>
+        import a1
+      File "/home/a08test/submissions/ahmadans/a1p2/a1.py", line 102
+        if(self.dimension_checker(i=i, j=j)):
+        ^
+    IndentationError: unexpected indent
+    
+
+2) unittest.loader.ModuleImportFailure.test_pep8                                      .. error
+.. because Failed to import test module: test_pep8
+Traceback (most recent call last):
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+    module = self._get_module_from_name(name)
+  File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+    __import__(name)
+  File "/home/a08test/submissions/ahmadans/a1p2/test_pep8.py", line 3, in <module>
+    import a1
+  File "/home/a08test/submissions/ahmadans/a1p2/a1.py", line 102
+    if(self.dimension_checker(i=i, j=j)):
+    ^
+IndentationError: unexpected indent
+ (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 32, in testFailure
+        raise exception
+    
+    ImportError: Failed to import test module: test_pep8
+    Traceback (most recent call last):
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 312, in _find_tests
+        module = self._get_module_from_name(name)
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/loader.py", line 290, in _get_module_from_name
+        __import__(name)
+      File "/home/a08test/submissions/ahmadans/a1p2/test_pep8.py", line 3, in <module>
+        import a1
+      File "/home/a08test/submissions/ahmadans/a1p2/a1.py", line 102
+        if(self.dimension_checker(i=i, j=j)):
+        ^
+    IndentationError: unexpected indent
+    
+
+
+

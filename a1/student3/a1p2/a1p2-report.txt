@@ -1,0 +1,585 @@
+Autotested Results for a1p2 submitted by Rishav Adhikari (adhika21)
+Generated at 2016-03-12T23:59:30
+
+Summary of Results: 14 out of 44 tests successfully passed
+--
+
+Tests for test_a1.TestA1 (13/43 passed)
+--
+
+1) test_a1.TestA1.test_add_scalar_default                                             .. ok!
+2) test_a1.TestA1.test_add_scalar_default_2                                           .. ok!
+3) test_a1.TestA1.test_add_matrix_defaults_unchanged                                  .. ok!
+4) test_a1.TestA1.test_init                                                           .. ok!
+5) test_a1.TestA1.test_get_val_default                                                .. ok!
+6) test_a1.TestA1.test_set_val_nodes_8                                                .. ok!
+7) test_a1.TestA1.test_set_val_nodes_6                                                .. ok!
+8) test_a1.TestA1.test_set_val_nodes_7                                                .. ok!
+9) test_a1.TestA1.test_set_val_nodes_4                                                .. ok!
+10) test_a1.TestA1.test_set_val_nodes_5                                                .. ok!
+11) test_a1.TestA1.test_set_val_nodes_2                                                .. ok!
+12) test_a1.TestA1.test_get_val                                                        .. ok!
+13) test_a1.TestA1.test_set_val_nodes_1                                                .. ok!
+14) test_a1.TestA1.test_set_val                                                        .. failed
+.. because <a1.MatrixNode object at 0x7ff1a9b678d0> != 9 : get_val not setting value correctly (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 89, in test_set_val
+        self.assertEqual(m.get_val(1, 1), 9, "get_val not setting value correctly")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: <a1.MatrixNode object at 0x7ff1a9b678d0> != 9 : get_val not setting value correctly
+
+15) test_a1.TestA1.test_set_val_default_nodes                                          .. failed
+.. because <a1.MatrixNode object at 0x7ff1a9b67b38> != None : setting a cell to the default value should not create a new node (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 165, in test_set_val_default_nodes
+        self.assertEqual(m._head._right, None, "setting a cell to the default value should not create a new node")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: <a1.MatrixNode object at 0x7ff1a9b67b38> != None : setting a cell to the default value should not create a new node
+
+16) test_a1.TestA1.test_get_col_type                                                   .. failed
+.. because False is not true : get_col not returning a OneDimensionalMatrix (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 231, in test_get_col_type
+        self.assertTrue(isinstance(m.get_col(1), a1.OneDimensionalMatrix), "get_col not returning a OneDimensionalMatrix")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : get_col not returning a OneDimensionalMatrix
+
+17) test_a1.TestA1.test_add_scalar_2                                                   .. failed
+.. because <a1.MatrixNode object at 0x7ff1a9b3cd68> != 18 : scalar addition not working on set node (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 335, in test_add_scalar_2
+        self.assertEqual(m.get_val(1, 2), 18, "scalar addition not working on set node")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: <a1.MatrixNode object at 0x7ff1a9b3cd68> != 18 : scalar addition not working on set node
+
+18) test_a1.TestA1.test_set_val_deleting_nodes                                         .. failed
+.. because <a1.MatrixNode object at 0x7ff1a9b67f28> != None : setting a node back to default value not deleting the node (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 201, in test_set_val_deleting_nodes
+        self.assertEqual(m._head._right, None, "setting a node back to default value not deleting the node")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: <a1.MatrixNode object at 0x7ff1a9b67f28> != None : setting a node back to default value not deleting the node
+
+19) test_a1.TestA1.test_add_scalar                                                     .. failed
+.. because 0 != 9 : scalar addition not working on non-set node (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 323, in test_add_scalar
+        self.assertEqual(m.get_val(1, 1), 9, "scalar addition not working on non-set node")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: 0 != 9 : scalar addition not working on non-set node
+
+20) test_a1.TestA1.test_get_row_type                                                   .. failed
+.. because False is not true : get_row not returning a OneDimensionalMatrix (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 223, in test_get_row_type
+        self.assertTrue(isinstance(m.get_row(1), a1.OneDimensionalMatrix), "get_row not returning a OneDimensionalMatrix")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 654, in assertTrue
+        raise self.failureException(msg)
+    
+    AssertionError: False is not true : get_row not returning a OneDimensionalMatrix
+
+21) test_a1.TestA1.test_set_val_deleting_nodes_2                                       .. failed
+.. because <a1.MatrixNode object at 0x7ff1a9b72160> != None : setting a node back to default value not deleting the node (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 213, in test_set_val_deleting_nodes_2
+        self.assertEqual(m._head._right, None, "setting a node back to default value not deleting the node")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: <a1.MatrixNode object at 0x7ff1a9b72160> != None : setting a node back to default value not deleting the node
+
+22) test_a1.TestA1.test_set_val_default_nodes_2                                        .. failed
+.. because <a1.MatrixNode object at 0x7ff1a9b67d30> != None : setting a cell to the default value should not create a new node (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 177, in test_set_val_default_nodes_2
+        self.assertEqual(m._head._right, None, "setting a cell to the default value should not create a new node")
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 797, in assertEqual
+        assertion_func(first, second, msg=msg)
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 790, in _baseAssertEqual
+        raise self.failureException(msg)
+    
+    AssertionError: <a1.MatrixNode object at 0x7ff1a9b67d30> != None : setting a cell to the default value should not create a new node
+
+23) test_a1.TestA1.test_add_matrix_dimensions                                          .. error
+.. because  (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 413, in test_add_matrix_dimensions
+        r = m1.add_matrix(m2)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 354, in add_matrix
+        raise MatrixInvalidOperationError()
+    
+    a1.MatrixInvalidOperationError
+
+24) test_a1.TestA1.test_identity                                                       .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 535, in test_identity
+        m = a1.IdentityMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+25) test_a1.TestA1.test_get_col_1d                                                     .. error
+.. because 'NoneType' object has no attribute 'get_item' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 243, in test_get_col_1d
+        self.assertEqual(c.get_item(1), 9, "get_col reslt accessed as a OneDimensionalMatrix not returning correct values")
+    
+    AttributeError: 'NoneType' object has no attribute 'get_item'
+
+26) test_a1.TestA1.test_get_row_set_col                                                .. error
+.. because _traversal() missing 1 required positional argument: 'index' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 309, in test_get_row_set_col
+        m.set_col(1, r)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 308, in set_col
+        self._index = self._traversal("col", col_num)
+    
+    TypeError: _traversal() missing 1 required positional argument: 'index'
+
+27) test_a1.TestA1.test_add_matrix_defaults                                            .. error
+.. because 'NoneType' object has no attribute 'get_val' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 371, in test_add_matrix_defaults
+        self.assertEqual(r.get_val(1, 1), 3, "adding 2 matrices not producing correct default values")
+    
+    AttributeError: 'NoneType' object has no attribute 'get_val'
+
+28) test_a1.TestA1.test_diagonal_matrix                                                .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 511, in test_diagonal_matrix
+        m1 = a1.DiagonalMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+29) test_a1.TestA1.test_add_matrix_set_nodes                                           .. error
+.. because 'NoneType' object has no attribute 'get_val' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 401, in test_add_matrix_set_nodes
+        self.assertEqual(r.get_val(1, 1), 3, "adding 2 matrices not producing correct matrix")
+    
+    AttributeError: 'NoneType' object has no attribute 'get_val'
+
+30) test_a1.TestA1.test_get_set_row                                                    .. error
+.. because _traversal() missing 1 required positional argument: 'index' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 295, in test_get_set_row
+        m.set_col(2, r)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 308, in set_col
+        self._index = self._traversal("col", col_num)
+    
+    TypeError: _traversal() missing 1 required positional argument: 'index'
+
+31) test_a1.TestA1.test_diagonal                                                       .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 481, in test_diagonal
+        m1 = a1.SquareMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+32) test_a1.TestA1.test_diagonal_invalid                                               .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 525, in test_diagonal_invalid
+        m = a1.DiagonalMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+33) test_a1.TestA1.test_identity_invalid                                               .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 547, in test_identity_invalid
+        m = a1.IdentityMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+34) test_a1.TestA1.test_matrix_mult                                                    .. error
+.. because 'Matrix' object has no attribute '_row_giver' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 437, in test_matrix_mult
+        r = m1.multiply_matrix(m2)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 360, in multiply_matrix
+        if self.col_giver() != mult_matrix._row_giver():
+    
+    AttributeError: 'Matrix' object has no attribute '_row_giver'
+
+35) test_a1.TestA1.test_matrix_mult_dimensions                                         .. error
+.. because 'Matrix' object has no attribute '_row_giver' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 457, in test_matrix_mult_dimensions
+        r = m1.multiply_matrix(m2)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 360, in multiply_matrix
+        if self.col_giver() != mult_matrix._row_giver():
+    
+    AttributeError: 'Matrix' object has no attribute '_row_giver'
+
+36) test_a1.TestA1.test_get_val_index_error                                            .. error
+.. because  (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 77, in test_get_val_index_error
+        m.get_val(4, 4)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 250, in get_val
+        raise MatrixDimensionError()
+    
+    a1.MatrixDimensionError
+
+37) test_a1.TestA1.test_identity_invalid_2                                             .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 557, in test_identity_invalid_2
+        m = a1.IdentityMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+38) test_a1.TestA1.test_get_row_values                                                 .. error
+.. because 'NoneType' object has no attribute 'get_item' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 257, in test_get_row_values
+        self.assertEqual(r.get_item(2), 9, "row retrieved didn't have value put into original matrix")
+    
+    AttributeError: 'NoneType' object has no attribute 'get_item'
+
+39) test_a1.TestA1.test_set_val_index_error                                            .. error
+.. because  (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 189, in test_set_val_index_error
+        m.set_val(5, 5, 9)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 270, in set_val
+        raise MatrixDimensionError()
+    
+    a1.MatrixDimensionError
+
+40) test_a1.TestA1.test_get_col_values                                                 .. error
+.. because 'NoneType' object has no attribute 'get_item' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 269, in test_get_col_values
+        self.assertEqual(r.get_item(2), 9, "col retrieved didn't have value put into original matrix")
+    
+    AttributeError: 'NoneType' object has no attribute 'get_item'
+
+41) test_a1.TestA1.test_set_val_nodes_3                                                .. error
+.. because 'Matrix' object has no attribute '_node_creaotr' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 118, in test_set_val_nodes_3
+        m.set_val(1, 1, 11)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 278, in set_val
+        self._hold_row = self._indexer("row", self._ind_y)
+    
+      File "/home/a08test/submissions/adhika21/a1p2/a1.py", line 220, in _indexer
+        self._helper.set_down(self._node_creaotr(
+    
+    AttributeError: 'Matrix' object has no attribute '_node_creaotr'
+
+42) test_a1.TestA1.test_transpose                                                      .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 467, in test_transpose
+        m1 = a1.SquareMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+43) test_a1.TestA1.test_symmetric_matrix                                               .. error
+.. because __init__() missing 1 required positional argument: 'n' (details below):
+
+    Traceback (most recent call last):
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 58, in testPartExecutor
+        yield
+    
+      File "/usr/local/cms/python-3.4.2/lib/python3.4/unittest/case.py", line 577, in run
+        testMethod()
+    
+      File "/home/a08test/submissions/adhika21/a1p2/test_a1.py", line 499, in test_symmetric_matrix
+        m1 = a1.SymmetricMatrix(3)
+    
+    TypeError: __init__() missing 1 required positional argument: 'n'
+
+
+
+Tests for test_pep8.Test (1/1 passed)
+--
+
+1) test_pep8.Test.test_pep8                                                           .. ok!
+
+
