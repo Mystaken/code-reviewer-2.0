@@ -7,6 +7,8 @@
       <th>Repo Path</th>
       <th>Feedback Questions</th>
       <th>Required Files</th>
+      <th></th>
+      <th>Manage</th>
     </thead>
     <tbody>
       <tr *ngFor="let assignment of assignments">
@@ -32,13 +34,53 @@
           </m-editable>
         </td>
         <td>{{assignment.feedback_questions}}</td>
-        <td>{{assignment.required_files}}</td>
+
+        <td>
+          <m-dropdown>    
+            <div class="text">File</div>    
+            <i class="dropdown icon"></i>   
+            <div class="menu">    
+              <div class="item">New</div>   
+              <div class="item">    
+                <span class="description">repo</span>   
+                  <m-editable
+                    [value]="assignment.repo_path"
+                    [onChange]="">
+                  </m-editable>
+              </div>    
+              <div class="item">    
+                <span class="description">folder</span>   
+                a2  
+              </div>           
+              <div class="divider"></div>   
+              <div class="item">{{assignment.required_files}}</div>     
+            </div>    
+          </m-dropdown>
+        </td>
         <td>
           <div (click)="loadSubmissionFiles(assignment)">load</div>
           <div (click)="distribute(assignment)">dis</div>
         </td>
+
+        <td>
+          <div class="ui teal buttons">
+            <div class="ui button">not working</div>
+            <div class="ui combo top right pointing dropdown icon button">
+              <i class="dropdown icon"></i>
+              <div class="menu">
+                <div class="item"><i class="edit icon"></i> Load</div>
+                <div class="item"><i class="delete icon"></i> Distribute</div>
+                <div class="item"><i class="delete icon"></i> Delete</div>
+              </div>
+            </div>
+          </div>
+        </td>
       </tr>
     </tbody>
   </table>
+
+
+  <!-- example dropdown for vc -->    
+
   
 </div>

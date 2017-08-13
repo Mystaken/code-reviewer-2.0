@@ -14,7 +14,10 @@ export class MDropdownComponent {
 
   ngAfterViewInit(): void {
     this.dropdown = this.parentElement.nativeElement.children[0];
-    $(this.dropdown).dropdown(this.settings)
+    $(this.dropdown).dropdown(this.settings);
+
+    // TODO: fix
+    $('.combo.dropdown').dropdown({ action: 'combo'});
   }
 }
 export interface dropdownOptions {
