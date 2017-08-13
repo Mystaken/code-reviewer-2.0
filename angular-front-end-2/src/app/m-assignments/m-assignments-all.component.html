@@ -7,7 +7,6 @@
       <th>Repo Path</th>
       <th>Feedback Questions</th>
       <th>Required Files</th>
-      <th></th>
       <th>Manage</th>
     </thead>
     <tbody>
@@ -57,10 +56,6 @@
             </div>    
           </m-dropdown>
         </td>
-        <td>
-          <div (click)="loadSubmissionFiles(assignment)">load</div>
-          <div (click)="distribute(assignment)">dis</div>
-        </td>
 
         <td>
           <div class="ui teal buttons">
@@ -68,8 +63,14 @@
             <div class="ui combo top right pointing dropdown icon button">
               <i class="dropdown icon"></i>
               <div class="menu">
-                <div class="item"><i class="edit icon"></i> Load</div>
-                <div class="item"><i class="delete icon"></i> Distribute</div>
+                <div class="item" (click)="loadSubmissionFiles(assignment)">
+                  <i class="edit icon"></i> 
+                  Load
+                  </div>
+                <div class="item" (click)="distribute(assignment)">
+                  <i class="delete icon"></i>
+                  Distribute
+                </div>
                 <div class="item"><i class="delete icon"></i> Delete</div>
               </div>
             </div>
