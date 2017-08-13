@@ -45,6 +45,7 @@ module.exports = function (router) {
                     num_peers: 1,
                     required_files: 1,
                     repo_path: 1,
+                    folder_name: 1,
                     feedback_questions: 1
                 }
             }
@@ -77,6 +78,7 @@ module.exports = function (router) {
             required_files: req.body.required_files || [],
             feedback_questions: req.body.feedback_questions || [],
             repo_path: req.body.repo_path || "",
+            folder_name: req.body.folder_name || "",
             peer_review: false,
             self_review: false,
             mark_review: false,
@@ -115,7 +117,6 @@ module.exports = function (router) {
         validator.validate(req.body, works_post_schema);
         error = validator.getLastErrors();
         if (error) {
-            console.log("????");
             return res.requestError({ code: "VALIDATION", message: error });
         }
         find_query = {
@@ -128,20 +129,13 @@ module.exports = function (router) {
             required_files: req.body.required_files,
             feedback_questions: req.body.feedback_questions,
             repo_path: req.body.repo_path,
+            folder_name: req.body.folder_name,
             peer_review: req.body.peer_review,
             self_review: req.body.self_review,
             mark_review: req.body.mark_review,
             status: 'active'
         };
-        if (req.body.student_submission_deadline) {
-            update_query.student_submission_deadline = mongoose.getDefaultDate(req.body.student_submission_deadline);
-        }
-        if (req.body.peer_review_deadline) {
-            update_query.peer_review_deadline = mongoose.getDefaultDate(req.body.peer_review_deadline);
-        }
-        if (req.body.ta_review_deadline) {
-            update_query.ta_review_deadline = mongoose.getDefaultDate(req.body.ta_review_deadline);
-        }
+
         utils.clean(update_query);
         return works_model.find(find_query).exec().then(function(ret) {
             if (!ret.length) {
@@ -207,6 +201,7 @@ module.exports = function (router) {
                     name: 1,
                     required_files: 1,
                     repo_path: 1,
+                    folder_name: 1,
                     feedback_questions: 1,
                     peer_review: 1,
                     self_review: 1,

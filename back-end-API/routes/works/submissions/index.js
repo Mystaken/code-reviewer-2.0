@@ -207,7 +207,7 @@ module.exports = function (router) {
             fs.readdir(repo_name, function(err, files) {
                 var count = 1;
                 files.forEach(function(utorid) {
-                    var file_path = repo_name + '/'+ utorid + '/' + 'a2' + '/' + file_name;
+                    var file_path = repo_name + '/'+ utorid + '/' + folder_name + '/' + file_name;
                     fs.readFile(file_path, 'utf8', function (err, code) {
                         var temp_count = count;
                         return user_model.aggregate([
