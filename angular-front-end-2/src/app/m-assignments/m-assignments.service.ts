@@ -29,4 +29,10 @@ export class MAssignmentsService {
   loadSubmissionFiles(params) {
     return this._api.post('works/submissions/loadSubmissionFiles', params);
   }
+
+
+  distribute(params) {
+    console.log('api.ts');
+    return this._api.post('works/submissions/distribute', params);
+  }
 }

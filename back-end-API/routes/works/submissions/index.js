@@ -11,6 +11,7 @@ var validator = require('../../../lib/validator'),
     submissions_model      = require('../../../models/submissions'),
     works_model            = require('../../../models/works'),
     user_model             = require('../../../models/users'),
+    feedbacks_model        = require('../../../models/feedbacks'),
     
     submissions_get_schema = require('../../../schemas/works/submissions/submissions_get'),
     submissions_put_schema = require('../../../schemas/works/submissions/submissions_put'),
@@ -236,6 +237,53 @@ module.exports = function (router) {
                     count ++;
                 });
             });
+        });
+    });
+
+
+
+    router.route("/distribute").post(function(req, res, next) {
+        if (req.session_user_type !== 'admin') return res.forbidden();
+        return submissions_model.aggregate([
+            { $match: { 'work_id': mongoose.Types.ObjectId(req.body.work_id) }},
+            { $project : { _id: 1, author_id: 1 } }
+        ]).exec().then(function(submissions) {
+            // SUFFLE  
+            var count = 0;
+            var len = submissions.length;
+            var current_index = len, temp, random_index;
+            var num_peers = req.body.num_peers;
+            // While there remain elements to shuffle...
+            while (0 !== current_index) {
+              // Pick a remaining element...
+              random_index = Math.floor(Math.random() * current_index);
+              current_index -= 1;
+              // And swap it with the current element.
+              temp = submissions[current_index];
+              submissions[current_index] = submissions[random_index];
+              submissions[random_index] = temp;
+            }
+
+            for (var i = 0; i < len; i ++) {
+              for (var j = 1; j <= num_peers; j ++) {
+
+                new feedbacks_model({
+                    submission_id: mongoose.Types.ObjectId(submissions[i]._id),
+                    author: mongoose.Types.ObjectId(submissions[i].author_id),
+                    review_by: mongoose.Types.ObjectId(submissions[(i + j) % len].author_id),
+                    feedbacks: [],
+                    mark: 0,
+                    create_date: new Date(),
+                    last_updated: new Date(),
+                    status: 'active'
+                }).save();
+                count ++;
+              }
+            }
+
+            if (count === len * num_peers) return res.sendResponse(count);
+        }).catch(function(err) {
+            res.requestError(err);
         });
     });
 

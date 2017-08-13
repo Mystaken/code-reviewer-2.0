@@ -34,7 +34,8 @@
         <td>{{assignment.feedback_questions}}</td>
         <td>{{assignment.required_files}}</td>
         <td>
-          <div (click)="loadSubmission(assignment)">load</div>
+          <div (click)="loadSubmissionFiles(assignment)">load</div>
+          <div (click)="distribute(assignment)">dis</div>
         </td>
       </tr>
     </tbody>
