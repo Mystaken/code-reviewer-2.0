@@ -7,13 +7,13 @@ import { CookieService } from 'ngx-cookie';
 export class SessionUserService {
   session_user_id: String = ""
   session_user_type: String = ""
-  isLoggedIn = true;
+  loggedIn = true;
   constructor(private _cookieService:CookieService) {
     try {
       let session = JSON.parse(this._cookieService.get('cr_session_user'))
       this.session_user_id = session.session_user_id;
       this.session_user_type = session.session_user_type;
-      this.isLoggedIn = true;
+      this.loggedIn = true;
     } catch (e) {
 
     }
@@ -28,6 +28,6 @@ export class SessionUserService {
   }
   
   isLoggedIn() {
-    return this.isLoggedIn;
+    return this.loggedIn;
   }
 }

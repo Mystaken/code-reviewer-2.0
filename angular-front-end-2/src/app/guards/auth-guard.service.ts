@@ -10,6 +10,6 @@ import { SessionUserService } from '../services/session-user.service';
 export class AuthGuard implements CanActivate {
   constructor(private _userService: SessionUserService, private router: Router) {}
   canActivate() {
-    return this.userService.isLoggedIn();
+    return this._userService.isLoggedIn();
   }
 }
