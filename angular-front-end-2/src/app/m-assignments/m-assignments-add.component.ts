@@ -71,6 +71,7 @@ export class MAssignmentsAddComponent {
             message: 'Successfully added assignment.'
           });
           this.assignmentAdded.emit(response);
+          this.newAssignment();
         },
         error => {
           this.showAssignmentsMsg({

@@ -5,6 +5,7 @@
   background-repeat: repeat-x;
   display: inline-block;
   cursor: pointer;
+  color: black;
 }
 .edit.input {
   width: 8em;

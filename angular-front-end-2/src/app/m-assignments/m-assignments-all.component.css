@@ -4,3 +4,8 @@
 .thead {
   padding: 0.1em;
 }
+
+.checkboxes {
+	display: flex;
+  	justify-content:space-between;
+}
