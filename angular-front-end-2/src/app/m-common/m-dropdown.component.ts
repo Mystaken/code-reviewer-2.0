@@ -14,6 +14,8 @@ export class MDropdownComponent {
 
   ngAfterViewInit(): void {
     $('.ui.dropdown').dropdown(this.settings);
+
+    // $('.tag.example .ui.dropdown').dropdown({ allowAdditions: true});
   }
 }
 export interface dropdownOptions {
