@@ -251,7 +251,7 @@ module.exports = function (router) {
 
     router.route("/distribute").post(function(req, res, next) {
         if (req.session_user_type !== 'admin') return res.forbidden();
-        return submission_files_model.aggregate([
+        return submissions_model.aggregate([
             { $match: { 'work_id': mongoose.Types.ObjectId(req.body.work_id) }},
             { $project : { _id: 1, author_id: 1 } }
         ]).exec().then(function(submissions) {
