@@ -15,6 +15,8 @@ import { APIRoutingService } from './services/api-routing.service';
 import { SessionUserService } from './services/session-user.service';
 import { ValidationService } from './services/validation.service';
 import { CookieService } from 'ngx-cookie';
+import { AdminGuard } from './guards/admin-guard.service';
+import { StudentGuard } from './guards/student-guard.service';
 import { AppComponent } from './app.component';
 
 @NgModule({
@@ -36,7 +38,8 @@ import { AppComponent } from './app.component';
     APIRoutingService,
     SessionUserService,
     ValidationService,
-    CookieService
+    CookieService,
+    AdminGuard
   ],
   bootstrap: [
     AppComponent

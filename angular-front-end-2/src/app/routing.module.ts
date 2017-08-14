@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
+import { AdminGuard } from './guards/admin-guard.service';
 import { MDashboardComponent } from './m-dashboard/m-dashboard.component';
 import { MNotFoundComponent } from './m-notfound/m-notfound.component';
 import { MAssignmentsAllComponent } from './m-assignments/m-assignments-all.component';
@@ -13,26 +14,26 @@ const routes: Routes = [
     path: '',   
     redirectTo: '/dashboard', 
     pathMatch: 'full'
-  },
-  {
+  },{
     path: 'dashboard',
     component: MDashboardComponent
-  },
-  {
+  },{
     path: 'submissions/:id',
     component: MSubmissionsComponent
-  },
-  {
+  },{
     path: 'students',
-    component: MStudentsComponent
-  },
-  {
+    component: MStudentsComponent,
+    canActivate: [ AdminGuard ]
+  },{
     path: 'assignments',
-    component: MAssignmentsComponent
-  }, 
-  { 
-    path: '**', 
+    component: MAssignmentsComponent,
+    canActivate: [ AdminGuard ]
+  },{ 
+    path: 'error', 
     component: MNotFoundComponent
+  },{ 
+    path: '**', 
+    redirectTo: '/error'
   }
 ];
 
