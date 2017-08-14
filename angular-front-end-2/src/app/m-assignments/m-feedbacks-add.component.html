@@ -1,0 +1,36 @@
+<div class="ui segment">
+  <h4 class="ui cursor dividing header" (click)="addNew=!addNew;newFeedbackQuestionsMsg.show=false">
+    <i class="plus icon" *ngIf="!addNew"></i>
+    <i class="minus icon" *ngIf="addNew"></i>
+    Add Feedback Questions
+  </h4>
+  <div class="ui inverted dimmer" [class.active]="submittingAssignment">
+    <div class="ui text loader">Submitting...</div>
+  </div>
+  <div class="ui form" *ngIf="addNew">
+      <div class="field">
+        <label>Feedback Questions</label>
+        <input type="text"
+          placeholder="Feedback Questions"
+          [(ngModel)]="pendingFeedbackQuestions.content">
+      </div>
+
+    <div class="ui primary right labeled icon button" (click)="addFeedbackQuestions()">
+      <i class="caret right icon"></i>
+      Submit
+    </div>
+  </div>
+  <div class="ui message"
+    [ngClass]="newFeedbackQuestionsMsg.type"
+    *ngIf="newFeedbackQuestionsMsg.show">
+    <i class="close icon" (click)="closeFeedbackQuestionsMsg()"></i>
+    <div class="content">
+      {{newFeedbackQuestionsMsg.message}}
+    </div>
+  </div>
+  <!-- batch upload -->
+  <div class="ui segment" *ngIf="addNew">
+    <h4 class="ui dividing header">Batch Upload</h4>
+    To be Worked on.
+  </div>
+</div>

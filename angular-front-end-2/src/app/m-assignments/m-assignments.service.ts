@@ -6,6 +6,12 @@ import { APIRoutingService } from '../services/api-routing.service';
 export class MAssignmentsService {
   constructor(private _api: APIRoutingService) { }
 
+
+
+  addFeedbackQuestions(params) {
+    return this._api.put('feedback_questions', params);
+  }
+
   addAssignment(params) {
     return this._api.put('works', params);
   }
