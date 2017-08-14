@@ -51,7 +51,7 @@ function validateArgs() {
             ret.user_id = args[args.indexOf(params.user_id.name) + 1];
             logger.debug('Setting login user to: ' + ret.user_id);
         } else {
-            logger.debug('No user_id inputted. Using default user_id.');
+            logger.debug('No user_id inputted. Using default user_id: ' + ret.user_id);
         }
         if (args.indexOf(params.user_type.name) >= 0) {
             ret.user_type = args[args.indexOf(params.user_type.name) + 1];
