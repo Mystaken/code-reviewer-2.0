@@ -23,38 +23,46 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        if (!mongoose.validID(req.query.feedback_id)) {
+        if (!mongoose.validID(req.query.submission_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
-                params: [ 'feedback_id' ]
+                params: [ 'submission_id' ]
             });
         }
-        return feedbacks_model.aggregate([
-                { 
-                    $match: {
-                        _id: mongoose.Types.ObjectId(req.query.feedback_id),
-                        status: 'active'
-                    } 
-                },{
-                    $project: {
-                        feedback_id: "$_id",
-                        _id: 0,
-                        submission_id: 1,
-                        feedbacks: 1,
-                        mark: 1
-                    }
-                }
-            ]).exec().then(function (submission) {
-                if (!submission || !submission.length) {
-                    return res.requestError({
-                        code: "NOT_FOUND",
-                        params: [ 'feedback_id' ]
-                    });
-                }
-                return res.sendResponse(submission);
-            }).catch(function (error) {
-                res.requestError(error);
-            });
+        return feedbacks_model.aggregate([{
+            $match: { 
+                $or: [{
+                    submission_id: mongoose.Types.ObjectId(req.query.submission_id),
+                    author: mongoose.Types.ObjectId(req.session_user_id),
+                    status: 'active'
+                },{ 
+                    submission_id: mongoose.Types.ObjectId(req.query.submission_id),
+                    review_by: mongoose.Types.ObjectId(req.session_user_id),
+                    status: 'active'
+                }]
+            }
+        },{
+            $project: {
+                feedback_id: "$_id",
+                _id: 0,
+                submission_id: 1,
+                feedbacks: 1,
+                mark: 1,
+                last_updated: 1,
+                review_by: 1,
+                create_date: 1
+            }
+        }]).exec().then(function(ret) {
+            if (!ret || !ret.length) {
+                return Promise.reject({
+                    code: "NOT_FOUND",
+                    params: [ 'submission_id' ]
+                });
+            }
+            return res.sendResponse(ret[0]);
+        }).catch(function (error) {
+            return res.requestError(error);
+        });
     }).put(function(req, res, next) {
         var error,
             date;
@@ -86,7 +94,7 @@ module.exports = function (router) {
                 }
                 return new feedbacks_model({
                     submission_id: req.body.submission_id,
-                    author: work.author_id,
+                    author: work[0].author_id,
                     review_by: req.session_user_id,
                     feedbacks: req.body.feedbacks || [],
                     mark: req.body.mark || 0,

@@ -28,10 +28,16 @@ var validator = require('../../../lib/validator'),
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
         var error;
-        if (!mongoose.validID(req.query.submission_id)) {
+        if (!mongoose.validID(req.query.work_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
-                params: [ 'submission_id' ]
+                params: [ 'work_id' ]
+            });
+        }
+        if (!mongoose.validID(req.query.author_id)) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'user_id' ]
             });
         }
         validator.validate(req.query, submissions_get_schema);
@@ -42,8 +48,8 @@ module.exports = function (router) {
         return submissions_model.aggregate([
             {
                 $match: {
-                    _id: mongoose.Types.ObjectId(req.query.submission_id),
-                    author_id: mongoose.Types.ObjectId(req.session_user_id)
+                    work_id: mongoose.Types.ObjectId(req.query.work_id),
+                    author_id: mongoose.Types.ObjectId(req.query.author_id)
                 }
             },{
                 $project: {
@@ -64,10 +70,26 @@ module.exports = function (router) {
             if (!ret || !ret.length) {
                 return Promise.reject({
                         code: "NOT_FOUND",
-                        params: [ 'submission_id' ]
+                        params: [ 'work_id' ]
                     });
             }
-            return res.sendResponse(ret[0]);
+            if (req.session_user_id === req.query.author_id) {
+                return res.sendResponse(ret[0]);
+            }
+            return feedbacks_model.aggregate([{
+                $match: {
+                    submission_id: mongoose.Types.ObjectId(ret[0].submission_id),
+                    review_by:  mongoose.Types.ObjectId(req.session_user_id)
+                }
+            }]).then(function(ret) {
+                if (!ret || !ret.length) {
+                    return Promise.reject({
+                        code: "NOT_FOUND",
+                        params: [ 'work_id' ]
+                    });
+                }
+                return res.sendResponse(ret[0]);
+            });
         }).catch(function(err) {
             return res.requestError(err);
         });
@@ -110,7 +132,7 @@ module.exports = function (router) {
         }).then(function (ret) {
             if (ret && ret.length) {
                 return Promise.reject({
-                        code: "EXISTS",
+                        code: "NOT_FOUND",
                         params: [ 'submission_id' ]
                     });
             }

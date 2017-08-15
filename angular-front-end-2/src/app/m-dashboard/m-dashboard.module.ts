@@ -9,6 +9,8 @@ import { MDashboardComponent } from './m-dashboard.component';
 import { MAnnouncementComponent } from './m-announcement.component';
 import { MDashboardSidebarComponent } from './m-dashboard-sidebar.component';
 
+import { MAssignmentsService } from '../m-assignments/m-assignments.service';
+
 @NgModule({
   declarations: [
     MDashboardComponent,
@@ -25,7 +27,9 @@ import { MDashboardSidebarComponent } from './m-dashboard-sidebar.component';
   exports: [
     MDashboardComponent
   ],
-  providers: [],
+  providers: [
+    MAssignmentsService
+  ],
   bootstrap: []
 })
 export class MDashboardModule { }

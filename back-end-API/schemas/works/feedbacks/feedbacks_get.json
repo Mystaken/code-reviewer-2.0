@@ -2,11 +2,11 @@
     "id": "feedbacks-get",
     "type": "object",
     "properties": {
-        "feedback_id": {
+        "submission_id": {
             "type": "string",
             "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "feedback_id" ]
+    "required": [ "submission_id" ]
 }

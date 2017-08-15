@@ -23,10 +23,6 @@ const routes: Routes = [
     component: MDashboardComponent,
     canActivate: [ AuthGuard ]
   },{
-    path: 'submissions/:id',
-    component: MSubmissionsComponent,
-    canActivate: [ AuthGuard ]
-  },{
     path: 'students',
     component: MStudentsComponent,
     canActivate: [ AdminGuard ]
@@ -34,6 +30,10 @@ const routes: Routes = [
     path: 'assignments',
     component: MAssignmentsComponent,
     canActivate: [ AdminGuard ]
+  },{
+    path: 'submissions/:id',
+    component: MSubmissionsComponent,
+    canActivate: [ AuthGuard ]
   },{ 
     path: 'error', 
     component: MNotFoundComponent,

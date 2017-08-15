@@ -1,6 +1,6 @@
 <m-header></m-header>
 <!-- if assignment does not exist -->
-<m-notfound-item *ngIf="!exists" [name]="'submission'"></m-notfound-item>
+<m-notfound-item *ngIf="!exists" [name]="'assignment'"></m-notfound-item>
 <!-- if assignment exists -->
 <div class="ui doubling stackable grid submissions container" *ngIf="exists">
   <div class="four wide column">
@@ -25,15 +25,15 @@
     </div>
     <div class="ui vertical fluid menu">
       <div class="ui secondary vertical pointing fluid menu">
-        <a class="active blue item">
-          Submit
-          <div class="ui blue left pointing label">1</div>
-        </a>
-        <a class="item">
+        <a class="item"
+          [class.active]="selected=='review'"
+          [class.blue]="selected=='review'">
           Review
           <div class="ui label">0</div>
         </a>
-        <a class="item">
+        <a class="item"
+          [class.active]="selected=='feedbacks'"
+          [class.blue]="selected=='feedbacks'">
           Feedbacks
           <div class="ui label">0</div>
         </a>
@@ -41,9 +41,9 @@
     </div>
   </div>
   <div class="twelve wide column">
-    <m-review
+    <!--<m-review
       [submission]="submission">
-    </m-review>
+    </m-review>-->
   </div>
 </div>
 <m-footer></m-footer>
