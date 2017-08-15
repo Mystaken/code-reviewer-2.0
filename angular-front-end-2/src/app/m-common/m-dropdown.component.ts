@@ -8,7 +8,7 @@ declare var $: any;
 })
 export class MDropdownComponent {
   @Input() class = "";
-  @Input() settings: dropdownOptions;
+  @Input() settings = {};
   dropdown: HTMLElement
   constructor(private parentElement: ElementRef) {}
 
@@ -20,7 +20,4 @@ export class MDropdownComponent {
 //   })
 // ;
   }
-}
-export interface dropdownOptions {
-  actions?: String
 }

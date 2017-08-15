@@ -32,15 +32,19 @@ module.exports = function (router) {
                 params: [ 'submission_id' ]
             });
         }
-        return feedbacks_model.aggregate([
-                {
-                    $match: {
+        return feedbacks_model.aggregate([{
+                $match: {
+                    $or: [{
                         submission_id: mongoose.Types.ObjectId(req.query.submission_id),
                         review_by: mongoose.Types.ObjectId(req.session_user_id),
                         status: 'active'
-                    }
+                    },{
+                        submission_id: mongoose.Types.ObjectId(req.query.submission_id),
+                        author: mongoose.Types.ObjectId(req.session_user_id),
+                        status: 'active'
+                    }]
                 }
-            ]).exec().then(function(ret) {
+            }]).exec().then(function(ret) {
                 if (!ret || !ret.length) {
                     return Promise.reject({
                         code: "NOT_FOUND",
@@ -133,73 +137,6 @@ module.exports = function (router) {
             });
     }).delete(function(req, res, next) {
     }).all(function (req, res, next) {
-        return res.invalidVerb();
-    });
-
-
-    router.route('/all').get(function(req, res, next) {
-        var error,
-            match_query;
-
-        validator.validate(req.query, annotations_all_get_schema);
-        error = validator.getLastErrors();
-        if (error) {
-            return res.requestError({ code: "VALIDATION", message: error });
-        }
-
-        if (!mongoose.validID(req.query.submission_id)) {
-            return res.requestError({
-                code: "NOT_FOUND",
-                params: [ 'submission_file_id' ]
-            });
-        }
-        match_query = {
-            _id:    mongoose.Types.ObjectId(req.query.submission_id)
-        }
-        if (req.session_user_type !== 'admin') {
-            match_query.author_id = mongoose.Types.ObjectId(req.session_user_id);
-        }
-        return submissions_model.aggregate([
-                {
-                    $match: match_query
-                }
-            ]).exec().then(function(ret) {
-                if (!ret || !ret.length) {
-                    return Promise.reject({
-                        code: "NOT_FOUND",
-                        params: [ 'submission_file_id' ]
-                    });
-                }
-                return annotations_model.aggregate([
-                        {
-                            $match: {
-                                submission_id: mongoose.Types.ObjectId(req.query.submission_id),
-                                status: 'active'
-                            }
-                        },
-                        { 
-                            $project : {
-                                annotation_id: "$_id",
-                                _id: 0,
-                                submission_id: 1,
-                                submission_file_id: 1,
-                                review_by: 1,
-                                annotation: 1,
-                                start: 1,
-                                end: 1
-                            }
-                        }
-                    ]).exec();
-            }).then(function (ret) {
-                return res.sendResponse({
-                        submission_id: req.query.submission_id,
-                        annotations: ret
-                    });
-            }).catch(function (err) {
-                res.requestError(err);
-            });
-
-    }).all(function(req, res, next) {
         return res.invalidVerb();
     });
 };

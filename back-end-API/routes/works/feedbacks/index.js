@@ -59,7 +59,7 @@ module.exports = function (router) {
                     params: [ 'submission_id' ]
                 });
             }
-            return res.sendResponse(ret[0]);
+            return res.sendResponse(ret);
         }).catch(function (error) {
             return res.requestError(error);
         });
@@ -153,7 +153,6 @@ module.exports = function (router) {
     });
 
     router.route('/all').get(function(req, res, next) {
-
         var error;
 
         validator.validate(req.query, feedback_all_get_schema);

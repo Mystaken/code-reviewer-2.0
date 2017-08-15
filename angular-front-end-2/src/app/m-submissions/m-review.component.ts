@@ -9,9 +9,9 @@ import {
 } from '@angular/core';
 import { MModalComponent } from '../m-common/m-modal.component';
 import { MSubmissionsService } from './m-submissions.service';
+import { Observable } from 'rxjs';
 import * as hljs from 'highlight.js';
 import * as $ from 'jquery';
-
 @Component({
   selector: 'm-review',
   templateUrl: './m-review.component.html',
@@ -19,8 +19,9 @@ import * as $ from 'jquery';
 })
 export class MReviewComponent {
   @Input() submission;
+  @Input() selectedFile;
+  @Input() type;
   @ViewChild('newAnnotation') modal: MModalComponent;
-  selectedFile;
   allAnnotations = []
   annotations = [];
   seperatedComments = [];
@@ -30,6 +31,9 @@ export class MReviewComponent {
 
   constructor(private _submissionsAPI: MSubmissionsService, private el: ElementRef) {
 
+    if (this.type === 'feedback') {
+      this.addComment = function() {}
+    }
     $(document).on('click', function(event) {
         $('.jcomment').each(function (i, c) {
             if(!c.contains(event.target)) {
@@ -39,11 +43,17 @@ export class MReviewComponent {
     });
   }
   ngOnInit() {
-    this._submissionsAPI.getAllAnnotations({
-      submission_id: this.submission.submission_id
-    }).subscribe((res) => {
-      this.allAnnotations = res.annotations;
-      this.selectFile(0);
+    return Observable.forkJoin([
+      this._submissionsAPI.getSubmissionFeedback({
+        submission_id: this.submission.submission_id
+      }),
+      this._submissionsAPI.getAllAnnotations({
+        submission_id: this.submission.submission_id
+      })
+    ]).subscribe((res) => {
+      console.log(res);
+      this.allAnnotations = res[1].annotations;
+      this.selectFile(this.selectedFile);
     });
   }
 

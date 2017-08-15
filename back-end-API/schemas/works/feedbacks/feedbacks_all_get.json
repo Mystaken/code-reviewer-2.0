@@ -1,5 +1,12 @@
 {
-    "id": "feedbacks-get",
+    "id": "feedbacks-all-get",
     "type": "object",
-    "additionalProperties": false
+    "properties": {
+        "submission_id": {
+            "type": "string",
+            "maxLength": 100
+        }
+    },
+    "additionalProperties": false,
+    "required": [ "submission_id" ]
 }

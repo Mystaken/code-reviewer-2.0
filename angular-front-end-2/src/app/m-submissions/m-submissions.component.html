@@ -11,10 +11,12 @@
       <table class="ui very basic single lined table"><tbody>
           <tr><td>Deadline:</td><td>N/A</td></tr>
       </tbody></table>
-      <h4 class="ui dividing header">Required Files</h4>
+      <h4 class="ui dividing header">Files</h4>
       <div class="ui list">
         <a class="item"
-          *ngFor="let file of assignment.required_files">
+          *ngFor="let file of assignment.required_files; let i=index;"
+          (click)="selectFile(file, i)"
+          [class.selectedFile]="file.selected">
           <i class="yellow help icon" *ngIf="!file.has_uploaded"></i>
           <i class="green file icon" *ngIf="file.has_uploaded"></i>
           <div class="content">
@@ -29,21 +31,22 @@
           [class.active]="selected=='review'"
           [class.blue]="selected=='review'">
           Review
-          <div class="ui label">0</div>
         </a>
         <a class="item"
-          [class.active]="selected=='feedbacks'"
-          [class.blue]="selected=='feedbacks'">
+          [class.active]="selected=='feedback'"
+          [class.blue]="selected=='feedback'">
           Feedbacks
-          <div class="ui label">0</div>
         </a>
       </div>
     </div>
   </div>
   <div class="twelve wide column">
-    <!--<m-review
-      [submission]="submission">
-    </m-review>-->
+    <m-review 
+      *ngIf="selectedFile !== undefined"
+      [selectedFile]="selectedFile"
+      [submission]="submission"
+      [type]="selected">
+    </m-review>
   </div>
 </div>
 <m-footer></m-footer>

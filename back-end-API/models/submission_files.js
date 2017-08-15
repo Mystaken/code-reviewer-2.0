@@ -16,7 +16,14 @@ submissions_files_schema = mongoose.Schema({
         type: mongoose.Schema.Types.ObjectId,
         required: true
     },
-    code: String,
+    submission_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true
+    },
+    code: {
+      type: String,
+      required: true
+    },
     delete_date: Date,
     create_date: Date,
     status: {

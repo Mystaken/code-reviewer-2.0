@@ -5,7 +5,7 @@
     <a class="active item"><i class="blue user icon"></i></a>
     <a class="item"><i class="purple user icon"></i></a>
     <a class="item"><i class="green user icon"></i></a>
-    <div class="right secondary menu">
+    <div class="right secondary menu" *ngIf="type==='review'">
       <div class="item">
         <div class="ui tiny basic button" (click)="addComment()">
           <i class="comment icon"></i>

@@ -20,4 +20,8 @@ export class MSubmissionsService {
   addAnnotation(params) {
     return this._api.put('works/annotations', params);
   }
+
+  getSubmissionFeedback(params) {
+    return this._api.get('works/feedbacks', params);
+  }
 }
