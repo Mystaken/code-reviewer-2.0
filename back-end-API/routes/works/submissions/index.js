@@ -28,6 +28,12 @@ var validator = require('../../../lib/validator'),
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
         var error;
+        validator.validate(req.query, submissions_get_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+
         if (!mongoose.validID(req.query.work_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
@@ -37,13 +43,8 @@ module.exports = function (router) {
         if (!mongoose.validID(req.query.author_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
-                params: [ 'user_id' ]
+                params: [ 'author_id' ]
             });
-        }
-        validator.validate(req.query, submissions_get_schema);
-        error = validator.getLastErrors();
-        if (error) {
-            return res.requestError({ code: "VALIDATION", message: error });
         }
         return submissions_model.aggregate([
             {
@@ -322,17 +323,19 @@ module.exports = function (router) {
     router.route('/files').get(function(req, res, next) {
         var error;
 
+        validator.validate(req.query, submission_files_get_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+
         if (!mongoose.validID(req.query.submission_file_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'submission_file_id' ]
             });
         }
-        validator.validate(req.query, submission_files_get_schema);
-        error = validator.getLastErrors();
-        if (error) {
-            return res.requestError({ code: "VALIDATION", message: error });
-        }
+
         return submission_files_model.aggregate([
                 {
                     $match: {
@@ -365,16 +368,17 @@ module.exports = function (router) {
         var error,
             query;
 
+        validator.validate(req.body, submission_files_delete_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+
         if (!mongoose.validID(req.body.submission_file_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'submission_file_id' ]
             });
-        }
-        validator.validate(req.body, submission_files_delete_schema);
-        error = validator.getLastErrors();
-        if (error) {
-            return res.requestError({ code: "VALIDATION", message: error });
         }
 
         query = {
@@ -414,6 +418,13 @@ module.exports = function (router) {
         var error,
             query,
             submission_old;
+
+        validator.validate(req.body, submission_files_put_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+
         if (!mongoose.validID(req.body.submission_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
@@ -421,11 +432,6 @@ module.exports = function (router) {
             });
         }
 
-        validator.validate(req.body, submission_files_put_schema);
-        error = validator.getLastErrors();
-        if (error) {
-            return res.requestError({ code: "VALIDATION", message: error });
-        }
         query = {
             _id: mongoose.Types.ObjectId(req.body.submission_id)
         };
