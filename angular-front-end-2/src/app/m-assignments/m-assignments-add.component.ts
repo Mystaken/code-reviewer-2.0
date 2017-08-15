@@ -22,6 +22,10 @@ export class MAssignmentsAddComponent {
     message: ''
   };
 
+  actionsDropdown = {
+    action: { useLabels: false }
+  }
+
   constructor(private _assignmentsAPI: MAssignmentsService,
     private _validator: ValidationService) {
     this.newAssignment();
