@@ -7,15 +7,13 @@ declare var $: any;
   styleUrls: ['./m-dropdown.component.css']
 })
 export class MDropdownComponent {
-  @Input() modalClass = "";
+  @Input() class = "";
   @Input() settings: dropdownOptions;
   dropdown: HTMLElement
   constructor(private parentElement: ElementRef) {}
 
   ngAfterViewInit(): void {
     $('.ui.dropdown').dropdown(this.settings);
-
-    // $('.tag.example .ui.dropdown').dropdown({ allowAdditions: true});
   }
 }
 export interface dropdownOptions {

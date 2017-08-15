@@ -7,7 +7,7 @@ declare var $: any;
   styleUrls: ['./m-modal.component.css']
 })
 export class MModalComponent {
-  @Input() modalClass = "";
+  @Input() class = "";
   constructor(private parentElement: ElementRef) {}
 
   ngAfterViewInit(): void {

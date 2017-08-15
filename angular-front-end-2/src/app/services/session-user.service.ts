@@ -7,7 +7,7 @@ import { CookieService } from 'ngx-cookie';
 export class SessionUserService {
   session_user_id: String = ""
   session_user_type: String = ""
-  loggedIn = true;
+  loggedIn = false;
   constructor(private _cookieService:CookieService) {
     try {
       let session = JSON.parse(this._cookieService.get('cr_session_user'))

@@ -7,12 +7,12 @@ import {
 } from '@angular/router';
 import { SessionUserService } from '../services/session-user.service';
 @Injectable()
-export class AuthGuard implements CanActivate {
+export class NotLoginGuard implements CanActivate {
   constructor(private _userService: SessionUserService, private router: Router) {}
   canActivate() {
-    if (!this._userService.isLoggedIn()) {
-      this.router.navigate(['/notLoggedIn']);
+    if (this._userService.isLoggedIn()) {
+      this.router.navigate(['/dashboard']);
     }
-    return this._userService.isLoggedIn();
+    return !this._userService.isLoggedIn();
   }
 }
