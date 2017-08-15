@@ -15,6 +15,7 @@ export class MAssignmentsAddComponent {
   newFeedback = "";
   newRequiredFile = "";
   addNew = false;
+  test;
   newAssignmentsMsg = {
     show: false,
     type: 'warning',
@@ -25,6 +26,10 @@ export class MAssignmentsAddComponent {
     private _validator: ValidationService) {
     this.newAssignment();
   }
+
+  showTest() {
+    console.log("**", this.test);
+  };
 
   addAssignment() {
     var err,
