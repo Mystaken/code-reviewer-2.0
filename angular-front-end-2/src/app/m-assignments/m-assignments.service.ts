@@ -7,8 +7,11 @@ export class MAssignmentsService {
   constructor(private _api: APIRoutingService) { }
 
   createFeedbackQuestion(params) {
-    console.log("createeee");
     return this._api.put('works/feedback_questions', params);
+  }
+
+  getAllFeedbackQuestions(params) {
+    return this._api.get('works/feedback_questions/all', params);
   }
 
   addAssignment(params) {

@@ -127,8 +127,8 @@
               <div class="menu">
                 <div class="item" 
                   *ngFor="let feedback_question of feedbackQuestions"
-                  (click)="addFeedbackQuestion(feedback_question)">
-                    {{feedback_question}}
+                  (click)="addFeedbackQuestion(feedback_question.feedback_question_id)">
+                    {{feedback_question.feedback_question}}
                 </div>
               </div>
             </div>

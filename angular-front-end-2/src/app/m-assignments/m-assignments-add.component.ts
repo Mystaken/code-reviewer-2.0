@@ -32,7 +32,7 @@ export class MAssignmentsAddComponent {
   constructor(private _assignmentsAPI: MAssignmentsService,
     private _validator: ValidationService) {
     this.newAssignment();
-    this.getFeedbackQuestions();
+    this.getAllFeedbackQuestions();
   }
 
   showTest() {
@@ -143,7 +143,7 @@ export class MAssignmentsAddComponent {
         .createFeedbackQuestion({
           feedback_question: this.newFeedback
         }).subscribe(response => {
-          this.getFeedbackQuestions();
+          this.getAllFeedbackQuestions();
           this.newFeedback = "";
         });
     }
@@ -164,18 +164,21 @@ export class MAssignmentsAddComponent {
     this.newAssignmentsMsg.show = false;
   }
 
-  getFeedbackQuestions() {
-    this.feedbackQuestions = ["question1", "question2", "question3", "question4"]
+  getAllFeedbackQuestions() {
+    this._assignmentsAPI
+      .getAllFeedbackQuestions({})
+      .subscribe(response => {
+        this.feedbackQuestions = response;
+      });
   }
 
-   addFeedbackQuestion(feedback_question) {
+  addFeedbackQuestion(feedback_question) {
     var index = this.pendingAssignment.feedback_questions.content.indexOf(feedback_question);
     if (index > -1) {
       this.pendingAssignment.feedback_questions.content.splice(index, 1);
     } else {
       this.pendingAssignment.feedback_questions.content.push(feedback_question);
     }
-     console.log(this.pendingAssignment.feedback_questions.content);
-     
+    console.log(this.pendingAssignment.feedback_questions.content);
   }
 }
