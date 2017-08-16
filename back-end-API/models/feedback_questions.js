@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
     feedback_questions_schema;
 
 feedback_questions_schema = mongoose.Schema({
-    feedback : {
+    feedback_question : {
         type: String,
         required: true
     },

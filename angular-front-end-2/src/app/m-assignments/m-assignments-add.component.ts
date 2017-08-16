@@ -23,7 +23,7 @@ export class MAssignmentsAddComponent {
   };
 
   actionsDropdown = {
-    action: { useLabels: false }
+    useLabels: false
   }
 
   constructor(private _assignmentsAPI: MAssignmentsService,
