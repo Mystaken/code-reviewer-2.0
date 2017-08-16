@@ -10,7 +10,6 @@ import { MFooterModule } from '../m-footer/m-footer.module';
 import { MAssignmentsAllComponent } from './m-assignments-all.component';
 import { MAssignmentsAddComponent } from './m-assignments-add.component';
 import { MAssignmentsComponent } from './m-assignments.component';
-import { MFeedbacksAddComponent } from './m-feedbacks-add.component';
 
 
 import { MAssignmentsService } from './m-assignments.service';
@@ -19,8 +18,7 @@ import { MAssignmentsService } from './m-assignments.service';
   declarations: [
     MAssignmentsAllComponent,
     MAssignmentsComponent,
-    MAssignmentsAddComponent,
-    MFeedbacksAddComponent
+    MAssignmentsAddComponent
   ],
   imports: [
     BrowserModule,

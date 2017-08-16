@@ -110,13 +110,13 @@
 
     <div class="ui segment">
       <h5 class="ui dividing header">Feedback Questions:</h5>
-      <div class="ui list">
+<!--       <div class="ui list">
         <div class="item" 
           *ngFor="let question of pendingAssignment.feedback_questions.content;let i=index">
           <i class="remove icon" (click)="pendingAssignment.feedback_questions.content.splice(i, 1)"></i>
           {{question}}
         </div>
-      </div>
+      </div> -->
       <div class="two fields">
         <div class="field">
           <m-dropdown [settings]="actionsDropdown">
@@ -125,9 +125,11 @@
               <i class="dropdown icon"></i>
               <div class="default text">Feedback Questions</div>
               <div class="menu">
-                <div class="item" data-value="angular">Angular</div>
-                <div class="item" data-value="css">CSS</div>
-                <div class="item" data-value="design">Graphic Design</div>
+                <div class="item" 
+                  *ngFor="let feedback_question of feedbackQuestions"
+                  (click)="addFeedbackQuestion(feedback_question)">
+                    {{feedback_question}}
+                </div>
               </div>
             </div>
           </m-dropdown>
@@ -136,7 +138,7 @@
         <div class="field">
           <div class="ui action input">
               <input type="text" placeholder="Feedback" [(ngModel)]="newFeedback">
-              <div class="ui primary button" (click)="addFeedbackQuestion()"><i class="plus icon"></i></div>
+              <div class="ui primary button" (click)="createFeedbackQuestion()"><i class="plus icon"></i></div>
           </div>
         </div>
       </div>

@@ -5,7 +5,7 @@ var validator   = require('../../../lib/validator'),
     mongoose    = require('mongoose'),
     Promise     = require('bluebird'),
 
-    feedbacks_model   = require('../../../models/feedback_questions');
+    feedback_questions_model   = require('../../../models/feedback_questions');
 
 
 module.exports = function (router) {

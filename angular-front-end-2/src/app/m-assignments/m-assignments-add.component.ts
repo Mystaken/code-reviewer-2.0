@@ -12,6 +12,9 @@ export class MAssignmentsAddComponent {
   @Output() assignmentAdded = new EventEmitter();
   submittingAssignment = false;
   pendingAssignment;
+
+  feedbackQuestions;
+
   newFeedback = "";
   newRequiredFile = "";
   addNew = false;
@@ -29,6 +32,7 @@ export class MAssignmentsAddComponent {
   constructor(private _assignmentsAPI: MAssignmentsService,
     private _validator: ValidationService) {
     this.newAssignment();
+    this.getFeedbackQuestions();
   }
 
   showTest() {
@@ -131,10 +135,17 @@ export class MAssignmentsAddComponent {
       }
     };
   }
-  addFeedbackQuestion() {
+
+
+  createFeedbackQuestion() {
     if (this.newFeedback) {
-      this.pendingAssignment.feedback_questions.content.push(this.newFeedback);
-      this.newFeedback = "";
+      this._assignmentsAPI
+        .createFeedbackQuestion({
+          feedback_question: this.newFeedback
+        }).subscribe(response => {
+          this.getFeedbackQuestions();
+          this.newFeedback = "";
+        });
     }
   }
   addRequiredFile() {
@@ -151,5 +162,20 @@ export class MAssignmentsAddComponent {
   }
   closeAssignmentsMsg() {
     this.newAssignmentsMsg.show = false;
+  }
+
+  getFeedbackQuestions() {
+    this.feedbackQuestions = ["question1", "question2", "question3", "question4"]
+  }
+
+   addFeedbackQuestion(feedback_question) {
+    var index = this.pendingAssignment.feedback_questions.content.indexOf(feedback_question);
+    if (index > -1) {
+      this.pendingAssignment.feedback_questions.content.splice(index, 1);
+    } else {
+      this.pendingAssignment.feedback_questions.content.push(feedback_question);
+    }
+     console.log(this.pendingAssignment.feedback_questions.content);
+     
   }
 }
