@@ -232,38 +232,47 @@ module.exports = function (router) {
             fs.readdir(repo_name, function(err, files) {
                 files.forEach(function(utorid) {
                     var file_path = repo_name + '/'+ utorid + '/' + folder_name + '/' + file_name;
-                    console.log(file_path);
                     fs.readFile(file_path, 'utf8', function (err, code) {
                         var temp_count = count;
                         return user_model.aggregate([
-                            { $match: {'utorid': utorid, status: 'active'} },
+                            { $match: {utorid: utorid, status: 'active'} },
                             { $project : { _id: 1 } }
                         ]).exec().then(function(student) {
-                            return new submission_files_model({
-                                author_id: mongoose.Types.ObjectId(student[0]._id),
-                                name: file_name,
-                                work_id: mongoose.Types.ObjectId(req.body.work_id),
-                                create_date: new Date(),
-                                code: code,
-                                status: 'active'
-                            }).save();
-                        }).then(function(ret) {
-                            return submissions_model.update(
-                                { 'work_id': mongoose.Types.ObjectId(ret.work_id),
-                                  'author_id': mongoose.Types.ObjectId(ret.author_id)}, 
-                                { $push: {'files': mongoose.Types.ObjectId(ret._id) }
-                            }).exec().then(function() {
-                                count ++;
+                            console.log("@@@@", student[0]._id, req.body.work_id);
+                            return submissions_model.aggregate([
+                                { $match: {
+                                    author_id:mongoose.Types.ObjectId(student[0]._id),
+                                    work_id: mongoose.Types.ObjectId(req.body.work_id)
+                                }},
+                                { $project : { _id: 1}}
+                            ]).exec().then(function(submission) {
+                                console.log("*********", submission)
+                                return new submission_files_model({
+                                    author_id: mongoose.Types.ObjectId(student[0]._id),
+                                    name: file_name,
+                                    work_id: mongoose.Types.ObjectId(req.body.work_id),
+                                    submission_id: mongoose.Types.ObjectId(submission[0]._id),
+                                    create_date: new Date(),
+                                    code: code,
+                                    status: 'active'
+                                }).save();
+                            }).then(function(ret) {
+                                return submissions_model.update(
+                                    { work_id: mongoose.Types.ObjectId(ret.work_id),
+                                      author_id: mongoose.Types.ObjectId(ret.author_id)}, 
+                                    { $push: {'files': mongoose.Types.ObjectId(ret._id) }
+                                }).exec().then(function() {
+                                    count ++;
 
-                                if (count === files.length) required_files --;
-                                console.log(count, files.length, required_files);
-                                if (count === files.length && required_files === 0) {
-                                    return res.sendResponse('file DONE!');
-                                }
-                            }).catch(function(err) {
-                                res.requestError(err);
+                                    if (count === files.length) required_files --;
+                                    if (count === files.length && required_files === 0) {
+                                        return res.sendResponse('file DONE!');
+                                    }
+                                }).catch(function(err) {
+                                    res.requestError(err);
+                                });
                             });
-                        });
+                        })
                     });
                 });
             });

@@ -40,7 +40,7 @@ export class MAssignmentsAllComponent {
     }
 
     
-    if (text === "Load Works") return this.loadSubmissions(assignment.work_id);
+    if (text === "Load Works") return this.loadSubmissions(assignment);
     if (text === "Load Files") return this.loadSubmissionFiles(assignment);
     if (text === "Distribute") return this.distribute(assignment);
     if (text === "Delete") return 1
