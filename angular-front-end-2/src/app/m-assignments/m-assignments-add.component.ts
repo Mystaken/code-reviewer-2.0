@@ -35,9 +35,6 @@ export class MAssignmentsAddComponent {
     this.getAllFeedbackQuestions();
   }
 
-  showTest() {
-    console.log("**", this.test);
-  };
 
   addAssignment() {
     var err,

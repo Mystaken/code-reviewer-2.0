@@ -121,7 +121,7 @@
         <div class="field">
           <m-dropdown [settings]="actionsDropdown">
             <div class="ui fluid multiple search selection dropdown" style="width:400px">
-              <input name="tags" type="hidden">
+              <!-- <input name="tags" type="hidden"> -->
               <i class="dropdown icon"></i>
               <div class="default text">Feedback Questions</div>
               <div class="menu">
@@ -130,6 +130,7 @@
                   (click)="addFeedbackQuestion(feedback_question.feedback_question_id)">
                     {{feedback_question.feedback_question}}
                 </div>
+                <div class="item"> testing </div>
               </div>
             </div>
           </m-dropdown>

@@ -14,10 +14,8 @@ export class MDropdownComponent {
 
   ngAfterViewInit(): void {
     $('.ui.dropdown').dropdown(this.settings);
-//     $('.no.label.example .ui.dropdown')
-//   .dropdown({
-//     useLabels: false
-//   })
-// ;
+
+    //TODO 
+    //$('.combo.dropdown').dropdown(this.settings);
   }
 }

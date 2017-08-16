@@ -9,9 +9,12 @@ import { MAssignmentsService } from './m-assignments.service';
 })
 export class MAssignmentsAllComponent {
   assignments = []
+  feedbackQuestions = {};
+
   actionsDropdown = {
     action: "combo"
   }
+
   constructor(private _assignmentsAPI: MAssignmentsService) {}
 
   ngOnInit() {
@@ -19,6 +22,29 @@ export class MAssignmentsAllComponent {
       .subscribe((res) => {
         this.assignments = res;
       });
+
+    this._assignmentsAPI.getAllFeedbackQuestions({})
+      .subscribe((res) => {
+        for (var i = 0; i < res.length; i ++) {
+          this.feedbackQuestions[res[i].feedback_question_id] = res[i].feedback_question
+        }
+      });
+  }
+
+  test(event, assignment){
+    var text;
+    if (!event.target.innerText) {
+      text = event.target.parentNode.innerText;
+    } else {
+      text = event.target.innerText;
+    }
+
+    
+    if (text === "Load Works") return this.loadSubmissions(assignment.work_id);
+    if (text === "Load Files") return this.loadSubmissionFiles(assignment);
+    if (text === "Distribute") return this.distribute(assignment);
+    if (text === "Delete") return 1
+
   }
 
   updateAssignment(assignment, type) {
@@ -34,11 +60,12 @@ export class MAssignmentsAllComponent {
   }
 
   addAssignment(work_id) {
+    console.log("what");
     return this._assignmentsAPI.getAssignment({
       work_id: work_id
     }).subscribe((res) => {
       this.assignments.push(res);
-      this.loadSubmissions({'work_id':work_id});
+      // this.loadSubmissions({'work_id':work_id});
     });
   }
 

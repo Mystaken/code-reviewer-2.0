@@ -17,7 +17,7 @@ submission_rules_schema = mongoose.Schema({
     required_files : [String],
     repo_path: String,
     folder_name: String,
-    feedback_questions: [String],
+    feedback_questions: [mongoose.Schema.Types.ObjectId],
     peer_review: Boolean,
     self_review: Boolean,
     mark_review: Boolean,

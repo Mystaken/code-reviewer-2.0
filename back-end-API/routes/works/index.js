@@ -84,6 +84,16 @@ module.exports = function (router) {
             mark_review: false,
             status: 'active'
         };
+
+        for (var i = 0; i < query.feedback_questions.length; i ++) {
+            if (!mongoose.validID(query.feedback_questions[i])) {
+                return res.requestError({
+                    code: "NOT_FOUND",
+                    params: [ 'query.feedback_questions[i]' ]
+                });
+            }
+            query.feedback_questions[i] = mongoose.Types.ObjectId(query.feedback_questions[i]);
+        } 
         //check if work exists
         return works_model.aggregate([
                 {
