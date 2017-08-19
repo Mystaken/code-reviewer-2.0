@@ -14,6 +14,10 @@ export class MAssignmentsService {
     return this._api.get('works/feedback_questions/all', params);
   }
 
+  getFeedbackQuestion(params) {
+    return this._api.get('works/feedback_questions', params);
+  }
+
   addAssignment(params) {
     return this._api.put('works', params);
   }
