@@ -9,6 +9,8 @@ declare var $: any;
 export class MCheckboxComponent {
   @Input() class = "";
   @Input() settings: checkboxOptions;
+  @Input() value;
+  //@Input() onChange;
   dropdown: HTMLElement
   constructor(private parentElement: ElementRef) {}
 
@@ -18,3 +20,4 @@ export class MCheckboxComponent {
 }
 export interface checkboxOptions {
 }
+

@@ -10,7 +10,7 @@ import { MAssignmentsService } from './m-assignments.service';
 export class MAssignmentsAllComponent {
   assignments = []
   feedbackQuestions = {};
-
+  xx = true;
   actionsDropdown = {
     action: "combo"
   }
@@ -31,6 +31,7 @@ export class MAssignmentsAllComponent {
       });
   }
 
+
   test(event, assignment){
     var text;
     if (!event.target.innerText) {
@@ -45,6 +46,15 @@ export class MAssignmentsAllComponent {
     if (text === "Distribute") return this.distribute(assignment);
     if (text === "Delete") return 1
 
+  }
+
+  release(assignment, type) {
+    var params = {
+      work_id: assignment.work_id
+    };
+    params[type] = !assignment[type]
+    return this._assignmentsAPI.updateAssignment(params).subscribe(
+      (res) => assignment[type] = params[type]);
   }
 
   updateAssignment(assignment, type) {
