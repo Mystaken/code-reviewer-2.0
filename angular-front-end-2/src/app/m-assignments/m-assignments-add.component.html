@@ -87,20 +87,23 @@
 
     <div class="ui segment">
       <h5 class="ui dividing header">Required Files:</h5>
-      <div class="ui list">
-        <div class="item"
-          *ngFor="let file of pendingAssignment.required_files.content; let i=index">
-          <i class="remove icon" (click)="pendingAssignment.required_files.content.splice(i, 1)"></i>
-          {{file}}
-        </div>
-      </div>
-      <div class="two fields">
 
+      <div class="two fields">
 
         <div class="field">
           <div class="ui action input">
             <input type="text" placeholder="file_name.py" [(ngModel)]="newRequiredFile">
             <div class="ui primary button" (click)="addRequiredFile()"><i class="plus icon"></i></div>
+          </div>
+        </div>
+
+        <div class="field">
+          <div class="ui list">
+            <div class="item"
+              *ngFor="let file of pendingAssignment.required_files.content; let i=index">
+              <i class="remove icon" (click)="pendingAssignment.required_files.content.splice(i, 1)"></i>
+              {{file}}
+            </div>
           </div>
         </div>
 
