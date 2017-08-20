@@ -29,7 +29,8 @@ import { MSubmissionsService } from './m-submissions.service';
     MNotFoundModule
   ],
   exports: [
-    MSubmissionsComponent
+    MSubmissionsComponent,
+    MReviewComponent
   ],
   providers: [
     MAssignmentsService,

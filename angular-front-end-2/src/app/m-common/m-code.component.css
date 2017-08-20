@@ -1,0 +1,5 @@
+.code.wrapper {
+  max-height: 50em;
+  overflow-y: scroll;
+  overflow-x: hidden;
+}

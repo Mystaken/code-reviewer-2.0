@@ -84,8 +84,8 @@ module.exports = function (router) {
                     submission_id: mongoose.Types.ObjectId(ret[0].submission_id),
                     review_by:  mongoose.Types.ObjectId(req.session_user_id)
                 }
-            }]).then(function(ret) {
-                if (!ret || !ret.length) {
+            }]).then(function(feedback) {
+                if (!feedback || !feedback.length) {
                     return Promise.reject({
                         code: "NOT_FOUND",
                         params: [ 'work_id' ]

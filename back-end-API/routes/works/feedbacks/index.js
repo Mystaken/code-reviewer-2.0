@@ -24,20 +24,20 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        if (!mongoose.validID(req.query.submission_id)) {
+        if (!mongoose.validID(req.query.work_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
-                params: [ 'submission_id' ]
+                params: [ 'work_id' ]
             });
         }
         return feedbacks_model.aggregate([{
             $match: { 
                 $or: [{
-                    submission_id: mongoose.Types.ObjectId(req.query.submission_id),
+                    work_id: mongoose.Types.ObjectId(req.query.work_id),
                     author: mongoose.Types.ObjectId(req.session_user_id),
                     status: 'active'
                 },{ 
-                    submission_id: mongoose.Types.ObjectId(req.query.submission_id),
+                    work_id: mongoose.Types.ObjectId(req.query.work_id),
                     review_by: mongoose.Types.ObjectId(req.session_user_id),
                     status: 'active'
                 }]
@@ -51,13 +51,15 @@ module.exports = function (router) {
                 mark: 1,
                 last_updated: 1,
                 review_by: 1,
-                create_date: 1
+                create_date: 1,
+                work_id: 1,
+                author: 1
             }
         }]).exec().then(function(ret) {
             if (!ret || !ret.length) {
                 return Promise.reject({
                     code: "NOT_FOUND",
-                    params: [ 'submission_id' ]
+                    params: [ 'work_id' ]
                 });
             }
             return res.sendResponse(ret);
@@ -96,6 +98,7 @@ module.exports = function (router) {
                 return new feedbacks_model({
                     submission_id: req.body.submission_id,
                     author: work[0].author_id,
+                    work_id: work[0].work_id,
                     review_by: req.session_user_id,
                     feedbacks: req.body.feedbacks || [],
                     mark: req.body.mark || 0,

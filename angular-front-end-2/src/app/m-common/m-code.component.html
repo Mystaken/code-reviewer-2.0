@@ -1,0 +1,19 @@
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.11.0/styles/agate.min.css">
+<div class="code wrapper">
+  <code [innerHTML]="displayCode" class="python" id="code"></code>
+</div>
+<m-modal #newAnnotation [class]="'mini'">
+  <div class="content">
+    <div class="ui form">
+      <div class="field">
+        <textarea rows="2" [(ngModel)]="annotation_input"></textarea>
+      </div>
+    </div>
+  </div>
+  <div class="actions">
+    <div class="ui positive right labeled icon button">
+      Add Annotation
+      <i class="comment icon"></i>
+    </div>
+  </div>
+</m-modal>

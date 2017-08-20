@@ -6,7 +6,8 @@ import { MEditableComponent } from './m-editable.component';
 import { MCalendarComponent } from './m-calendar.component';
 import { MDropdownComponent } from './m-dropdown.component';
 import { MModalComponent } from './m-modal.component';
-import { MCheckboxComponent } from './m-checkbox.component'
+import { MCheckboxComponent } from './m-checkbox.component';
+import { MCodeComponent } from './m-code.component';
 
 @NgModule({
   declarations: [
@@ -14,7 +15,8 @@ import { MCheckboxComponent } from './m-checkbox.component'
     MCalendarComponent,
     MModalComponent,
     MDropdownComponent,
-    MCheckboxComponent
+    MCheckboxComponent,
+    MCodeComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +27,8 @@ import { MCheckboxComponent } from './m-checkbox.component'
     MCalendarComponent,
     MModalComponent,
     MDropdownComponent,
-    MCheckboxComponent
+    MCheckboxComponent,
+    MCodeComponent
   ],
   providers: []
 })
