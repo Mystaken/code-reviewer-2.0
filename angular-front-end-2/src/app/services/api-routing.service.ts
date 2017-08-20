@@ -50,8 +50,19 @@ export class APIRoutingService {
   }
 
   delete(route, params) {
+    var param;
     params = params || {};
-    return this._http.delete(this._api_route + route, params)
+    let requestOpts: URLSearchParams = new URLSearchParams();
+    for (param in params) {
+        if(params.hasOwnProperty(param)) {
+          requestOpts.set(param, params[param]);
+        }
+    }
+
+    let requestOptions = new RequestOptions();
+    requestOptions.params = requestOpts;
+
+    return this._http.delete(this._api_route + route, requestOptions)
         .map(res => res.json().data)
         .catch(this._parseError);
   }
