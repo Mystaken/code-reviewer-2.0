@@ -45,4 +45,16 @@ export class MAssignmentsService {
   distribute(params) {
     return this._api.post('works/submissions/distribute', params);
   }
+
+  dropSubmissions(params) {
+    return this._api.delete('works/submissions/all', params);
+  }
+
+  dropSubmissionFiles(params) {
+    return this._api.delete('works/submissions/files/all', params);
+  }
+
+  dropFeedbacks(params) {
+    return this._api.delete('works/feedbacks/all', params);
+  }
 }

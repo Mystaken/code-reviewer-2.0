@@ -115,7 +115,6 @@ module.exports = function (router) {
         // if (error) {
         //     return res.requestError({ code: "VALIDATION", message: error });
         // }
-        console.log("GETＡＬＬＬＬＬ");
         return feedback_questions_model.aggregate([
             {
                 $project: {
@@ -125,7 +124,6 @@ module.exports = function (router) {
                 }
             }
         ]).exec().then(function (feedback_questions) {
-            console.log(feedback_questions);
             return res.sendResponse(feedback_questions);
         }).catch(function (error) {
             res.requestError(error);

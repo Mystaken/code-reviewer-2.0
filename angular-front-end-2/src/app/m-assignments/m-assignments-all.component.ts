@@ -44,7 +44,7 @@ export class MAssignmentsAllComponent {
     if (text === "Load Works") return this.loadSubmissions(assignment);
     if (text === "Load Files") return this.loadSubmissionFiles(assignment);
     if (text === "Distribute") return this.distribute(assignment);
-    if (text === "Delete") return 1
+    if (text === "Delete") return this.deleteWork(assignment);
 
   }
 
@@ -93,4 +93,21 @@ export class MAssignmentsAllComponent {
     //console.log(assignment);
     return this._assignmentsAPI.distribute(assignment).subscribe((res) => {console.log(res)});
   }
+
+  deleteWork(assignment) {
+    console.log(assignment);
+    return this._assignmentsAPI.dropSubmissions(assignment)
+      .subscribe((res) => {
+        return this._assignmentsAPI.dropSubmissionFiles(assignment)
+          .subscribe((res) => {
+            return this._assignmentsAPI.dropFeedbacks(assignment)
+              .subscribe((res) => {
+                console.log(res);
+            });
+          });
+      });
+    
+    
+  }
+
 }

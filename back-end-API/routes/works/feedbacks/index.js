@@ -11,7 +11,8 @@ var validator   = require('../../../lib/validator'),
     feedback_get_schema    = require('../../../schemas/works/feedbacks/feedbacks_get'),
     feedback_put_schema    = require('../../../schemas/works/feedbacks/feedbacks_put'),
     feedback_post_schema   = require('../../../schemas/works/feedbacks/feedbacks_post'),
-    feedback_all_get_schema = require('../../../schemas/works/feedbacks/feedbacks_all_get');
+    feedback_all_get_schema = require('../../../schemas/works/feedbacks/feedbacks_all_get'),
+    feedback_all_delete_schema = require('../../../schemas/works/feedbacks/feedbacks_all_delete');
 
 module.exports = function (router) {
 
@@ -192,6 +193,25 @@ module.exports = function (router) {
             return res.sendResponse(submission);
         }).catch(function (error) {
             res.requestError(error);
+        });
+    }).delete(function (req, res, next) {
+        if (req.session_user_type !== 'admin') return res.forbidden();
+
+        var error;
+
+        validator.validate(req.query, feedback_all_delete_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+
+        console.log("DELETE feedbacks");
+        return feedbacks_model.remove(
+            {work_id: mongoose.Types.ObjectId(req.query.work_id)} 
+        ).exec().then(function(feedbacks) {
+            return res.sendResponse(1);
+        }).catch(function(err) {
+            return res.requestError(err);
         });
     });
 };

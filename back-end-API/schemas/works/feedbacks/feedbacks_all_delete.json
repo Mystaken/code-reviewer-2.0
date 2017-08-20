@@ -1,12 +1,12 @@
 {
-    "id": "submission-files-get",
+    "id": "feedbacks-all-delete",
     "type": "object",
     "properties": {
-        "submission_file_id": {
+        "work_id": {
             "type": "string",
             "maxLength": 100
         }
     },
     "additionalProperties": false,
-    "required": [ "submission_file_id" ]
+    "required": [ "work_id" ]
 }

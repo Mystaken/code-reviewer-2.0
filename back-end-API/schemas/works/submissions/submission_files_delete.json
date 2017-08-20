@@ -1,5 +1,5 @@
 {
-    "id": "submissions-delete",
+    "id": "submission-files-delete",
     "type": "object",
     "properties": {
         "submission_file_id": {

@@ -15,12 +15,14 @@ var validator = require('../../../lib/validator'),
     
     submissions_get_schema = require('../../../schemas/works/submissions/submissions_get'),
     submissions_put_schema = require('../../../schemas/works/submissions/submissions_put'),
-    submissions_all_get_schema = require('../../../schemas/works/submissions/submissions_all_get'),
+    submissions_all_get_schema     = require('../../../schemas/works/submissions/submissions_all_get'),
+    submissions_all_delete_schema  = require('../../../schemas/works/submissions/submissions_all_delete'),
     submission_files_get_schema    = require('../../../schemas/works/submissions/submission_files_get'),
     submission_files_delete_schema = require('../../../schemas/works/submissions/submission_files_delete'),
     submission_files_put_schema    = require('../../../schemas/works/submissions/submission_files_put'),
     submission_files_upload_schema = require('../../../schemas/works/submissions/submission_files_upload'),
-    student_all_get_schema  = require('../../../schemas/users/students/students_all_get');
+    student_all_get_schema  = require('../../../schemas/users/students/students_all_get'),
+    submission_files_all_delete_schema = require('../../../schemas/works/submissions/submission_files_all_delete');
 
 
 
@@ -194,6 +196,21 @@ module.exports = function (router) {
         }).catch(function(err) {
             return res.requestError(err);
         });
+    }).delete(function(req, res, next) {
+        if (req.session_user_type !== 'admin') return res.forbidden();
+        var error;
+        validator.validate(req.query, submissions_all_delete_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+        return submissions_model.remove(
+            {work_id: mongoose.Types.ObjectId(req.query.work_id)} 
+        ).exec().then(function(works) {
+            return res.sendResponse(1);
+        }).catch(function(err) {
+            return res.requestError(err);
+        });
     });
 
 
@@ -238,7 +255,6 @@ module.exports = function (router) {
                             { $match: {utorid: utorid, status: 'active'} },
                             { $project : { _id: 1 } }
                         ]).exec().then(function(student) {
-                            console.log("@@@@", student[0]._id, req.body.work_id);
                             return submissions_model.aggregate([
                                 { $match: {
                                     author_id:mongoose.Types.ObjectId(student[0]._id),
@@ -246,7 +262,6 @@ module.exports = function (router) {
                                 }},
                                 { $project : { _id: 1}}
                             ]).exec().then(function(submission) {
-                                console.log("*********", submission)
                                 return new submission_files_model({
                                     author_id: mongoose.Types.ObjectId(student[0]._id),
                                     name: file_name,
@@ -285,7 +300,7 @@ module.exports = function (router) {
         if (req.session_user_type !== 'admin') return res.forbidden();
         return submissions_model.aggregate([
             { $match: { 'work_id': mongoose.Types.ObjectId(req.body.work_id) }},
-            { $project : { _id: 1, author_id: 1 } }
+            { $project : { _id: 1, author_id: 1, work_id:1 } }
         ]).exec().then(function(submissions) {
             // SUFFLE  
             var count = 0;
@@ -307,6 +322,7 @@ module.exports = function (router) {
               for (var j = 1; j <= num_peers; j ++) {
 
                 new feedbacks_model({
+                    work_id: mongoose.Types.ObjectId(submissions[i].work_id),
                     submission_id: mongoose.Types.ObjectId(submissions[i]._id),
                     author: mongoose.Types.ObjectId(submissions[i].author_id),
                     review_by: mongoose.Types.ObjectId(submissions[(i + j) % len].author_id),
@@ -322,12 +338,11 @@ module.exports = function (router) {
 
             if (count === len * num_peers) return res.sendResponse(count);
         }).catch(function(err) {
-            res.requestError(err);
+            return res.requestError(err);
         });
     });
 
     
-
 
     router.route('/files').get(function(req, res, next) {
         var error;
@@ -380,6 +395,7 @@ module.exports = function (router) {
                 return res.requestError(err);
             });
     }).delete(function (req, res, next) {
+
     }).put(function(req, res, next) {
         var error,
             query,
@@ -427,6 +443,25 @@ module.exports = function (router) {
             }).exec().then(function() {
                 return res.sendResponse(ret._id);
             });
+        }).catch(function(err) {
+            return res.requestError(err);
+        });
+    });
+
+
+    router.route('/files/all').delete(function(req, res, next) {
+        if (req.session_user_type !== 'admin') return res.forbidden();
+
+        var error;
+        validator.validate(req.query, submission_files_all_delete_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+        return submission_files_model.remove(
+            {work_id: mongoose.Types.ObjectId(req.query.work_id)} 
+        ).exec().then(function(files) {
+            return res.sendResponse(1);
         }).catch(function(err) {
             return res.requestError(err);
         });
