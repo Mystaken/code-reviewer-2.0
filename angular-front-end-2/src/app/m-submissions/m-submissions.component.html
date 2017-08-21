@@ -50,7 +50,7 @@
         <a class="item"
           [class.active]="selectedReview==i"
           [class.blue]="selectedReview==i"
-          (click)="selectedReview=i"
+          (click)="selectedReview=-1;selectedReview=i"
           *ngFor="let review of reviews; let i = index;">
           <span>
             <i class="user icon"

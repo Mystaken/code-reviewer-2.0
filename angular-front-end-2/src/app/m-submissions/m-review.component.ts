@@ -24,7 +24,8 @@ export class MReviewComponent {
   allAnnotations: any = {};
   /* The annotations for the current selected file. */
   annotations = [];
-
+  /* the current review (to check for changes) */
+  oldReview;
   constructor(private _submissionsAPI: MSubmissionsService) {
     $('.comment.button').mousedown(function(event) {
       event.preventDefault();
@@ -32,6 +33,23 @@ export class MReviewComponent {
   }
 
   ngOnInit() {
+    this.oldReview = this.review;
+    this.getSubmission(0);
+  }
+
+  ngOnChanges(val) {
+    if (this.submission.submission_id && 
+      this.allAnnotations.annotations &&
+      this.review) {
+      if (this.review.feedback_id !== this.oldReview.feedback_id) {
+        this.getSubmission(this.selectedFile)
+      } else {
+        this.selectFile(this.selectedFile);
+      }
+    }
+  }
+
+  getSubmission(i) {
     return this._submissionsAPI.getSubmission({
         work_id: this.review.work_id,
         author_id: this.review.author
@@ -45,19 +63,11 @@ export class MReviewComponent {
               submission_id: this.submission.submission_id
             }).subscribe((res) => {
               this.allAnnotations = res;
-              this.selectFile(0);
+              this.selectFile(i);
             })
           })
       });
   }
-
-  ngOnChanges(val) {
-    if (this.submission.submission_id && 
-      this.allAnnotations.annotations &&
-      this.review)
-    this.selectFile(this.selectedFile);
-  }
-
   selectFile(i) {
     this.selectedFile = i;
     this.annotations = this.allAnnotations.annotations.filter((annotation) => {
@@ -77,7 +87,6 @@ export class MReviewComponent {
       .subscribe((res) => {
         this.annotations = this.annotations.concat([newAnnotation]);
         this.allAnnotations.annotations.push(newAnnotation);
-        console.log(this.annotations);
       });
   }
 }
