@@ -1,0 +1,21 @@
+<div class="feedback wrapper">
+  <div class="ui dividing header">Feedbacks</div>
+  <div class="ui top attached tabular menu">
+    <a class="item"
+      *ngFor="let file of submission.files; let i=index"
+      (click)="selectFile(i)"
+      [class.active]="selectedFile==i">
+      <i class="file icon"></i>
+      {{file.name}}
+    </a>
+  </div>
+  <div class="ui bottom attached segment">
+    <m-code #codeblock
+      *ngIf="selectedFile >= 0"
+      [code]="submission.files[selectedFile].code"
+      [(annotations)]="annotations"
+      (newAnnotation)="newAnnotation($event)"
+      >
+    </m-code>
+  </div>
+</div>

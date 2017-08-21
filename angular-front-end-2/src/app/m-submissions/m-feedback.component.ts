@@ -1,40 +1,33 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as $ from 'jquery';
 
 import { MCodeComponent } from '../m-common/m-code.component';
 import { MSubmissionsService } from './m-submissions.service';
 
 @Component({
-  selector: 'm-review',
-  templateUrl: './m-review.component.html',
-  styleUrls: ['./m-review.component.css']
+  selector: 'm-feedback',
+  templateUrl: './m-feedback.component.html',
+  styleUrls: ['./m-feedback.component.css']
 })
-export class MReviewComponent {
-  /* the feedback for this review */
-  @Input() review;
-  /* The submission of this review */
+export class MFeedbackComponent {
+  /* the feedback for this feedback */
+  @Input() feedback;
+  /* The submission of this feedback */
   submission: any = {};
   /* The selected file */
   selectedFile: number = -1;
-  /* The codeblock */
-  @ViewChild('codeblock') codeblock: MCodeComponent;
-  /* All annotations for this review */
+  /* All annotations for this feedback */
   allAnnotations: any = {};
   /* The annotations for the current selected file. */
   annotations = [];
 
-  constructor(private _submissionsAPI: MSubmissionsService) {
-    $('.comment.button').mousedown(function(event) {
-      event.preventDefault();
-    });
-  }
+  constructor(private _submissionsAPI: MSubmissionsService) {}
 
   ngOnInit() {
     return this._submissionsAPI.getSubmission({
-        work_id: this.review.work_id,
-        author_id: this.review.author
+        work_id: this.feedback.work_id,
+        author_id: this.feedback.author
       }).subscribe((res) => {
         this.submission = res;
         return Observable.forkJoin(
@@ -50,34 +43,19 @@ export class MReviewComponent {
           })
       });
   }
-
   ngOnChanges(val) {
     if (this.submission.submission_id && 
       this.allAnnotations.annotations &&
-      this.review)
+      this.feedback)
     this.selectFile(this.selectedFile);
   }
 
   selectFile(i) {
     this.selectedFile = i;
+    console.log(1);
     this.annotations = this.allAnnotations.annotations.filter((annotation) => {
-      return annotation.submission_file_id == this.submission.files[i].submission_file_id;
+      return annotation.submission_file_id == this.submission.files[i].submission_file_id &&
+        annotation.review_by == this.feedback.review_by;
     });
-  }
-
-  newAnnotation(annotation) {
-    let newAnnotation =  {
-      submission_id: this.submission.submission_id,
-      submission_file_id: this.submission.files[this.selectedFile].submission_file_id,
-      annotation: annotation.annotation,
-      start: annotation.start,
-      end: annotation.end
-    }
-    this._submissionsAPI.addAnnotation(newAnnotation)
-      .subscribe((res) => {
-        this.annotations = this.annotations.concat([newAnnotation]);
-        this.allAnnotations.annotations.push(newAnnotation);
-        console.log(this.annotations);
-      });
   }
 }

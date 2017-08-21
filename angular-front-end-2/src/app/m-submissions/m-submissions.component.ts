@@ -19,10 +19,12 @@ export class MSubmissionsComponent {
   work;
   /* Index of selected file */
   selectedFile;
-  /* Reviews for this work and user */
+  /* Reviews this user needs to review. */
   reviews
   /* The selected review */
   selectedReview = -1;
+  /* Feedbacks this user has got from others */
+  feedbacks;
   constructor(private _assignmentsAPI: MAssignmentsService,
     private _submissionsAPI: MSubmissionsService,
     private route:ActivatedRoute,
@@ -38,7 +40,15 @@ export class MSubmissionsComponent {
       this.work.required_files;
       this._submissionsAPI.getSubmissionFeedback({
         work_id: this.work.work_id
-      }).subscribe(res => this.reviews = res);
+      }).subscribe(res => {
+        this.reviews = res.filter((review) => {
+          return review.review_by === this._userService.getUserID()
+        });
+        this.feedbacks = res.filter((review) => {
+          return review.review_by !== this._userService.getUserID()
+        });
+      });
     });
   }
+
 }

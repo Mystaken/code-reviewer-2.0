@@ -22,7 +22,27 @@
         </a>
       </div>
     </div>
-    <div class="ui vertical fluid menu">
+    <div class="ui vertical borderless fluid menu">
+      <div class="item">
+        <div class="ui header">Feedbacks</div>
+      </div>
+      <div class="ui vertical secondary fluid pointing menu">
+        <a class="item"
+          [class.active]="selectedFeedback==i"
+          [class.blue]="selectedFeedback==i"
+          (click)="selectedReview=-1;selectedFeedback=i"
+          *ngFor="let feedback of feedbacks; let i = index;">
+          <span>
+            <i class="user icon"
+              [class.blue]="i==0"
+              [class.red]="i==1"
+              [class.purple]="i==2"
+              [class.green]="i==3">
+            </i>
+            Feedback {{i + 1}}
+          </span>
+        </a>
+      </div>
       <div class="item">
         <div class="ui header">Reviews</div>
       </div>
@@ -46,6 +66,11 @@
     </div>
   </div>
   <div class="twelve wide column">
+    <m-feedback 
+      *ngIf="selectedFeedback >= 0"
+      [feedback]="feedbacks[selectedFeedback]"
+      >
+    </m-feedback>
     <m-review 
       *ngIf="selectedReview >= 0"
       [review]="reviews[selectedReview]"

@@ -45,19 +45,22 @@ module.exports = function (router) {
                     }]
                 }
             }]).exec().then(function(ret) {
+                var matchQuery = {
+                    submission_id: mongoose.Types.ObjectId(req.query.submission_id),
+                    status: 'active'
+                };
                 if (!ret || !ret.length) {
                     return Promise.reject({
                         code: "NOT_FOUND",
                         params: [ 'submission_id' ]
                     });
                 }
+                if (ret[0].author != req.session_user_id) {
+                  matchQuery.review_by = mongoose.Types.ObjectId(req.session_user_id);
+                }
                 return annotations_model.aggregate([
                         {
-                            $match: {
-                                submission_id: mongoose.Types.ObjectId(req.query.submission_id),
-                                review_by: mongoose.Types.ObjectId(req.session_user_id),
-                                status: 'active'
-                            }
+                            $match: matchQuery
                         },
                         {
                             $project : {
@@ -66,7 +69,8 @@ module.exports = function (router) {
                                 submission_file_id: 1,
                                 annotation: 1,
                                 start: 1,
-                                end: 1
+                                end: 1,
+                                review_by: 1
                             }
                         }
                     ]).exec();

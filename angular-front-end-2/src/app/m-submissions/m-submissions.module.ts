@@ -7,6 +7,7 @@ import { MFooterModule } from '../m-footer/m-footer.module';
 import { MCommonModule } from '../m-common/m-common.module';
 import { MNotFoundModule } from '../m-notfound/m-notfound.module';
 
+import { MFeedbackComponent } from './m-feedback.component';
 import { MSubmissionsComponent } from './m-submissions.component';
 import { MReviewComponent } from './m-review.component';
 
@@ -17,7 +18,8 @@ import { MSubmissionsService } from './m-submissions.service';
 @NgModule({
   declarations: [
     MSubmissionsComponent,
-    MReviewComponent
+    MReviewComponent,
+    MFeedbackComponent
   ],
   imports: [
     BrowserModule,
