@@ -24,4 +24,9 @@ export class MSubmissionsService {
   getSubmissionFeedback(params) {
     return this._api.get('works/feedbacks', params);
   }
+
+  getFeedbackQuestion(params) {
+    return this._api.get('works/feedback_questions', params);
+  }
+
 }

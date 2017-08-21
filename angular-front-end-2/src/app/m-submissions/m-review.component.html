@@ -25,5 +25,19 @@
       (newAnnotation)="newAnnotation($event)"
       >
     </m-code>
+
+    <div>
+      <div *ngFor="let feedback_question of feedbackQuestions">
+        <h4 class="ui header">{{feedback_question}}</h4>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui piled segment">
+    <h4 class="ui header">A header</h4>
+      <div class="ui left icon input">
+      <input type="text" placeholder="give feedback">
+      <i class="comment icon"></i>
+    </div>
   </div>
 </div>

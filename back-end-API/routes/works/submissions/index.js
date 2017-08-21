@@ -346,7 +346,7 @@ module.exports = function (router) {
 
     router.route('/files').get(function(req, res, next) {
         var error;
-
+        console.log(req.query.submission_file_id);
         validator.validate(req.query, submission_files_get_schema);
         error = validator.getLastErrors();
         if (error) {
@@ -383,6 +383,7 @@ module.exports = function (router) {
                         review_by:  mongoose.Types.ObjectId(req.session_user_id)
                     }
                 }]).then(function(feedbacks) {
+                    console.log(feedbacks);
                     if (!feedbacks || !feedbacks.length) {
                         return Promise.reject({
                             code: "NOT_FOUND",
@@ -392,6 +393,7 @@ module.exports = function (router) {
                     return res.sendResponse(ret[0]);
                 });
             }).catch(function(err) {
+                console.log("----");
                 return res.requestError(err);
             });
     }).delete(function (req, res, next) {

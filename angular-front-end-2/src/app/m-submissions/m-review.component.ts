@@ -5,6 +5,7 @@ import * as $ from 'jquery';
 
 import { MCodeComponent } from '../m-common/m-code.component';
 import { MSubmissionsService } from './m-submissions.service';
+import { MAssignmentsService } from '../m-assignments/m-assignments.service';
 
 @Component({
   selector: 'm-review',
@@ -26,7 +27,11 @@ export class MReviewComponent {
   annotations = [];
   /* the current review (to check for changes) */
   oldReview;
-  constructor(private _submissionsAPI: MSubmissionsService) {
+  /* The feedback questions */
+  feedbackQuestions = [];
+
+  constructor(private _submissionsAPI: MSubmissionsService,
+              private _assignmentsAPI: MAssignmentsService) {
     $('.comment.button').mousedown(function(event) {
       event.preventDefault();
     });
@@ -35,6 +40,7 @@ export class MReviewComponent {
   ngOnInit() {
     this.oldReview = this.review;
     this.getSubmission(0);
+    this.getFeedbackQuestions();
   }
 
   ngOnChanges(val) {
@@ -88,5 +94,20 @@ export class MReviewComponent {
         this.annotations = this.annotations.concat([newAnnotation]);
         this.allAnnotations.annotations.push(newAnnotation);
       });
+  }
+
+  getFeedbackQuestions() {
+    this._assignmentsAPI.getAssignment({
+      work_id: this.review.work_id
+    }).subscribe((work) => {
+      for (var i = 0; i < work.feedback_questions.length; i++)  {
+        this._submissionsAPI.getFeedbackQuestion({ 
+          feedback_question_id : work.feedback_questions[i]
+         }).subscribe((res) => {
+           this.feedbackQuestions.push(res.feedback_question);
+           console.log(this.feedbackQuestions);
+         })
+      }
+    });
   }
 }
