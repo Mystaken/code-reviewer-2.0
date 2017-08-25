@@ -38,6 +38,7 @@ export class MReviewComponent {
   }
 
   ngOnInit() {
+    console.log(this.review);
     this.oldReview = this.review;
     this.getSubmission(0);
     this.getFeedbackQuestions();
@@ -52,6 +53,7 @@ export class MReviewComponent {
       } else {
         this.selectFile(this.selectedFile);
       }
+      console.log(this.review.author, this.oldReview.author);
     }
   }
 

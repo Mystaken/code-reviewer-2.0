@@ -26,18 +26,18 @@
       >
     </m-code>
 
-    <div>
+    <div class="ui form">
       <div *ngFor="let feedback_question of feedbackQuestions">
-        <h4 class="ui header">{{feedback_question}}</h4>
+
+        <div class="ui hidden divider"></div>
+    
+        <div class="field">
+          <h3 class="ui header">{{feedback_question}}</h3>
+          <textarea rows="2">{{review.author}}</textarea>
+        </div>
+
       </div>
     </div>
   </div>
 
-  <div class="ui piled segment">
-    <h4 class="ui header">A header</h4>
-      <div class="ui left icon input">
-      <input type="text" placeholder="give feedback">
-      <i class="comment icon"></i>
-    </div>
-  </div>
 </div>
