@@ -27,17 +27,25 @@
     </m-code>
 
     <div class="ui form">
-      <div *ngFor="let feedback_question of feedbackQuestions; let i=index">
+      <div *ngFor="let feedback_question of feedbackQuestions; let i=index" >
 
         <div class="ui hidden divider"></div>
     
         <div class="field">
           <h3 class="ui header">{{feedback_question}}</h3>
-          <textarea rows="2" [(ngModel)]="feedbacks[i]"></textarea>
+          <textarea rows="2" on-focusout="updateFeedbacks()" [(ngModel)]="feedbacks[i]" ></textarea>
         </div>
 
       </div>
-    </div>
+
+<!--       <div class="field">
+        <div class="ui hidden divider"></div>
+        <button class="ui primary button">
+          <i class="icon save"></i>
+          Save
+        </button>
+        </div>
+    </div> -->
   </div>
 
 </div>

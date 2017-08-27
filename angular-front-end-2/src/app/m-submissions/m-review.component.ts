@@ -47,14 +47,14 @@ export class MReviewComponent {
   }
 
   ngOnChanges(val) {
-    
-    this.updateFeedbacks(this.oldReview);
+
+    this.getNewFeedbacks();
 
     if (this.submission.submission_id && 
       this.allAnnotations.annotations &&
       this.review) {
       if (this.review.feedback_id !== this.oldReview.feedback_id) {
-        this.getSubmission(this.selectedFile)
+        this.getSubmission(this.selectedFile);
       } else {
         this.selectFile(this.selectedFile);
       }
@@ -117,22 +117,19 @@ export class MReviewComponent {
     });
   }
 
-  updateFeedbacks(review) {
-    if (review) {
-      this._submissionsAPI.updateFeedbacks({
-        feedback_id: review.feedback_id,
-        feedbacks: this.feedbacks,
-        mark : 0 // TODO
-      }).subscribe((res) => {
-        return this.getNewFeedbacks(this.review);
-      })
-    } else {
-      return this.getNewFeedbacks(this.review);
-    }
+  updateFeedbacks() {
+    var feedbacks = this.feedbacks;
+    this._submissionsAPI.updateFeedbacks({
+      feedback_id: this.oldReview.feedback_id,
+      feedbacks: feedbacks,
+      mark : 0 // TODO
+    }).subscribe((res) => {
+      
+    })
   }
 
-  getNewFeedbacks(review) {
-    this.feedbacks = review.feedbacks;
+  getNewFeedbacks() {
+    this.feedbacks = this.review.feedbacks;
     // fill out with "" if feedbacks === []
     if (this.feedbacks.length === 0) {
       for (var i = 0; i < this.feedbackQuestions.length; i ++) {
