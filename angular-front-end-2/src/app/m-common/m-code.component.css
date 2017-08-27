@@ -3,3 +3,7 @@
   overflow-y: scroll;
   overflow-x: hidden;
 }
+
+code {
+  white-space: pre-wrap;
+}
