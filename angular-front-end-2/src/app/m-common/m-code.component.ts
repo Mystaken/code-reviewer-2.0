@@ -42,7 +42,7 @@ export class MCodeComponent {
     });
   }
   ngOnChanges(val) {
-    if (code) {
+    if (this.code) {
       this.updateComments();
     }
   }
