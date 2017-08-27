@@ -98,6 +98,8 @@ function configureMiddleware(app, opt) {
             app.use(function (req, res, next) {
                 req.session_user_id   = '597454be305f03346c012275';
                 req.session_user_type = 'admin';
+                //reset cookie
+                res.clearCookie(config.cookie.session.name);
                 res.cookie(config.cookie.session.name,
                   JSON.stringify({
                     session_user_id: req.session_user_id,
@@ -112,6 +114,8 @@ function configureMiddleware(app, opt) {
             app.use(function (req, res, next) {
                 req.session_user_id = req.query.session_user_id || req.body.session_user_id || opt.user_id;
                 req.session_user_type = req.query.session_user_type || req.body.session_user_type || opt.user_type;
+                //reset cookie
+                res.clearCookie(config.cookie.session.name);
                 res.cookie(config.cookie.session.name,
                   JSON.stringify({
                     session_user_id: req.session_user_id,

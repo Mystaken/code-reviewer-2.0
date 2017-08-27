@@ -32,13 +32,12 @@ export class MReviewComponent {
 
   constructor(private _submissionsAPI: MSubmissionsService,
               private _assignmentsAPI: MAssignmentsService) {
-    $('.comment.button').mousedown(function(event) {
-      event.preventDefault();
-    });
   }
 
   ngOnInit() {
-    console.log(this.review);
+    $('.comment.button').mousedown(function(event) {
+      event.preventDefault();
+    });
     this.oldReview = this.review;
     this.getSubmission(0);
     this.getFeedbackQuestions();
@@ -53,7 +52,7 @@ export class MReviewComponent {
       } else {
         this.selectFile(this.selectedFile);
       }
-      console.log(this.review.author, this.oldReview.author);
+      this.oldReview = this.review;
     }
   }
 
