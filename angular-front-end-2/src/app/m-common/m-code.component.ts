@@ -42,7 +42,9 @@ export class MCodeComponent {
     });
   }
   ngOnChanges(val) {
-    this.updateComments();
+    if (code) {
+      this.updateComments();
+    }
   }
   ngAfterViewInit() {
     setTimeout(_=>this.updateComments());
