@@ -121,7 +121,7 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        if (!mongoose.validID(req.query.feedback_id)) {
+        if (!mongoose.validID(req.body.feedback_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'feedback_id' ]
@@ -195,7 +195,7 @@ module.exports = function (router) {
             }
             return res.sendResponse(submission);
         }).catch(function (error) {
-            res.requestError(error);
+            return res.requestError(error);
         });
     }).delete(function (req, res, next) {
         if (req.session_user_type !== 'admin') return res.forbidden();
@@ -208,7 +208,6 @@ module.exports = function (router) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
 
-        console.log("DELETE feedbacks");
         return feedbacks_model.remove(
             {work_id: mongoose.Types.ObjectId(req.query.work_id)} 
         ).exec().then(function(feedbacks) {

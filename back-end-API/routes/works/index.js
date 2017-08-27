@@ -69,7 +69,6 @@ module.exports = function (router) {
         validator.validate(req.body, works_put_schema);
         error = validator.getLastErrors();
         if (error) {
-            console.log("BADDDDD");
             return res.requestError({ code: "VALIDATION", message: error });
         }
         query = {
@@ -112,11 +111,9 @@ module.exports = function (router) {
             }).then(function(ret) {
                 res.sendResponse(ret._id);
             }).catch(function(err) {
-                console.log("NOOOOO", err);
                 return res.requestError(err);
             });
     }).post(function(req, res, next) {
-        console.log(req.body);
         var error,
             find_query,
             update_query;

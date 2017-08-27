@@ -27,13 +27,13 @@
     </m-code>
 
     <div class="ui form">
-      <div *ngFor="let feedback_question of feedbackQuestions">
+      <div *ngFor="let feedback_question of feedbackQuestions; let i=index">
 
         <div class="ui hidden divider"></div>
     
         <div class="field">
           <h3 class="ui header">{{feedback_question}}</h3>
-          <textarea rows="2">{{review.author}}</textarea>
+          <textarea rows="2" [(ngModel)]="feedbacks[i]"></textarea>
         </div>
 
       </div>

@@ -29,4 +29,7 @@ export class MSubmissionsService {
     return this._api.get('works/feedback_questions', params);
   }
 
+  updateFeedbacks(params) {
+    return this._api.post('works/feedbacks', params);
+  }
 }

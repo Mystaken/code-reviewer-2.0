@@ -29,6 +29,8 @@ export class MReviewComponent {
   oldReview;
   /* The feedback questions */
   feedbackQuestions = [];
+  /* The feedbacks */
+  feedbacks = [];
 
   constructor(private _submissionsAPI: MSubmissionsService,
               private _assignmentsAPI: MAssignmentsService) {
@@ -41,9 +43,13 @@ export class MReviewComponent {
     this.oldReview = this.review;
     this.getSubmission(0);
     this.getFeedbackQuestions();
+    //this.getNewFeedbacks(this.oldReview);
   }
 
   ngOnChanges(val) {
+    
+    this.updateFeedbacks(this.oldReview);
+
     if (this.submission.submission_id && 
       this.allAnnotations.annotations &&
       this.review) {
@@ -106,9 +112,32 @@ export class MReviewComponent {
           feedback_question_id : work.feedback_questions[i]
          }).subscribe((res) => {
            this.feedbackQuestions.push(res.feedback_question);
-           console.log(this.feedbackQuestions);
          })
       }
     });
+  }
+
+  updateFeedbacks(review) {
+    if (review) {
+      this._submissionsAPI.updateFeedbacks({
+        feedback_id: review.feedback_id,
+        feedbacks: this.feedbacks,
+        mark : 0 // TODO
+      }).subscribe((res) => {
+        return this.getNewFeedbacks(this.review);
+      })
+    } else {
+      return this.getNewFeedbacks(this.review);
+    }
+  }
+
+  getNewFeedbacks(review) {
+    this.feedbacks = review.feedbacks;
+    // fill out with "" if feedbacks === []
+    if (this.feedbacks.length === 0) {
+      for (var i = 0; i < this.feedbackQuestions.length; i ++) {
+        this.feedbacks.push("");
+      }
+    }
   }
 }

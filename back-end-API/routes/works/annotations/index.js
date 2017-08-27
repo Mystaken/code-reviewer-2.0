@@ -136,7 +136,6 @@ module.exports = function (router) {
             }).then(function(ret) {
                 return res.sendResponse(ret._id);
             }).catch(function (err) {
-                console.log(err);
                 return res.requestError(err);
             });
     }).delete(function(req, res, next) {
