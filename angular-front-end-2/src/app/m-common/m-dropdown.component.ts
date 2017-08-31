@@ -17,5 +17,6 @@ export class MDropdownComponent {
 
     //TODO 
     //$('.combo.dropdown').dropdown(this.settings);
+    $('.ui.accordion').accordion();
   }
 }
