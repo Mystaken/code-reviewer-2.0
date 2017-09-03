@@ -21,8 +21,7 @@ submissions_files_schema = mongoose.Schema({
         required: true
     },
     code: {
-      type: String,
-      required: true
+      type: String
     },
     delete_date: Date,
     create_date: Date,

@@ -47,7 +47,7 @@ export class MReviewComponent {
   }
 
   ngOnChanges(val) {
-
+    console.log(this.review);
     this.getNewFeedbacks();
 
     if (this.submission.submission_id && 
@@ -118,6 +118,7 @@ export class MReviewComponent {
   }
 
   updateFeedbacks() {
+    console.log(this.feedbacks);
     var feedbacks = this.feedbacks;
     this._submissionsAPI.updateFeedbacks({
       feedback_id: this.oldReview.feedback_id,
@@ -138,3 +139,10 @@ export class MReviewComponent {
     }
   }
 }
+
+
+// 59ab5d19fa75e02448ee6202
+// 59ab5d24fa75e02448ee6203
+// 59ab5d2dfa75e02448ee6204
+// 59ab5d40fa75e02448ee6205
+// 59ab5d4bfa75e02448ee6206

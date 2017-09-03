@@ -44,6 +44,7 @@ export class MFeedbackComponent {
       });
   }
   ngOnChanges(val) {
+  console.log(this.feedback);
     if (this.submission.submission_id && 
       this.allAnnotations.annotations &&
       this.feedback)

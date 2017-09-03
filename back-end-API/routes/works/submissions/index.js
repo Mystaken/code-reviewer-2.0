@@ -240,6 +240,7 @@ module.exports = function (router) {
     });
 
     router.route("/loadSubmissionFiles").post(function(req, res, next) {
+        console.log(req.body);
         if (req.session_user_type !== 'admin') return res.forbidden();
         var repo_name = "./../" + req.body.repo_path;
         var folder_name = req.body.folder_name;
@@ -250,7 +251,7 @@ module.exports = function (router) {
                 files.forEach(function(utorid) {
                     var file_path = repo_name + '/'+ utorid + '/' + folder_name + '/' + file_name;
                     fs.readFile(file_path, 'utf8', function (err, code) {
-                        code = code.replace(/\r/g, "");
+                        //code = code.replace(/\r/g, "");
                         var temp_count = count;
                         return user_model.aggregate([
                             { $match: {utorid: utorid, status: 'active'} },
@@ -285,7 +286,7 @@ module.exports = function (router) {
                                         return res.sendResponse('file DONE!');
                                     }
                                 }).catch(function(err) {
-                                    res.requestError(err);
+                                    return res.requestError(err);
                                 });
                             });
                         })
