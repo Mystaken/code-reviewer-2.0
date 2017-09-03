@@ -112,6 +112,7 @@ function configureMiddleware(app, opt) {
             break;
         case "development":
             app.use(function (req, res, next) {
+                console.log(opt);
                 req.session_user_id = req.query.session_user_id || req.body.session_user_id || opt.user_id;
                 req.session_user_type = req.query.session_user_type || req.body.session_user_type || opt.user_type;
                 //reset cookie

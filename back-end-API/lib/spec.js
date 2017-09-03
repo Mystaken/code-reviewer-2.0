@@ -8,8 +8,8 @@ var configExpress   = require('./config-express'),
 module.exports = function(app) {
     return {
         configure: function (opt) {
-            return configMongoose.configure(app, opt).then(function() {
-                return configExpress.configure(app, opt);
+            return configExpress.configure(app, opt).then(function() {
+                return configMongoose.configure(app, opt);
             }).then(function() {
                 return validator.configure(app, opt);
             });
