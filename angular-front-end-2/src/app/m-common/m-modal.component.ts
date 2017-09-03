@@ -1,4 +1,4 @@
-import { Component, Input, AfterViewInit, ElementRef } from '@angular/core';
+import { Component, Input, AfterViewInit, ElementRef, OnInit } from '@angular/core';
 declare var $: any;
 
 @Component({
@@ -8,13 +8,15 @@ declare var $: any;
 })
 export class MModalComponent {
   @Input() class = "";
-  constructor(private _el: ElementRef) {}
+  modal;
+  constructor(private _el: ElementRef) {
+  }
 
-  ngAfterViewInit(): void {
-
+  ngOnInit() {
+    this.modal = $(this._el.nativeElement.querySelector('.ui.modal'));
   }
 
   show(settings) {
-    $(this._el.nativeElement.children[0]).modal(settings).modal('show');
+    this.modal.modal(settings).modal('show');
   }
 }
