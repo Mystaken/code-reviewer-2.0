@@ -12,10 +12,10 @@ export class MCheckboxComponent {
   @Input() value;
   //@Input() onChange;
   dropdown: HTMLElement
-  constructor(private parentElement: ElementRef) {}
+  constructor(private _el: ElementRef) {}
 
   ngAfterViewInit(): void {
-    $('.ui.checkbox').checkbox(this.settings);
+    $(this._el.nativeElement.children[0]).checkbox(this.settings);
   }
 }
 export interface checkboxOptions {

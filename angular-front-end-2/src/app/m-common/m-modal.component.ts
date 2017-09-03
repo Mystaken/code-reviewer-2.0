@@ -8,12 +8,13 @@ declare var $: any;
 })
 export class MModalComponent {
   @Input() class = "";
-  constructor(private parentElement: ElementRef) {}
+  constructor(private _el: ElementRef) {}
 
   ngAfterViewInit(): void {
+
   }
 
   show(settings) {
-    $('.ui.modal').modal(settings).modal('show');
+    $(this._el.nativeElement.children[0]).modal(settings).modal('show');
   }
 }
