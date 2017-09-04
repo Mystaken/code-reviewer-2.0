@@ -139,6 +139,40 @@ module.exports = function (router) {
                 return res.requestError(err);
             });
     }).delete(function(req, res, next) {
+        var error,
+            query;
+        validator.validate(req.query, annotations_delete_schema);
+        error = validator.getLastErrors();
+        if (error) {
+            return res.requestError({ code: "VALIDATION", message: error });
+        }
+        if (!mongoose.validID(req.query.annotation_id)) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'annotation_id' ]
+            });
+        }
+        query = {
+            _id: mongoose.Types.ObjectId(req.query.annotation_id),
+            status: 'active'
+        };
+        return annotations_model.aggregate([{
+            $match: query
+        }]).exec().then(function(ret) {
+            if (!ret || !ret.length) {
+                return Promise.reject({
+                    code: "NOT_FOUND",
+                    params: [ 'annotation_id' ]
+                });
+            }
+            return annotations_model.findOneAndUpdate(query, {
+                    status: 'inactive'
+                }).exec();
+        }).then(function(ret) {
+            res.sendResponse(ret._id);
+        }).catch(function (err) {
+            res.requestError(err);
+        });
     }).all(function (req, res, next) {
         return res.invalidVerb();
     });

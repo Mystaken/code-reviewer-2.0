@@ -21,6 +21,10 @@ export class MSubmissionsService {
     return this._api.put('works/annotations', params);
   }
 
+  deleteAnnotation(params) {
+    return this._api.delete('works/annotations', params);
+  }
+
   getSubmissionFeedback(params) {
     return this._api.get('works/feedbacks', params);
   }

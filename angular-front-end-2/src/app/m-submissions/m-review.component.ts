@@ -3,6 +3,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import * as $ from 'jquery';
 
+import { MModalComponent } from '../m-common/m-modal.component';
 import { MCodeComponent } from '../m-common/m-code.component';
 import { MSubmissionsService } from './m-submissions.service';
 import { MAssignmentsService } from '../m-assignments/m-assignments.service';
@@ -31,6 +32,8 @@ export class MReviewComponent {
   feedbackQuestions = [];
   /* The feedbacks */
   feedbacks = [];
+  /* Modal when listing annotation */
+  @ViewChild('annotationList') annotationList: MModalComponent;
 
   constructor(private _submissionsAPI: MSubmissionsService,
               private _assignmentsAPI: MAssignmentsService) {
@@ -47,7 +50,6 @@ export class MReviewComponent {
   }
 
   ngOnChanges(val) {
-    console.log(this.review);
     this.getNewFeedbacks();
 
     if (this.submission.submission_id && 
@@ -81,6 +83,23 @@ export class MReviewComponent {
           })
       });
   }
+
+  showAnnotations() {
+    this.annotationList.show({});
+  }
+
+  removeAnnotation(annotation) {
+    var annotation_id = annotation.annotation_id;
+    this._submissionsAPI.deleteAnnotation({
+      annotation_id: annotation_id
+    }).subscribe((res) => {
+      this.allAnnotations.annotations = this.allAnnotations.annotations.filter((annotation) => {
+        return annotation.annotation_id !== annotation_id;
+      });
+      this.selectFile(this.selectedFile);
+    });
+  }
+
   selectFile(i) {
     this.selectedFile = i;
     this.annotations = this.allAnnotations.annotations.filter((annotation) => {
