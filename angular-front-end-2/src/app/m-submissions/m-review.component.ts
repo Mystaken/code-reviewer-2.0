@@ -34,7 +34,11 @@ export class MReviewComponent {
   feedbacks = [];
   /* Modal when listing annotation */
   @ViewChild('annotationList') annotationList: MModalComponent;
-
+  /* settings for the rating */
+  ratingSettings = {
+    clearable: true,
+    maxRating: 5
+  };
   constructor(private _submissionsAPI: MSubmissionsService,
               private _assignmentsAPI: MAssignmentsService) {
   }

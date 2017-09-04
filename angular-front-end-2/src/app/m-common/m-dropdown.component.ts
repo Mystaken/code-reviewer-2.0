@@ -9,7 +9,6 @@ declare var $: any;
 export class MDropdownComponent {
   @Input() class = "";
   @Input() settings = {};
-  dropdown: HTMLElement
   constructor(private _el: ElementRef) {}
 
   ngAfterViewInit(): void {

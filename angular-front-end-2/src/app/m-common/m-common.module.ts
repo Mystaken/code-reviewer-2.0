@@ -9,6 +9,7 @@ import { MModalComponent } from './m-modal.component';
 import { MCheckboxComponent } from './m-checkbox.component';
 import { MCodeComponent } from './m-code.component';
 import { MAccordionComponent } from './m-accordion.component';
+import { MRatingComponent } from './m-rating.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { MAccordionComponent } from './m-accordion.component';
     MDropdownComponent,
     MCheckboxComponent,
     MCodeComponent,
-    MAccordionComponent
+    MAccordionComponent,
+    MRatingComponent
   ],
   imports: [
     BrowserModule,
@@ -31,7 +33,8 @@ import { MAccordionComponent } from './m-accordion.component';
     MDropdownComponent,
     MCheckboxComponent,
     MCodeComponent,
-    MAccordionComponent
+    MAccordionComponent,
+    MRatingComponent
   ],
   providers: []
 })
