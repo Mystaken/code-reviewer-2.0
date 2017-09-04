@@ -32,10 +32,10 @@
       >
     </m-code>
   </div>
-  <div class="ui attached segment"> 
-    <div class="header">
-      Rating:
-      <m-rating [settings]="ratingSettings" [class]="'large star'"></m-rating>
+  <div class="ui attached segment">
+    <div class="ui compact segment">
+      <div class="ui small header">Rating</div>
+      <m-rating [settings]="ratingSettings" [class]="'huge star'"></m-rating>
     </div>
     <div class="ui form">
       <div *ngFor="let feedback_question of feedbackQuestions; let i=index" >
