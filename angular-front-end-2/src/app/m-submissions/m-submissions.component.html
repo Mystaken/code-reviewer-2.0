@@ -24,6 +24,26 @@
     </div>
     <div class="ui vertical borderless fluid menu">
       <div class="item">
+        <div class="ui dividing header">Reviews</div>
+      </div>
+      <div class="ui vertical secondary fluid pointing menu">
+        <a class="item"
+          [class.active]="selectedReview==i"
+          [class.blue]="selectedReview==i"
+          (click)="selectedFeedback=-1;selectedReview=i"
+          *ngFor="let review of reviews; let i = index;">
+          <span>
+            <i class="user icon"
+              [class.blue]="i==0"
+              [class.red]="i==1"
+              [class.purple]="i==2"
+              [class.green]="i==3">
+            </i>
+            Peer {{i + 1}}
+          </span>
+        </a>
+      </div>
+      <div class="item">
         <div class="ui dividing header">Feedbacks</div>
       </div>
       <div class="ui vertical secondary fluid pointing menu">
@@ -39,38 +59,37 @@
               [class.purple]="i==2"
               [class.green]="i==3">
             </i>
-            Feedback {{i + 1}}
+            Peer {{i + 1}}
           </span>
         </a>
-      </div>
-      <div class="item">
-        <div class="ui dividing header">Reviews</div>
-      </div>
-      <div class="ui vertical secondary fluid pointing menu">
+
         <a class="item"
-          [class.active]="selectedReview==i"
-          [class.blue]="selectedReview==i"
-          (click)="selectedFeedback=-1;selectedReview=i"
-          *ngFor="let review of reviews; let i = index;">
-          <span>
-            <i class="user icon"
-              [class.blue]="i==0"
-              [class.red]="i==1"
-              [class.purple]="i==2"
-              [class.green]="i==3">s
-            </i>
-            Review {{i + 1}}
-          </span>
+          [class.active]="selectedFeedback==99"
+          [class.blue]="selectedFeedback==99"
+          (click)="selectedReview=-1;selectedFeedback=99">
+          <span><i class="users icon black" ></i> All Peers</span>
         </a>
+
       </div>
     </div>
   </div>
   <div class="twelve wide column">
+
+<!--     <m-feedback 
+      *ngIf="selectedFeedback == -2"
+      [feedbacks]="feedbacks"
+      []
+      >
+    </m-feedback> -->
+
     <m-feedback 
       *ngIf="selectedFeedback >= 0"
       [feedbacks]="feedbacks"
+      [selectedFeedback]="selectedFeedback"
       >
     </m-feedback>
+
+
     <m-review 
       *ngIf="selectedReview >= 0"
       [review]="reviews[selectedReview]"

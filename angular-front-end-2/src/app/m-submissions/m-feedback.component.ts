@@ -15,6 +15,7 @@ import { MAssignmentsService } from '../m-assignments/m-assignments.service';
 export class MFeedbackComponent {
   /* the feedback for this feedback */
   @Input() feedbacks;
+  @Input() selectedFeedback;
   /* The submission of this feedback */
   submission: any = {};
   /* The selected file */
@@ -31,10 +32,12 @@ export class MFeedbackComponent {
 
   ngOnInit() {
     this.getFeedbackQuestions();
+    var query = {}
+
     return this._submissionsAPI.getSubmission({
-        work_id: this.feedbacks[0].work_id,
-        author_id: this.feedbacks[0].author
-      }).subscribe((res) => {
+      work_id : this.feedbacks[0].work_id,
+      author_id : this.feedbacks[0].author
+    }).subscribe((res) => {
         this.submission = res;
         return Observable.forkJoin(
             this.submission.files.map((file_id) => this._submissionsAPI.getSubmissionFile({ submission_file_id: file_id }))
@@ -49,24 +52,30 @@ export class MFeedbackComponent {
           })
       });
   }
+
   ngOnChanges(val) {
-    console.log(this.feedbacks);
     if (this.submission.submission_id && 
       this.allAnnotations.annotations &&
-      this.feedbacks[0])
+      this.feedbacks)
     this.selectFile(this.selectedFile);
+
   }
 
   selectFile(i) {
     this.selectedFile = i;
     this.annotations = this.allAnnotations.annotations.filter((annotation) => {
       console.log(annotation);
-      return annotation.submission_file_id == this.submission.files[i].submission_file_id
+
+      if (this.selectedFeedback === 99) return annotation.submission_file_id == this.submission.files[i].submission_file_id;
+
+      return annotation.submission_file_id == this.submission.files[i].submission_file_id 
+            && annotation.review_by == this.feedbacks[this.selectedFeedback].review_by
     });
   }
+
    getFeedbackQuestions() {
     this._assignmentsAPI.getAssignment({
-      work_id: this.feedbacks[0].work_id
+      work_id : this.feedbacks[0].work_id
     }).subscribe((work) => {
       for (var i = 0; i < work.feedback_questions.length; i++)  {
         this._submissionsAPI.getFeedbackQuestion({ 
