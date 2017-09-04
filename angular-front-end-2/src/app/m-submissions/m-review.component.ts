@@ -94,6 +94,7 @@ export class MReviewComponent {
 
   removeAnnotation(annotation) {
     var annotation_id = annotation.annotation_id;
+    console.log(annotation);
     this._submissionsAPI.deleteAnnotation({
       annotation_id: annotation_id
     }).subscribe((res) => {
@@ -112,7 +113,7 @@ export class MReviewComponent {
   }
 
   newAnnotation(annotation) {
-    let newAnnotation =  {
+    let newAnnotation: any =  {
       submission_id: this.submission.submission_id,
       submission_file_id: this.submission.files[this.selectedFile].submission_file_id,
       annotation: annotation.annotation,
@@ -121,6 +122,7 @@ export class MReviewComponent {
     }
     this._submissionsAPI.addAnnotation(newAnnotation)
       .subscribe((res) => {
+        newAnnotation.annotation_id = res;
         this.annotations = this.annotations.concat([newAnnotation]);
         this.allAnnotations.annotations.push(newAnnotation);
       });
