@@ -57,7 +57,7 @@
               [class.blue]="i==0"
               [class.red]="i==1"
               [class.purple]="i==2"
-              [class.green]="i==3">
+              [class.green]="i==3">s
             </i>
             Review {{i + 1}}
           </span>
@@ -68,7 +68,7 @@
   <div class="twelve wide column">
     <m-feedback 
       *ngIf="selectedFeedback >= 0"
-      [feedback]="feedbacks[selectedFeedback]"
+      [feedbacks]="feedbacks"
       >
     </m-feedback>
     <m-review 

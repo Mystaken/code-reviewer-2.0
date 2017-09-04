@@ -19,20 +19,26 @@
     </m-code>
 
   <div class="ui hidden divider"></div>
-  <m-dropdown>
-    <div class="ui styled accordion">
-      <div *ngFor="let feedback of feedback.feedbacks">
-        <div class="title">
+  <div *ngFor="let feedback_question of feedbackQuestions; let i=index" >
+    <h3 class="ui header">{{feedback_question}}</h3>
+    <m-accordion [class]="'styled fluid'">
+      <div *ngFor="let feedback of feedbacks">
+        <div class="title" *ngIf="feedback.feedbacks[i]">
           <i class="dropdown icon"></i>
-          {{feedback.substring(0, 20) + " ....."}}
+          {{feedback.feedbacks[i].substring(0, 20) + " ....."}}
+        </div>
+        <div class="title" *ngIf="!feedback.feedbacks[i]">
+          <i class="dropdown icon"></i>
+          {{" ....."}}
         </div>
         <div class="content">
-          <pre>{{feedback}}</pre>
+          <p style="white-space: pre-wrap;">{{feedback.feedbacks[i]}}</p>
         </div>
       </div>
+    </m-accordion>
+    <div class="ui hidden divider"></div>
+  </div>
 
-    </div>
-    </m-dropdown>
 
   </div>
 </div>

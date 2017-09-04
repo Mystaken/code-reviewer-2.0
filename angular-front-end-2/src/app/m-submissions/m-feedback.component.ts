@@ -4,6 +4,8 @@ import { Observable } from 'rxjs';
 
 import { MCodeComponent } from '../m-common/m-code.component';
 import { MSubmissionsService } from './m-submissions.service';
+import { MAssignmentsService } from '../m-assignments/m-assignments.service';
+
 
 @Component({
   selector: 'm-feedback',
@@ -12,7 +14,7 @@ import { MSubmissionsService } from './m-submissions.service';
 })
 export class MFeedbackComponent {
   /* the feedback for this feedback */
-  @Input() feedback;
+  @Input() feedbacks;
   /* The submission of this feedback */
   submission: any = {};
   /* The selected file */
@@ -21,13 +23,17 @@ export class MFeedbackComponent {
   allAnnotations: any = {};
   /* The annotations for the current selected file. */
   annotations = [];
+  /* The feedback questions */
+  feedbackQuestions = [];
 
-  constructor(private _submissionsAPI: MSubmissionsService) {}
+  constructor(private _submissionsAPI: MSubmissionsService,
+              private _assignmentsAPI: MAssignmentsService) {}
 
   ngOnInit() {
+    this.getFeedbackQuestions();
     return this._submissionsAPI.getSubmission({
-        work_id: this.feedback.work_id,
-        author_id: this.feedback.author
+        work_id: this.feedbacks[0].work_id,
+        author_id: this.feedbacks[0].author
       }).subscribe((res) => {
         this.submission = res;
         return Observable.forkJoin(
@@ -44,19 +50,31 @@ export class MFeedbackComponent {
       });
   }
   ngOnChanges(val) {
-  console.log(this.feedback);
+    console.log(this.feedbacks);
     if (this.submission.submission_id && 
       this.allAnnotations.annotations &&
-      this.feedback)
+      this.feedbacks[0])
     this.selectFile(this.selectedFile);
   }
 
   selectFile(i) {
     this.selectedFile = i;
-    console.log(1);
     this.annotations = this.allAnnotations.annotations.filter((annotation) => {
-      return annotation.submission_file_id == this.submission.files[i].submission_file_id &&
-        annotation.review_by == this.feedback.review_by;
+      console.log(annotation);
+      return annotation.submission_file_id == this.submission.files[i].submission_file_id
+    });
+  }
+   getFeedbackQuestions() {
+    this._assignmentsAPI.getAssignment({
+      work_id: this.feedbacks[0].work_id
+    }).subscribe((work) => {
+      for (var i = 0; i < work.feedback_questions.length; i++)  {
+        this._submissionsAPI.getFeedbackQuestion({ 
+          feedback_question_id : work.feedback_questions[i]
+         }).subscribe((res) => {
+           this.feedbackQuestions.push(res.feedback_question);
+         })
+      }
     });
   }
 }
