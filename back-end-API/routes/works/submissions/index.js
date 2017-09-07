@@ -251,7 +251,7 @@ module.exports = function (router) {
                 files.forEach(function(utorid) {
                     var file_path = repo_name + '/'+ utorid + '/' + folder_name + '/' + file_name;
                     fs.readFile(file_path, 'utf8', function (err, code) {
-                        //code = code.replace(/\r/g, "");
+                        code = code.replace(/\r/g, "");
                         var temp_count = count;
                         return user_model.aggregate([
                             { $match: {utorid: utorid, status: 'active'} },

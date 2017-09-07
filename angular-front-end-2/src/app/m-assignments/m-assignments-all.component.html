@@ -88,22 +88,24 @@
           </m-checkbox>
         </div>
           <div class="container-flex-space-between">
-          <div></div>
-          <m-dropdown [settings]="actionsDropdown">
+            <div></div>
+
             <div class="ui blue buttons">
               <div class="ui button" (click)="test($event, assignment)">Select</div>
-              <div class="ui combo top right pointing dropdown icon button">
+              
+              <m-dropdown [settings]="actionsDropdown" [class]="'combo top right pointing icon button'">
                 <i class="dropdown icon"></i>
                 <div class="menu">
-                  <div class="item"><i class="dice icon"></i>Load Works</div>
+                  <div class="item"><i class="dice icon"></i><span class="text">Load Files</span></div>
                   <div class="item"><i class="edit icon"></i>Load Files</div>
                   <div class="item"><i class="wizard icon"></i>Distribute</div>
                   <div class="item"><i class="delete icon"></i>Delete</div>
                 </div>
-              </div>
+              </m-dropdown>
+
             </div>
-            </m-dropdown>
-            </div>
+
+          </div>
         </td>
       </tr>
     </tbody>
@@ -113,3 +115,47 @@
       example
     </div>
   <!-- example dropdown for vc -->
+
+<m-dropdown [class]="'floating labeled icon button'">
+  <i class="dropdown icon"></i>
+  <span class="">Select</span>
+  
+  <div class="left menu">
+
+    <div class="item">
+      <i class="dropdown icon"></i>
+      <span class="text">Load Works & Files</span>
+      <div class="menu">
+        <div class="item">Load</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <i class="dropdown icon"></i>
+      <span class="text">Load Files</span>
+      <div class="menu">
+        <div class="item">1</div>
+        <div class="item">Cancel</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <i class="dropdown icon"></i>
+      <span class="text">Distribute</span>
+      <div class="menu">
+        <div class="item">1</div>
+        <div class="item">Cancel</div>
+      </div>
+    </div>
+
+    <div class="item">
+      <i class="dropdown icon"></i>
+      <span class="text">Delete</span>
+      <div class="menu">
+        <div class="item">1</div>
+        <div class="item">Cancel</div>
+      </div>
+    </div>
+
+  </div>
+</m-dropdown>
