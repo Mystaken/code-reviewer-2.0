@@ -2,29 +2,34 @@
   [class.green]="userType=='admin'"
   [class.blue]="userType==='student'">
   <div class="ui container">
-    <a class="header item"
-      routerLink="/dashboard">
-      <img class="ui mini image" [src]="crIcon">
-      Code Reviewer
-    </a>
-    <a class="active item"
+    <div id="hamburger-menu" onclick="$('#nav-btn.item').toggle();">
+      <i class="sidebar icon"></i>
+    </div>
+    <div id="logo">
+      <a class="header item"
+        routerLink="/dashboard">
+        <img class="ui mini image" [src]="crIcon">
+        Code Reviewer
+      </a>
+    </div>
+    <a id="nav-btn" class="active item"
       routerLink="/assignments"
       [class.active]="selected==='Assignments'"
       *ngIf="userType=='admin'">
       Assignments
     </a>
-    <a class="item"
+    <a id="nav-btn" class="item"
       routerLink="/students"
       [class.active]="selected==='Students'"
       *ngIf="userType=='admin'">
       Students
     </a>
     <div class="right labeled menu">
-      <a class="item">
+      <a id="nav-btn" class="item">
         <i class="user icon"></i>
         {{userTypeDisplay}}
       </a>
-      <a class="item">
+      <a id="nav-btn" class="item">
         <i class="help icon"></i>
         Help (TBW)
       </a>
