@@ -10,6 +10,7 @@ import { MNotFoundComponent } from './m-notfound/m-notfound.component';
 import { MAssignmentsAllComponent } from './m-assignments/m-assignments-all.component';
 import { MAssignmentsComponent } from './m-assignments/m-assignments.component';
 import { MStudentsComponent } from './m-students/m-students.component';
+import { MTasComponent } from './m-tas/m-tas.component';
 import { MSubmissionsComponent } from './m-submissions/m-submissions.component';
 import { MNotLoggedInComponent } from './m-notfound/m-notloggedin.component';
 
@@ -43,7 +44,11 @@ const routes: Routes = [
     component: MNotLoggedInComponent,
     canActivate: [ NotLoginGuard ]
   },{ 
-    path: '**', 
+    path: 'tas', 
+    component: MTasComponent,
+    canActivate: [ AdminGuard ]
+  },{ 
+    path: '**',
     redirectTo: '/error'
   }
 ];

@@ -12,9 +12,7 @@ user_schema = mongoose.Schema({
         unique: true            // avoid duplicates
     },
     student_number: {
-        type: Number,
-        required: true,
-        unique: true
+        type: Number
     },
     email: {
         type: String,

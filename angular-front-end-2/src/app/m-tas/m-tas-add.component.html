@@ -1,0 +1,74 @@
+<div class="ui segment">
+  <h4 class="ui cursor dividing header" (click)="addNew=!addNew">
+    <i class="plus icon" *ngIf="!addNew"></i>
+    <i class="minus icon" *ngIf="addNew"></i>
+    Add TA
+  </h4>
+  <div class="ui inverted dimmer" [class.active]="addingta">
+    <div class="ui text loader">Submitting...</div>
+  </div>
+  <div class="ui form" *ngIf="addNew">
+    <div class="two fields">
+      <div class="field"
+        [class.error]="pendingTa.first_name.error"
+        (click)="pendingTa.first_name.error=false">
+        <label>First Name</label>
+        <input type="text" 
+          placeholder="First Name"
+          [(ngModel)]="pendingTa.first_name.content">
+      </div>
+      <div class="field"
+        [class.error]="pendingTa.last_name.error"
+        (click)="pendingTa.last_name.error=false">
+        <label>Last Name</label>
+        <input type="text"
+          placeholder="Last Name"
+          [(ngModel)]="pendingTa.last_name.content">
+      </div>
+    </div>
+    <div class="two fields">
+      <div class="field"
+        [class.error]="pendingTa.utorid.error"
+        (click)="pendingTa.utorid.error=false">
+        <label>UtorID</label>
+        <input type="text"
+          placeholder="UtorID"
+          [(ngModel)]="pendingTa.utorid.content">
+      </div>
+      <div class="field"
+        [class.error]="pendingTa.contract_number.error"
+        (click)="pendingTa.contract_number.error=false">
+        <label>Contract Number</label>
+        <input type="text"
+          placeholder="contract number"
+          [(ngModel)]="pendingTa.contract_number.content">
+      </div>
+    </div>
+    <div class="field"
+      [class.error]="pendingTa.email.error"
+        (click)="pendingTa.email.error=false">
+      <label>Email</label>
+      <input type="text"
+        placeholder="Email"
+        [(ngModel)]="pendingTa.email.content">
+    </div>
+    <div class="ui primary right labeled icon button"
+      (click)="addTa()">
+      <i class="caret right icon"></i>
+      Add TA
+    </div>
+  </div>
+  <div class="ui message"
+    [ngClass]='newTaMsg.type'
+    [hidden]='!newTaMsg.show'>
+    <i class="close icon" (click)="closeTaMsg()"></i>
+    <div class="content">
+      {{newTaMsg.message}}
+    </div>
+  </div>
+  <!-- batch upload -->
+  <div class="ui segment" *ngIf="addNew">
+    <h4 class="ui dividing header">Batch Upload</h4>
+    To be Worked on.
+  </div>
+</div>

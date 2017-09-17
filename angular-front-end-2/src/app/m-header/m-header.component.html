@@ -24,6 +24,12 @@
       *ngIf="userType=='admin'">
       Students
     </a>
+    <a id="nav-btn" class="item"
+      routerLink="/tas"
+      [class.active]="selected==='TAs'"
+      *ngIf="userType=='admin'">
+      TAs
+    </a>
     <div class="right labeled menu">
       <a id="nav-btn" class="item">
         <i class="user icon"></i>

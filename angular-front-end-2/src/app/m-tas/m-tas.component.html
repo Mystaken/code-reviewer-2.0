@@ -1,0 +1,9 @@
+<m-header [selected]="'Tas'"></m-header>
+<div class="ui tas container">
+  <div class="ui dividing header">
+    TAs
+  </div>
+  <m-tas-add (TaAdded)="allTas.addTa($event)"></m-tas-add>
+  <m-tas-all #allTas></m-tas-all>
+</div>
+<m-footer></m-footer>
