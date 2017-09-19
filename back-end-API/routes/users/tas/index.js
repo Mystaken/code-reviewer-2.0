@@ -9,11 +9,11 @@ var validator   = require('../../../lib/validator'),
     user_model      = require('../../../models/users'),
     feedback_model  = require('../../../models/feedbacks'),
 
-    student_get_schema      = require('../../../schemas/users/tas/tas_get'),
-    student_put_schema      = require('../../../schemas/users/tas/tas_put'),
-    student_delete_schema   = require('../../../schemas/users/tas/tas_delete'),
-    student_post_schema     = require('../../../schemas/users/tas/tas_post'),
-    student_all_get_schema  = require('../../../schemas/users/tas/tas_all_get');
+    ta_get_schema      = require('../../../schemas/users/tas/tas_get'),
+    ta_put_schema      = require('../../../schemas/users/tas/tas_put'),
+    ta_delete_schema   = require('../../../schemas/users/tas/tas_delete'),
+    ta_post_schema     = require('../../../schemas/users/tas/tas_post'),
+    ta_all_get_schema  = require('../../../schemas/users/tas/tas_all_get');
 
 module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
@@ -80,7 +80,7 @@ module.exports = function (router) {
                         $project: {
                             user_id: "$_id",
                             _id: 0,
-                            student_number: 1,
+                            contract_number: 1,
                             first_name: 1,
                             last_name: 1,
                             utorid: 1,
@@ -111,7 +111,7 @@ module.exports = function (router) {
         if (req.session_user_type !== 'admin') {
             return res.forbidden();
         }
-        validator.validate(req.body, student_put_schema);
+        validator.validate(req.body, ta_put_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
@@ -122,7 +122,7 @@ module.exports = function (router) {
                     $match: {
                         $or: [
                             { utorid: req.body.utorid },
-                            { student_number: req.body.student_number },
+                            { contract_number: req.body.contract_number },
                             { email: req.body.email }
                         ]
                     }   
@@ -132,7 +132,7 @@ module.exports = function (router) {
                 if (ret.length) {
                     return Promise.reject({
                         code: "EXISTS",
-                        params: [ 'email', "student_number", "utorid" ]
+                        params: [ 'email', "contract_number", "utorid" ]
                     });
                 }
                 // create new user
@@ -141,14 +141,15 @@ module.exports = function (router) {
                     last_name:      req.body.last_name,
                     email:          req.body.email,
                     utorid:         req.body.utorid,
-                    student_number: req.body.student_number,
+                    contract_number: req.body.contract_number,
                     last_login:     new Date(),
-                    user_type:      'student',
+                    user_type:      'ta',
                     status:         'active'
                 }).save();
             }).then(function(ret) {
                 res.sendResponse(ret._id);
             }).catch(function(err) {
+                console.log(err);
                 return res.requestError(err);
             });
 
@@ -168,7 +169,7 @@ module.exports = function (router) {
           });
         }
 
-        validator.validate(req.body, student_post_schema);
+        validator.validate(req.body, ta_post_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: 'VALIDATION', message: error });
@@ -183,7 +184,7 @@ module.exports = function (router) {
 
         query = {
             _id: mongoose.Types.ObjectId(req.body.user_id),
-            user_type: 'student',
+            user_type: 'Ta',
             status: 'active'
         };
         update_query = utils.clean({
@@ -215,14 +216,14 @@ module.exports = function (router) {
                 params: [ 'user_id' ]
             });
         }
-        validator.validate(req.body, student_delete_schema);
+        validator.validate(req.body, ta_delete_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
         query = {
             _id: mongoose.Types.ObjectId(req.body.user_id),
-            user_type: 'student'
+            user_type: 'ta'
         };
         return user_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
@@ -249,11 +250,11 @@ module.exports = function (router) {
         if (req.session_user_type !== 'admin') {
             return res.forbidden();
         }
-        if (req.query.student_number) {
-            req.query.student_number = sanitizer.sanitize(req.query.student_number,
+        if (req.query.contract_number) {
+            req.query.contract_number = sanitizer.sanitize(req.query.contract,
                 'stringToInteger');
         }
-        validator.validate(req.query, student_all_get_schema);
+        validator.validate(req.query, ta_all_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
@@ -264,8 +265,8 @@ module.exports = function (router) {
             last_name:  req.query.last_name,
             utorid:     req.query.utorid,
             status:     req.query.status,
-            user_type:  'student',
-            student_number: req.query.last_name
+            user_type:  'ta',
+            contract_number: req.query.contract_number
         };
         if (req.query.user_id) {
             if (!mongoose.validID(req.query.user_id)) {
@@ -284,7 +285,7 @@ module.exports = function (router) {
                 last_name: 1,
                 utorid: 1,
                 status: 1,
-                student_number: 1,
+                contract_number: 1,
                 last_login: { 
                     $dateToString: { 
                         format: "%Y-%m-%d %H:%M:%S", 
