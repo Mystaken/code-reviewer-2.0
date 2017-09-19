@@ -11,17 +11,17 @@
     </thead>
     <tbody>
       <tr *ngFor="let ta of tas">
-        <td>{{ta.ta_number}}</td>
+        <td>{{ta.contract_number}}</td>
         <td>
           <m-editable
             [value]="ta.first_name"
-            [onChange]="updateta(ta, 'first_name')">
+            [onChange]="updateTa(ta, 'first_name')">
           </m-editable>
         </td>
         <td>
           <m-editable
             [value]="ta.last_name"
-            [onChange]="updateta(ta, 'last_name')">
+            [onChange]="updateTa(ta, 'last_name')">
           </m-editable>
         </td>
         <td>{{ta.utorid}}</td>
