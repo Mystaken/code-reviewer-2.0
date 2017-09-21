@@ -122,7 +122,6 @@ module.exports = function (router) {
                     $match: {
                         $or: [
                             { utorid: req.body.utorid },
-                            { contract_number: req.body.contract_number },
                             { email: req.body.email }
                         ]
                     }   
@@ -132,7 +131,7 @@ module.exports = function (router) {
                 if (ret.length) {
                     return Promise.reject({
                         code: "EXISTS",
-                        params: [ 'email', "contract_number", "utorid" ]
+                        params: [ 'email', "utorid" ]
                     });
                 }
                 // create new user
@@ -184,7 +183,7 @@ module.exports = function (router) {
 
         query = {
             _id: mongoose.Types.ObjectId(req.body.user_id),
-            user_type: 'Ta',
+            user_type: 'ta',
             status: 'active'
         };
         update_query = utils.clean({

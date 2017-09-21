@@ -17,10 +17,6 @@
         "utorid": {
             "type": "string",
             "maxLength": 100
-        },
-        "student_number": {
-            "type": "number",
-            "maxLength": 100
         }
     },
     "additionalProperties": false,
