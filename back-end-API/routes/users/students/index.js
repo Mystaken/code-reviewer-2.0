@@ -232,7 +232,7 @@ module.exports = function (router) {
             utorid:     req.query.utorid,
             status:     req.query.status,
             user_type:  'student',
-            student_number: req.query.last_name
+            student_number: req.query.student_number
         };
         if (req.query.user_id) {
             if (!mongoose.validID(req.query.user_id)) {
