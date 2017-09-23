@@ -20,7 +20,7 @@ module.exports = function (router) {
         var error;
 
         // validate given query
-        validator.validate(req.query, tas_get_schema);
+        validator.validate(req.query, ta_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
