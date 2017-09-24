@@ -7,7 +7,6 @@ var validator   = require('../../../lib/validator'),
     Promise     = require('bluebird'),
 
     user_model      = require('../../../models/users'),
-    feedback_model  = require('../../../models/feedbacks'),
 
     ta_get_schema      = require('../../../schemas/users/tas/tas_get'),
     ta_put_schema      = require('../../../schemas/users/tas/tas_put'),
@@ -19,89 +18,58 @@ module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
         var error;
 
-        // validate given query
         validator.validate(req.query, ta_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
 
-        // check if the user's ID is present in the database
         if (!mongoose.validID(req.query.user_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'user_id' ]
             });
         }
-
-
-        return Promise.try(function() {
-            // if this user is an admin, then no rejection
-            if (req.session_user_type === 'admin') {
-                return;
-            }
-
-            // if this user is a TA and he's trying to get other TA's information
-            if (req.session_user_type === 'ta' &&
-                req.session_user_id !== req.query.user_id) {
-                // reject
-                return Promise.reject({
-                    code: "NOT_FOUND",
-                    params: [ 'user_id' ]
-                });
-            }
-
-
-            return user_model.aggregate([
-                    {   // check if query matches below pattern
-                        $match: {
-                            _id: mongoose.Types.ObjectId(req.query.user_id),
-                            user_type: 'ta',
-                            status: 'active'
-                        }
+        // prevent a TA accessing an other TA’s data
+        if (req.session_user_type === 'ta' &&
+            req.session_user_id !== req.query.user_id) {
+            return res.requestError({
+                code: "NOT_FOUND",
+                params: [ 'user_id' ]
+            });
+        }
+        return user_model.aggregate([
+                {
+                    $match: {
+                        _id: mongoose.Types.ObjectId(req.query.user_id),
+                        user_type: 'ta',
+                        status: 'active'
                     }
-                ]).then(function(result) {
-
-                    if (!result && !result.length) {
-                        return Promise.reject({
-                            code: "NOT_FOUND",
-                            params: [ 'user_id' ]
-                        });
-                    }
-                });
-            }).then(function(ret) {
-                return user_model.aggregate([
-                    {
-                        $match: {
-                            _id: mongoose.Types.ObjectId(req.query.user_id),
-                            status: 'active'
-                        }
-                    },{
-                        $project: {
-                            user_id: "$_id",
-                            _id: 0,
-                            contract_number: 1,
-                            first_name: 1,
-                            last_name: 1,
-                            utorid: 1,
-                            email: 1,
-                            last_login: { 
-                                $dateToString: { 
-                                    format: "%Y-%m-%d %H:%M:%S", 
-                                    date: "$last_login" 
-                                }
+                },{
+                    $project: {
+                        user_id: "$_id",
+                        _id: 0,
+                        contract_number: 1,
+                        first_name: 1,
+                        last_name: 1,
+                        utorid: 1,
+                        email: 1,
+                        last_login: { 
+                            $dateToString: { 
+                                format: "%Y-%m-%d %H:%M:%S", 
+                                date: "$last_login" 
                             }
                         }
                     }
-                ]).exec();
-            }).then(function(ret) {
+                }
+            ]).exec().then(function(ret) {
                 if (!ret || !ret.length) {
                     return Promise.reject({
                         code: "NOT_FOUND",
                         params: [ 'user_id' ]
                     });
                 }
-                return res.sendResponse(ret);
+                return res.sendResponse(ret[0]);
             }).catch(function(err) {
                 return res.requestError(err);
             });
@@ -116,7 +84,7 @@ module.exports = function (router) {
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-        // checking if user exists
+        // checking if user exists by checking their utorid and email
         return user_model.aggregate([
                 {
                     $match: {
@@ -148,7 +116,6 @@ module.exports = function (router) {
             }).then(function(ret) {
                 res.sendResponse(ret._id);
             }).catch(function(err) {
-                console.log(err);
                 return res.requestError(err);
             });
 
@@ -156,11 +123,11 @@ module.exports = function (router) {
         var error,
             query,
             update_query;
-        if (req.session_user_type !== 'admin' ||
-            req.session_user_type !== 'student') {
-          return res.forbidden();
+        if (req.session_user_type !== 'admin' &&
+            req.session_user_type !== 'ta') {
+            return res.forbidden();
         }
-        if (req.session_user_type === 'student' &&
+        if (req.session_user_type === 'ta' &&
             req.session_user_id !== req.query.user_id) {
           return res.requestError({
               code: 'NOT_FOUND',
@@ -250,7 +217,7 @@ module.exports = function (router) {
             return res.forbidden();
         }
         if (req.query.contract_number) {
-            req.query.contract_number = sanitizer.sanitize(req.query.contract,
+            req.query.contract_number = sanitizer.sanitize(req.query.contract_number,
                 'stringToInteger');
         }
         validator.validate(req.query, ta_all_get_schema);
