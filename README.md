@@ -1,24 +1,21 @@
 # code-reviewer-2.0
 
-## description of the project
+Code Reviewer is a platform supports conducting code review online. It intends to help students to write better code and learn from their peers.
 
-There are 5 stages of each work:
+#### As a Developer
+```
+# Make the required directories
+mkdir code-reviewer
 
-1. My Works
-	Students submit their code
+# Checkout repo from git
+git clone https://github.com/BoZhaoUTSC/code-reviewer-2.0.git
+cd code-reviewer
 
-2. Review My Own Work
-	Students review their own code, similar to proof reading when submitting a paper
-	They try to identify the "weakness" of their own code
+# Get dependencies
+cd angular-front-end-2/
+npm i
+cd ../back-end-API
+npm i
 
-3. Review My Peers
-	Students review their peers' code
-	Students may find cleaner/better solutions
-
-4. How My Code is Reviewed
-	Students check their peers/TA's feedback of their code
-	
-5. Quality of My Reviews
-	Students see the evaluation of their reviews
-
-Note: instructors may opt-out any stages
+# Start MongoDB
+mongod
