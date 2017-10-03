@@ -92,7 +92,7 @@ module.exports = function (router) {
                             { utorid: req.body.utorid },
                             { email: req.body.email }
                         ]
-                    }   
+                    }
                 }
             ]).exec().then(function(ret) {
                 // if user exists, return error message.

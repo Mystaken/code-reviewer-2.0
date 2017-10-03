@@ -106,7 +106,7 @@ export class MTasAddComponent {
         error => {
           this.showTaMsg({
             type: 'red',
-            message: 'Failed to add TA.'
+            message: (error.message[0].code === 'EXISTS') ? 'This TA exists':'Failed to add TA.' 
           });
           this.addingTa = false;
       });
