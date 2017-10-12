@@ -19,6 +19,7 @@ import { ValidationService } from './services/validation.service';
 import { AdminGuard } from './guards/admin-guard.service';
 import { AuthGuard } from './guards/auth-guard.service';
 import { NotLoginGuard } from './guards/notlogin-guard.service';
+import { AuthService } from './services/auth/auth.service';
 
 import { AppComponent } from './app.component';
 
@@ -43,6 +44,7 @@ import { AppComponent } from './app.component';
     SessionUserService,
     ValidationService,
     CookieService,
+    AuthService,
     AdminGuard,
     AuthGuard,
     NotLoginGuard

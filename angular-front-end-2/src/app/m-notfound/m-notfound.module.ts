@@ -1,4 +1,3 @@
-import { AuthService } from './../services/auth/auth.service';
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 
@@ -19,8 +18,6 @@ import { MNotLoggedInComponent } from './m-notloggedin.component';
     MNotFoundItemComponent,
     MNotLoggedInComponent
   ],
-  providers: [
-    AuthService
-  ]
+  providers: []
 })
 export class MNotFoundModule { }

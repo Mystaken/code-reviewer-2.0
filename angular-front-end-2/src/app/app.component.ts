@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,14 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'app works!';
+  
+  constructor(public auth: AuthService) {
+    // Comment out this method call if using
+    // hash-based routing
+    auth.handleAuthentication();
+
+    // Uncomment this method call if using
+    // hash-based routing
+    // auth.handleAuthenticationWithHash();
+  }
 }
