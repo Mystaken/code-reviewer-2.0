@@ -9,9 +9,23 @@
           <a class="header">You are not logged in.</a>
           <div class="description">
             <a href="http://localhost:3000/api" target="_blank">Please log in here.</a>
+            <button (click)="auth.login()"
+              class="ui secondary button">
+              Log In
+            </button>
+            <button (click)="showStatus()"
+              class="ui secondary button">
+              Show status
+            </button>
+            <div *ngIf="auth.isAuthenticated()">
+              You're logged in using Auth0.
+            </div>
+            <div *ngIf="!auth.isAuthenticated()">
+              You are NOT logged in using Auth0.
+            </div>
           </div>
         </div>
       </div>
     </div>
   </div>
-</div>s
+</div>

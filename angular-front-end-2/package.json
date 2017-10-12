@@ -24,6 +24,7 @@
     "@angular/platform-browser-dynamic": "^4.0.0",
     "@angular/router": "^4.0.0",
     "auth0-js": "^8.10.1",
+    "auth0-lock": "^10.22.0",
     "core-js": "^2.4.1",
     "highlight.js": "^9.11.0",
     "jquery": "^3.2.1",
