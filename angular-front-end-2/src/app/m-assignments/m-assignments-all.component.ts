@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 
 import { MAssignmentsService } from './m-assignments.service';
+import { MModalComponent } from '../m-common/m-modal.component';
 
 @Component({
   selector: 'm-assignments-all',
@@ -14,7 +15,9 @@ export class MAssignmentsAllComponent {
   actionsDropdown = {
     action: "combo"
   }
+  currentAssignment = null;
 
+  @ViewChild('management') management: MModalComponent;
   constructor(private _assignmentsAPI: MAssignmentsService) {}
 
   ngOnInit() {
@@ -32,21 +35,21 @@ export class MAssignmentsAllComponent {
   }
 
 
-  test(event, assignment){
-    var text;
-    if (!event.target.innerText) {
-      text = event.target.parentNode.innerText;
-    } else {
-      text = event.target.innerText;
-    }
+  // test(event, assignment){
+  //   var text;
+  //   if (!event.target.innerText) {
+  //     text = event.target.parentNode.innerText;
+  //   } else {
+  //     text = event.target.innerText;
+  //   }
 
     
-    if (text === "Load Works") return this.loadSubmissions(assignment);
-    if (text === "Load Files") return this.loadSubmissionFiles(assignment);
-    if (text === "Distribute") return this.distribute(assignment);
-    if (text === "Delete") return this.deleteWork(assignment);
+  //   if (text === "Load Works") return this.loadSubmissions(assignment);
+  //   if (text === "Load Files") return this.loadSubmissionFiles(assignment);
+  //   if (text === "Distribute") return this.distribute(assignment);
+  //   if (text === "Delete") return this.deleteWork(assignment);
 
-  }
+  // }
 
   release(assignment, type) {
     var params = {
@@ -79,19 +82,19 @@ export class MAssignmentsAllComponent {
     });
   }
 
-  loadSubmissions(assignment) {
-    //console.log(assignment);
-    return this._assignmentsAPI.loadSubmissions(assignment).subscribe((res) => {console.log("DONEEEEE")});
+  loadSubmissions() {
+    console.log(this.currentAssignment);
+    //return this._assignmentsAPI.loadSubmissions(this.currentAssignment).subscribe((res) => {console.log("DONEEEEE")});
   }
 
   loadSubmissionFiles(assignment) {
     //console.log(assignment);
-    return this._assignmentsAPI.loadSubmissionFiles(assignment).subscribe((res) => {console.log("doneee")});
+    return this._assignmentsAPI.loadSubmissionFiles(this.currentAssignment).subscribe((res) => {console.log("doneee")});
   }
 
   distribute(assignment) {
     //console.log(assignment);
-    return this._assignmentsAPI.distribute(assignment).subscribe((res) => {console.log(res)});
+    return this._assignmentsAPI.distribute(this.currentAssignment).subscribe((res) => {console.log(res)});
   }
 
   deleteWork(assignment) {
@@ -110,4 +113,30 @@ export class MAssignmentsAllComponent {
     
   }
 
+   showManagement(assignment) {
+     this.currentAssignment = assignment;
+    this.management.show({});
+  }
+
 }
+
+// 1  
+// student1
+// student1
+// student1  student1  2017-09-03 01:38:33  59ab5d19fa75e02448ee6202
+// 2  
+// student2
+// student2
+// student2  student2  2017-09-03 01:38:44  59ab5d24fa75e02448ee6203
+// 3  
+// student3
+// student3
+// student3  student3  2017-09-03 01:38:53  59ab5d2dfa75e02448ee6204
+// 4  
+// student4
+// student4
+// student4  student4  2017-09-03 01:39:12  59ab5d40fa75e02448ee6205
+// 5  
+// student5
+// student5
+// student5  student5  2017-09-03 01:39:23  59ab5d4bfa75e02448ee6206

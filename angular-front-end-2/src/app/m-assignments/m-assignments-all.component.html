@@ -90,19 +90,9 @@
           <div class="container-flex-space-between">
             <div></div>
 
-            <div class="ui blue buttons">
-              <div class="ui button" (click)="test($event, assignment)">Select</div>
-              
-              <m-dropdown [settings]="actionsDropdown" [class]="'combo top right pointing icon button'">
-                <i class="dropdown icon"></i>
-                <div class="menu">
-                  <div class="item"><i class="dice icon"></i><span class="text">Load Files</span></div>
-                  <div class="item"><i class="edit icon"></i>Load Files</div>
-                  <div class="item"><i class="wizard icon"></i>Distribute</div>
-                  <div class="item"><i class="delete icon"></i>Delete</div>
-                </div>
-              </m-dropdown>
-
+            <div class="ui blue comment button" (click)="showManagement(assignment)">
+              <i class="comment icon"></i>
+              Manage
             </div>
 
           </div>
@@ -116,46 +106,29 @@
     </div>
   <!-- example dropdown for vc -->
 
-<m-dropdown [class]="'floating labeled icon button'">
-  <i class="dropdown icon"></i>
-  <span class="">Select</span>
-  
-  <div class="left menu">
-
-    <div class="item">
-      <i class="dropdown icon"></i>
-      <span class="text">Load Works & Files</span>
-      <div class="menu">
-        <div class="item">Load</div>
-      </div>
+  <m-modal #management [class]="'small'">
+    <i class="close icon"></i>
+    <div class="header">
+      Manage Assignment
     </div>
 
-    <div class="item">
-      <i class="dropdown icon"></i>
-      <span class="text">Load Files</span>
-      <div class="menu">
-        <div class="item">1</div>
-        <div class="item">Cancel</div>
+    <div class="content" >
+      <div class="ui animated fade basic button" (click)="loadSubmissions()">
+        <div class="visible content">Load Works and Files</div>
+        <div class="hidden content">$12.99 a month</div>
       </div>
     </div>
-
-    <div class="item">
-      <i class="dropdown icon"></i>
-      <span class="text">Distribute</span>
-      <div class="menu">
-        <div class="item">1</div>
-        <div class="item">Cancel</div>
+    <div class="content">
+      <div class="ui animated fade basic button">
+        <div class="visible content">Distribute</div>
+        <div class="hidden content">$12.99 a month</div>
       </div>
     </div>
-
-    <div class="item">
-      <i class="dropdown icon"></i>
-      <span class="text">Delete</span>
-      <div class="menu">
-        <div class="item">1</div>
-        <div class="item">Cancel</div>
+    <div class="content">
+      <div class="ui animated fade basic button">
+        <div class="visible content">Sign-up for a Pro account</div>
+        <div class="hidden content">$12.99 a month</div>
       </div>
     </div>
+  </m-modal>
 
-  </div>
-</m-dropdown>
