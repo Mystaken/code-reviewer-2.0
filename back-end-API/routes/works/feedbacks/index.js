@@ -201,13 +201,11 @@ module.exports = function (router) {
         if (req.session_user_type !== 'admin') return res.forbidden();
 
         var error;
-
         validator.validate(req.query, feedback_all_delete_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
-
         return feedbacks_model.remove(
             {work_id: mongoose.Types.ObjectId(req.query.work_id)} 
         ).exec().then(function(feedbacks) {

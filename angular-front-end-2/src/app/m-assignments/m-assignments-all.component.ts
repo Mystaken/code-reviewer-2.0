@@ -82,19 +82,38 @@ export class MAssignmentsAllComponent {
     });
   }
 
-  loadSubmissions() {
-    console.log(this.currentAssignment);
-    //return this._assignmentsAPI.loadSubmissions(this.currentAssignment).subscribe((res) => {console.log("DONEEEEE")});
+  loadSubmissionsAndFiles() {
+    if (this.currentAssignment) {
+      return this._assignmentsAPI.dropSubmissions(this.currentAssignment)
+      .subscribe((res) => {
+        return this._assignmentsAPI.dropSubmissionFiles(this.currentAssignment)
+        .subscribe((res) => {
+          return this._assignmentsAPI.dropFeedbacks(this.currentAssignment)
+          .subscribe((res) => {
+            return this._assignmentsAPI.loadSubmissions(this.currentAssignment)
+            .subscribe((res) => {
+              return this._assignmentsAPI.loadSubmissionFiles(this.currentAssignment)
+              .subscribe((res) => {
+                console.log("doneee")
+              });
+            });
+          });
+        });
+      });
+    }
   }
 
-  loadSubmissionFiles(assignment) {
-    //console.log(assignment);
-    return this._assignmentsAPI.loadSubmissionFiles(this.currentAssignment).subscribe((res) => {console.log("doneee")});
-  }
 
-  distribute(assignment) {
-    //console.log(assignment);
-    return this._assignmentsAPI.distribute(this.currentAssignment).subscribe((res) => {console.log(res)});
+  distribute() {
+    if (this.currentAssignment) {
+      return this._assignmentsAPI.dropFeedbacks(this.currentAssignment)
+      .subscribe((res) => {
+        return this._assignmentsAPI.distribute(this.currentAssignment)
+        .subscribe((res) => {console.log(res)
+        });
+      });
+      
+    }
   }
 
   deleteWork(assignment) {
@@ -107,8 +126,8 @@ export class MAssignmentsAllComponent {
               .subscribe((res) => {
                 console.log(res);
             });
-          });
-      });
+        });
+    });
     
     
   }
