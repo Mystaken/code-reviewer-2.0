@@ -22,6 +22,7 @@
     "jshint": "^2.9.2",
     "jshint-stylish": "^2.2.0",
     "moment": "^2.18.1",
+    "nodemon": "^1.12.1",
     "supertest": "^3.0.0"
   }
 }

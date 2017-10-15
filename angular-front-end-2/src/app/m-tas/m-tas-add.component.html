@@ -41,7 +41,9 @@
         <label>Contract Number</label>
         <input type="text"
           placeholder="contract number"
-          [(ngModel)]="pendingTa.contract_number.content">
+          [(ngModel)]="pendingTa.contract_number.content"
+          (blur)="validateContractNumber()"
+          (input)="validateContractNumber()">
       </div>
     </div>
     <div class="field"
@@ -57,7 +59,14 @@
       <i class="caret right icon"></i>
       Add TA
     </div>
+    <div class="ui message red"
+      *ngIf='pendingTa.contract_number.error'>
+      <div class="content">
+        {{ this.pendingTa.contract_number.error }}
+      </div>
+    </div>
   </div>
+
   <div class="ui message"
     [ngClass]='newTaMsg.type'
     [hidden]='!newTaMsg.show'>

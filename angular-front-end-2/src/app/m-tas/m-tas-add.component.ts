@@ -39,7 +39,7 @@ export class MTasAddComponent {
         type: 'string'
       },
       email: {
-        content: "",
+        content: "@mail.utoronto.ca",
         error: false,
         type: 'string'
       },
@@ -49,7 +49,7 @@ export class MTasAddComponent {
         type: 'string'
       },
       contract_number: {
-        content: "",
+        content: "1",
         error: false,
         type: 'number'
       }
@@ -111,6 +111,20 @@ export class MTasAddComponent {
           this.addingTa = false;
       });
   }
+
+  /*
+   * Validate the number of contract.
+   * Contract number should be an integer between 0 and 10 inclusively.
+   */
+  validateContractNumber() {
+    var result = this._validator.validateInt(this.pendingTa.contract_number.content, {min: 0, max:10});
+    if (result.errors.length > 0)
+      this.pendingTa.contract_number.error = "The contract number is an integer between 0 and 10 inclusively.";
+    else
+      this.pendingTa.contract_number.error = false;
+  }
+
+
 
   showTaMsg(opt) {
     this.newTaMsg.type = opt.type;
