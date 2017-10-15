@@ -15,7 +15,12 @@ export class MAssignmentsAllComponent {
   actionsDropdown = {
     action: "combo"
   }
-  currentAssignment = null;
+  currentAssignment = {
+    name:"",
+    work_id: ""
+  };
+  currentLoadedSubmissions = 0;
+  currentDistributedStudent = 0;
 
   @ViewChild('management') management: MModalComponent;
   constructor(private _assignmentsAPI: MAssignmentsService) {}
@@ -116,25 +121,31 @@ export class MAssignmentsAllComponent {
     }
   }
 
-  deleteWork(assignment) {
-    console.log(assignment);
-    return this._assignmentsAPI.dropSubmissions(assignment)
+  deleteWork() {
+    if (this.currentAssignment) {
+      return this._assignmentsAPI.dropSubmissions(this.currentAssignment)
       .subscribe((res) => {
-        return this._assignmentsAPI.dropSubmissionFiles(assignment)
+        return this._assignmentsAPI.dropSubmissionFiles(this.currentAssignment)
+        .subscribe((res) => {
+          return this._assignmentsAPI.dropFeedbacks(this.currentAssignment)
           .subscribe((res) => {
-            return this._assignmentsAPI.dropFeedbacks(assignment)
-              .subscribe((res) => {
-                console.log(res);
-            });
+            console.log(res);
+          });
         });
-    });
+      });
+    }
     
     
   }
 
    showManagement(assignment) {
      this.currentAssignment = assignment;
-    this.management.show({});
+    return this._assignmentsAPI.getSubmissions({work_id: this.currentAssignment.work_id}).subscribe((res) => {
+      this.currentLoadedSubmissions = res.length;
+      
+      this.management.show({});
+    });
+    
   }
 
 }

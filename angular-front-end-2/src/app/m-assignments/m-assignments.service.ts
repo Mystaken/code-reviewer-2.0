@@ -57,4 +57,8 @@ export class MAssignmentsService {
   dropFeedbacks(params) {
     return this._api.delete('works/feedbacks/all', params);
   }
+
+  getSubmissions(params) {
+    return this._api.get('works/submissions/all', params);
+  }
 }
