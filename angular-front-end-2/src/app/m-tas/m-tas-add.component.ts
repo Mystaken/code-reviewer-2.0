@@ -39,7 +39,7 @@ export class MTasAddComponent {
         type: 'string'
       },
       email: {
-        content: "",
+        content: "@mail.utoronto.ca",
         error: false,
         type: 'string'
       },
@@ -49,7 +49,7 @@ export class MTasAddComponent {
         type: 'string'
       },
       contract_number: {
-        content: "",
+        content: "1",
         error: false,
         type: 'number'
       }
