@@ -26,19 +26,27 @@ export class ValidationService {
       content: this._sanitizer.sanitize(SecurityContext.HTML, str)
     };
   }
+
+  /*
+   * int: the input to be validated
+   * opt: restrictions of this int
+   */
   validateInt(int, opt) {
     let errors = [];
     let num = parseInt(int);
+
     if (num != int) {
       return {
         errors: ['NaN']
       };
     }
-    if (opt.max && num > opt.max) {
+    // greater than upper limit
+    if (opt.max !== undefined && num > opt.max) {
       errors.push('max')
     }
-    if (opt.min && num < opt.min) {
-      errors.push('max')
+    // smaller than lower limit
+    if (opt.min !== undefined && num < opt.min) {
+      errors.push('min')
     }
     return {
       errors: errors,
