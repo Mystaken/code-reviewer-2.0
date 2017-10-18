@@ -1,3 +1,4 @@
+import { AuthService } from './../services/auth/auth.service';
 import { Component, Input } from '@angular/core';
 import { SessionUserService } from '../services/session-user.service';
 
@@ -12,7 +13,7 @@ export class MHeaderComponent {
   userType;
   userTypeDisplay;
   crIcon;
-  constructor(private _userService: SessionUserService) {
+  constructor(private _userService: SessionUserService, private authService: AuthService) {
     this.userType = this._userService.getUserType();
     if (this.userType === 'admin') {
       this.crIcon = 'assets/images/icon-circle-green.png';
@@ -21,5 +22,9 @@ export class MHeaderComponent {
       this.crIcon = 'assets/images/icon-circle-blue.png';
       this.userTypeDisplay = 'Student';
     }
+  }
+
+  logout() {
+    this.authService.logout();
   }
 }
