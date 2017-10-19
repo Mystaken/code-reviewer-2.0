@@ -9,7 +9,7 @@ import { MNotFoundModule } from './m-notfound/m-notfound.module';
 import { MAssignmentsModule } from './m-assignments/m-assignments.module';
 import { MStudentsModule } from './m-students/m-students.module';
 import { MTasModule } from './m-tas/m-tas.module';
-import { MSubmissionsModule } from './m-submissions/m-submissions.module'
+import { MSubmissionsModule } from './m-submissions/m-submissions.module';
 import { RoutingModule } from './routing.module';
 
 import { CookieService } from 'ngx-cookie';

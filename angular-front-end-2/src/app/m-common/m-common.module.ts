@@ -38,4 +38,5 @@ import { MRatingComponent } from './m-rating.component';
   ],
   providers: []
 })
+
 export class MCommonModule { }

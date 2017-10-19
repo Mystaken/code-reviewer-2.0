@@ -16,10 +16,10 @@ export class ValidationService {
       errors.push('empty');
     }
     if (opt.maxLength && str.length > opt.maxLength) {
-      errors.push('maxLength')
+      errors.push('maxLength');
     }
     if (opt.minLength && str.length < opt.minLength) {
-      errors.push('maxLength')
+      errors.push('maxLength');
     }
     return {
       errors: errors,
@@ -42,11 +42,11 @@ export class ValidationService {
     }
     // greater than upper limit
     if (opt.max !== undefined && num > opt.max) {
-      errors.push('max')
+      errors.push('max');
     }
     // smaller than lower limit
     if (opt.min !== undefined && num < opt.min) {
-      errors.push('min')
+      errors.push('min');
     }
     return {
       errors: errors,

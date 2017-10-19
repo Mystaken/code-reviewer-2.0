@@ -15,39 +15,39 @@ import { MSubmissionsComponent } from './m-submissions/m-submissions.component';
 import { MNotLoggedInComponent } from './m-notfound/m-notloggedin.component';
 
 const routes: Routes = [
-  { 
-    path: '',   
-    redirectTo: '/dashboard', 
+  {
+    path: '',
+    redirectTo: '/dashboard',
     pathMatch: 'full'
-  },{
+  }, {
     path: 'dashboard',
     component: MDashboardComponent,
     canActivate: [ AuthGuard ]
-  },{
+  }, {
     path: 'students',
     component: MStudentsComponent,
     canActivate: [ AdminGuard ]
-  },{
+  }, {
     path: 'assignments',
     component: MAssignmentsComponent,
     canActivate: [ AdminGuard ]
-  },{
+  }, {
     path: 'submissions/:id',
     component: MSubmissionsComponent,
     canActivate: [ AuthGuard ]
-  },{ 
-    path: 'error', 
+  }, {
+    path: 'error',
     component: MNotFoundComponent,
     canActivate: [ AuthGuard ]
-  },{ 
-    path: 'notLoggedIn', 
+  }, {
+    path: 'notLoggedIn',
     component: MNotLoggedInComponent,
     canActivate: [ NotLoginGuard ]
-  },{ 
-    path: 'tas', 
+  }, {
+    path: 'tas',
     component: MTasComponent,
     canActivate: [ AdminGuard ]
-  },{ 
+  }, {
     path: '**',
     redirectTo: '/error'
   }
@@ -64,4 +64,5 @@ const routes: Routes = [
   ],
   providers: []
 })
+
 export class RoutingModule { }

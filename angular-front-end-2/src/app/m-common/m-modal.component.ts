@@ -6,8 +6,8 @@ declare var $: any;
   templateUrl: './m-modal.component.html',
   styleUrls: ['./m-modal.component.css']
 })
-export class MModalComponent {
-  @Input() class = "";
+export class MModalComponent implements OnInit {
+  @Input() class = '';
   modal;
   constructor(private _el: ElementRef) {
   }

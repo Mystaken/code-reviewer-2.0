@@ -7,7 +7,7 @@ declare var $: any;
   styleUrls: ['./m-rating.component.css']
 })
 export class MRatingComponent {
-  @Input() class = "";
+  @Input() class = '';
   @Input() settings = {};
   rating;
   constructor(private _el: ElementRef) {

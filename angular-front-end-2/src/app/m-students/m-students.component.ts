@@ -14,6 +14,6 @@ import { ValidationService } from '../services/validation.service';
 export class MStudentsComponent {
   constructor(private _studentAPI: MStudentsService, private _validator: ValidationService) {
     this._studentAPI
-      .getAllStudents({})
+      .getAllStudents({});
   }
 }

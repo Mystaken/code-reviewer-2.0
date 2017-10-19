@@ -32,7 +32,7 @@ export class MFeedbackComponent {
 
   ngOnInit() {
     this.getFeedbackQuestions();
-    var query = {}
+    let query = {};
 
     return this._submissionsAPI.getSubmission({
       work_id : this.feedbacks[0].work_id,
@@ -48,13 +48,13 @@ export class MFeedbackComponent {
             }).subscribe((res) => {
               this.allAnnotations = res;
               this.selectFile(0);
-            })
-          })
+            });
+          });
       });
   }
 
   ngOnChanges(val) {
-    if (this.submission.submission_id && 
+    if (this.submission.submission_id &&
       this.allAnnotations.annotations &&
       this.feedbacks)
     this.selectFile(this.selectedFile);
@@ -68,8 +68,8 @@ export class MFeedbackComponent {
 
       if (this.selectedFeedback === 99) return annotation.submission_file_id == this.submission.files[i].submission_file_id;
 
-      return annotation.submission_file_id == this.submission.files[i].submission_file_id 
-            && annotation.review_by == this.feedbacks[this.selectedFeedback].review_by
+      return annotation.submission_file_id == this.submission.files[i].submission_file_id
+            && annotation.review_by == this.feedbacks[this.selectedFeedback].review_by;
     });
   }
 
@@ -77,12 +77,12 @@ export class MFeedbackComponent {
     this._assignmentsAPI.getAssignment({
       work_id : this.feedbacks[0].work_id
     }).subscribe((work) => {
-      for (var i = 0; i < work.feedback_questions.length; i++)  {
-        this._submissionsAPI.getFeedbackQuestion({ 
+      for (let i = 0; i < work.feedback_questions.length; i++)  {
+        this._submissionsAPI.getFeedbackQuestion({
           feedback_question_id : work.feedback_questions[i]
          }).subscribe((res) => {
            this.feedbackQuestions.push(res.feedback_question);
-         })
+         });
       }
     });
   }

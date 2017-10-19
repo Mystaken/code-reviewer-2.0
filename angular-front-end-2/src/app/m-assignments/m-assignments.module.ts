@@ -36,4 +36,5 @@ import { MAssignmentsService } from './m-assignments.service';
     MAssignmentsService
   ]
 })
+
 export class MAssignmentsModule { }

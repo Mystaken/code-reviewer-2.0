@@ -22,7 +22,7 @@ export class MCalendarComponent implements AfterViewInit, ControlValueAccessor {
     today: false,
     formatter: {
       date: function (date, settings) {
-        var year = date.getFullYear().toString(),
+        let year = date.getFullYear().toString(),
             month = (date.getMonth() + 1).toString(),
             day = date.getDate().toString();
         if (month.length < 2) { month = '0' + month; }

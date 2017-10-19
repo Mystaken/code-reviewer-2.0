@@ -35,4 +35,5 @@ import { MTasAllComponent } from './m-tas-all.component';
     MTasService
   ]
 })
+
 export class MTasModule { }

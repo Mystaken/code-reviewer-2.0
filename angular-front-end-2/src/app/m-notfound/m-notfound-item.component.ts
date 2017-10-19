@@ -6,5 +6,5 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./m-notfound-item.component.css']
 })
 export class MNotFoundItemComponent {
-  @Input() name = "item"
+  @Input() name = 'item';
 }

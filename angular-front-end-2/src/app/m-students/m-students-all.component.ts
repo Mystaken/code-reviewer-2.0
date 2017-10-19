@@ -24,14 +24,14 @@ export class MStudentsAllComponent {
   }
 
   updateStudent(student, type) {
-    var self = this;
+    let self = this;
     return function(value) {
-      var params = {
+      let params = {
         user_id: student.user_id
       };
-      params[type] = value
+      params[type] = value;
       return self._studentAPI.updateStudent(params).subscribe(
-        (res) => student[type]=value);
-    }
+        (res) => student[type] = value);
+    };
   }
 }

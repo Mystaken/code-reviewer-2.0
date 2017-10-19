@@ -7,7 +7,7 @@ declare var $: any;
   styleUrls: ['./m-accordion.component.css']
 })
 export class MAccordionComponent {
-  @Input() class = "";
+  @Input() class = '';
   @Input() settings = {};
   constructor(private _el: ElementRef) {}
 

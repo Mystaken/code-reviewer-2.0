@@ -15,8 +15,8 @@ export class MAssignmentsAddComponent {
 
   feedbackQuestions;
 
-  newFeedback = "";
-  newRequiredFile = "";
+  newFeedback = '';
+  newRequiredFile = '';
   addNew = false;
   test;
   newAssignmentsMsg = {
@@ -27,7 +27,7 @@ export class MAssignmentsAddComponent {
 
   actionsDropdown = {
     useLabels: false
-  }
+  };
 
   constructor(private _assignmentsAPI: MAssignmentsService,
     private _validator: ValidationService) {
@@ -37,7 +37,7 @@ export class MAssignmentsAddComponent {
 
 
   addAssignment() {
-    var err,
+    let err,
       errors = false,
       assignment = this.pendingAssignment;
     // validation
@@ -94,11 +94,11 @@ export class MAssignmentsAddComponent {
   newAssignment() {
     this.pendingAssignment = {
       repo_path: {
-        content: "",
+        content: '',
         error: false
       },
       folder_name: {
-        content: "",
+        content: '',
         error: false
       },
       feedback_questions: {
@@ -110,7 +110,7 @@ export class MAssignmentsAddComponent {
         error: false
       },
       name: {
-        content: "",
+        content: '',
         error: false
       },
       num_peers: {
@@ -141,14 +141,14 @@ export class MAssignmentsAddComponent {
           feedback_question: this.newFeedback
         }).subscribe(response => {
           this.getAllFeedbackQuestions();
-          this.newFeedback = "";
+          this.newFeedback = '';
         });
     }
   }
   addRequiredFile() {
     if (this.newRequiredFile) {
       this.pendingAssignment.required_files.content.push(this.newRequiredFile);
-      this.newRequiredFile = "";
+      this.newRequiredFile = '';
     }
   }
 
@@ -170,7 +170,7 @@ export class MAssignmentsAddComponent {
   }
 
   addFeedbackQuestion(feedback_question) {
-    var index = this.pendingAssignment.feedback_questions.content.indexOf(feedback_question);
+    let index = this.pendingAssignment.feedback_questions.content.indexOf(feedback_question);
     if (index > -1) {
       this.pendingAssignment.feedback_questions.content.splice(index, 1);
     } else {

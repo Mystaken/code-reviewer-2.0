@@ -20,14 +20,14 @@ export class MSubmissionsComponent {
   /* Index of selected file */
   selectedFile;
   /* Reviews this user needs to review. */
-  reviews
+  reviews;
   /* The selected review */
   selectedReview = -1;
   /* Feedbacks this user has got from others */
   feedbacks;
   constructor(private _assignmentsAPI: MAssignmentsService,
     private _submissionsAPI: MSubmissionsService,
-    private route:ActivatedRoute,
+    private route: ActivatedRoute,
     private _userService: SessionUserService) {}
 
   ngOnInit(){
@@ -42,10 +42,10 @@ export class MSubmissionsComponent {
         work_id: this.work.work_id
       }).subscribe(res => {
         this.reviews = res.filter((review) => {
-          return review.review_by === this._userService.getUserID()
+          return review.review_by === this._userService.getUserID();
         });
         this.feedbacks = res.filter((review) => {
-          return review.review_by !== this._userService.getUserID()
+          return review.review_by !== this._userService.getUserID();
         });
       });
     });

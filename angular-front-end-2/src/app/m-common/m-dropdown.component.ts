@@ -6,8 +6,8 @@ declare var $: any;
   templateUrl: './m-dropdown.component.html',
   styleUrls: ['./m-dropdown.component.css']
 })
-export class MDropdownComponent {
-  @Input() class = "";
+export class MDropdownComponent implements AfterViewInit {
+  @Input() class = '';
   @Input() settings = {};
   constructor(private _el: ElementRef) {}
 

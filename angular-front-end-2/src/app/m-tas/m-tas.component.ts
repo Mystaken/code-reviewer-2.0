@@ -14,6 +14,6 @@ import { ValidationService } from '../services/validation.service';
 export class MTasComponent {
   constructor(private _taAPI: MTasService, private _validator: ValidationService) {
     this._taAPI
-      .getAllTas({})
+      .getAllTas({});
   }
 }

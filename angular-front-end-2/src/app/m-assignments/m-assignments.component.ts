@@ -7,7 +7,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./m-assignments.component.css']
 })
 export class MAssignmentsComponent {
-  constructor(private route:ActivatedRoute) {
+  constructor(private route: ActivatedRoute) {
     console.log(this.route.snapshot.params);
   }
 }

@@ -29,27 +29,27 @@ export class MStudentsAddComponent {
   newStudent() {
     this.pendingStudent = {
       first_name: {
-        content: "",
+        content: '',
         error: false,
         type: 'string'
       },
       last_name: {
-        content: "",
+        content: '',
         error: false,
         type: 'string'
       },
       email: {
-        content: "",
+        content: '',
         error: false,
         type: 'string'
       },
       utorid: {
-        content: "",
+        content: '',
         error: false,
         type: 'string'
       },
       student_number: {
-        content: "",
+        content: '',
         error: false,
         type: 'number'
       }
@@ -57,7 +57,7 @@ export class MStudentsAddComponent {
   }
 
   addStudent() {
-    var i,
+    let i,
       content,
       error,
       validation;

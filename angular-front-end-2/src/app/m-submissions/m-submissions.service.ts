@@ -10,7 +10,7 @@ export class MSubmissionsService {
   }
 
   getSubmissionFile(params) {
-    return this._api.get('works/submissions/files', params)
+    return this._api.get('works/submissions/files', params);
   }
 
   getAllAnnotations(params) {

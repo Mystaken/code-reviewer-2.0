@@ -10,8 +10,8 @@ import * as $ from 'jquery';
 })
 export class MCodeComponent {
   /* The code to be displayed. */
-  @Input() code: String = "";
-  /* 
+  @Input() code: String = '';
+  /*
    * The annotations to be displayed
    * List of Object
    * object.start = the start index of the annotation
@@ -26,16 +26,16 @@ export class MCodeComponent {
   /* Comments seperated by start and end points */
   seperatedComments = [];
   /* HTML Code to be displayed. */
-  displayCode = "";
+  displayCode = '';
   /* if there is a change in code/comments */
   changed = false;
   /* The new annotation. */
-  annotation_input = "";
+  annotation_input = '';
   constructor(private el: ElementRef) {
     // Closing comments.
     $(document).on('click', function(event) {
       $('.jcomment').each(function (i, c) {
-        if(!c.contains(event.target)) {
+        if (!c.contains(event.target)) {
           $(c).children('.jmessage').removeClass('show');
         }
       });
@@ -47,12 +47,12 @@ export class MCodeComponent {
     }
   }
   ngAfterViewInit() {
-    setTimeout(_=>this.updateComments());
+    setTimeout(_ => this.updateComments());
   }
 
   ngAfterViewChecked() {
     if (this.changed) {
-      hljs.highlightBlock(this.el.nativeElement.querySelector("#code"));
+      hljs.highlightBlock(this.el.nativeElement.querySelector('#code'));
       this.changed = false;
     }
 
@@ -72,19 +72,19 @@ export class MCodeComponent {
    */
   minInterval(l) {
     if (!l) { return; }
-    var currVal = Number.MAX_SAFE_INTEGER,
+    let currVal = Number.MAX_SAFE_INTEGER,
       res = 0,
       state,
       i;
 
     for (i = 0; i < l.length; i++) {
       if (currVal > l[i].start) {
-        state = 'start'
+        state = 'start';
         currVal = l[i].start;
         res = i;
       }
       if (currVal > l[i].end) {
-        state = 'end'
+        state = 'end';
         currVal = l[i].end;
         res = i;
       }
@@ -103,10 +103,10 @@ export class MCodeComponent {
               {start: 5, end: 7, annotations: [1]}]
    */
   seperateIntervals(l) {
-    var data = l.map(function(obj) {
-        if (null === obj || "object" != typeof obj) return obj;
-        var copy = obj.constructor();
-        for (var attr in obj) {
+    let data = l.map(function(obj) {
+        if (null === obj || 'object' != typeof obj) return obj;
+        let copy = obj.constructor();
+        for (let attr in obj) {
           if (obj.hasOwnProperty(attr)) copy[attr] = obj[attr];
         }
         return copy;
@@ -117,7 +117,7 @@ export class MCodeComponent {
       prevIdx = Number.MAX_SAFE_INTEGER,
       currIdx;
 
-    while(curr.state) {
+    while (curr.state) {
       currIdx = data[curr.idx][curr.state];
       if (prevIdx < currIdx) {
         res.push({
@@ -136,7 +136,7 @@ export class MCodeComponent {
       curr = this.minInterval(data);
     }
     return res.map(function (e) {
-      var comments = [];
+      let comments = [];
       e.annotations.forEach(function(e) {
         comments.push(e);
       });
@@ -149,14 +149,14 @@ export class MCodeComponent {
 
   /* Adds highlights to code */
   updateCodeComments(code, annotations) {
-    var reversed = annotations.sort(function(a, b){ return b.end - a.end;}),
+    let reversed = annotations.sort(function(a, b){ return b.end - a.end; }),
       displayComments,
       i;
     for (i = 0; i < reversed.length; i++) {
       displayComments = '<div class="jmessage"><div class="ui list">' +
         reversed[i].annotations
-          .map(i => '<a class="item"><i class="comment icon"></i><div class="content"><div class="description">' + 
-            this.annotations[i].annotation +'</div></div></a>').join('') + '</div></div>'
+          .map(i => '<a class="item"><i class="comment icon"></i><div class="content"><div class="description">' +
+            this.annotations[i].annotation + '</div></div></a>').join('') + '</div></div>';
         code = code.slice(0, reversed[i].start) +
         '<span class="jcomment">' +
         code.slice(reversed[i].start, reversed[i].end) +
@@ -167,10 +167,10 @@ export class MCodeComponent {
     return code;
   }
   getSelectionCharOffsetsWithin(element) {
-    var start = 0, end = 0;
-    var sel, range, priorRange;
+    let start = 0, end = 0;
+    let sel, range, priorRange;
     sel = window.getSelection();
-    if (typeof sel != "undefined" && sel && sel.rangeCount) {
+    if (typeof sel != 'undefined' && sel && sel.rangeCount) {
       range =  sel.getRangeAt(0);
       priorRange = range.cloneRange();
       priorRange.selectNodeContents(element);
@@ -185,7 +185,7 @@ export class MCodeComponent {
   }
 
   addAnnotation() {
-    var interval = this.getSelectionCharOffsetsWithin(this.el.nativeElement.querySelector("#code")),
+    let interval = this.getSelectionCharOffsetsWithin(this.el.nativeElement.querySelector('#code')),
       sc = this.seperatedComments,
       start = interval.start,
       end = interval.end,
@@ -215,7 +215,7 @@ export class MCodeComponent {
             annotation: comment,
           });
         },
-        onHide: () => this.annotation_input = ""
+        onHide: () => this.annotation_input = ''
       });
       return true;
     }

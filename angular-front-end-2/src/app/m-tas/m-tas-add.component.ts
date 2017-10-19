@@ -29,27 +29,27 @@ export class MTasAddComponent {
   newTa() {
     this.pendingTa = {
       first_name: {
-        content: "",
+        content: '',
         error: false,
         type: 'string'
       },
       last_name: {
-        content: "",
+        content: '',
         error: false,
         type: 'string'
       },
       email: {
-        content: "@mail.utoronto.ca",
+        content: '@mail.utoronto.ca',
         error: false,
         type: 'string'
       },
       utorid: {
-        content: "",
+        content: '',
         error: false,
         type: 'string'
       },
       contract_number: {
-        content: "1",
+        content: '1',
         error: false,
         type: 'number'
       }
@@ -57,7 +57,7 @@ export class MTasAddComponent {
   }
 
   addTa() {
-    var i,
+    let i,
       content,
       error,
       validation;
@@ -93,7 +93,8 @@ export class MTasAddComponent {
         last_name: this.pendingTa.last_name.content,
         utorid: this.pendingTa.utorid.content,
         email: this.pendingTa.email.content,
-        contract_number: parseInt(this.pendingTa.contract_number.content),
+        // parse int in base 10
+        contract_number: parseInt(this.pendingTa.contract_number.content, 10),
       }).subscribe(response => {
           this.showTaMsg({
             type: 'green',
@@ -106,7 +107,7 @@ export class MTasAddComponent {
         error => {
           this.showTaMsg({
             type: 'red',
-            message: (error.message[0].code === 'EXISTS') ? 'This TA exists':'Failed to add TA.' 
+            message: (error.message[0].code === 'EXISTS') ? 'This TA exists' : 'Failed to add TA.'
           });
           this.addingTa = false;
       });
@@ -117,9 +118,9 @@ export class MTasAddComponent {
    * Contract number should be an integer between 0 and 10 inclusively.
    */
   validateContractNumber() {
-    var result = this._validator.validateInt(this.pendingTa.contract_number.content, {min: 0, max:10});
+    let result = this._validator.validateInt(this.pendingTa.contract_number.content, {min: 0, max: 10});
     if (result.errors.length > 0)
-      this.pendingTa.contract_number.error = "The contract number is an integer between 0 and 10 inclusively.";
+      this.pendingTa.contract_number.error = 'The contract number is an integer between 0 and 10 inclusively.';
     else
       this.pendingTa.contract_number.error = false;
   }

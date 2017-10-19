@@ -10,19 +10,19 @@ export class APIRoutingService {
   constructor(private _http: Http) { }
   _parseError(err) {
     try {
-      return Observable.throw(err.json())
-    } catch(e) {
+      return Observable.throw(err.json());
+    } catch (e) {
       return Observable.throw([{
         code: 'SERVER_ERROR'
       }]);
     }
   }
   get(route, params) {
-    var param;
+    let param;
     params = params || {};
     let requestOpts: URLSearchParams = new URLSearchParams();
     for (param in params) {
-        if(params.hasOwnProperty(param)) {
+        if (params.hasOwnProperty(param)) {
           requestOpts.set(param, params[param]);
         }
     }
@@ -50,11 +50,11 @@ export class APIRoutingService {
   }
 
   delete(route, params) {
-    var param;
+    let param;
     params = params || {};
     let requestOpts: URLSearchParams = new URLSearchParams();
     for (param in params) {
-        if(params.hasOwnProperty(param)) {
+        if (params.hasOwnProperty(param)) {
           requestOpts.set(param, params[param]);
         }
     }

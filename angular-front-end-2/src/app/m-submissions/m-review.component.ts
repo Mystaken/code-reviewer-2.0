@@ -56,7 +56,7 @@ export class MReviewComponent {
   ngOnChanges(val) {
     this.getNewFeedbacks();
 
-    if (this.submission.submission_id && 
+    if (this.submission.submission_id &&
       this.allAnnotations.annotations &&
       this.review) {
       if (this.review.feedback_id !== this.oldReview.feedback_id) {
@@ -83,8 +83,8 @@ export class MReviewComponent {
             }).subscribe((res) => {
               this.allAnnotations = res;
               this.selectFile(i);
-            })
-          })
+            });
+          });
       });
   }
 
@@ -93,7 +93,7 @@ export class MReviewComponent {
   }
 
   removeAnnotation(annotation) {
-    var annotation_id = annotation.annotation_id;
+    let annotation_id = annotation.annotation_id;
     console.log(annotation);
     this._submissionsAPI.deleteAnnotation({
       annotation_id: annotation_id
@@ -119,7 +119,7 @@ export class MReviewComponent {
       annotation: annotation.annotation,
       start: annotation.start,
       end: annotation.end
-    }
+    };
     this._submissionsAPI.addAnnotation(newAnnotation)
       .subscribe((res) => {
         newAnnotation.annotation_id = res;
@@ -132,34 +132,34 @@ export class MReviewComponent {
     this._assignmentsAPI.getAssignment({
       work_id: this.review.work_id
     }).subscribe((work) => {
-      for (var i = 0; i < work.feedback_questions.length; i++)  {
-        this._submissionsAPI.getFeedbackQuestion({ 
+      for (let i = 0; i < work.feedback_questions.length; i++)  {
+        this._submissionsAPI.getFeedbackQuestion({
           feedback_question_id : work.feedback_questions[i]
          }).subscribe((res) => {
            this.feedbackQuestions.push(res.feedback_question);
-         })
+         });
       }
     });
   }
 
   updateFeedbacks() {
     console.log(this.feedbacks);
-    var feedbacks = this.feedbacks;
+    let feedbacks = this.feedbacks;
     this._submissionsAPI.updateFeedbacks({
       feedback_id: this.oldReview.feedback_id,
       feedbacks: feedbacks,
       mark : 0 // TODO
     }).subscribe((res) => {
-      
-    })
+
+    });
   }
 
   getNewFeedbacks() {
     this.feedbacks = this.review.feedbacks;
     // fill out with "" if feedbacks === []
     if (this.feedbacks.length === 0) {
-      for (var i = 0; i < this.feedbackQuestions.length; i ++) {
-        this.feedbacks.push("");
+      for (let i = 0; i < this.feedbackQuestions.length; i ++) {
+        this.feedbacks.push('');
       }
     }
   }

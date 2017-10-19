@@ -7,17 +7,18 @@ declare var $: any;
   styleUrls: ['./m-checkbox.component.css']
 })
 export class MCheckboxComponent {
-  @Input() class = "";
+  @Input() class = '';
   @Input() settings: checkboxOptions;
   @Input() value;
   //@Input() onChange;
-  dropdown: HTMLElement
+  dropdown: HTMLElement;
   constructor(private _el: ElementRef) {}
 
   ngAfterViewInit(): void {
     $(this._el.nativeElement.children[0]).checkbox(this.settings);
   }
 }
+
 export interface checkboxOptions {
 }
 

@@ -24,14 +24,14 @@ export class MTasAllComponent {
   }
 
   updateTa(ta, type) {
-    var self = this;
+    let self = this;
     return function(value) {
-      var params = {
+      let params = {
         user_id: ta.user_id
       };
-      params[type] = value
+      params[type] = value;
       return self._taAPI.updateTa(params).subscribe(
-        (res) => ta[type]=value);
-    }
+        (res) => ta[type] = value);
+    };
   }
 }

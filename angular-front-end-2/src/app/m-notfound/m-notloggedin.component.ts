@@ -11,6 +11,6 @@ export class MNotLoggedInComponent {
 
   constructor(public auth: AuthService) {}
   toLogin(){
-    window.open("http://localhost:3000/api", "_blank");
+    window.open('http://localhost:3000/api', '_blank');
   }
 }

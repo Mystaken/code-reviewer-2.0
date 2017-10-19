@@ -9,7 +9,7 @@
       true,
       "check-space"
     ],
-    "curly": true,
+    "curly": false,
     "eofline": true,
     "forin": true,
     "import-blacklist": [
@@ -68,7 +68,7 @@
       "check-else",
       "check-whitespace"
     ],
-    "prefer-const": true,
+    "prefer-const": false,
     "quotemark": [
       true,
       "single"
@@ -111,7 +111,7 @@
     "component-selector": [
       true,
       "element",
-      "app",
+      "",
       "kebab-case"
     ],
     "use-input-property-decorator": true,
