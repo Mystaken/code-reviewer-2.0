@@ -7,6 +7,9 @@ var express      = require('express'),
     cookieParser = require('cookie-parser'),
     logger       = require('./lib/logger'),
     cors         = require('cors'),
+    expressJwt   = require('express-jwt'),
+    jwt          = require('jsonwebtoken'),
+    unless       = require('express-unless'),
 
     config      = require('./config/config.json'),
     API_PORT    = 3000,
@@ -77,11 +80,23 @@ function startApp() {
     }
     logger.setup();
 
+    var myJwt = expressJwt({
+        secret: "a temporary secret"
+    }).unless({
+        path: ['/', '/login', '/api']
+    });
+
     app.use(bodyParser.json())
         .use(cookieParser())
         .use(kraken(spec.onconfig))
         .use(express.static(APP_DIR))
-        .use(cors()); //REMOVE THIS LATER.
+        .use(cors()) //REMOVE THIS LATER.
+        .use(myJwt);
+
+    // login route
+    app.get('/login', function(req, res) {
+        res.send("accessible");
+    })
 
     return spec.configure(opt).then(function() {
         return app.listen(API_PORT, function() {
