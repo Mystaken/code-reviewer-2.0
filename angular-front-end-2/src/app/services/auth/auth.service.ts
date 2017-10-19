@@ -1,3 +1,4 @@
+import { RequestOptions, Headers, Http } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { AUTH_CONFIG } from './auth0-variables';
 import { Router, NavigationStart } from '@angular/router';
@@ -20,10 +21,24 @@ export class AuthService {
     }
   });
 
-  constructor(public router: Router) {}
+  constructor(public router: Router, private http: Http) {}
 
   public login(): void {
     this.lock.show();
+  }
+
+  // get authorization token based on id_token and access_token
+  private getAuthorizationToken(authResult) {
+    let headers = new Headers();
+    headers.append('id_token', authResult.idToken);
+    headers.append('access_token', authResult.accessToken);
+    let requestOptions = new RequestOptions({headers: headers});
+    return this.http.get('http://localhost:3000/login', requestOptions)
+      .map(res => res.json())
+      .subscribe(res => {
+        authResult.auThorizationToken = res;
+        this.setSession(authResult)
+      });
   }
 
   // Call this method in app.component.ts
@@ -31,7 +46,7 @@ export class AuthService {
   public handleAuthentication(): void {
     this.lock.on('authenticated', (authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.setSession(authResult);
+        this.getAuthorizationToken(authResult);
         this.router.navigate(['/']);
       }
     });
@@ -42,34 +57,14 @@ export class AuthService {
     });
   }
 
-  // Call this method in app.component.ts
-  // if using hash-based routing
-  public handleAuthenticationWithHash(): void {
-    this
-      .router
-      .events
-      .filter(event => event instanceof NavigationStart)
-      .filter((event: NavigationStart) => (/access_token|id_token|error/).test(event.url))
-      .subscribe(() => {
-        this.lock.resumeAuth(window.location.hash, (err, authResult) => {
-          if (err) {
-            this.router.navigate(['/']);
-            console.log(err);
-            alert(`Error: ${err.error}. Check the console for further details.`);
-            return;
-          }
-          this.setSession(authResult);
-          this.router.navigate(['/']);
-        });
-    });
-  }
-
+  // set tokens in localStorage
   private setSession(authResult): void {
     // Set the time that the access token will expire at
     const expiresAt = JSON.stringify((authResult.expiresIn * 1000) + new Date().getTime());
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
+    localStorage.setItem('authorization_token', authResult.auThorizationToken);
   }
 
   public logout(): void {
@@ -88,4 +83,18 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
+  // create a Header with tokens
+  public createHeaders(): Headers {
+    if (this.isAuthenticated()) {
+      let headers = new Headers();
+      let authorizationToken = localStorage.getItem('authorization_token');
+      let id_token = localStorage.getItem('id_token');
+      let access_token = localStorage.getItem('access_token');
+      headers.append('Authorization', 'Bearer ' + authorizationToken);
+      headers.append('id_token', id_token);
+      headers.append('access_token', access_token);
+
+      return headers;
+    }
+  }
 }

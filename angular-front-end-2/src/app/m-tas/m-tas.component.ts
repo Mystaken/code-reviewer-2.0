@@ -16,4 +16,5 @@ export class MTasComponent {
     this._taAPI
       .getAllTas({});
   }
+
 }

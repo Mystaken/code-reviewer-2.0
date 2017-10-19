@@ -1,5 +1,6 @@
+import { AuthService } from './auth/auth.service';
 import { Injectable } from '@angular/core';
-import { Headers, Http, URLSearchParams, RequestOptions} from '@angular/http';
+import { Http, URLSearchParams, RequestOptions} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
@@ -7,7 +8,8 @@ import 'rxjs/Rx';
 export class APIRoutingService {
   private _api_route = 'http://localhost:3000/api/';
 
-  constructor(private _http: Http) { }
+  constructor(private _http: Http, private _authService: AuthService) { }
+
   _parseError(err) {
     try {
       return Observable.throw(err.json());
@@ -17,6 +19,7 @@ export class APIRoutingService {
       }]);
     }
   }
+
   get(route, params) {
     let param;
     params = params || {};
@@ -26,8 +29,10 @@ export class APIRoutingService {
           requestOpts.set(param, params[param]);
         }
     }
+    // append tokens in headers if authenticated
+    let headers = this._authService.createHeaders();
+    let requestOptions = new RequestOptions({headers: headers});
 
-    let requestOptions = new RequestOptions();
     requestOptions.params = requestOpts;
 
     return this._http.get(this._api_route + route, requestOptions)
@@ -66,4 +71,6 @@ export class APIRoutingService {
         .map(res => res.json().data)
         .catch(this._parseError);
   }
+
+
 }
