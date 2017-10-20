@@ -27,26 +27,13 @@ export class AuthService {
     this.lock.show();
   }
 
-  // get authorization token based on id_token and access_token
-  private getAuthorizationToken(authResult) {
-    let headers = new Headers();
-    headers.append('id_token', authResult.idToken);
-    headers.append('access_token', authResult.accessToken);
-    let requestOptions = new RequestOptions({headers: headers});
-    return this.http.get('http://localhost:3000/login', requestOptions)
-      .map(res => res.json())
-      .subscribe(res => {
-        authResult.auThorizationToken = res;
-        this.setSession(authResult)
-      });
-  }
 
   // Call this method in app.component.ts
   // if using path-based routing
   public handleAuthentication(): void {
     this.lock.on('authenticated', (authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
-        this.getAuthorizationToken(authResult);
+        this.setSession(authResult);
         this.router.navigate(['/']);
       }
     });
@@ -64,7 +51,6 @@ export class AuthService {
     localStorage.setItem('access_token', authResult.accessToken);
     localStorage.setItem('id_token', authResult.idToken);
     localStorage.setItem('expires_at', expiresAt);
-    localStorage.setItem('authorization_token', authResult.auThorizationToken);
   }
 
   public logout(): void {
@@ -87,12 +73,8 @@ export class AuthService {
   public createHeaders(): Headers {
     if (this.isAuthenticated()) {
       let headers = new Headers();
-      let authorizationToken = localStorage.getItem('authorization_token');
-      let id_token = localStorage.getItem('id_token');
       let access_token = localStorage.getItem('access_token');
-      headers.append('Authorization', 'Bearer ' + authorizationToken);
-      headers.append('id_token', id_token);
-      headers.append('access_token', access_token);
+      headers.append('access_token', 'Bearer ' + access_token);
 
       return headers;
     }
