@@ -7,10 +7,8 @@ var express      = require('express'),
     cookieParser = require('cookie-parser'),
     logger       = require('./lib/logger'),
     cors         = require('cors'),
-    expressJwt   = require('express-jwt'),
-    jwt          = require('jsonwebtoken'),
-    unless       = require('express-unless'),
 
+    auth        = require('./lib/authentication.js'),
     config      = require('./config/config.json'),
     API_PORT    = 3000,
     API_DIR     = __dirname,
@@ -19,6 +17,7 @@ var express      = require('express'),
     spec        = require('./lib/spec')(app);
 
 function validateArgs() {
+    // parse command line arguments
     var args = process.argv.slice(2),
         ret  = {},
         valid_user_types = [ 'admin' , 'ta', 'student'],
@@ -33,12 +32,13 @@ function validateArgs() {
                 name: '--user_type'
             }
         };
-
+    // for development only
     ret = {
         environment: 'development',
         user_id: '597454be305f03346c012275',
         user_type: 'admin'
     }
+    // set envrionment
     if (args.indexOf(params.env.name) > 0) {
         ret.environment = args[args.indexOf(params.env.name) + 1];
         if (ret.environment !== 'production' || ret.environment !== 'development') {
@@ -46,9 +46,11 @@ function validateArgs() {
             ret.error = true;
             return ret;
         }
+    // no environment found
     } else {
         logger.warn('No environment set. Defaulting to \'development\'.');
     }
+    // development environment
     if (ret.environment === 'development') {
         if (args.indexOf(params.user_id.name) >= 0) {
             ret.user_id = args[args.indexOf(params.user_id.name) + 1];
@@ -74,30 +76,24 @@ function validateArgs() {
 function startApp() {
     var opt;
     logger.setup();
+    // validate command line arguments
     opt = validateArgs();
     if (opt.error) {
         return;
     }
     logger.setup();
 
-    var myJwt = expressJwt({
-        secret: "a temporary secret"
-    }).unless({
-        path: ['/', '/login', '/api']
-    });
-
     app.use(bodyParser.json())
         .use(cookieParser())
         .use(kraken(spec.onconfig))
         .use(express.static(APP_DIR))
-        .use(cors()) //REMOVE THIS LATER.
-        .use(myJwt);
+        .use(cors()); //REMOVE THIS LATER.
 
-    // login route
-    app.get('/login', function(req, res) {
-        res.send("accessible");
-    })
+    // check access token and configure user_id and user_type for each req
+    //if (opt.environment === 'production')
+    app.use('/api/*', auth);
 
+    // configure req, res, and middleware
     return spec.configure(opt).then(function() {
         return app.listen(API_PORT, function() {
             logger.info(config.app.name + ' started at PORT: ' + API_PORT);

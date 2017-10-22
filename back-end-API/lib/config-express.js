@@ -112,7 +112,9 @@ function configureMiddleware(app, opt) {
             break;
         case "development":
             app.use(function (req, res, next) {
+                if (typeof req.session_user_id === undefined)
                 req.session_user_id = req.query.session_user_id || req.body.session_user_id || opt.user_id;
+                if (typeof req.session_user_type === undefined)
                 req.session_user_type = req.query.session_user_type || req.body.session_user_type || opt.user_type;
                 //reset cookie
                 res.clearCookie(config.cookie.session.name);
@@ -136,7 +138,8 @@ module.exports = {
     configure: function (app, opt) {
         configureRequest(express.request, opt);
         configureResponse(express.response, opt);
-        configureMiddleware(app, opt);
+        // uncomment the line below when removing auth0
+        // configureMiddleware(app, opt);
         return Promise.resolve();
     }
 };
