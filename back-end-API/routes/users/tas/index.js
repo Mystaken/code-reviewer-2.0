@@ -74,6 +74,13 @@ module.exports = function (router) {
                 return res.requestError(err);
             });
 
+  // put(route, params) {
+  //   params = params || {};
+  //   return this._http.put(this._api_route + route, params)
+  //       .map(res => res.json().data)
+  //       .catch(this._parseError);
+  // }
+
     }).put(function (req, res, next) {
         var error;
         if (req.session_user_type !== 'admin') {
@@ -95,7 +102,7 @@ module.exports = function (router) {
                     }
                 }
             ]).exec().then(function(ret) {
-                // if user exists, return error message.
+                // if there exists a user with the same email or utorid
                 if (ret.length) {
                     return Promise.reject({
                         code: "EXISTS",
@@ -123,10 +130,12 @@ module.exports = function (router) {
         var error,
             query,
             update_query;
+        // only admin and ta can post to api/tas
         if (req.session_user_type !== 'admin' &&
             req.session_user_type !== 'ta') {
             return res.forbidden();
         }
+        // no TA can access other TA's information
         if (req.session_user_type === 'ta' &&
             req.session_user_id !== req.query.user_id) {
           return res.requestError({
@@ -134,20 +143,20 @@ module.exports = function (router) {
               params: [ 'user_id' ]
           });
         }
-
+        // validation
         validator.validate(req.body, ta_post_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: 'VALIDATION', message: error });
         }
-
+        // this TA with user_id does not exists in db
         if (!mongoose.validID(req.body.user_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'user_id' ]
             });
         }
-
+        // only active TA can make request
         query = {
             _id: mongoose.Types.ObjectId(req.body.user_id),
             user_type: 'ta',

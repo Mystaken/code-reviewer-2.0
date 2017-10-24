@@ -1,22 +1,29 @@
 import { Injectable } from '@angular/core';
-
+import { Router } from '@angular/router';
 import { APIRoutingService } from './api-routing.service';
 import { CookieService } from 'ngx-cookie';
+import { Http } from '@angular/http';
 
 @Injectable()
 export class SessionUserService {
   session_user_id: String = '';
   session_user_type: String = '';
   loggedIn = false;
-  constructor(private _cookieService: CookieService) {
-    try {
-      let session = JSON.parse(this._cookieService.get('cr_session_user'));
-      this.session_user_id = session.session_user_id;
-      this.session_user_type = session.session_user_type;
-      this.loggedIn = true;
-    } catch (e) {
 
-    }
+  constructor(private _api: APIRoutingService, private _router: Router) {
+    this.setUserInfo();
+  }
+
+  // get this user's user_id and user_type and
+  // set them in session
+  setUserInfo(): void {
+    this._api.get('users', {})
+      .subscribe(result => {
+        this.session_user_id = result[0].user_id;
+        this.session_user_type = result[0].user_type;
+        this.loggedIn = true;
+        this._router.navigate(['/dashboard']);
+      });
   }
 
   getUserID(): String {

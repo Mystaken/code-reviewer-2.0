@@ -1,6 +1,5 @@
-import { AuthService } from './auth/auth.service';
 import { Injectable } from '@angular/core';
-import { Http, URLSearchParams, RequestOptions} from '@angular/http';
+import { Http, URLSearchParams, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/Rx';
 
@@ -8,7 +7,7 @@ import 'rxjs/Rx';
 export class APIRoutingService {
   private _api_route = 'http://localhost:3000/api/';
 
-  constructor(private _http: Http, private _authService: AuthService) { }
+  constructor(private _http: Http) { }
 
   _parseError(err) {
     try {
@@ -18,6 +17,16 @@ export class APIRoutingService {
         code: 'SERVER_ERROR'
       }]);
     }
+  }
+
+  // create a header contains access_token for authentication
+  createHeaders(): Headers {
+    let headers = new Headers();
+    let access_token = localStorage.getItem('access_token');
+    headers.append('access_token', access_token);
+
+    return headers;
+    // TODO: redirect to not loggin page if no access_token found
   }
 
   get(route, params) {
@@ -30,7 +39,7 @@ export class APIRoutingService {
         }
     }
     // append tokens in headers if authenticated
-    let headers = this._authService.createHeaders();
+    let headers = this.createHeaders();
     let requestOptions = new RequestOptions({headers: headers});
 
     requestOptions.params = requestOpts;

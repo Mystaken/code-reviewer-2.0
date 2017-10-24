@@ -46,7 +46,7 @@ const routes: Routes = [
   }, {
     path: 'tas',
     component: MTasComponent,
-    canActivate: [ AdminGuard ]
+    canActivate: [ ]
   }, {
     path: '**',
     redirectTo: '/error'

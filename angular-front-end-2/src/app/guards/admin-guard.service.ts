@@ -9,12 +9,14 @@ import { SessionUserService } from '../services/session-user.service';
 
 @Injectable()
 export class AdminGuard implements CanActivate {
-  constructor(private _userService: SessionUserService,
+  constructor(private userService: SessionUserService,
     private router: Router) {}
   canActivate() {
-    if (this._userService.getUserType() !== 'admin') {
+    console.log(this.userService.getUserID());
+    console.log(this.userService.getUserType());
+    if (this.userService.getUserType() !== 'admin') {
       this.router.navigate(['/error']);
     }
-    return this._userService.getUserType() === 'admin';
+    return this.userService.getUserType() === 'admin';
   }
 }

@@ -1,6 +1,7 @@
-import { RequestOptions, Headers, Http } from '@angular/http';
+import { RequestOptions, Headers } from '@angular/http';
 import { Injectable } from '@angular/core';
 import { AUTH_CONFIG } from './auth0-variables';
+import { SessionUserService } from '../session-user.service';
 import { Router, NavigationStart } from '@angular/router';
 import 'rxjs/add/operator/filter';
 import Auth0Lock from 'auth0-lock';
@@ -22,7 +23,7 @@ export class AuthService {
     }
   });
 
-  constructor(public router: Router, private http: Http) {}
+  constructor(public router: Router, private _userService: SessionUserService) {}
 
   public login(): void {
     this.lock.show();
@@ -34,13 +35,16 @@ export class AuthService {
   public handleAuthentication(): void {
     this.lock.on('authenticated', (authResult) => {
       if (authResult && authResult.accessToken && authResult.idToken) {
+        // set tokens in local storage
         this.setSession(authResult);
+        // set user info for front-end
+        this._userService.setUserInfo();
         this.router.navigate(['/']);
       }
     });
     this.lock.on('authorization_error', (err) => {
       this.router.navigate(['/']);
-      console.log(err);
+
       alert(`Error: ${err.error}. Check the console for further details.`);
     });
   }
@@ -70,14 +74,5 @@ export class AuthService {
     return new Date().getTime() < expiresAt;
   }
 
-  // create a Header with tokens
-  public createHeaders(): Headers {
-    if (this.isAuthenticated()) {
-      let headers = new Headers();
-      let access_token = localStorage.getItem('access_token');
-      headers.append('access_token', 'Bearer ' + access_token);
 
-      return headers;
-    }
-  }
 }

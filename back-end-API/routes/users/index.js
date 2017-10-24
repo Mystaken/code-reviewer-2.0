@@ -13,24 +13,35 @@ module.exports = function (router) {
     router.route('/').get(function(req, res, next) {
         var error,
             user_id;
+        // set user_id in query
+        // assume users are only getting information about themselves
+        if (!req.query.user_id) {
+            req.query.user_id = req.session_user_id;
+        }
 
+        // validate this query
         validator.validate(req.query, user_get_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
 
+        // admin can everyone's information
+        // all other users can only get their own information
         if (req.session_user_type !== 'admin' &&
             req.session_user_id !== req.query.user_id) {
             return res.forbidden();
         }
 
+        // check if this user exists in db
         if (!mongoose.validID(req.query.user_id)) {
             return res.requestError({
                 code: "NOT_FOUND",
                 params: [ 'user_id' ]
             });
         }
+
+        // fidn user by _id
         return user_model.aggregate([
             { 
                 $match: {
