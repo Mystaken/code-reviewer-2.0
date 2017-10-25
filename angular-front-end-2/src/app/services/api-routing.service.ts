@@ -51,12 +51,20 @@ export class APIRoutingService {
 
   put(route, params) {
     params = params || {};
+    // append tokens in headers if authenticated
+    let headers = this.createHeaders();
+    let requestOptions = new RequestOptions({headers: headers});
+    requestOptions.params = params;
     return this._http.put(this._api_route + route, params)
         .map(res => res.json().data)
         .catch(this._parseError);
   }
 
   post(route, params) {
+    // append tokens in headers if authenticated
+    let headers = this.createHeaders();
+    let requestOptions = new RequestOptions({headers: headers});
+    requestOptions.params = params;
     params = params || {};
     return this._http.post(this._api_route + route, params)
         .map(res => res.json().data)
