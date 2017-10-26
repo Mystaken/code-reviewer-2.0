@@ -12,7 +12,7 @@ var express      = require('express'),
     config      = require('./config/config.json'),
     API_PORT    = 3000,
     API_DIR     = __dirname,
-    APP_DIR     = path.join(__dirname, '../angular-front-end/dist'),
+    APP_DIR     = path.join(__dirname, '../angular-front-end-2/dist'),
     app         = express(),
     spec        = require('./lib/spec')(app);
 
