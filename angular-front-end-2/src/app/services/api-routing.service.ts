@@ -24,9 +24,7 @@ export class APIRoutingService {
     let headers = new Headers();
     let access_token = localStorage.getItem('access_token');
     headers.append('access_token', access_token);
-
     return headers;
-    // TODO: redirect to not loggin page if no access_token found
   }
 
   get(route, params) {
@@ -51,21 +49,23 @@ export class APIRoutingService {
 
   put(route, params) {
     params = params || {};
-    // append tokens in headers if authenticated
-    let headers = this.createHeaders();
-    let requestOptions = new RequestOptions({headers: headers});
-    requestOptions.params = params;
+
+    // append tokens
+    let access_token = localStorage.getItem('access_token');
+    params.access_token = access_token;
+
     return this._http.put(this._api_route + route, params)
         .map(res => res.json().data)
         .catch(this._parseError);
   }
 
   post(route, params) {
-    // append tokens in headers if authenticated
-    let headers = this.createHeaders();
-    let requestOptions = new RequestOptions({headers: headers});
-    requestOptions.params = params;
     params = params || {};
+
+    // append tokens
+    let access_token = localStorage.getItem('access_token');
+    params.access_token = access_token;
+
     return this._http.post(this._api_route + route, params)
         .map(res => res.json().data)
         .catch(this._parseError);
@@ -81,7 +81,10 @@ export class APIRoutingService {
         }
     }
 
-    let requestOptions = new RequestOptions();
+    // append tokens in headers if authenticated
+    let headers = this.createHeaders();
+    let requestOptions = new RequestOptions({headers: headers});
+
     requestOptions.params = requestOpts;
 
     return this._http.delete(this._api_route + route, requestOptions)

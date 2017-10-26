@@ -90,8 +90,12 @@ function startApp() {
         .use(cors()); //REMOVE THIS LATER.
 
     // check access token and configure user_id and user_type for each req
-    if (opt.environment === 'production') 
-        app.use('/api/*', auth);
+    //if (opt.environment === 'production') 
+    app.use('/api/users/', auth);
+    app.use('/api/users/*', auth);
+    app.use('/api/works/', auth);
+    app.use('/api/works/*', auth);
+    //app.use('/api/*', auth);
 
     // configure req, res, and middleware
     return spec.configure(opt).then(function() {

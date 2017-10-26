@@ -82,6 +82,7 @@ module.exports = function (router) {
   // }
 
     }).put(function (req, res, next) {
+        console.log(req)
         var error;
         if (req.session_user_type !== 'admin') {
             return res.forbidden();
@@ -127,6 +128,7 @@ module.exports = function (router) {
             });
 
     }).post(function (req, res, next) {
+        console.log(req)
         var error,
             query,
             update_query;

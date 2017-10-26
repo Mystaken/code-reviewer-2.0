@@ -9,7 +9,7 @@
           <a class="header">You are not logged in.</a>
           <div class="description">
             <a href="http://localhost:3000/api" target="_blank">Please log in here.</a>
-            <button (click)="auth.login()"
+            <!-- <button (click)="auth.login()"
               class="ui secondary button">
               Log In
             </button>
@@ -18,10 +18,36 @@
             </div>
             <div *ngIf="!auth.isAuthenticated()">
               You are NOT logged in using Auth0.
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
     </div>
+
+    <!-- login form -->
+    <form class="ui large form" [formGroup]="myForm" (ngSubmit)="login()">
+      <div class="ui stacked segment">
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="user icon"></i>
+            <input 
+              formControlName="email"
+              type="email" name="email" placeholder="your utormail">
+          </div>
+        </div>
+        <div class="field">
+          <div class="ui left icon input">
+            <i class="lock icon">
+            </i>
+            <input 
+              formControlName="password"
+              type="password" name="password" placeholder="password">
+          </div>
+        </div>
+        <button class="ui fluid large teal submit button">
+          Login
+        </button>
+      </div>
+    </form>
   </div>
 </div>

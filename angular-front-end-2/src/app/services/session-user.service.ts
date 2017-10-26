@@ -11,12 +11,11 @@ export class SessionUserService {
   loggedIn = false;
 
   constructor(private _api: APIRoutingService, private _router: Router) {
-    this.setUserInfo();
   }
 
   // get this user's user_id and user_type and
   // set them in session
-  setUserInfo(): void {
+  public setUserInfo(): void {
     this._api.get('users', {})
       .subscribe(result => {
         this.session_user_id = result[0].user_id;

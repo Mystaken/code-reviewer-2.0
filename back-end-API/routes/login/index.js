@@ -10,9 +10,9 @@ module.exports = function (router) {
 
     router.route('/').post(function(req, res, next) {
         // if post.body contains email and password
-        if (req.body.email && req.body.password) {
+        if (req.body && req.body.email && req.body.password) {
             // get auth0 access_token by email and password
-            var options = { 
+            var options = {
                 method: 'POST',
                 url: 'https://code-reviewer.auth0.com/oauth/token',
                 headers: { 'content-type': 'application/json' },
@@ -31,8 +31,7 @@ module.exports = function (router) {
             // get token, expire_at and send it back to the user
             request(options, function (error, response, body) {
                 if (error) throw new Error(error);
-
-                return res.status(200).json(body)
+                return res.sendResponse(body)
             });
         }
     }).all(function (req, res, next) {
