@@ -1,8 +1,14 @@
 .container {
   position: relative;
-  transform: translateY(100%);
+  transform: translateY(25vh);
 }
 
 .ui.teal.button {
   background-color: #0E6EB8;
+}
+
+@media only screen and (max-width: 512px) {
+  #login {
+    width: 100% !important;
+  }
 }
