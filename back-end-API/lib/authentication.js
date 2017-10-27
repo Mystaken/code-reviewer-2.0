@@ -22,16 +22,21 @@ module.exports = function(req, res, next) {
         };
         return request(options)
             .then(function (result) {
-                // get this user's user_id and user_type by his email
-                return user_model.findOne({email: result.email}, "_id user_type", function(err, result) {
-                    if (err) res.forbidden();
-                    // set this user's user_id and user_type
-                    req.session_user_id = result._id.toString();
-                    req.session_user_type = result.user_type;
-                    // console.log("authentication result", req.session_user_id, req.session_user_type)
-                    next();
-                });
-                
+                // if this user has a valid access_token
+                if (result !== null) {
+                    // get this user's user_id and user_type by his email
+                    return user_model.findOne({email: result.email}, "_id user_type", function(err, user) {
+                        if (err) return res.forbidden();
+                        if (user === null) return res.forbidden();
+                        // set this user's user_id and user_type
+                        req.session_user_id = user._id.toString();
+                        req.session_user_type = user.user_type;
+                        next();
+                    });
+                // if this user does not have a valid access_token, i.e. can't get his email
+                } else {
+                    res.forbidden();
+                }
             })
             .catch(function (err) {
                 return res.forbidden();
