@@ -35,7 +35,6 @@ export class MNotLoggedInComponent {
   }
 
   login() {
-    console.log(1)
     return this._api.post('login', {
       email: this.email,
       password: this.password
@@ -49,7 +48,6 @@ export class MNotLoggedInComponent {
         this.router.navigate(['/']);
       });
   }
-
 
 }
 
