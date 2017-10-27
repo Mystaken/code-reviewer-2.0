@@ -1,29 +1,5 @@
 <div class="ui two column centered grid container">
   <div class="column">
-    <div class="ui items">
-      <div class="item">
-        <div class="image">
-          <img src="http://i.imgur.com/r3Zf4VI.jpg">
-        </div>
-        <div class="content">
-          <a class="header">You are not logged in.</a>
-          <div class="description">
-            <a href="http://localhost:3000/api" target="_blank">Please log in here.</a>
-            <!-- <button (click)="auth.login()"
-              class="ui secondary button">
-              Log In
-            </button>
-            <div *ngIf="auth.isAuthenticated()">
-              You're logged in using Auth0.
-            </div>
-            <div *ngIf="!auth.isAuthenticated()">
-              You are NOT logged in using Auth0.
-            </div> -->
-          </div>
-        </div>
-      </div>
-    </div>
-
     <!-- login form -->
     <form class="ui large form" [formGroup]="myForm" (ngSubmit)="login()">
       <div class="ui stacked segment">
