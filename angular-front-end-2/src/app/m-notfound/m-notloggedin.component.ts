@@ -14,7 +14,7 @@ export class MNotLoggedInComponent {
   isLoggedIn = true;
 
   myForm = new FormGroup({
-    email: new FormControl('', [
+    email: new FormControl('@mail.utoronto.ca', [
       Validators.required
     ]),
     password: new FormControl('', Validators.required)
@@ -50,5 +50,3 @@ export class MNotLoggedInComponent {
   }
 
 }
-
-

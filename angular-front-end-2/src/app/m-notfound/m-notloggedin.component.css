@@ -1,3 +1,8 @@
 .container {
-  padding: 5em;
+  position: relative;
+  transform: translateY(100%);
+}
+
+.ui.teal.button {
+  background-color: #0E6EB8;
 }
