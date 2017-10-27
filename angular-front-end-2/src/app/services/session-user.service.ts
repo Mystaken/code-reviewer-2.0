@@ -36,4 +36,16 @@ export class SessionUserService {
   isLoggedIn() {
     return this.loggedIn;
   }
+
+  logout() {
+    // Remove tokens and expiry time from localStorage
+    localStorage.removeItem('access_token');
+    localStorage.removeItem('id_token');
+    localStorage.removeItem('expires_at');
+    this.session_user_id = '';
+    this.session_user_type = '';
+    this.loggedIn = false;
+    // Go back to the home route
+    this._router.navigate(['/notLoggedIn']);
+  }
 }

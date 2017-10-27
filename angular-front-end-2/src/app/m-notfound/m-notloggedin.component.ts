@@ -41,7 +41,6 @@ export class MNotLoggedInComponent {
       password: this.password
     })
       .subscribe(res => {
-        console.log(res)
         // set token and expire time in local storage
         localStorage.setItem('access_token', res.access_token);
         const expiresAt = JSON.stringify((res.expires_in * 1000) + new Date().getTime());

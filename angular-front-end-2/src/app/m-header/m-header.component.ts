@@ -13,7 +13,7 @@ export class MHeaderComponent {
   userType;
   userTypeDisplay;
   crIcon;
-  constructor(private _userService: SessionUserService, private authService: AuthService) {
+  constructor(private _userService: SessionUserService) {
     this.userType = this._userService.getUserType();
     if (this.userType === 'admin') {
       this.crIcon = 'assets/images/icon-circle-green.png';
@@ -25,6 +25,6 @@ export class MHeaderComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this._userService.logout();
   }
 }
