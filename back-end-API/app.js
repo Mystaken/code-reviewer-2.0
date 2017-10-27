@@ -10,7 +10,7 @@ var express      = require('express'),
 
     auth        = require('./lib/authentication.js'),
     config      = require('./config/config.json'),
-    API_PORT    = 3000,
+    API_PORT    = process.env.PORT || 3000,
     API_DIR     = __dirname,
     APP_DIR     = path.join(__dirname, '../angular-front-end-2/dist'),
     app         = express(),
