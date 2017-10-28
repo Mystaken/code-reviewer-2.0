@@ -4,7 +4,7 @@
         "doc_link": "https://github.com/BoZhaoUTSC/code-reviewer-2.0/blob/master/back-end-API/doc/routes/route-documentation.md"
     }, 
     "mongo" : {
-        "server": "mongodb://db_admin:db_admin@ds123084.mlab.com:23084/code-reviewer-2",
+        "server": "mongodb://localhost/csca08",
         "opt": {
           "useMongoClient": true
         }

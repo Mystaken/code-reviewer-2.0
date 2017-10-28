@@ -14,7 +14,7 @@ module.exports = function(req, res, next) {
     if (access_token) {
         // send a get request to auth0 to retrive uesr email
         var options = {
-            uri: 'https://code-reviewer.auth0.com/userinfo',
+            uri: 'https://' + process.env.DOMAIN + '/userinfo',
             headers: {
                 'Authorization': 'Bearer ' + access_token
             },

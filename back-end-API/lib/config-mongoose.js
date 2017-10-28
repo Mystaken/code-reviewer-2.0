@@ -50,7 +50,7 @@ module.exports = {
      */
     configure: function (app, opt) {
         return setup({
-            server: config.mongo.server
+            server: process.env.MONGO_SERVER
         });
     }
 };
