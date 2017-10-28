@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { Http, URLSearchParams, RequestOptions, Headers } from '@angular/http';
 import { Observable } from 'rxjs/Rx';
@@ -5,7 +6,7 @@ import 'rxjs/Rx';
 
 @Injectable()
 export class APIRoutingService {
-  private _api_route = '/api/';
+  private _api_route = environment.apiURL;
 
   constructor(private _http: Http) { }
 
