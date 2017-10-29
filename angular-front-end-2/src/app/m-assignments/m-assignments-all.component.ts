@@ -140,11 +140,12 @@ export class MAssignmentsAllComponent {
 
    showManagement(assignment) {
      this.currentAssignment = assignment;
-    return this._assignmentsAPI.getSubmissions({work_id: this.currentAssignment.work_id}).subscribe((res) => {
-      this.currentLoadedSubmissions = res.length;
+     this.management.show({});
+    // return this._assignmentsAPI.getSubmissions({work_id: this.currentAssignment.work_id}).subscribe((res) => {
+    //   this.currentLoadedSubmissions = res.length;
 
-      this.management.show({});
-    });
+    //   this.management.show({});
+    // });
 
   }
 
