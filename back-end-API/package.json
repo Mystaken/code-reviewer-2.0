@@ -2,7 +2,13 @@
   "name": "api",
   "version": "0.1.0",
   "main": "app.js",
-  "scripts": {},
+  "scripts": {
+    "start": "node app.js"
+  },
+  "engines": {
+    "node": "^8.7.0",
+    "npm": "^5.5.1"
+  },
   "dependencies": {
     "bluebird": "^3.4.1",
     "body-parser": "^1.15.2",
@@ -27,8 +33,5 @@
     "moment": "^2.18.1",
     "nodemon": "^1.12.1",
     "supertest": "^3.0.0"
-  },
-  "engines": {
-    "node": "^6.9.2"
   }
 }
