@@ -90,7 +90,7 @@ function startApp() {
         .use(express.static(APP_DIR));
     
     // only enable cors in development
-    if (ret.environment === 'development')
+    if (opt.environment === 'development')
         app.use(cors());
 
     // check access token and configure user_id and user_type for each req
