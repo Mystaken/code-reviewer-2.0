@@ -40,8 +40,6 @@ export class SessionUserService {
   logout() {
     // Remove tokens and expiry time from localStorage
     localStorage.removeItem('access_token');
-    localStorage.removeItem('id_token');
-    localStorage.removeItem('expires_at');
     this.session_user_id = '';
     this.session_user_type = '';
     this.loggedIn = false;
