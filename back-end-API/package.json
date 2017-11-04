@@ -18,6 +18,7 @@
     "gulp": "^3.9.1",
     "gulp-exec": "^2.1.2",
     "gulp-jshint": "^2.0.1",
+    "jsonwebtoken": "^8.1.0",
     "kraken-js": "^2.0.0",
     "mongoose": "^4.10.0",
     "request": "^2.83.0",
