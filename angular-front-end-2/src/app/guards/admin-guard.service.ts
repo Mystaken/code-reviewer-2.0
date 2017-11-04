@@ -12,8 +12,6 @@ export class AdminGuard implements CanActivate {
   constructor(private userService: SessionUserService,
     private router: Router) {}
   canActivate() {
-    console.log(this.userService.getUserID());
-    console.log(this.userService.getUserType());
     if (this.userService.getUserType() !== 'admin') {
       this.router.navigate(['/error']);
     }
