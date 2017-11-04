@@ -1,1 +1,0 @@
-1. remove cors = require('cors'), and app.use(cors())    // enable all cors requests in app.js
