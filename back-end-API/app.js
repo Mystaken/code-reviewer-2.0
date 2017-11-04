@@ -87,8 +87,11 @@ function startApp() {
     app.use(bodyParser.json())
         .use(cookieParser())
         .use(kraken(spec.onconfig))
-        .use(express.static(APP_DIR))
-        .use(cors()); //REMOVE THIS LATER.
+        .use(express.static(APP_DIR));
+    
+    // only enable cors in development
+    if (ret.environment === 'development')
+        app.use(cors());
 
     // check access token and configure user_id and user_type for each req
     app.use('/api/users/', auth);
