@@ -1,4 +1,3 @@
-import { AuthService } from './../services/auth/auth.service';
 import { Component, Input } from '@angular/core';
 import { SessionUserService } from '../services/session-user.service';
 
