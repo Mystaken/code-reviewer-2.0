@@ -26,7 +26,7 @@ cd ../back-end-API
 npm i       // install back-end dependencies in back-end directory
 ```
 
-#### As a User
+#### As a developer
 -   install this project following installation instructions above
 -   ng serve in front-end directory, then the front-end will run on localhost: 4200
 -   node app.js in back-end directory, then the back-end will run on localhost: 3000
