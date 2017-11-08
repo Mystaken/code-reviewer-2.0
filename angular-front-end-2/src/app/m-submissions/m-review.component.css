@@ -10,3 +10,13 @@
    -ms-user-select: none;
    user-select: none;
 }
+
+@media screen and (max-width: 767px) {
+  .btn-text-label {
+    display: none;
+  }
+
+  .comment.button {
+    padding-right: 12px;
+  }
+}
