@@ -44,13 +44,22 @@ export class MReviewComponent {
   }
 
   ngOnInit() {
-    $('.comment.button').mousedown(function(event) {
+    var $commentBtn = $('.comment.button');
+
+    $commentBtn.mousedown(function(event) {
       event.preventDefault();
     });
     this.oldReview = this.review;
     this.getSubmission(0);
     this.getFeedbackQuestions();
     //this.getNewFeedbacks(this.oldReview);
+
+    // Create keyboard shortcut "Press A" to annotate.
+    $(document).keydown(function(event) {
+      if ($commentBtn && event.which === 65) {
+        $commentBtn.trigger('click');
+      }
+    });
   }
 
   ngOnChanges(val) {
