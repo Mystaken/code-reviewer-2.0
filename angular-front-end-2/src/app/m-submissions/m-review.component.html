@@ -10,14 +10,14 @@
     </a>
     <div class="right secondary menu">
       <div class="item">
-        <div class="ui tiny green comment button" (click)="showAnnotations()">
+        <div class="ui tiny basic comment button" (click)="showAnnotations()">
           <i class="comment icon"></i>
           View Annotations
         </div>
       </div>
       <div class="item">
-        <div class="ui tiny basic comment button" (click)="codeblock.addAnnotation()">
-          <i class="comment icon"></i>
+        <div class="ui tiny green comment button" (click)="codeblock.addAnnotation()">
+          <i class="plus icon"></i>
           Annotate
         </div>
       </div>
@@ -54,8 +54,8 @@
     </div>
     <div class="content">
       <div class="ui middle aligned divided list">
-        <div 
-          class="item" 
+        <div
+          class="item"
           *ngFor="let annotation of annotations">
 
           <div class="right floated content">
