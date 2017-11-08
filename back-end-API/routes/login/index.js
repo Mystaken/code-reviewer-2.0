@@ -32,6 +32,8 @@ module.exports = function (router) {
             // get token, expire_at and send it back to the user
             request(options, function (error, response, body) {
                 if (error) throw new Error(error);
+                // TODO: send error description
+                if (body.error) return;
                 // get this user's user_id and user_type by email
                 user_model.findOne({email: req.body.email}, "_id user_type", function(err, user) {
                     if (err) return res.forbidden();
