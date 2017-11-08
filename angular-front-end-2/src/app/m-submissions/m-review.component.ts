@@ -44,9 +44,7 @@ export class MReviewComponent {
   }
 
   ngOnInit() {
-    var $commentBtn = $('.comment.button');
-
-    $commentBtn.mousedown(function(event) {
+    $('.comment.button').mousedown(function(event) {
       event.preventDefault();
     });
     this.oldReview = this.review;
@@ -56,8 +54,8 @@ export class MReviewComponent {
 
     // Create keyboard shortcut "Press A" to annotate.
     $(document).keydown(function(event) {
-      if ($commentBtn && event.which === 65) {
-        $commentBtn.trigger('click');
+      if ($('.green.comment.button') && event.which === 65) {
+        $('.green.comment.button').trigger('click');
       }
     });
   }
