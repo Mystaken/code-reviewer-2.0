@@ -6,13 +6,13 @@
   <div class="content">
     <div class="ui form">
       <div class="field">
-        <textarea rows="2" [(ngModel)]="annotation_input"></textarea>
+        <textarea id="annotation-text-area" rows="2" [(ngModel)]="annotation_input"></textarea>
       </div>
     </div>
   </div>
   <div class="actions">
-    <div class="ui positive right labeled icon button">
-      Add Annotation
+    <div id="add-annotation-btn" class="ui positive right labeled icon button">
+      Add Annotation (Ctrl-Enter)
       <i class="send icon"></i>
     </div>
   </div>
