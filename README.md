@@ -6,7 +6,10 @@ Code Reviewer is a platform supports conducting code review online. It intends t
 ### Features
 - Code Review (review your peers' code anonymously)
 - Authentication
-
+- Authorization
+- RESTful API
+- Single Page App
+- Mobile Responsiveness
 
 ### Requirements
 - Angular 2+
