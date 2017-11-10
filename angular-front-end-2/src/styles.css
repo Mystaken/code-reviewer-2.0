@@ -11,7 +11,7 @@ body {
   position: relative;
   height: 32px;
   display: inline;
-  background-color: grey;
+  background-color: rgba(112, 112, 221, 0.5);
   margin-left: 1px;
   margin-right: 1px;
 }
