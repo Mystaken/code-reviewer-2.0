@@ -37,6 +37,16 @@
         <button class="ui fluid large teal submit button">
           Login
         </button>
+        <!-- message for failed login -->
+        <div class="ui form error"
+          [hidden]='!errorMessage'
+          (click)="closeErrorMessage()">
+          <div class="ui error message">
+            <p>
+              {{ errorMessage }} 
+            </p>
+          </div>
+        </div>
       </div>
     </form>
   </div>
