@@ -2,6 +2,7 @@ import { Component, Input, ElementRef, ViewChild, EventEmitter, Output } from '@
 import { MModalComponent } from '../m-common/m-modal.component';
 import * as hljs from 'highlight.js';
 import * as $ from 'jquery';
+import escape from 'validator/lib/escape';  // sanitize user inputs
 
 @Component({
   selector: 'm-code',
@@ -215,7 +216,8 @@ export class MCodeComponent {
     if (end > 0 && end - start > 3) {
       this.modal.show({
         onApprove: (value) => {
-          let comment = this.annotation_input;
+          // sanitize inputs to avoid HTML tags
+          let comment = escape(this.annotation_input);
           this.newAnnotation.emit({
             start: start,
             end: end,
