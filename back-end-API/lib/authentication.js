@@ -16,7 +16,7 @@ module.exports = function(req, res, next) {
         // verify custom access_token by CLIENT_SECRET
         // TODO: check expire time
         try {
-            var decoded = jwt.verify(access_token, process.env.CLIENT_SECRET);
+            var decoded = jwt.verify(access_token, process.env.SECRET);
             req.session_user_id = decoded.user_id;
             req.session_user_type = decoded.user_type;
             next();
