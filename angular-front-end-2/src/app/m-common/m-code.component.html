@@ -2,11 +2,11 @@
 <div class="code wrapper">
   <code [innerHTML]="displayCode" class="python" id="code"></code>
 </div>
-<m-modal #newAnnotation [class]="'mini'">
+<m-modal #newAnnotation [class]="medium">
   <div class="content">
     <div class="ui form">
       <div class="field">
-        <textarea id="annotation-text-area" rows="2" [(ngModel)]="annotation_input"></textarea>
+        <textarea id="annotation-text-area" rows="15" [(ngModel)]="annotation_input"></textarea>
       </div>
     </div>
   </div>
