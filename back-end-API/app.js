@@ -98,6 +98,15 @@ function startApp() {
     app.use('/api/users/*', auth);
     app.use('/api/works/', auth);
     app.use('/api/works/*', auth);
+    // temp fix since app.use('*') will deny redirect to home page
+    // redirect to login page if they bookmarked /notLoggedIn
+    app.use('/notLoggedIn', function(req, res) {
+        res.redirect('/');
+    });
+    // redirect to login page if they bookmarked /notLoggedIn
+    app.use('/dashboard', function(req, res) {
+        res.redirect('/');
+    });
 
     // configure req, res, and middleware
     return spec.configure(opt).then(function() {
