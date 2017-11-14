@@ -12,4 +12,6 @@
 4.  `cd angular-front-end-2`
 5.  `ng build --env=prod`         // build front-end
 6.  `cd ../back-end-API`          
-7.  `node app.js &`               // start the app in background
+7.  `ps aux | grep username`      // find the process id of running node process
+8.  `kill -9 process_id`          // cancel it
+9.  `node app.js &`               // start the app in background
