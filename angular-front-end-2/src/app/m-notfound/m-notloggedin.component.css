@@ -7,6 +7,10 @@
   background-color: #0E6EB8;
 }
 
+.ui.form.error {
+  margin-top: 14px;
+}
+
 @media only screen and (max-width: 512px) {
   #login {
     width: 100% !important;

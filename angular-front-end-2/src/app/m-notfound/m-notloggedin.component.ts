@@ -15,7 +15,7 @@ export class MNotLoggedInComponent {
   errorMessage: String = '';
 
   myForm = new FormGroup({
-    email: new FormControl('@mail.utoronto.ca', [
+    email: new FormControl('', [
       Validators.required
     ]),
     password: new FormControl('', Validators.required)
@@ -28,7 +28,12 @@ export class MNotLoggedInComponent {
   ) {}
 
   get email() {
-    return this.myForm.get('email').value;
+    // automatically add the UTORmail domain if user did not enter one
+    var email = this.myForm.get('email').value;
+    if (email.indexOf('@') === -1) {
+      email += '@mail.utoronto.ca';
+    }
+    return email;
   }
 
   get password() {
@@ -36,11 +41,14 @@ export class MNotLoggedInComponent {
   }
 
   login() {
+    // dismiss the error message when the login button is clicked again
+    this.errorMessage = '';
+
     // both email and password are required for authentication
     if (!this.email)
-      return this.errorMessage = 'Please enter your official utormail.';
+      return this.errorMessage = 'Please enter your official UTORmail.';
     if (!this.password)
-      return this.errorMessage = 'Please enter a password.';
+      return this.errorMessage = 'Please enter your password.';
 
     // assume email and passwords are given
     return this._api.post('login', {
