@@ -5,7 +5,8 @@
   "description": "Code Reviewer is a online platform for conducting anonymous peer reviews, designed for helping students write better code by learning from their peers.",
   "author": "The Code Reviewer Team <code.reviewer.utsc@gmail.com>",
   "contributors": [
-    "Andrew Wang <me@andrewwang.ca> (http://andrewwang.ca)"
+    "Andrew Wang <me@andrewwang.ca> (http://andrewwang.ca)",
+    "Kenny Zhao <bodotzhao@gmail.com> (https://github.com/BoZhaoUTSC)"
   ],
   "main": "app.js",
   "scripts": {
