@@ -1,6 +1,6 @@
 # Code Reviewer 2
 
-Code Reviewer is a platform supports conducting code review online. It intends to help students to write better code and learn from their peers.
+Code Reviewer is a online platform for conducting anonymous peer reviews, designed for helping students write better code by learning from their peers.
 
 
 ### Features
