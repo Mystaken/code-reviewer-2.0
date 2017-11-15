@@ -1,7 +1,12 @@
 {
-  "name": "mae",
+  "name": "code-reviewer",
   "version": "2.1.0",
-  "license": "MIT",
+  "license": "GPL-3.0",
+  "description": "Code Reviewer is a online platform for conducting anonymous peer reviews, designed for helping students write better code by learning from their peers.",
+  "author": "The Code Reviewer Team <code.reviewer.utsc@gmail.com>",
+  "contributors": [
+    "Andrew Wang <me@andrewwang.ca> (http://andrewwang.ca)"
+  ],
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
