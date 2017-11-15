@@ -23,7 +23,7 @@
         [class.error]="pendingAssignment.repo_path.error"
         (click)="pendingAssignment.repo_path.error=false">
         <label>Repo Path</label>
-        <input type="text" 
+        <input type="text"
           placeholder="Repo Path"
           [(ngModel)]="pendingAssignment.repo_path.content">
       </div>
@@ -64,7 +64,7 @@
         <div class="field"
           [class.error]="pendingAssignment.submission_deadline.error"
           (click)="pendingAssignment.submission_deadline.error=false">
-          <m-calendar 
+          <m-calendar
             [type]="'datetime'"
             [placeholder]="'Submission Deadline'"
             [today]="true"
@@ -93,7 +93,7 @@
         <div class="field">
           <div class="ui action input">
             <input type="text" placeholder="file_name.py" [(ngModel)]="newRequiredFile">
-            <div class="ui primary button" (click)="addRequiredFile()"><i class="plus icon"></i></div>
+            <div class="ui primary icon button" (click)="addRequiredFile()"><i class="plus icon"></i></div>
           </div>
         </div>
 
@@ -114,7 +114,7 @@
     <div class="ui segment">
       <h5 class="ui dividing header">Feedback Questions:</h5>
 <!--       <div class="ui list">
-        <div class="item" 
+        <div class="item"
           *ngFor="let question of pendingAssignment.feedback_questions.content;let i=index">
           <i class="remove icon" (click)="pendingAssignment.feedback_questions.content.splice(i, 1)"></i>
           {{question}}
@@ -127,7 +127,7 @@
             <i class="dropdown icon"></i>
             <div class="default text">Feedback Questions</div>
             <div class="menu">
-              <div class="item" 
+              <div class="item"
                 *ngFor="let feedback_question of feedbackQuestions"
                 (click)="addFeedbackQuestion(feedback_question.feedback_question_id)">
                   {{feedback_question.feedback_question}}
@@ -139,7 +139,7 @@
         <div class="field">
           <div class="ui action input">
               <input type="text" placeholder="Feedback" [(ngModel)]="newFeedback">
-              <div class="ui primary button" (click)="createFeedbackQuestion()"><i class="plus icon"></i></div>
+              <div class="ui primary icon button" (click)="createFeedbackQuestion()"><i class="plus icon"></i></div>
           </div>
         </div>
       </div>

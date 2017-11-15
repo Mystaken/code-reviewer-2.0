@@ -113,22 +113,18 @@
     </div>
 
     <div class="content" >
-      <div class="ui animated fade basic button" (click)="loadSubmissionsAndFiles()">
+      <div class="ui basic button" (click)="loadSubmissionsAndFiles()">
         <div class="visible content">Load/Re-load all submissions & required files</div>
-        <!-- <div class="hidden content">{{currentLoadedSubmissions}}00 submissions loaded, 100 files loaded</div>
- -->      </div>
-    </div>
-    <div class="content">
-      <div class="ui animated fade basic button" (click)="distribute()">
-        <div class="visible content">Distribute/Re-distribute {{currentAssignment.name}} to all students</div>
-        <!-- <div class="hidden content">{{currentLoadedSubmissions}}</div> -->
       </div>
     </div>
     <div class="content">
-      <div class="ui animated fade basic button" (click)="deleteWork()">
+      <div class="ui basic button" (click)="distribute()">
+        <div class="visible content">Distribute/Re-distribute {{currentAssignment.name}} to all students</div>
+      </div>
+    </div>
+    <div class="content">
+      <div class="ui red basic button" (click)="deleteWork()">
         <div class="visible content">Delete this work</div>
-        <!-- <div class="hidden content">$12.99 a month</div> -->
       </div>
     </div>
   </m-modal>
-
