@@ -10,7 +10,7 @@
 2.  `cd code-reviewer-2.0`
 3.  `git pull`                    // update
 4.  `cd angular-front-end-2`
-5.  `ng build --env=prod`         // build front-end
+5.  `ng build --prod`             // build front-end
 6.  `cd ../back-end-API`          
 7.  `ps aux | grep username`      // find the process id of running node process
 8.  `kill -9 process_id`          // cancel it
