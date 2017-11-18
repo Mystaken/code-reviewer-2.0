@@ -33,7 +33,7 @@ module.exports = function (router) {
                 }
                 // assume password is correct
                 // get this user's user_id and user_type by email
-                user_model.findOne({email: req.body.email}, "_id user_type", function(err, user) {
+                user_model.findOneAndUpdate({email: req.body.email}, { $set: { last_login: new Date() }}, function(err, user) {
                     if (err) return res.forbidden();
                     // if there's no user with this email in mongoDB
                     if (user === null) return res.forbidden();
