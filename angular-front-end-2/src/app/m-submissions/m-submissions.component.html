@@ -24,7 +24,7 @@
     </div>
     <div class="ui vertical borderless fluid menu">
       <div class="item">
-        <div class="ui dividing header">Reviews</div>
+        <div class="ui dividing header"><h4>Review your Peers</h4></div>
       </div>
       <div class="ui vertical secondary fluid pointing menu">
         <a class="item"
@@ -44,7 +44,7 @@
         </a>
       </div>
       <div class="item">
-        <div class="ui dividing header">Feedbacks</div>
+        <div class="ui dividing header"><h4>Feedback from Peers</h4></div>
       </div>
       <div class="ui vertical secondary fluid pointing menu">
         <a class="item"
@@ -75,14 +75,14 @@
   </div>
   <div class="twelve wide column">
 
-<!--     <m-feedback 
+<!--     <m-feedback
       *ngIf="selectedFeedback == -2"
       [feedbacks]="feedbacks"
       []
       >
     </m-feedback> -->
 
-    <m-feedback 
+    <m-feedback
       *ngIf="selectedFeedback >= 0"
       [feedbacks]="feedbacks"
       [selectedFeedback]="selectedFeedback"
@@ -90,11 +90,11 @@
     </m-feedback>
 
 
-    <m-review 
+    <m-review
       *ngIf="selectedReview >= 0"
       [review]="reviews[selectedReview]"
       >
     </m-review>
   </div>
-</div>  
+</div>
 <m-footer></m-footer>
