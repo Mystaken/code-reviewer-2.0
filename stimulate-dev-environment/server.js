@@ -70,7 +70,7 @@ bcrypt.hash(password, 8, function(err, hash) {
 
 // create students
 Promise.map(emails, function(email, i) {
-    console.log("Adding", i);
+    console.log("Adding", emails[i]);
     return bcrypt.hash(password, 8).then(function(hash) {
         return auth_model({
             email: email,
@@ -79,14 +79,14 @@ Promise.map(emails, function(email, i) {
     }).then(function() {
         new user_model({
             email: email,
-            utorid: "student" + i,
+            utorid: "student" + (i + 1),
             user_type: "student",
             status: "active"
         }).save();
     });
 })
 .then(function() {
-    console.log("Done");
+    console.log("Added students");
 })
 .catch(function(err) {
     consoel.log(err);
