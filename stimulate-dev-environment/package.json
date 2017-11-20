@@ -1,0 +1,16 @@
+{
+  "name": "stimulate-dev-environment",
+  "version": "1.0.0",
+  "description": "stimulate development environment",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^1.0.3",
+    "bluebird": "^3.5.1",
+    "mongoose": "^4.13.0"
+  }
+}
