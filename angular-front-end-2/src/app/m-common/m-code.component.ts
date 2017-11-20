@@ -1,4 +1,5 @@
-import { Component, Input, ElementRef, ViewChild, EventEmitter, Output } from '@angular/core';
+import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
+import { Component, Input, ElementRef, ViewChild, EventEmitter, Output, SecurityContext } from '@angular/core';
 import { MModalComponent } from '../m-common/m-modal.component';
 import * as hljs from 'highlight.js';
 import * as $ from 'jquery';
@@ -32,7 +33,7 @@ export class MCodeComponent {
   changed = false;
   /* The new annotation. */
   annotation_input = '';
-  constructor(private el: ElementRef) {
+  constructor(private el: ElementRef, private sanitizer: DomSanitizer) {
     // Closing comments.
     $(document).on('click', function(event) {
       $('.jcomment').each(function (i, c) {
@@ -221,7 +222,7 @@ export class MCodeComponent {
       this.modal.show({
         onApprove: (value) => {
           // sanitize inputs to avoid HTML tags
-          let comment = escape(this.annotation_input);
+          let comment = this.sanitizer.sanitize(SecurityContext.HTML, this.escapeHtml(this.annotation_input));
           this.newAnnotation.emit({
             start: start,
             end: end,
@@ -234,4 +235,11 @@ export class MCodeComponent {
     }
     return false;
   }
+
+  // escape some sensible characters
+  private escapeHtml(unsafe) {
+    return unsafe.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                 .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+  }
+
 }
