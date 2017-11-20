@@ -3,7 +3,6 @@ import { Component, Input, ElementRef, ViewChild, EventEmitter, Output, Security
 import { MModalComponent } from '../m-common/m-modal.component';
 import * as hljs from 'highlight.js';
 import * as $ from 'jquery';
-import escape from 'validator/lib/escape';  // sanitize user inputs
 
 @Component({
   selector: 'm-code',
