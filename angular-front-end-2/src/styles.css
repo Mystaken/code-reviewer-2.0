@@ -20,7 +20,8 @@ body {
   display:none;
   top: 2em;
   left: 0;
-  max-width: 250px;
+  max-width: 600px;
+  width: 350px;
   border: 1px solid #d4d4d5;
   background: #fff;
   padding: .833em 1em;
