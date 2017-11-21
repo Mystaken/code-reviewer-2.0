@@ -4,7 +4,7 @@ var mongoose = require('mongoose'),
 
 
 mongoose.connect('mongodb://localhost/csca08', { useMongoClient: true });
-
+mongoose.Promise = Promise;
 
 const admin_email = "code.reviewer.utsc@gmail.com";
 const password = "1";
@@ -89,7 +89,7 @@ Promise.map(emails, function(email, i) {
     console.log("Added students");
 })
 .catch(function(err) {
-    consoel.log(err);
+    console.log(err);
 })
 .finally(function() {
     console.log("All Done!")
