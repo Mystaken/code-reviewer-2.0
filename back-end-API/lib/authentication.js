@@ -1,7 +1,6 @@
 'use strict';
 
-var request     = require('request-promise'),
-    jwt         = require('jsonwebtoken');
+var jwt = require('jsonwebtoken');
 
 module.exports = function(req, res, next) {
     // find access_token

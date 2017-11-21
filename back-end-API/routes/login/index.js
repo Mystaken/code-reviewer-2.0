@@ -3,7 +3,6 @@
 var validator   = require('../../lib/validator'),
     utils       = require('../../lib/utils'),
     Promise     = require('bluebird'),
-    request     = require('request'),
     jwt         = require('jsonwebtoken'),
     bcrypt      = require('bcrypt'),
     user_model  = require('../../models/users'),
