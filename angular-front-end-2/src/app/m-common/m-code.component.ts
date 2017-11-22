@@ -68,9 +68,15 @@ export class MCodeComponent {
       this.changed = false;
     }
 
-    $('.jcomment').on('click', function() {
+    // show annotation
+    $('.jcomment').hover( function() {
       $( this ).children('.jmessage').addClass('show');
     });
+
+    // hide annotation
+    $('.jcomment').mouseleave( function() {
+      $( this ).children('.jmessage').removeClass('show');
+    })
   }
 
   updateComments() {
