@@ -19,6 +19,12 @@
           [(ngModel)]="pendingAssignment.name.content">
       </div>
 
+      <!-- select code source (students submitted code) -->
+      <div class="field">
+        <label>Choose Files</label>
+        <input type="file" (change)="fileChange($event)" placeholder="Upload file" accept=".pdf,.doc,.docx">        
+      </div>
+
       <div class="field"
         [class.error]="pendingAssignment.repo_path.error"
         (click)="pendingAssignment.repo_path.error=false">

@@ -68,9 +68,14 @@ export class MCodeComponent {
       this.changed = false;
     }
 
+<<<<<<< HEAD
     // show annotation
     $('.jcomment').hover( function() {
       $( this ).children('.jmessage').addClass('show');
+=======
+    $('.jcomment').on('click', function() {
+      $( this ).children('.jmessage').addClass('show large');
+>>>>>>> Add upload files
     });
 
     // hide annotation
