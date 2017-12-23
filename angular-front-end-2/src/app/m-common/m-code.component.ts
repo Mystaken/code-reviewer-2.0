@@ -43,15 +43,6 @@ export class MCodeComponent {
     });
   }
 
-  ngOnInit() {
-    // Create keyboard shortcut "Ctrl-Enter" to submit annotation.
-    $('#annotation-text-area').keydown(function (e) {
-      if ($('#add-annotation-btn') && e.ctrlKey && e.keyCode == 13) {
-        $('#add-annotation-btn').trigger('click');
-      }
-    });
-  }
-
   ngOnChanges(val) {
     if (this.code) {
       this.updateComments();
