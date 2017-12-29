@@ -213,7 +213,7 @@ export class MCodeComponent {
         end -= tmp;
       }
     }
-    if (end > 0 && end - start > 3) {
+    if (end > 0 && end - start > 0) {
       this.modal.show({
         onApprove: (value) => {
           // sanitize inputs to avoid HTML tags
