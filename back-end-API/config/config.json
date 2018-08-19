@@ -1,59 +1,57 @@
 {
-    "app": {
-        "name": "APP",
-        "doc_link": "https://github.com/BoZhaoUTSC/code-reviewer-2.0/blob/master/back-end-API/doc/routes/route-documentation.md"
-    }, 
-    "mongo" : {
-        "server": "mongodb://localhost/csca08",
-        "opt": {
-          "useMongoClient": true
-        }
-    },
-    "specialization": {
-    },
-    "cookie": {
-        "session": {
-            "name": "cr_session_user"
-        }
-    },
-    "middleware": {
-
-        "router": {
-            "route": "/api",
-            "module": {
-                "arguments": [{ "directory": "path:./routes" }]
-            }
-        },
-        "appsec": {
-            "priority": 110,
-            "module": {
-                "name": "lusca",
-                "arguments": [
-                    {
-                        "csrf": false,
-                        "xframe": "SAMEORIGIN",
-                        "p3p": false,
-                        "csp": false
-                    }
-                ]
-            }
-        },
-        "multipart": {
-            "enabled": true,
-            "module": {
-                "name": "kraken-js/middleware/multipart",
-                "arguments": [
-                    {
-                        "uploadDir": "/tmp/upload",
-                        "keepExtensions": true,
-                        "hash": "sha1",
-                        "multiples": true
-                    }
-                ]
-            }
-        },
-        "logger": {
-            "enabled": false
-        }
+  "app": {
+    "name": "APP",
+    "doc_link": "https://github.com/BoZhaoUTSC/code-reviewer-2.0/blob/master/back-end-API/doc/routes/route-documentation.md"
+  },
+  "mongo": {
+    "server": "mongodb://localhost:27017/csca08",
+    "opt": {
+      "useNewUrlParser": true
     }
+  },
+  "specialization": {},
+  "cookie": {
+    "session": {
+      "name": "cr_session_user"
+    }
+  },
+  "middleware": {
+    "router": {
+      "route": "/api",
+      "module": {
+        "arguments": [{ "directory": "path:./routes" }]
+      }
+    },
+    "appsec": {
+      "priority": 110,
+      "module": {
+        "name": "lusca",
+        "arguments": [
+          {
+            "csrf": false,
+            "xframe": "SAMEORIGIN",
+            "p3p": false,
+            "csp": false
+          }
+        ]
+      }
+    },
+    "multipart": {
+      "enabled": true,
+      "module": {
+        "name": "kraken-js/middleware/multipart",
+        "arguments": [
+          {
+            "uploadDir": "/tmp/upload",
+            "keepExtensions": true,
+            "hash": "sha1",
+            "multiples": true
+          }
+        ]
+      }
+    },
+    "logger": {
+      "enabled": false
+    }
+  }
 }
