@@ -34,7 +34,7 @@ yarn       // optional: install dev environment dependencies
 
 #### As a developer
 
-- load dummy daeta for development
+- load dummy data for development
 - node server.js in stimulate-dev-environment, then terminate the process after you see "All Done!"
 
 - install this project following above installation instructions
