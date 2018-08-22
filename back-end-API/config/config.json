@@ -3,6 +3,7 @@
     "name": "APP",
     "doc_link": "https://github.com/BoZhaoUTSC/code-reviewer-2.0/blob/master/back-end-API/doc/routes/route-documentation.md"
   },
+  "secret": "BUGJclaQOa4drqpTxH3UnHjCW0VY0DAUNDKXpOy_wHDB84iuCA5NNPOK4hh6K2ym",
   "mongo": {
     "server": "mongodb://localhost:27017/csca08",
     "opt": {
