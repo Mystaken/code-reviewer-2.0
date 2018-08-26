@@ -30,6 +30,10 @@ export class MAssignmentsService {
     return this._api.post('works', params);
   }
 
+  deleteAssignment(params) {
+    return this._api.delete('works', params);
+  }
+
   getAssignment(params) {
     return this._api.get('works', params);
   }
