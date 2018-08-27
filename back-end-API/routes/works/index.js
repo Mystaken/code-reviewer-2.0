@@ -31,13 +31,13 @@ module.exports = function (router) {
             });
         }
         return works_model.aggregate([
-            { 
+            {
                 $match: {
                     _id: mongoose.Types.ObjectId(req.query.work_id),
                     status: 'active'
-                } 
+                }
             },
-            { 
+            {
                 $project : {
                     work_id: "$_id",
                     _id: 0,
@@ -92,13 +92,13 @@ module.exports = function (router) {
                 });
             }
             query.feedback_questions[i] = mongoose.Types.ObjectId(query.feedback_questions[i]);
-        } 
+        }
         //check if work exists
         return works_model.aggregate([
                 {
                     $match: {
                         name: req.body.name
-                    }   
+                    }
                 }
             ]).exec().then(function(ret) {
                 if (ret.length) {
@@ -164,13 +164,13 @@ module.exports = function (router) {
             return res.forbidden();
         }
 
-        validator.validate(req.body, works_delete_schema);
+        validator.validate(req.query, works_delete_schema);
         error = validator.getLastErrors();
         if (error) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
         query = {
-            _id: mongoose.Types.ObjectId(req.body.work_id)
+            _id: mongoose.Types.ObjectId(req.query.work_id)
         };
         return works_model.find(query).exec().then(function(ret) {
             if (!ret.length) {
@@ -179,9 +179,7 @@ module.exports = function (router) {
                         params: [ 'work_id' ]
                     });
             }
-            return works_model.findOneAndUpdate(query, {
-                    status: 'inactive'
-                }).exec();
+            return works_model.findOneAndDelete(query).exec();
         }).then(function(ret) {
             res.sendResponse(ret._id);
         }).catch(function (err) {
@@ -200,7 +198,7 @@ module.exports = function (router) {
             return res.requestError({ code: "VALIDATION", message: error });
         }
         return works_model.aggregate([
-            { 
+            {
                 $project : {
                     work_id: "$_id",
                     _id: 0,

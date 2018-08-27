@@ -28,14 +28,14 @@ cd angular-front-end-2
 yarn       // install front-end dependencies in front-end directory
 cd ../back-end-API
 yarn       // install back-end dependencies in back-end directory
-cd ../stimulate-dev-environment
+cd ../simulate-dev-environment
 yarn       // optional: install dev environment dependencies
 ```
 
 #### As a developer
 
 - load dummy data for development
-- node server.js in stimulate-dev-environment, then terminate the process after you see "All Done!"
+- node server.js in simulate-dev-environment, then terminate the process after you see "All Done!"
 
 - install this project following above installation instructions
 - ng serve in front-end directory, then the front-end will run on localhost: 4200
@@ -43,7 +43,7 @@ yarn       // optional: install dev environment dependencies
 - mongod, then MongoDB will start on localhost: 27017
 
 - go to localhost:4200, then you will see the app
-- login credentials are in stimulate-dev-environment/load_data.js
+- login credentials are in simulate-dev-environment/load_data.js
 
 ### API documentation
 

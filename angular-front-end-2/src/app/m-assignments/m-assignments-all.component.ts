@@ -129,13 +129,18 @@ export class MAssignmentsAllComponent {
         .subscribe((res) => {
           return this._assignmentsAPI.dropFeedbacks(this.currentAssignment)
           .subscribe((res) => {
-            console.log(res);
+            return this._assignmentsAPI.deleteAssignment({'work_id': this.currentAssignment.work_id})
+            .subscribe((res) => {
+              var closeBtns = document.getElementsByClassName('close');
+              for (var i = 0; i < closeBtns.length; i++) {
+                closeBtns[i].click();
+              }
+              this.ngOnInit();
+            });
           });
         });
       });
     }
-
-
   }
 
    showManagement(assignment) {
