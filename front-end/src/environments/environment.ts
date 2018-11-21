@@ -4,7 +4,8 @@
 import { Environment } from './environment.config';
 
 export const environment: Environment = {
-  production: false
+  production: false,
+  domain: 'localhost:3000'
 };
 
 /*
